@@ -73,15 +73,10 @@ PROFILE = {
     ],
     "intro": (
         "My name is David Li and I am a first-year PhD student at MBZUAI. "
-        "My research sits at the intersection of generative modeling, optimal "
-        "transport, and diffusion-based learning systems."
+        "My research interests are mainly in generative models, diffusion models, "
+        "optimal transport, and related areas of machine learning. I am especially "
+        "interested in making diffusion models faster through distillation approaches."
     ),
-    "research_blurb": (
-        "I am especially interested in making diffusion and bridge models faster "
-        "and more reliable through inverse distillation, few-step generation, "
-        "uncertainty quantification, and data-efficient pretraining."
-    ),
-    "research_thesis": "Fast generative modeling.",
     "community": {
         "title": "LiSearch",
         "subtitle": "Generative models, new papers, new ideas",
@@ -90,7 +85,9 @@ PROFILE = {
             "that the best way to understand them deeply is through discussion with other "
             "researchers, students, and enthusiasts. I created LiSearch to share short "
             "textual descriptions of papers, highlight key ideas, and invite everyone to "
-            "discuss them in the comments."
+            "discuss them in the comments in my Telegram channel. We also publish all "
+            "recordings of the discussion sessions on YouTube. I will be glad to see you "
+            "in the sessions."
         ),
         "links": [
             {

@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260520-lisearch-nodirection">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260520-lisearch-cleancopy">
 </head>
 <body>
   <div class="layout">
@@ -47,18 +47,15 @@
         <a href="#lisearch">LiSearch</a>
         <a href="#work">Work</a>
         <a href="#papers">Papers</a>
-        <a href="#contact">Contact</a>
+        <a href="{{ profile.links.email }}">Contact</a>
       </nav>
 
       <section class="statement">
-        <p class="label">Current thesis</p>
-        <h2>{{ profile.research_thesis }}</h2>
-        <p>{{ profile.intro }} {{ profile.research_blurb }}</p>
+        <p>{{ profile.intro }}</p>
       </section>
 
       <section id="lisearch" class="community-section">
         <div>
-          <p class="label">Community</p>
           <h2>{{ profile.community.title }}</h2>
           <p>{{ profile.community.text }}</p>
         </div>
@@ -75,7 +72,6 @@
       <section id="work" class="feature-section">
         <div class="section-title">
           <p class="label">Selected work</p>
-          <h2>Three anchor projects</h2>
         </div>
         <div class="feature-list">
           {% for work in profile.selected_work %}
@@ -91,7 +87,6 @@
       <section id="papers" class="paper-section">
         <div class="section-title">
           <p class="label">Publications</p>
-          <h2>Full list from Scholar</h2>
         </div>
         <div class="paper-table">
           {% for paper in profile.papers %}
@@ -119,14 +114,6 @@
             </article>
           {% endfor %}
         </div>
-      </section>
-
-      <section id="contact" class="contact-band">
-        <div>
-          <p class="label">Contact</p>
-          <h2>Open to conversations</h2>
-        </div>
-        <a href="{{ profile.links.email }}">{{ profile.email }}</a>
       </section>
     </main>
   </div>
