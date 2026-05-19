@@ -1,17 +1,17 @@
 :root {
-  color-scheme: light;
-  --ink: #241013;
-  --paper: #f5ebe9;
-  --panel: #fff9f7;
-  --panel-strong: #ead0cd;
-  --line: #d7a8a6;
-  --line-strong: #7e1c26;
-  --muted: #654347;
-  --quiet: #8d5057;
-  --accent: #781822;
-  --accent-strong: #4f0c14;
-  --accent-soft: rgba(120, 24, 34, 0.14);
-  --shadow-red: 0 16px 34px rgba(79, 12, 20, 0.17);
+  color-scheme: dark;
+  --ink: #fff2ed;
+  --paper: #120506;
+  --panel: #1c080b;
+  --panel-strong: #350b12;
+  --line: rgba(255, 194, 184, 0.18);
+  --line-strong: #c43a48;
+  --muted: #d8aaa4;
+  --quiet: #f07b83;
+  --accent: #ff5a68;
+  --accent-strong: #ffd1d6;
+  --accent-soft: rgba(255, 90, 104, 0.13);
+  --shadow-red: 0 20px 45px rgba(0, 0, 0, 0.42), 0 0 34px rgba(255, 62, 82, 0.16);
 }
 
 * {
@@ -25,9 +25,9 @@ html {
 body {
   margin: 0;
   background:
-    linear-gradient(90deg, rgba(120, 24, 34, 0.07) 1px, transparent 1px),
-    linear-gradient(rgba(120, 24, 34, 0.07) 1px, transparent 1px),
-    linear-gradient(180deg, #fff8f6 0%, #f5ebe9 52%, #ead6d3 100%),
+    linear-gradient(90deg, rgba(255, 149, 142, 0.045) 1px, transparent 1px),
+    linear-gradient(rgba(255, 149, 142, 0.045) 1px, transparent 1px),
+    linear-gradient(180deg, #21070b 0%, #160608 48%, #080203 100%),
     var(--paper);
   background-size: 28px 28px;
   color: var(--ink);
@@ -64,7 +64,7 @@ svg {
   flex-direction: column;
   gap: 24px;
   border-right: 1px solid var(--line);
-  background: rgba(255, 249, 247, 0.9);
+  background: rgba(24, 6, 9, 0.9);
   padding: 28px;
   backdrop-filter: blur(14px);
 }
@@ -111,7 +111,7 @@ svg {
   object-fit: cover;
   border: 2px solid var(--ink);
   background: var(--panel);
-  filter: saturate(0.96) contrast(1.02);
+  filter: saturate(0.9) contrast(1.08) brightness(0.92);
 }
 
 .identity-copy {
@@ -135,7 +135,7 @@ svg {
   font-size: clamp(2rem, 4vw, 3.45rem);
   line-height: 0.95;
   letter-spacing: 0;
-  text-shadow: 0 8px 24px rgba(79, 12, 20, 0.13);
+  text-shadow: 0 10px 28px rgba(255, 63, 82, 0.22);
 }
 
 .identity-copy p:last-child {
@@ -181,7 +181,7 @@ svg {
   justify-content: flex-end;
   gap: 22px;
   border-bottom: 1px solid var(--line);
-  background: rgba(255, 249, 247, 0.86);
+  background: rgba(18, 5, 6, 0.86);
   padding: 16px 0;
   backdrop-filter: blur(12px);
 }
@@ -221,9 +221,9 @@ svg {
 .contact-band {
   border: 1px solid var(--line);
   background:
-    linear-gradient(180deg, rgba(120, 24, 34, 0.05), transparent 52%),
-    rgba(255, 249, 247, 0.93);
-  box-shadow: 0 1px 2px rgba(79, 12, 20, 0.08);
+    linear-gradient(180deg, rgba(255, 90, 104, 0.08), transparent 58%),
+    rgba(27, 8, 11, 0.94);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
 }
 
 .direction-card {
@@ -352,7 +352,7 @@ svg {
   border: 1px solid var(--accent);
   background: var(--accent-soft);
   padding: 12px 14px;
-  box-shadow: inset 0 0 0 1px rgba(159, 29, 43, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(255, 206, 211, 0.06);
 }
 
 @media (max-width: 980px) {
