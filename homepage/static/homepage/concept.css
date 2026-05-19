@@ -1,17 +1,17 @@
 :root {
   color-scheme: light;
-  --ink: #211316;
-  --paper: #fbf7f5;
-  --panel: #fffdfb;
-  --panel-strong: #f7e8e6;
-  --line: #ead5d2;
-  --line-strong: #b65a61;
-  --muted: #6d5558;
-  --quiet: #a07b80;
-  --accent: #9f1d2b;
-  --accent-strong: #6f121c;
-  --accent-soft: rgba(159, 29, 43, 0.1);
-  --shadow-red: 0 16px 34px rgba(111, 18, 28, 0.14);
+  --ink: #241013;
+  --paper: #f5ebe9;
+  --panel: #fff9f7;
+  --panel-strong: #ead0cd;
+  --line: #d7a8a6;
+  --line-strong: #7e1c26;
+  --muted: #654347;
+  --quiet: #8d5057;
+  --accent: #781822;
+  --accent-strong: #4f0c14;
+  --accent-soft: rgba(120, 24, 34, 0.14);
+  --shadow-red: 0 16px 34px rgba(79, 12, 20, 0.17);
 }
 
 * {
@@ -25,9 +25,9 @@ html {
 body {
   margin: 0;
   background:
-    linear-gradient(90deg, rgba(159, 29, 43, 0.055) 1px, transparent 1px),
-    linear-gradient(rgba(159, 29, 43, 0.055) 1px, transparent 1px),
-    linear-gradient(180deg, #fffdfb 0%, #fbf7f5 50%, #f6ece9 100%),
+    linear-gradient(90deg, rgba(120, 24, 34, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(120, 24, 34, 0.07) 1px, transparent 1px),
+    linear-gradient(180deg, #fff8f6 0%, #f5ebe9 52%, #ead6d3 100%),
     var(--paper);
   background-size: 28px 28px;
   color: var(--ink);
@@ -64,7 +64,7 @@ svg {
   flex-direction: column;
   gap: 24px;
   border-right: 1px solid var(--line);
-  background: rgba(255, 253, 251, 0.88);
+  background: rgba(255, 249, 247, 0.9);
   padding: 28px;
   backdrop-filter: blur(14px);
 }
@@ -132,10 +132,10 @@ svg {
 .identity-copy h1 {
   margin: 0;
   color: var(--ink);
-  font-size: clamp(2.4rem, 5vw, 4.7rem);
+  font-size: clamp(2rem, 4vw, 3.45rem);
   line-height: 0.95;
   letter-spacing: 0;
-  text-shadow: 0 8px 24px rgba(111, 18, 28, 0.1);
+  text-shadow: 0 8px 24px rgba(79, 12, 20, 0.13);
 }
 
 .identity-copy p:last-child {
@@ -181,7 +181,7 @@ svg {
   justify-content: flex-end;
   gap: 22px;
   border-bottom: 1px solid var(--line);
-  background: rgba(255, 253, 251, 0.84);
+  background: rgba(255, 249, 247, 0.86);
   padding: 16px 0;
   backdrop-filter: blur(12px);
 }
@@ -221,9 +221,9 @@ svg {
 .contact-band {
   border: 1px solid var(--line);
   background:
-    linear-gradient(180deg, rgba(159, 29, 43, 0.035), transparent 52%),
-    rgba(255, 253, 251, 0.92);
-  box-shadow: 0 1px 2px rgba(111, 18, 28, 0.07);
+    linear-gradient(180deg, rgba(120, 24, 34, 0.05), transparent 52%),
+    rgba(255, 249, 247, 0.93);
+  box-shadow: 0 1px 2px rgba(79, 12, 20, 0.08);
 }
 
 .direction-card {
