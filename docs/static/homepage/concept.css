@@ -255,14 +255,6 @@ svg {
   line-height: 1.8;
 }
 
-.direction-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin: 10px 0 72px;
-}
-
-.direction-card,
 .feature-card,
 .paper-item,
 .community-section,
@@ -275,19 +267,12 @@ svg {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(246, 251, 255, 0.04);
 }
 
-.direction-card {
-  min-height: 210px;
-  padding: 22px;
-}
-
-.direction-card span,
 .feature-card span {
   color: var(--accent);
   font-size: 0.72rem;
   font-weight: 800;
 }
 
-.direction-card h3,
 .feature-card h3,
 .paper-item h3 {
   margin: 18px 0 10px;
@@ -296,7 +281,6 @@ svg {
   line-height: 1.45;
 }
 
-.direction-card p,
 .feature-card p,
 .paper-item p,
 .community-section p {
@@ -478,7 +462,6 @@ svg {
     overflow-x: auto;
   }
 
-  .direction-grid,
   .feature-list {
     grid-template-columns: 1fr;
   }

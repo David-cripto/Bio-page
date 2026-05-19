@@ -103,23 +103,6 @@ PROFILE = {
             },
         ],
     },
-    "research_directions": [
-        {
-            "index": "01",
-            "title": "Fast Generative Models",
-            "text": "Inverse distillation and few-step sampling for diffusion, flow, and bridge models.",
-        },
-        {
-            "index": "02",
-            "title": "Transport and Bridges",
-            "text": "Schrodinger bridges, optimal transport, and data-to-data generative processes.",
-        },
-        {
-            "index": "03",
-            "title": "Reliable Generation",
-            "text": "Uncertainty signals and evaluation tools for language diffusion models and scientific domains.",
-        },
-    ],
     "news": [
         {
             "date": "May 2026",
