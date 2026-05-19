@@ -1,0 +1,125 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ profile.name }} - alternate research homepage concept">
+  <title>{{ profile.name }} - Research Concept</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}">
+</head>
+<body>
+  <div class="layout">
+    <aside class="identity-panel">
+      <a class="back-link" href="/">Classic layout</a>
+      <div class="portrait">
+        <img src="{% static 'homepage/profile.png' %}" alt="{{ profile.name }}">
+      </div>
+      <div class="identity-copy">
+        <p class="eyebrow">Research homepage concept</p>
+        <h1>{{ profile.name }}</h1>
+        <p>{{ profile.role }} at {{ profile.short_affiliation }}</p>
+      </div>
+
+      <div class="advisor-list">
+        <span>Supervisors</span>
+        {% for supervisor in profile.supervisors %}
+          <a href="{{ supervisor.url }}" target="_blank" rel="noopener noreferrer">{{ supervisor.name }}</a>
+        {% endfor %}
+      </div>
+
+      <div class="rail-links">
+        <a href="{{ profile.links.email }}">Email</a>
+        <a href="{{ profile.links.scholar }}" target="_blank" rel="noopener noreferrer">Scholar</a>
+        <a href="{{ profile.links.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="{{ profile.links.x }}" target="_blank" rel="noopener noreferrer">X</a>
+      </div>
+    </aside>
+
+    <main class="content">
+      <nav class="top-nav" aria-label="Concept page navigation">
+        <a href="#direction">Direction</a>
+        <a href="#work">Work</a>
+        <a href="#papers">Papers</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <section class="statement">
+        <p class="label">Current thesis</p>
+        <h2>{{ profile.research_thesis }}</h2>
+        <p>{{ profile.intro }} {{ profile.research_blurb }}</p>
+      </section>
+
+      <section id="direction" class="direction-grid" aria-label="Research directions">
+        {% for direction in profile.research_directions %}
+          <article class="direction-card">
+            <span>{{ direction.index }}</span>
+            <h3>{{ direction.title }}</h3>
+            <p>{{ direction.text }}</p>
+          </article>
+        {% endfor %}
+      </section>
+
+      <section id="work" class="feature-section">
+        <div class="section-title">
+          <p class="label">Selected work</p>
+          <h2>Three anchor projects</h2>
+        </div>
+        <div class="feature-list">
+          {% for work in profile.selected_work %}
+            <a class="feature-card" href="{{ work.url }}" target="_blank" rel="noopener noreferrer">
+              <span>{{ work.venue }}</span>
+              <h3>{{ work.title }}</h3>
+              <p>{{ work.description }}</p>
+            </a>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section id="papers" class="paper-section">
+        <div class="section-title">
+          <p class="label">Publications</p>
+          <h2>Full list from Scholar</h2>
+        </div>
+        <div class="paper-table">
+          {% for paper in profile.papers %}
+            <article class="paper-item">
+              <div class="paper-year">{{ paper.year|default:"--" }}</div>
+              <div>
+                <h3>
+                  {% if paper.url %}
+                    <a href="{{ paper.url }}" target="_blank" rel="noopener noreferrer">{{ paper.title }}</a>
+                  {% else %}
+                    {{ paper.title }}
+                  {% endif %}
+                </h3>
+                <p>{{ paper.summary|default:paper.venue }}</p>
+                <div class="paper-actions">
+                  <span>{{ paper.venue }}</span>
+                  {% if paper.url %}
+                    <a href="{{ paper.url }}" target="_blank" rel="noopener noreferrer">Paper</a>
+                  {% endif %}
+                  {% if paper.code_url %}
+                    <a href="{{ paper.code_url }}" target="_blank" rel="noopener noreferrer">Code</a>
+                  {% endif %}
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section id="contact" class="contact-band">
+        <div>
+          <p class="label">Contact</p>
+          <h2>Open to research conversations around generative modeling, diffusion, and optimal transport.</h2>
+        </div>
+        <a href="{{ profile.links.email }}">{{ profile.email }}</a>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

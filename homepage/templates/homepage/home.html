@@ -1,0 +1,340 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#020617">
+  <meta name="description" content="{{ profile.name }} - {{ profile.role }} at {{ profile.affiliation }}">
+  <title>{{ profile.name }} - ML Research</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'homepage/site.css' %}">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved === "light") {
+          document.documentElement.classList.remove("dark");
+        } else {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (error) {
+        document.documentElement.classList.add("dark");
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#top">
+          {{ profile.name }}
+          <span>// {{ profile.role }}</span>
+        </a>
+        <div class="header-actions">
+          <nav class="nav-links" aria-label="Primary navigation">
+            <a href="#top">Home</a>
+            <a href="#papers">Papers</a>
+            <a href="#contact">Contact</a>
+            <a href="#about">About</a>
+          </nav>
+          <button class="icon-button" type="button" data-theme-toggle aria-label="Toggle dark mode">
+            <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8z"></path>
+            </svg>
+          </button>
+          <button class="icon-button menu-button" type="button" data-menu-toggle aria-label="Open navigation">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <nav class="mobile-nav" data-mobile-nav aria-label="Mobile navigation">
+        <a href="#top">Home</a>
+        <a href="#papers">Papers</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+      </nav>
+    </header>
+
+    <main id="top" class="main-content">
+      <section class="container hero-section">
+        <div class="hero-copy">
+          <h1 class="glitch-title" aria-label="{{ profile.name }}">
+            <span class="glitch-word" data-text="{{ profile.name }}">{{ profile.name }}</span>
+            <span class="glitch-subword" data-text="Generative Modeling">Generative Modeling</span>
+          </h1>
+          <p class="intro-text">
+            {{ profile.intro }}
+          </p>
+          <p class="intro-text compact">
+            {{ profile.research_blurb }}
+          </p>
+
+          <div class="advisor-strip" aria-label="Supervisors">
+            <span>Supervised by</span>
+            {% for supervisor in profile.supervisors %}
+              <a href="{{ supervisor.url }}" target="_blank" rel="noopener noreferrer">{{ supervisor.name }}</a>
+            {% endfor %}
+          </div>
+
+          <div class="research-tags" aria-label="Research focus">
+            {% for focus in profile.research_focus %}
+              <span>{{ focus }}</span>
+            {% endfor %}
+          </div>
+
+          <div class="profile-actions">
+            <a class="button primary" href="{{ profile.links.email }}">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 4h16v16H4z"></path>
+                <path d="m4 7 8 6 8-6"></path>
+              </svg>
+              Email
+            </a>
+            <a class="button" href="{{ profile.links.scholar }}" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+              </svg>
+              Google Scholar
+            </a>
+            <a class="button" href="{{ profile.links.linkedin }}" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+              LinkedIn
+            </a>
+            <a class="button" href="{{ profile.links.x }}" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 4l16 16M20 4 4 20"></path>
+              </svg>
+              X
+            </a>
+          </div>
+        </div>
+
+        <aside class="portrait-column" aria-label="{{ profile.name }} profile summary">
+          <div class="portrait-frame">
+            <img src="{% static 'homepage/profile.png' %}" alt="{{ profile.name }}" loading="lazy">
+          </div>
+          <div class="mini-stats">
+            <div>
+              <span>{{ profile.citation_count }}</span>
+              <p>citations</p>
+            </div>
+            <div>
+              <span>{{ profile.papers|length }}</span>
+              <p>papers</p>
+            </div>
+            <div>
+              <span>3</span>
+              <p>advisors</p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="container split-section" aria-label="Research updates and selected work">
+        <div>
+          <h2>Latest News</h2>
+          <ul class="news-list">
+            {% for item in profile.news %}
+              <li>
+                <time>{{ item.date }}</time>
+                <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.text }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div>
+          <h2>Selected Work</h2>
+          <div class="work-list">
+            {% for work in profile.selected_work %}
+              <a class="work-card" href="{{ work.url }}" target="_blank" rel="noopener noreferrer">
+                <span>{{ work.venue }}</span>
+                <h3>{{ work.title }}</h3>
+                <p>{{ work.description }}</p>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="container contact-section">
+        <div class="section-heading">
+          <h2>Contacts</h2>
+          <a href="{{ profile.links.email }}">Write an email</a>
+        </div>
+        <div class="contact-grid">
+          {% for contact in profile.contacts %}
+            <a class="contact-card" href="{{ contact.url }}" target="_blank" rel="noopener noreferrer">
+              <span>{{ contact.label }}</span>
+              <strong>{{ contact.value }}</strong>
+            </a>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section id="papers" class="container papers-section">
+        <div class="section-heading">
+          <h2>Papers</h2>
+          <a href="{{ profile.links.scholar }}" target="_blank" rel="noopener noreferrer">View full Scholar profile</a>
+        </div>
+        <div class="paper-list">
+          {% for paper in profile.papers %}
+            <article class="paper-row">
+              <div>
+                <h3>
+                  {% if paper.url %}
+                    <a href="{{ paper.url }}" target="_blank" rel="noopener noreferrer">{{ paper.title }}</a>
+                  {% else %}
+                    {{ paper.title }}
+                  {% endif %}
+                </h3>
+                <p>{{ paper.authors }}</p>
+                <p class="venue">{{ paper.venue }}</p>
+                {% if paper.summary %}
+                  <p class="paper-summary">{{ paper.summary }}</p>
+                {% endif %}
+                <div class="paper-links">
+                  {% if paper.url %}
+                    <a href="{{ paper.url }}" target="_blank" rel="noopener noreferrer">Paper</a>
+                  {% endif %}
+                  {% if paper.code_url %}
+                    <a href="{{ paper.code_url }}" target="_blank" rel="noopener noreferrer">Code</a>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="paper-meta">
+                {% if paper.year %}
+                  <span>{{ paper.year }}</span>
+                {% endif %}
+                {% if paper.citations %}
+                  <span>{{ paper.citations }} cites</span>
+                {% endif %}
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section id="about" class="container about-section">
+        <h2>About</h2>
+        <p>
+          {{ profile.name }} is a first-year PhD student at
+          <a href="{{ profile.links.mbzuai }}" target="_blank" rel="noopener noreferrer">{{ profile.short_affiliation }}</a>,
+          working on generative modeling, optimal transport, diffusion models, and efficient distillation.
+          This page is generated from a small Django data module, so publications, links, and research notes
+          can be edited without touching the template structure.
+        </p>
+        <div class="supervisor-grid">
+          {% for supervisor in profile.supervisors %}
+            <a class="supervisor-card" href="{{ supervisor.url }}" target="_blank" rel="noopener noreferrer">
+              <span>Advisor</span>
+              <strong>{{ supervisor.name }}</strong>
+              <p>{{ supervisor.title }}</p>
+            </a>
+          {% endfor %}
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© 2026 {{ profile.name }}</p>
+        <div class="footer-links">
+          <a href="{{ profile.links.email }}" aria-label="Email">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 4h16v16H4z"></path>
+              <path d="m4 7 8 6 8-6"></path>
+            </svg>
+          </a>
+          <a href="{{ profile.links.scholar }}" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+            </svg>
+          </a>
+          <a href="{{ profile.links.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+          <a href="{{ profile.links.x }}" target="_blank" rel="noopener noreferrer" aria-label="X">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 4l16 16M20 4 4 20"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var themeButton = document.querySelector("[data-theme-toggle]");
+      var menuButton = document.querySelector("[data-menu-toggle]");
+      var mobileNav = document.querySelector("[data-mobile-nav]");
+      var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#%&";
+
+      function toggleTheme() {
+        root.classList.toggle("dark");
+        try {
+          localStorage.setItem("theme", root.classList.contains("dark") ? "dark" : "light");
+        } catch (error) {}
+      }
+
+      function scramble(element) {
+        var target = element.getAttribute("data-text");
+        var frame = 0;
+        var total = 18;
+        var timer = window.setInterval(function () {
+          element.textContent = target
+            .split("")
+            .map(function (letter, index) {
+              if (letter === " ") return " ";
+              if (index < Math.floor((frame / total) * target.length)) return letter;
+              return alphabet[Math.floor(Math.random() * alphabet.length)];
+            })
+            .join("");
+          frame += 1;
+          if (frame > total) {
+            element.textContent = target;
+            window.clearInterval(timer);
+          }
+        }, 36);
+      }
+
+      if (themeButton) {
+        themeButton.addEventListener("click", toggleTheme);
+      }
+      if (menuButton && mobileNav) {
+        menuButton.addEventListener("click", function () {
+          mobileNav.classList.toggle("open");
+        });
+      }
+
+      document.querySelectorAll("[data-text]").forEach(function (element, index) {
+        window.setTimeout(function () {
+          scramble(element);
+        }, 150 + index * 180);
+      });
+    })();
+  </script>
+</body>
+</html>
