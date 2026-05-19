@@ -72,3 +72,29 @@ Also add matching CSRF origins:
 ```text
 https://*.onrender.com,https://yourdomain.com,https://www.yourdomain.com
 ```
+
+## Publishing On GitHub Pages
+
+This project can also be exported as a static site because the current homepage
+does not need a database or dynamic user input.
+
+```bash
+DJANGO_STATIC_URL=/Bio-page/static/ python scripts/export_github_pages.py
+```
+
+The generated static site is written to `docs/`:
+
+- `docs/index.html`
+- `docs/concept/index.html`
+- `docs/static/homepage/...`
+
+To publish it, configure GitHub Pages to serve from:
+
+- Branch: `main`
+- Folder: `/docs`
+
+The expected project URL is:
+
+```text
+https://david-cripto.github.io/Bio-page/
+```
