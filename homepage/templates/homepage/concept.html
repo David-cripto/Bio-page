@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260520-lisearch-theme">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260520-lisearch-community">
 </head>
 <body>
   <div class="layout">
@@ -37,12 +37,15 @@
         <a href="{{ profile.links.scholar }}" target="_blank" rel="noopener noreferrer">Scholar</a>
         <a href="{{ profile.links.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="{{ profile.links.x }}" target="_blank" rel="noopener noreferrer">X</a>
+        <a href="{{ profile.links.telegram }}" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a href="{{ profile.links.youtube }}" target="_blank" rel="noopener noreferrer">YouTube</a>
       </div>
     </aside>
 
     <main class="content">
       <nav class="top-nav" aria-label="Research page navigation">
         <a href="#direction">Direction</a>
+        <a href="#lisearch">LiSearch</a>
         <a href="#work">Work</a>
         <a href="#papers">Papers</a>
         <a href="#contact">Contact</a>
@@ -62,6 +65,22 @@
             <p>{{ direction.text }}</p>
           </article>
         {% endfor %}
+      </section>
+
+      <section id="lisearch" class="community-section">
+        <div>
+          <p class="label">Community</p>
+          <h2>{{ profile.community.title }}</h2>
+          <p>{{ profile.community.text }}</p>
+        </div>
+        <div class="community-links" aria-label="LiSearch links">
+          {% for link in profile.community.links %}
+            <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">
+              <span>{{ profile.community.subtitle }}</span>
+              {{ link.label }}
+            </a>
+          {% endfor %}
+        </div>
       </section>
 
       <section id="work" class="feature-section">

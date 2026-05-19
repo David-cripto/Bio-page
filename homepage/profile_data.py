@@ -19,6 +19,8 @@ PROFILE = {
         "scholar": "https://scholar.google.com/citations?hl=en&user=L88Qc4YAAAAJ",
         "linkedin": "https://www.linkedin.com/in/david-li-ab07b332b/",
         "x": "https://x.com/LiDavid2002",
+        "telegram": "https://t.me/LiSearch",
+        "youtube": "https://www.youtube.com/@davidli2272",
     },
     "supervisors": [
         {
@@ -58,6 +60,16 @@ PROFILE = {
             "value": "@LiDavid2002",
             "url": "https://x.com/LiDavid2002",
         },
+        {
+            "label": "Telegram",
+            "value": "LiSearch",
+            "url": "https://t.me/LiSearch",
+        },
+        {
+            "label": "YouTube",
+            "value": "@davidli2272",
+            "url": "https://www.youtube.com/@davidli2272",
+        },
     ],
     "intro": (
         "My name is David Li and I am a first-year PhD student at MBZUAI. "
@@ -70,6 +82,27 @@ PROFILE = {
         "uncertainty quantification, and data-efficient pretraining."
     ),
     "research_thesis": "Fast generative modeling.",
+    "community": {
+        "title": "LiSearch",
+        "subtitle": "Generative models, new papers, new ideas",
+        "text": (
+            "I regularly read papers and articles about generative models, and I often feel "
+            "that the best way to understand them deeply is through discussion with other "
+            "researchers, students, and enthusiasts. I created LiSearch to share short "
+            "textual descriptions of papers, highlight key ideas, and invite everyone to "
+            "discuss them in the comments."
+        ),
+        "links": [
+            {
+                "label": "Telegram channel",
+                "url": "https://t.me/LiSearch",
+            },
+            {
+                "label": "YouTube channel",
+                "url": "https://www.youtube.com/@davidli2272",
+            },
+        ],
+    },
     "research_directions": [
         {
             "index": "01",
