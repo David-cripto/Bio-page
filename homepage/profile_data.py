@@ -125,7 +125,7 @@ PROFILE = {
         {
             "title": "Universal Inverse Distillation for Matching Models with Real-Data Supervision",
             "description": "A universal inverse distillation framework that incorporates real data into matching-model distillation without GAN training.",
-            "venue": "ICLR 2026",
+            "venue": "ICLR 2026 (Oral)",
             "url": "https://arxiv.org/abs/2509.22459",
         },
     ],
