@@ -1,9 +1,8 @@
 # David Li Research Homepage
 
-This is a small Django research homepage with two visual layouts:
+This is a small Django research homepage. The concept layout is the only active page:
 
-- Classic layout: `/`
-- Experimental concept layout: `/concept/`
+- Homepage: `/`
 
 Most page content lives in `homepage/profile_data.py`. The HTML templates are in
 `homepage/templates/homepage/`, and the CSS files are in `homepage/static/homepage/`.
@@ -19,20 +18,9 @@ python3 -m venv .venv
 Open:
 
 - `http://localhost:8000/`
-- `http://localhost:8000/concept/`
 
 ## Important Clickable Areas
 
-Classic layout:
-
-- Hero buttons: Email, Google Scholar, LinkedIn, X
-- Selected work cards
-- Paper and code links
-- Footer contact icons
-
-Concept layout:
-
-- `Classic layout` link in the left panel
 - Left rail links: Email, Scholar, LinkedIn, X
 - Top navigation: Direction, Work, Papers, Contact
 - Selected work cards
@@ -85,7 +73,6 @@ DJANGO_STATIC_URL=/Bio-page/static/ python scripts/export_github_pages.py
 The generated static site is written to `docs/`:
 
 - `docs/index.html`
-- `docs/concept/index.html`
 - `docs/static/homepage/...`
 
 To publish it, configure GitHub Pages to serve from:

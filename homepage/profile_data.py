@@ -69,11 +69,7 @@ PROFILE = {
         "and more reliable through inverse distillation, few-step generation, "
         "uncertainty quantification, and data-efficient pretraining."
     ),
-    "research_thesis": (
-        "I work on practical generative modeling: how to keep the mathematical "
-        "structure of diffusion, bridge, and optimal-transport methods while "
-        "making them cheaper, faster, and easier to trust."
-    ),
+    "research_thesis": "Fast, structured generative modeling.",
     "research_directions": [
         {
             "index": "01",
