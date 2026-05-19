@@ -69,7 +69,7 @@ PROFILE = {
         "and more reliable through inverse distillation, few-step generation, "
         "uncertainty quantification, and data-efficient pretraining."
     ),
-    "research_thesis": "Fast, structured generative modeling.",
+    "research_thesis": "Fast generative modeling.",
     "research_directions": [
         {
             "index": "01",
