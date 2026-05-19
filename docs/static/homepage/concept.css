@@ -1,10 +1,10 @@
 :root {
   color-scheme: dark;
   --ink: #fff2ed;
-  --paper: #120506;
-  --panel: #1c080b;
-  --panel-strong: #350b12;
-  --line: rgba(255, 194, 184, 0.18);
+  --paper: #080203;
+  --panel: #100405;
+  --panel-strong: #23060b;
+  --line: rgba(255, 194, 184, 0.14);
   --line-strong: #c43a48;
   --muted: #d8aaa4;
   --quiet: #f07b83;
@@ -25,11 +25,9 @@ html {
 body {
   margin: 0;
   background:
-    linear-gradient(90deg, rgba(255, 149, 142, 0.045) 1px, transparent 1px),
-    linear-gradient(rgba(255, 149, 142, 0.045) 1px, transparent 1px),
-    linear-gradient(180deg, #21070b 0%, #160608 48%, #080203 100%),
+    radial-gradient(circle at 72% 10%, rgba(105, 18, 29, 0.16), transparent 34%),
+    linear-gradient(180deg, #140406 0%, #0b0304 52%, #030101 100%),
     var(--paper);
-  background-size: 28px 28px;
   color: var(--ink);
   font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   line-height: 1.5;
@@ -64,7 +62,7 @@ svg {
   flex-direction: column;
   gap: 24px;
   border-right: 1px solid var(--line);
-  background: rgba(24, 6, 9, 0.9);
+  background: rgba(10, 2, 4, 0.93);
   padding: 28px;
   backdrop-filter: blur(14px);
 }
@@ -181,7 +179,7 @@ svg {
   justify-content: flex-end;
   gap: 22px;
   border-bottom: 1px solid var(--line);
-  background: rgba(18, 5, 6, 0.86);
+  background: rgba(8, 2, 3, 0.9);
   padding: 16px 0;
   backdrop-filter: blur(12px);
 }
@@ -221,8 +219,8 @@ svg {
 .contact-band {
   border: 1px solid var(--line);
   background:
-    linear-gradient(180deg, rgba(255, 90, 104, 0.08), transparent 58%),
-    rgba(27, 8, 11, 0.94);
+    linear-gradient(180deg, rgba(255, 90, 104, 0.055), transparent 58%),
+    rgba(14, 4, 6, 0.96);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
 }
 
