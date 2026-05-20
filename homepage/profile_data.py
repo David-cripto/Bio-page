@@ -88,11 +88,11 @@ PROFILE = {
         ),
         "links": [
             {
-                "label": "Telegram channel",
+                "label": "Telegram",
                 "url": "https://t.me/LiSearch",
             },
             {
-                "label": "YouTube channel",
+                "label": "YouTube",
                 "url": "https://www.youtube.com/@davidli2272",
             },
         ],
