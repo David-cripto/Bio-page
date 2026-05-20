@@ -151,7 +151,7 @@ PROFILE = {
         },
         {
             "title": "IDLM: Inverse-distilled Diffusion Language Models",
-            "authors": "David Li, Nikita Gushchin, Dmitry Abulkhanov, Eric Moulines, Ivan Oseledets, Maxim Panov, Alexander Korotin",
+            "authors": "David Li*, Nikita Gushchin*, Dmitry Abulkhanov, Eric Moulines, Ivan Oseledets, Maxim Panov, Alexander Korotin",
             "venue": "The 43rd International Conference on Machine Learning (ICML 2026)",
             "year": "2026",
             "citations": "1",
@@ -163,7 +163,7 @@ PROFILE = {
         },
         {
             "title": "One-Step Residual Shifting Diffusion for Image Super-Resolution via Distillation",
-            "authors": "Daniil Selikhanovych, David Li, Aleksei Leonov, Nikita Gushchin, Sergei Kushneriuk, Alexander Filippov, Evgeny Burnaev, Iaroslav Koshelev, Alexander Korotin",
+            "authors": "Daniil Selikhanovych*, David Li*, Aleksei Leonov*, Nikita Gushchin*, Sergei Kushneriuk, Alexander Filippov, Evgeny Burnaev, Iaroslav Koshelev, Alexander Korotin",
             "venue": "The 43rd International Conference on Machine Learning (ICML 2026)",
             "year": "2026",
             "citations": "4",
@@ -172,7 +172,7 @@ PROFILE = {
         },
         {
             "title": "Universal Inverse Distillation for Matching Models with Real-Data Supervision (No GANs)",
-            "authors": "Nikita Kornilov, David Li, Tikhon Mavrin, Aleksei Leonov, Nikita Gushchin, Evgeny Burnaev, Iaroslav Koshelev, Alexander Korotin",
+            "authors": "Nikita Kornilov*, David Li*, Tikhon Mavrin*, Aleksei Leonov, Nikita Gushchin, Evgeny Burnaev, Iaroslav Koshelev, Alexander Korotin",
             "venue": "The 14th International Conference on Learning Representations (ICLR 2026)",
             "year": "2026",
             "citations": "2",
@@ -192,7 +192,7 @@ PROFILE = {
         },
         {
             "title": "Accelerating Diffusion Language Models via Inverse Distillation",
-            "authors": "David Li, Nikita Gushchin, Dmitry Abulkhanov, Eric Moulines, Ivan Oseledets, Maxim Panov, Alexander Korotin",
+            "authors": "David Li*, Nikita Gushchin*, Dmitry Abulkhanov, Eric Moulines, Ivan Oseledets, Maxim Panov, Alexander Korotin",
             "venue": "ReALM-GEN Workshop at ICLR 2026",
             "year": "2026",
             "citations": "",
@@ -201,7 +201,7 @@ PROFILE = {
         },
         {
             "title": "Inverse-distilled Diffusion Language Models",
-            "authors": "David Li, Nikita Gushchin, Dmitry Abulkhanov, Eric Moulines, Ivan Oseledets, Maxim Panov, Alexander Korotin",
+            "authors": "David Li*, Nikita Gushchin*, Dmitry Abulkhanov, Eric Moulines, Ivan Oseledets, Maxim Panov, Alexander Korotin",
             "venue": "ICLR 2026 Workshop on Deep Generative Models in Machine Learning",
             "year": "2026",
             "citations": "",
@@ -210,7 +210,7 @@ PROFILE = {
         },
         {
             "title": "Inverse Bridge Matching Distillation",
-            "authors": "Nikita Gushchin, David Li, Daniil Selikhanovych, Evgeny Burnaev, Dmitry Baranchuk, Alexander Korotin",
+            "authors": "Nikita Gushchin, David Li*, Daniil Selikhanovych*, Evgeny Burnaev, Dmitry Baranchuk, Alexander Korotin",
             "venue": "The 42nd International Conference on Machine Learning (ICML 2025)",
             "year": "2025",
             "citations": "7",

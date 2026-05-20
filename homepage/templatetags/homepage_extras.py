@@ -1,3 +1,5 @@
+import re
+
 from django import template
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
@@ -13,8 +15,10 @@ def highlight_author(authors, author_name):
     if not escaped_name:
         return escaped_authors
 
-    highlighted = escaped_authors.replace(
-        escaped_name,
-        f'<span class="author-highlight">{escaped_name}</span>',
-    )
+    pattern = re.compile(rf"{re.escape(str(escaped_name))}\*?")
+
+    def replace_author(match):
+        return f'<span class="author-highlight">{match.group(0)}</span>'
+
+    highlighted = pattern.sub(replace_author, str(escaped_authors))
     return mark_safe(highlighted)

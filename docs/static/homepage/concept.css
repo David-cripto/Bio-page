@@ -173,6 +173,13 @@ svg {
   text-transform: uppercase;
 }
 
+.equal-note {
+  margin: 0 0 10px;
+  color: var(--quiet);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
 .identity-copy h1 {
   margin: 0;
   color: var(--ink);
@@ -403,9 +410,9 @@ svg {
 }
 
 .paper-authors .author-highlight {
-  color: var(--ink);
+  color: #d6adff;
   font-weight: 800;
-  text-shadow: 0 0 16px rgba(25, 198, 255, 0.44);
+  text-shadow: 0 0 16px rgba(190, 97, 255, 0.42), 0 0 2px rgba(78, 221, 255, 0.18);
 }
 
 .paper-actions {
