@@ -394,6 +394,14 @@ svg {
   margin: 0 0 8px;
 }
 
+.paper-item .paper-authors {
+  margin: 0 0 8px;
+  color: var(--quiet);
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
 .paper-actions {
   display: flex;
   flex-wrap: wrap;
