@@ -182,7 +182,7 @@ PROFILE = {
         },
         {
             "title": "Diffusion and adversarial Schrodinger bridges via iterative proportional Markovian fitting",
-            "authors": "Sergei Kholkin, Grigoriy Ksenofontov, David Li, Nikita Kornilov, Nikita Gushchin, Alexandra Suvorikova, Alexey Kroshnin, Evgeny Burnaev, Alexander Korotin",
+            "authors": "Sergei Kholkin*, Grigoriy Ksenofontov*, David Li*, Nikita Kornilov*, Nikita Gushchin*, Alexandra Suvorikova, Alexey Kroshnin, Evgeny Burnaev, Alexander Korotin",
             "venue": "The 14th International Conference on Learning Representations (ICLR 2026)",
             "year": "2026",
             "citations": "5",
