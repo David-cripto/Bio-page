@@ -123,7 +123,7 @@ PROFILE = {
     "selected_work": [
         {
             "title": "IDLM: Inverse-distilled Diffusion Language Models",
-            "description": "A post-training framework that distills diffusion language models into few-step generators while preserving entropy and generative perplexity.",
+            "description": "Framework that distills diffusion language models into few-step generators while preserving entropy and generative perplexity.",
             "venue": "ICML 2026",
             "url": "https://david-cripto.github.io/idlm-project-page/",
         },
