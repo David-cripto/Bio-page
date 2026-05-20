@@ -303,11 +303,13 @@ svg {
 .community-links a {
   display: grid;
   align-content: center;
+  place-items: center;
   min-height: 68px;
   padding: 14px 16px;
   color: var(--ink);
   font-size: 0.92rem;
   font-weight: 800;
+  text-align: center;
   transition: border 160ms ease, transform 160ms ease, box-shadow 160ms ease;
 }
 
