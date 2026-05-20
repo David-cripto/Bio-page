@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260520-purple-author-stars">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260520-publication-stats">
 </head>
 <body>
   <div class="layout">
@@ -83,8 +83,15 @@
       </section>
 
       <section id="papers" class="paper-section">
-        <div class="section-title">
-          <p class="label">Publications</p>
+        <div class="section-title publication-title">
+          <div>
+            <p class="label">Publications</p>
+            <div class="publication-stats" aria-label="Publication summary">
+              <span><strong>5x</strong> A*</span>
+              <span><strong>2x</strong> Oral</span>
+              <span><strong>3x</strong> Workshops</span>
+            </div>
+          </div>
           <p class="equal-note">* equal contribution</p>
         </div>
         <div class="paper-table">

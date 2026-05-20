@@ -180,6 +180,34 @@ svg {
   font-weight: 700;
 }
 
+.publication-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.publication-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  border: 1px solid rgba(184, 107, 255, 0.34);
+  background:
+    linear-gradient(135deg, rgba(25, 198, 255, 0.12), rgba(184, 107, 255, 0.16)),
+    rgba(7, 21, 45, 0.7);
+  padding: 5px 10px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  box-shadow: inset 0 1px 0 rgba(246, 251, 255, 0.05), 0 0 18px rgba(184, 107, 255, 0.08);
+}
+
+.publication-stats strong {
+  color: #d6adff;
+  font-weight: 800;
+}
+
 .identity-copy h1 {
   margin: 0;
   color: var(--ink);
@@ -349,6 +377,15 @@ svg {
   margin-bottom: 20px;
 }
 
+.publication-title {
+  align-items: flex-start;
+}
+
+.publication-title .equal-note {
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
 .section-title h2 {
   margin: 0;
   font-size: 1.45rem;
@@ -480,6 +517,16 @@ svg {
 
   .statement {
     padding-top: 48px;
+  }
+
+  .section-title {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .publication-title .equal-note {
+    margin-top: 0;
   }
 
   .paper-item {
