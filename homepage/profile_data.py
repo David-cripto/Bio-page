@@ -186,8 +186,9 @@ PROFILE = {
             "venue": "The 43rd International Conference on Machine Learning (ICML 2026)",
             "year": "2026",
             "citations": "1",
-            "url": "https://david-cripto.github.io/idlm-project-page/",
-            "code_url": "https://david-cripto.github.io/idlm-project-page/",
+            "title_url": "https://david-cripto.github.io/idlm-project-page/",
+            "url": "https://arxiv.org/abs/2602.19066",
+            "code_url": "https://github.com/David-cripto/IDLM",
             "summary": "Extends inverse distillation to discrete token spaces for diffusion language models, targeting 4x to 64x fewer inference steps.",
         },
         {

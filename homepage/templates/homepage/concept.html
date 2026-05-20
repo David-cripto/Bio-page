@@ -94,7 +94,7 @@
               <div>
                 <h3>
                   {% if paper.url %}
-                    <a href="{{ paper.url }}" target="_blank" rel="noopener noreferrer">{{ paper.title }}</a>
+                    <a href="{{ paper.title_url|default:paper.url }}" target="_blank" rel="noopener noreferrer">{{ paper.title }}</a>
                   {% else %}
                     {{ paper.title }}
                   {% endif %}
