@@ -45,7 +45,7 @@
     <main class="content">
       <nav class="top-nav" aria-label="Research page navigation">
         <a href="#lisearch">LiSearch</a>
-        <a href="#work">Selected work</a>
+        <a href="#work">Highlights</a>
         <a href="#papers">Publications</a>
       </nav>
 
@@ -70,7 +70,7 @@
 
       <section id="work" class="feature-section">
         <div class="section-title">
-          <p class="label">Selected work</p>
+          <p class="label">Highlights</p>
         </div>
         <div class="feature-list">
           {% for work in profile.selected_work %}
@@ -107,6 +107,9 @@
                   {% endif %}
                   {% if paper.code_url %}
                     <a href="{{ paper.code_url }}" target="_blank" rel="noopener noreferrer">Code</a>
+                  {% endif %}
+                  {% if paper.webpage_url %}
+                    <a href="{{ paper.webpage_url }}" target="_blank" rel="noopener noreferrer">Webpage</a>
                   {% endif %}
                 </div>
               </div>
