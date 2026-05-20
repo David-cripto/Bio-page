@@ -142,7 +142,7 @@ PROFILE = {
     "papers": [
         {
             "title": "Uncertainty Quantification for Large Language Diffusion Models",
-            "authors": "A. Vazhentsev, V. Smirnov, D. Li, M. Panov, T. Baldwin, A. Shelmanov",
+            "authors": "Artem Vazhentsev, Vladislav Smirnov, David Li, Maxim Panov, Timothy Baldwin, Artem Shelmanov",
             "venue": "arXiv preprint arXiv:2605.14570",
             "year": "2026",
             "citations": "",
@@ -151,7 +151,7 @@ PROFILE = {
         },
         {
             "title": "IDLM: Inverse-distilled Diffusion Language Models",
-            "authors": "D. Li, N. Gushchin, D. Abulkhanov, E. Moulines, I. Oseledets, M. Panov, et al.",
+            "authors": "David Li, Nikita Gushchin, Dmitry Abulkhanov, Eric Moulines, Ivan Oseledets, Maxim Panov, Alexander Korotin",
             "venue": "The 43rd International Conference on Machine Learning (ICML 2026)",
             "year": "2026",
             "citations": "1",
@@ -163,7 +163,7 @@ PROFILE = {
         },
         {
             "title": "One-Step Residual Shifting Diffusion for Image Super-Resolution via Distillation",
-            "authors": "D. Selikhanovych, D. Li, A. Leonov, N. Gushchin, S. Kushneriuk, A. Filippov, et al.",
+            "authors": "Daniil Selikhanovych, David Li, Aleksei Leonov, Nikita Gushchin, Sergei Kushneriuk, Alexander Filippov, Evgeny Burnaev, Iaroslav Koshelev, Alexander Korotin",
             "venue": "The 43rd International Conference on Machine Learning (ICML 2026)",
             "year": "2026",
             "citations": "4",
@@ -172,7 +172,7 @@ PROFILE = {
         },
         {
             "title": "Universal Inverse Distillation for Matching Models with Real-Data Supervision (No GANs)",
-            "authors": "N. Kornilov, D. Li, T. Mavrin, A. Leonov, N. Gushchin, E. Burnaev, I. Koshelev, et al.",
+            "authors": "Nikita Kornilov, David Li, Tikhon Mavrin, Aleksei Leonov, Nikita Gushchin, Evgeny Burnaev, Iaroslav Koshelev, Alexander Korotin",
             "venue": "The 14th International Conference on Learning Representations (ICLR 2026)",
             "year": "2026",
             "citations": "2",
@@ -182,7 +182,7 @@ PROFILE = {
         },
         {
             "title": "Diffusion and adversarial Schrodinger bridges via iterative proportional Markovian fitting",
-            "authors": "S. Kholkin, G. Ksenofontov, D. Li, N. Kornilov, N. Gushchin, A. Suvorikova, et al.",
+            "authors": "Sergei Kholkin, Grigoriy Ksenofontov, David Li, Nikita Kornilov, Nikita Gushchin, Alexandra Suvorikova, Alexey Kroshnin, Evgeny Burnaev, Alexander Korotin",
             "venue": "The 14th International Conference on Learning Representations (ICLR 2026)",
             "year": "2026",
             "citations": "5",
@@ -192,7 +192,7 @@ PROFILE = {
         },
         {
             "title": "Accelerating Diffusion Language Models via Inverse Distillation",
-            "authors": "D. Li, N. Gushchin, D. Abulkhanov, E. Moulines, I. Oseledets, M. Panov, et al.",
+            "authors": "David Li, Nikita Gushchin, Dmitry Abulkhanov, Eric Moulines, Ivan Oseledets, Maxim Panov, Alexander Korotin",
             "venue": "ReALM-GEN Workshop at ICLR 2026",
             "year": "2026",
             "citations": "",
@@ -201,7 +201,7 @@ PROFILE = {
         },
         {
             "title": "Inverse-distilled Diffusion Language Models",
-            "authors": "D. Li, N. Gushchin, D. Abulkhanov, E. Moulines, I. Oseledets, M. Panov, et al.",
+            "authors": "David Li, Nikita Gushchin, Dmitry Abulkhanov, Eric Moulines, Ivan Oseledets, Maxim Panov, Alexander Korotin",
             "venue": "ICLR 2026 Workshop on Deep Generative Models in Machine Learning",
             "year": "2026",
             "citations": "",
@@ -210,7 +210,7 @@ PROFILE = {
         },
         {
             "title": "Inverse Bridge Matching Distillation",
-            "authors": "N. Gushchin, D. Li, D. Selikhanovych, E. Burnaev, D. Baranchuk, A. Korotin",
+            "authors": "Nikita Gushchin, David Li, Daniil Selikhanovych, Evgeny Burnaev, Dmitry Baranchuk, Alexander Korotin",
             "venue": "The 42nd International Conference on Machine Learning (ICML 2025)",
             "year": "2025",
             "citations": "7",
@@ -220,7 +220,7 @@ PROFILE = {
         },
         {
             "title": "Medical Semantic Segmentation with Diffusion Pretrain",
-            "authors": "D. Li, A. Kurmukov, M. Goncharov, R. Sokolov, M. Belyaev",
+            "authors": "David Li, Anvar Kurmukov, Mikhail Goncharov, Roman Sokolov, Mikhail Belyaev",
             "venue": "arXiv preprint arXiv:2501.19265",
             "year": "2025",
             "citations": "",
