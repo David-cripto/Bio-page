@@ -1,4 +1,4 @@
-{% load static %}
+{% load static homepage_extras %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260520-paper-authors">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260520-highlight-author">
 </head>
 <body>
   <div class="layout">
@@ -99,7 +99,7 @@
                   {% endif %}
                 </h3>
                 {% if paper.authors %}
-                  <p class="paper-authors">{{ paper.authors }}</p>
+                  <p class="paper-authors">{{ paper.authors|highlight_author:profile.name }}</p>
                 {% endif %}
                 <p>{{ paper.summary|default:paper.venue }}</p>
                 <div class="paper-actions">

@@ -402,6 +402,12 @@ svg {
   line-height: 1.55;
 }
 
+.paper-authors .author-highlight {
+  color: var(--ink);
+  font-weight: 800;
+  text-shadow: 0 0 16px rgba(25, 198, 255, 0.44);
+}
+
 .paper-actions {
   display: flex;
   flex-wrap: wrap;
