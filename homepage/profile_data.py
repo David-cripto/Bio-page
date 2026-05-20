@@ -173,7 +173,7 @@ PROFILE = {
         {
             "title": "Universal Inverse Distillation for Matching Models with Real-Data Supervision (No GANs)",
             "authors": "Nikita Kornilov*, David Li*, Tikhon Mavrin*, Aleksei Leonov, Nikita Gushchin, Evgeny Burnaev, Iaroslav Koshelev, Alexander Korotin",
-            "venue": "The 14th International Conference on Learning Representations (ICLR 2026)",
+            "venue": "The 14th International Conference on Learning Representations (ICLR 2026, Oral)",
             "year": "2026",
             "citations": "2",
             "url": "https://arxiv.org/abs/2509.22459",
@@ -193,7 +193,7 @@ PROFILE = {
         {
             "title": "Accelerating Diffusion Language Models via Inverse Distillation",
             "authors": "David Li*, Nikita Gushchin*, Dmitry Abulkhanov, Eric Moulines, Ivan Oseledets, Maxim Panov, Alexander Korotin",
-            "venue": "ReALM-GEN Workshop at ICLR 2026",
+            "venue": "ReALM-GEN Workshop at ICLR 2026 (Oral)",
             "year": "2026",
             "citations": "",
             "url": "https://openreview.net/pdf/f8f615852fb80558006e8fe93e9819ce99b697b8.pdf",
