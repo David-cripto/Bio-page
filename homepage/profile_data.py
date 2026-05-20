@@ -79,7 +79,6 @@ PROFILE = {
     ),
     "community": {
         "title": "LiSearch",
-        "subtitle": "Generative models, new papers, new ideas",
         "text": (
             "I created LiSearch for people who want to understand generative model papers "
             "through discussion. I share short paper notes, highlight key ideas, and invite "

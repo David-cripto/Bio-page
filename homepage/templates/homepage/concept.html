@@ -61,7 +61,6 @@
         <div class="community-links" aria-label="LiSearch links">
           {% for link in profile.community.links %}
             <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">
-              <span>{{ profile.community.subtitle }}</span>
               {{ link.label }}
             </a>
           {% endfor %}
