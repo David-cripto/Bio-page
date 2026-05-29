@@ -820,9 +820,10 @@ svg {
 
 .ar-token-chain {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1fr) 16px minmax(0, 1fr) 16px minmax(0, 1fr) 16px minmax(0, 1fr);
-  gap: 6px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
   align-items: center;
+  position: relative;
 }
 
 .ar-token-chain span:not(.chain-arrow),
@@ -834,7 +835,7 @@ svg {
   border: 1px solid rgba(94, 217, 255, 0.22);
   background: rgba(2, 8, 24, 0.66);
   color: var(--ink);
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   font-weight: 800;
   line-height: 1;
   white-space: nowrap;
@@ -843,10 +844,35 @@ svg {
 .ar-token-chain .chain-arrow {
   display: grid;
   place-items: center;
-  min-height: 42px;
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 20px;
+  height: 20px;
+  min-height: 0;
+  border-radius: 999px;
+  background: rgba(7, 21, 45, 0.9);
   color: #ffd3a2;
   font-size: 0.9rem;
   font-weight: 800;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+}
+
+.ar-token-chain .chain-arrow:nth-child(2) {
+  left: 20%;
+}
+
+.ar-token-chain .chain-arrow:nth-child(4) {
+  left: 40%;
+}
+
+.ar-token-chain .chain-arrow:nth-child(6) {
+  left: 60%;
+}
+
+.ar-token-chain .chain-arrow:nth-child(8) {
+  left: 80%;
 }
 
 .ar-token-chain .token-active {
@@ -881,9 +907,9 @@ svg {
   margin-top: 30px;
 }
 
+.ar-token-chain span:not(.chain-arrow),
 .parallel-token-block span {
   min-height: 62px;
-  font-size: 0.9rem;
 }
 
 .generation-card p {
