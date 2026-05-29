@@ -616,17 +616,19 @@ svg {
   padding: 18px 20px;
   color: #d8fbff;
   font-size: 0.95rem;
+  text-align: center;
 }
 
-.blog-equation code,
-.blog-section code {
-  font-family: inherit;
+.blog-section mjx-container[jax="SVG"] {
+  color: #d8fbff;
 }
 
-.blog-section code {
-  color: #a8f4b6;
-  font-weight: 700;
-  overflow-wrap: anywhere;
+.blog-equation mjx-container[jax="SVG"][display="true"] {
+  margin: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 0;
 }
 
 .blog-figure {

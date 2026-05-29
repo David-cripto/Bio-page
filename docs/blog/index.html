@@ -6,13 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Blog post about IDLM: Inverse-distilled Diffusion Language Models">
   <title>IDLM Blog | David Li</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-idlm-paper-figures">
-  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-idlm-paper-figures">
-  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-idlm-paper-figures">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-idlm-tex">
+  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-idlm-tex">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-idlm-tex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-idlm-paper-figures">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["\\[", "\\]"]]
+      },
+      svg: {
+        fontCache: "global"
+      },
+      options: {
+        skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-idlm-tex">
 </head>
 <body>
   <main class="blog-shell">
@@ -64,7 +79,7 @@
         </p>
         <div class="blog-callout">
           <strong>Core question.</strong>
-          <span>If the teacher is fixed, what distribution should the student generate so that the teacher would still be the best denoiser for those samples?</span>
+          <span>If the teacher \(f^\star\) is fixed, what distribution \(p_\theta\) should the student generate so that the teacher remains the best denoiser?</span>
         </div>
       </section>
 
@@ -72,12 +87,20 @@
         <p class="label">2. Method</p>
         <h2>Teacher-vs-Fake Distribution Matching</h2>
         <p>
-          IDLM starts from the inverse-distillation objective. Let <code>f*</code> be the frozen teacher
-          trained on real data, and let <code>p_theta</code> be the distribution produced by the
+          IDLM starts from the inverse-distillation objective. Let \(f^\star\) be the frozen teacher
+          trained on real data, and let \(p_\theta\) be the distribution produced by the
           student. IDLM compares the teacher loss on student samples with the loss of a fake diffusion
           model trained on the current student distribution:
         </p>
-        <pre class="blog-equation"><code>L_IDLM(theta) = L(f*, p_theta) - min_f L(f, p_theta)</code></pre>
+        <div class="blog-equation">
+          \[
+            \mathcal{L}_{\mathrm{IDLM}}(\theta)
+            =
+            \mathcal{L}(f^\star, p_\theta)
+            -
+            \min_f \mathcal{L}(f, p_\theta)
+          \]
+        </div>
         <p>
           The fake model is important. It represents what the current student can already explain by
           itself. The teacher provides attraction toward data-like samples; the fake model provides a
@@ -86,7 +109,7 @@
 
         <figure class="blog-figure">
           <img src="/Bio-page/static/homepage/blog/idlm-method.png" alt="Current arXiv IDLM training loop with generator, teacher, and fake model">
-          <figcaption>The current arXiv method figure: a student generator is diffused forward, evaluated by the frozen teacher and the fake model, and updated through the teacher-minus-fake IDLM loss.</figcaption>
+          <figcaption>The current arXiv method figure: the student \(G_\theta\) is diffused forward, evaluated by the frozen teacher \(f^\star\) and fake model \(f\), and updated through the teacher-minus-fake IDLM loss.</figcaption>
         </figure>
 
         <div class="method-grid">
@@ -94,7 +117,7 @@
             <h3>Path Matching, Not Just Marginal Matching</h3>
             <p>
               The theory shows that the ideal IDLM loss matches full diffusion paths,
-              <code>KL(P_theta || P*)</code>. DMD-like methods instead match noised marginals at
+              \(\mathrm{KL}(P_\theta \,\Vert\, P^\star)\). DMD-like methods instead match noised marginals at
               sampled times. A stop-gradient reduction can make inverse distillation look DMD-like,
               but that changes the full gradient.
             </p>
@@ -102,7 +125,7 @@
           <div>
             <h3>Discrete Tokens Need Process-Aware Gradients</h3>
             <p>
-              For masked diffusion, the <code>SUBS</code> parameterization copies revealed tokens, so
+              For masked diffusion, the \(\mathrm{SUBS}\) parameterization copies revealed tokens, so
               non-mask branches cancel and only masked positions carry signal. For uniform diffusion,
               tokens can be revised repeatedly, so the Duo relaxation keeps gradients through
               intermediate states.
@@ -150,27 +173,27 @@
               <tbody>
                 <tr>
                   <td>MDLM Teacher</td>
-                  <td>1024</td>
-                  <td>18.0%</td>
+                  <td>\(1024\)</td>
+                  <td>\(18.0\%\)</td>
                   <td>Teacher baseline</td>
                 </tr>
                 <tr>
                   <td>IDLM-MDLM</td>
-                  <td>128</td>
-                  <td>19.86%</td>
-                  <td>Teacher-level with 8x fewer steps</td>
+                  <td>\(128\)</td>
+                  <td>\(19.86\%\)</td>
+                  <td>Teacher-level with \(8\times\) fewer steps</td>
                 </tr>
                 <tr>
                   <td>Duo Teacher</td>
-                  <td>1024</td>
-                  <td>17.2%</td>
+                  <td>\(1024\)</td>
+                  <td>\(17.2\%\)</td>
                   <td>Teacher baseline</td>
                 </tr>
                 <tr>
                   <td>IDLM-Duo</td>
-                  <td>64</td>
-                  <td>19.03%</td>
-                  <td>Teacher-level with 16x fewer steps</td>
+                  <td>\(64\)</td>
+                  <td>\(19.03\%\)</td>
+                  <td>Teacher-level with \(16\times\) fewer steps</td>
                 </tr>
               </tbody>
             </table>
@@ -182,7 +205,7 @@
           <p>
             OpenWebText evaluates unconditional generation with GenPPL, MAUVE, entropy, and related
             diversity checks. Lower GenPPL is better, but it must be read together with entropy because
-            reverse-KL-like training can become mode-seeking.
+            reverse-\(\mathrm{KL}\)-like training can become mode-seeking.
           </p>
           <figure class="blog-figure">
             <div class="blog-figure-grid">
@@ -194,17 +217,17 @@
           <div class="metric-grid">
             <div class="metric-card">
               <span>Masked Diffusion</span>
-              <strong>64x</strong>
-              <p>IDLM-MDLM reaches strong 16-step quality against a 1024-step MDLM teacher.</p>
+              <strong>\(64\times\)</strong>
+              <p>IDLM-MDLM reaches strong \(16\)-step quality against a \(1024\)-step MDLM teacher.</p>
             </div>
             <div class="metric-card">
               <span>Uniform Diffusion</span>
-              <strong>128x-256x</strong>
+              <strong>\(128\times\)-\(256\times\)</strong>
               <p>IDLM-DCD remains competitive in aggressive low-step Duo/DCD settings.</p>
             </div>
             <div class="metric-card">
               <span>SEDD</span>
-              <strong>4x</strong>
+              <strong>\(4\times\)</strong>
               <p>IDLM-SEDD validates the general CTMC score-entropy formulation in the appendix.</p>
             </div>
           </div>
@@ -221,21 +244,21 @@
               <tbody>
                 <tr>
                   <td>MDLM</td>
-                  <td>1024 steps, GenPPL 41.29, entropy 5.28</td>
-                  <td>16 steps, GenPPL 32.75, entropy 5.42</td>
+                  <td>\(1024\) steps, \(\mathrm{GenPPL}=41.29\), \(H=5.28\)</td>
+                  <td>\(16\) steps, \(\mathrm{GenPPL}=32.75\), \(H=5.42\)</td>
                   <td>Better GenPPL with comparable diversity</td>
                 </tr>
                 <tr>
-                  <td>Duo-DCD greedy</td>
-                  <td>1024-step Duo reference</td>
-                  <td>4 steps, GenPPL 77.47, entropy 5.28</td>
-                  <td>Usable 256x low-step regime</td>
+                  <td>Duo-DCD\(^{\mathrm{g}}\)</td>
+                  <td>\(1024\)-step Duo reference</td>
+                  <td>\(4\) steps, \(\mathrm{GenPPL}=77.47\), \(H=5.28\)</td>
+                  <td>Usable \(256\times\) low-step regime</td>
                 </tr>
                 <tr>
-                  <td>Duo-DCD ancestral</td>
-                  <td>1024-step Duo reference</td>
-                  <td>8 steps, GenPPL 66.41, entropy 5.42</td>
-                  <td>Strong 128x speed-quality tradeoff</td>
+                  <td>Duo-DCD\(^{\mathrm{a}}\)</td>
+                  <td>\(1024\)-step Duo reference</td>
+                  <td>\(8\) steps, \(\mathrm{GenPPL}=66.41\), \(H=5.42\)</td>
+                  <td>Strong \(128\times\) speed-quality tradeoff</td>
                 </tr>
               </tbody>
             </table>
@@ -252,13 +275,13 @@
         <h2>What IDLM Teaches Us</h2>
         <p>
           IDLM shows that diffusion language model distillation can be framed as a distribution-matching
-          problem: train a fast student whose samples are supported by the teacher more than by a fake
+          problem: train a fast student \(p_\theta\) whose samples are supported by the teacher \(f^\star\) more than by a fake
           model trained on the student's current distribution. This viewpoint gives a clean theoretical
           target and a practical few-step training recipe.
         </p>
         <p>
           The most useful intuition is teacher-vs-fake contrast. For masked diffusion, this contrast
-          becomes a clean mask-only update because <code>SUBS</code> copies revealed tokens. For uniform
+          becomes a clean mask-only update because \(\mathrm{SUBS}\) copies revealed tokens. For uniform
           diffusion, the same idea teaches both which token to choose and when to jump between
           intermediate states. Across the reported experiments, this produces substantial sampling
           acceleration while preserving the teacher's generation quality and diversity.
