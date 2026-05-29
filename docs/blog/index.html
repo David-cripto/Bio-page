@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Blog post about IDLM: Inverse-distilled Diffusion Language Models">
   <title>IDLM Blog | David Li</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-motivation-structure">
-  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-motivation-structure">
-  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-motivation-structure">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-distillation-figure">
+  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-distillation-figure">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-distillation-figure">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-motivation-structure">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-distillation-figure">
 </head>
 <body>
   <main class="blog-shell">
@@ -264,6 +264,45 @@
           can be trained to imitate the teacher with far fewer steps. This is one of the reasons
           modern image diffusion systems can be much faster than the original many-step samplers.
         </p>
+        <figure class="distill-figure" aria-label="Distilled image diffusion with four denoising steps">
+          <div class="problem-panel distill-panel">
+            <div class="problem-panel-head">
+              <span>Distilled image diffusion</span>
+              <strong>4 student denoising steps instead of T</strong>
+            </div>
+            <div class="problem-steps distill-steps" aria-label="Four-step distilled cat image denoising timeline">
+              <div class="problem-node">
+                <span class="problem-node-label">Input noise</span>
+                <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-noise.png?v=20260529-cat-blocks" alt="Random image noise before distilled denoising">
+              </div>
+              <div class="problem-node">
+                <span class="problem-node-label">Step&nbsp;\(1\)</span>
+                <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-1.png?v=20260529-cat-blocks" alt="First distilled cat image denoising step">
+                <span class="problem-model">Student denoiser</span>
+              </div>
+              <div class="problem-node">
+                <span class="problem-node-label">Step&nbsp;\(2\)</span>
+                <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-3.png?v=20260529-cat-blocks" alt="Second distilled cat image denoising step with a visible cat">
+                <span class="problem-model">Student denoiser</span>
+              </div>
+              <div class="problem-node">
+                <span class="problem-node-label">Step&nbsp;\(3\)</span>
+                <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-late.png?v=20260529-cat-blocks" alt="Third distilled cat image denoising step near the final image">
+                <span class="problem-model">Student denoiser</span>
+              </div>
+              <div class="problem-node problem-final-node">
+                <span class="problem-node-label">Step&nbsp;\(4\)</span>
+                <img class="cat-board cat-board-final" src="/Bio-page/static/homepage/blog/idlm-cat-step-final.png?v=20260529-cat-blocks" alt="Final distilled generated tabby cat image">
+                <span class="problem-model">Student denoiser</span>
+              </div>
+            </div>
+          </div>
+          <figcaption>
+            Distillation teaches a student sampler to take larger jumps along the teacher trajectory:
+            instead of following a long chain of denoising calls, it approximates the same endpoint
+            with a short sequence.
+          </figcaption>
+        </figure>
         <p>
           This naturally suggests the same question for language: can we transfer the distillation
           idea to diffusion language models? If the answer is yes, we could keep the useful part of

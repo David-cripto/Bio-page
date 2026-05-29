@@ -784,6 +784,10 @@ svg {
   margin: 34px 0 30px;
 }
 
+.distill-figure {
+  margin: 26px 0 30px;
+}
+
 .problem-panels {
   display: grid;
   gap: 16px;
@@ -825,6 +829,15 @@ svg {
   min-width: 930px;
 }
 
+.distill-panel .problem-panel-head {
+  min-width: 768px;
+}
+
+.distill-steps {
+  grid-template-columns: 128px repeat(4, 138px);
+  min-width: 768px;
+}
+
 .problem-panel-text .problem-steps {
   grid-template-columns: 138px 138px 138px 138px 54px 138px 138px;
 }
@@ -856,6 +869,10 @@ svg {
 }
 
 .problem-image-steps .problem-node:not(:last-child)::after {
+  top: 88px;
+}
+
+.distill-steps .problem-node:not(:last-child)::after {
   top: 88px;
 }
 
@@ -1002,7 +1019,8 @@ svg {
   color: #dfffd7;
 }
 
-.problem-figure figcaption {
+.problem-figure figcaption,
+.distill-figure figcaption {
   margin: 14px 0 0;
   color: var(--quiet);
   font-size: 0.76rem;
