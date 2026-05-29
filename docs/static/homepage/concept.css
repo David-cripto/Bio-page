@@ -885,7 +885,7 @@ svg {
 .parallel-token-block .token-noise {
   border-color: rgba(184, 107, 255, 0.28);
   background: rgba(184, 107, 255, 0.13);
-  color: var(--quiet);
+  color: #d9a8ff;
 }
 
 .generation-time {
