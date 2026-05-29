@@ -584,25 +584,29 @@ svg {
 
 .blog-contents {
   scroll-margin-top: 82px;
+  display: grid;
+  grid-template-columns: minmax(170px, 0.32fr) minmax(0, 1fr);
+  column-gap: 46px;
   margin: 0 0 84px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  padding: 34px 0 38px;
+  padding: 38px 0 42px;
 }
 
 .blog-contents .label {
-  margin-bottom: 22px;
+  align-self: start;
+  margin: 0;
   color: #ffd3a2;
-  font-size: clamp(1.55rem, 2.8vw, 2.35rem);
-  line-height: 1;
+  font-size: clamp(1.9rem, 3.6vw, 3.05rem);
+  line-height: 0.96;
   letter-spacing: 0;
   text-transform: none;
 }
 
 .blog-contents > ol {
+  grid-column: 2;
   counter-reset: toc;
   display: grid;
-  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -611,34 +615,50 @@ svg {
 .blog-contents > ol > li {
   counter-increment: toc;
   display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
-  column-gap: 18px;
+  grid-template-columns: 84px minmax(0, 1fr);
+  column-gap: 22px;
   align-items: start;
-  padding: 4px 0;
+  border-top: 1px solid rgba(94, 217, 255, 0.16);
+  padding: 18px 0;
+}
+
+.blog-contents > ol > li:first-child {
+  border-top: 0;
+  padding-top: 0;
 }
 
 .blog-contents > ol > li::before {
   content: counter(toc) ".";
   color: var(--quiet);
-  font-size: clamp(1.15rem, 1.8vw, 1.55rem);
+  font-size: clamp(1.25rem, 2.1vw, 1.8rem);
   font-weight: 800;
-  line-height: 1.22;
+  line-height: 1.1;
 }
 
 .blog-contents > ol > li > a {
   color: var(--ink);
-  font-size: clamp(1.15rem, 1.8vw, 1.55rem);
+  font-size: clamp(1.25rem, 2.1vw, 1.8rem);
   font-weight: 800;
-  line-height: 1.22;
+  line-height: 1.1;
   text-decoration: none;
+}
+
+.toc-note {
+  grid-column: 2;
+  max-width: 780px;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 500;
+  line-height: 1.55;
 }
 
 .blog-contents > ol > li > ol {
   grid-column: 2;
   counter-reset: toc-sub;
   display: grid;
-  gap: 6px;
-  margin: 10px 0 4px;
+  gap: 7px;
+  margin: 14px 0 2px;
   padding: 0;
   list-style: none;
 }
@@ -646,7 +666,7 @@ svg {
 .blog-contents > ol > li > ol > li {
   counter-increment: toc-sub;
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
+  grid-template-columns: 54px minmax(0, 1fr);
   column-gap: 12px;
   align-items: baseline;
 }
@@ -1466,6 +1486,15 @@ svg {
 
   .blog-hero-heading h1 {
     font-size: clamp(2.4rem, 8vw, 4rem);
+  }
+
+  .blog-contents {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+
+  .blog-contents > ol {
+    grid-column: auto;
   }
 
   .blog-contents ol,
