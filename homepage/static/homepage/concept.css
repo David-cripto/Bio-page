@@ -584,43 +584,86 @@ svg {
 
 .blog-contents {
   scroll-margin-top: 82px;
-  margin: 0 0 76px;
+  margin: 0 0 84px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  padding: 22px 0 26px;
+  padding: 34px 0 38px;
 }
 
 .blog-contents .label {
-  margin-bottom: 14px;
+  margin-bottom: 22px;
+  color: #ffd3a2;
+  font-size: clamp(1.55rem, 2.8vw, 2.35rem);
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
-.blog-contents ol {
+.blog-contents > ol {
+  counter-reset: toc;
+  display: grid;
+  gap: 10px;
   margin: 0;
-  padding-left: 1.35rem;
+  padding: 0;
+  list-style: none;
+}
+
+.blog-contents > ol > li {
+  counter-increment: toc;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  column-gap: 18px;
+  align-items: start;
+  padding: 4px 0;
+}
+
+.blog-contents > ol > li::before {
+  content: counter(toc) ".";
   color: var(--quiet);
-  font-size: 0.88rem;
+  font-size: clamp(1.15rem, 1.8vw, 1.55rem);
   font-weight: 800;
-  line-height: 1.85;
+  line-height: 1.22;
 }
 
-.blog-contents ol ol {
-  margin: 2px 0 2px;
-  padding-left: 1.55rem;
-  font-size: 0.84rem;
-  line-height: 1.78;
-}
-
-.blog-contents li {
-  padding-left: 0.18rem;
-}
-
-.blog-contents li::marker {
-  color: var(--quiet);
-  font-size: 0.76rem;
-}
-
-.blog-contents a {
+.blog-contents > ol > li > a {
   color: var(--ink);
+  font-size: clamp(1.15rem, 1.8vw, 1.55rem);
+  font-weight: 800;
+  line-height: 1.22;
+  text-decoration: none;
+}
+
+.blog-contents > ol > li > ol {
+  grid-column: 2;
+  counter-reset: toc-sub;
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 4px;
+  padding: 0;
+  list-style: none;
+}
+
+.blog-contents > ol > li > ol > li {
+  counter-increment: toc-sub;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  column-gap: 12px;
+  align-items: baseline;
+}
+
+.blog-contents > ol > li > ol > li::before {
+  content: counter(toc) "." counter(toc-sub);
+  color: var(--quiet);
+  font-size: 0.86rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.blog-contents > ol > li > ol a {
+  color: var(--ink);
+  font-size: 0.98rem;
+  font-weight: 800;
+  line-height: 1.5;
   text-decoration: none;
 }
 
