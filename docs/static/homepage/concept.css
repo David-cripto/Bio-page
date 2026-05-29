@@ -719,6 +719,14 @@ svg {
   padding: 16px;
 }
 
+.problem-cat-timeline {
+  width: 100%;
+  min-width: 760px;
+  border: 1px solid rgba(94, 217, 255, 0.2);
+  border-radius: 6px;
+  background: #091226;
+}
+
 .problem-panel-head {
   display: flex;
   align-items: center;
