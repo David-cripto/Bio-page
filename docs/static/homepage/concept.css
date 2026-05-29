@@ -524,6 +524,11 @@ svg {
   text-shadow: 0 0 34px rgba(25, 198, 255, 0.24);
 }
 
+.blog-hero-heading h1 span {
+  display: block;
+  white-space: nowrap;
+}
+
 .blog-hero-copy p:not(.label),
 .blog-section > p,
 .result-block > p {
