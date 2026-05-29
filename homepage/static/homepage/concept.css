@@ -886,15 +886,6 @@ svg {
   font-size: 0.9rem;
 }
 
-.parallel-token-label {
-  margin-top: 14px;
-  color: #ffd3a2;
-  font-size: 0.72rem;
-  font-weight: 800;
-  text-align: center;
-  text-transform: uppercase;
-}
-
 .generation-card p {
   margin: 18px 0 0;
   color: var(--muted);
