@@ -591,38 +591,43 @@ svg {
 }
 
 .blog-contents .label {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .blog-contents ol {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px 18px;
   margin: 0;
-  padding: 0;
-  list-style: none;
+  padding-left: 1.35rem;
+  color: var(--quiet);
+  font-size: 0.88rem;
+  font-weight: 800;
+  line-height: 1.85;
+}
+
+.blog-contents ol ol {
+  margin: 2px 0 2px;
+  padding-left: 1.55rem;
+  font-size: 0.84rem;
+  line-height: 1.78;
+}
+
+.blog-contents li {
+  padding-left: 0.18rem;
+}
+
+.blog-contents li::marker {
+  color: var(--quiet);
+  font-size: 0.76rem;
 }
 
 .blog-contents a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 46px;
-  border-bottom: 1px solid rgba(94, 217, 255, 0.14);
   color: var(--ink);
-  font-size: 0.86rem;
-  font-weight: 800;
+  text-decoration: none;
 }
 
 .blog-contents a:hover {
-  border-bottom-color: rgba(255, 211, 162, 0.56);
   color: #ffd3a2;
-}
-
-.blog-contents a span {
-  width: 42px;
-  color: var(--quiet);
-  font-size: 0.76rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .blog-section {
