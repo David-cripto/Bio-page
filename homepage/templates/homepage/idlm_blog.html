@@ -158,22 +158,17 @@
 
         <h3 id="diffusion-bottleneck" class="blog-subheading">1.2 The Bottleneck of Diffusion Models</h3>
         <p>
-          The catch is inference speed. Although diffusion models can achieve remarkable sample
-          quality, standard samplers remain sequential in time. They run a chain of \(T\) denoising
-          steps, and step \(t+1\) depends on the output of step \(t\). As a result, the sampler still
-          pays for many forward passes, often \(50\), \(100\), \(250\), or even \(1000\).
+          The catch is inference speed. In <a href="https://arxiv.org/abs/2006.11239" target="_blank" rel="noopener noreferrer">DDPM-style</a>
+          sampling, step \(t+1\) depends on step \(t\), so generation still needs a sequential chain
+          of denoising calls, often \(50\), \(100\), \(250\), or even \(1000\) forward passes.
         </p>
         <p>
-          This can make diffusion generation slower than autoregressive generation in practice,
-          especially when the number of denoising steps is large. At the same time, diffusion has a
-          clear acceleration opportunity: each denoising step can update all pixels or token positions
-          at once. If we can reduce the number of sequential denoising calls, the parallelism inside
-          each call becomes much more valuable.
-        </p>
-        <p>
-          The two block diagrams below show the problem directly. The model does not generate the
-          final image or sentence in one shot; it repeatedly calls the same denoising network, moving
-          from noise toward a clean sample.
+          The diagrams below show the tension. Image diffusion refines all pixels inside each block,
+          and language diffusion methods such as <a href="https://arxiv.org/abs/2107.03006" target="_blank" rel="noopener noreferrer">D3PM</a>
+          and <a href="https://openreview.net/forum?id=L4uaAR4ArM" target="_blank" rel="noopener noreferrer">MDLM</a>
+          can revise many tokens with bidirectional context. But the blocks themselves remain ordered:
+          the model moves from noise to a clean sample by repeatedly calling the denoising network.
+          This is the part we want to compress.
         </p>
         <figure class="problem-figure" aria-label="Sequential denoising bottleneck">
           <div class="problem-panels">
