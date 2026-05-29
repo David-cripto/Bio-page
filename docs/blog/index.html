@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Blog post about IDLM: Inverse-distilled Diffusion Language Models">
   <title>IDLM Blog | David Li</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-idlm-section-hierarchy">
-  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-idlm-section-hierarchy">
-  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-idlm-section-hierarchy">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-idlm-problem-figures">
+  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-idlm-problem-figures">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-idlm-problem-figures">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-idlm-section-hierarchy">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-idlm-problem-figures">
 </head>
 <body>
   <main class="blog-shell">
@@ -96,6 +96,119 @@
           faster. In practice, diffusion language models often use hundreds or thousands of reverse
           denoising steps, so the parallelism does not automatically translate into fast inference.
         </p>
+        <figure class="problem-figure" aria-label="Sequential denoising bottleneck">
+          <div class="problem-panels">
+            <div class="problem-panel problem-panel-image">
+              <div class="problem-panel-head">
+                <span>Image diffusion intuition</span>
+                <strong>\(T\) sequential denoising steps</strong>
+              </div>
+              <div class="problem-steps" aria-label="Image denoising timeline">
+                <div class="problem-node">
+                  <span class="problem-node-label">Input noise</span>
+                  <i class="image-tile image-noise"></i>
+                </div>
+                <div class="problem-node">
+                  <span class="problem-node-label">Step \(1\)</span>
+                  <i class="image-tile image-step-one"></i>
+                  <span class="problem-model">Denoising model</span>
+                </div>
+                <div class="problem-node">
+                  <span class="problem-node-label">Step \(2\)</span>
+                  <i class="image-tile image-step-two"></i>
+                  <span class="problem-model">Denoising model</span>
+                </div>
+                <div class="problem-node">
+                  <span class="problem-node-label">Step \(3\)</span>
+                  <i class="image-tile image-step-three"></i>
+                  <span class="problem-model">Denoising model</span>
+                </div>
+                <div class="problem-node problem-dots">
+                  <span class="problem-node-label" aria-hidden="true">...</span>
+                </div>
+                <div class="problem-node">
+                  <span class="problem-node-label">Step \(T-1\)</span>
+                  <i class="image-tile image-step-late"></i>
+                  <span class="problem-model">Denoising model</span>
+                </div>
+                <div class="problem-node problem-final-node">
+                  <span class="problem-node-label">Step \(T\)</span>
+                  <i class="image-tile image-final"></i>
+                  <span class="problem-model">Denoising model</span>
+                </div>
+              </div>
+            </div>
+            <div class="problem-panel problem-panel-text">
+              <div class="problem-panel-head">
+                <span>Language diffusion problem</span>
+                <strong>\(T\) sequential token-denoising steps</strong>
+              </div>
+              <div class="problem-steps" aria-label="Token denoising timeline">
+                <div class="problem-node">
+                  <span class="problem-node-label">Random tokens</span>
+                  <div class="token-board token-board-noise">
+                    <span>LQ</span><span>7G</span><span>%X</span><span>Z9</span><span>K2</span>
+                    <span>Q#</span><span>3M</span><span>R8</span><span>!P</span><span>6Y</span>
+                    <span>V4</span><span>@T</span><span>9B</span><span>WZ</span><span>1F</span>
+                  </div>
+                </div>
+                <div class="problem-node">
+                  <span class="problem-node-label">Step \(1\)</span>
+                  <div class="token-board">
+                    <span>The</span><span>xz</span><span>cat</span><span>!P</span><span>7a</span>
+                    <span>Q#</span><span>sat</span><span>on</span><span>y2</span><span>6Y</span>
+                    <span>V4</span><span>@T</span><span>mat</span><span>WZ</span><span>.</span>
+                  </div>
+                  <span class="problem-model">Denoising model</span>
+                </div>
+                <div class="problem-node">
+                  <span class="problem-node-label">Step \(2\)</span>
+                  <div class="token-board">
+                    <span>The</span><span>small</span><span>cat</span><span>sat</span><span>on</span>
+                    <span>the</span><span>mat</span><span>y2</span><span>.</span><span>6Y</span>
+                    <span>V4</span><span>quietly</span><span>.</span><span>WZ</span><span>.</span>
+                  </div>
+                  <span class="problem-model">Denoising model</span>
+                </div>
+                <div class="problem-node">
+                  <span class="problem-node-label">Step \(3\)</span>
+                  <div class="token-board">
+                    <span>The</span><span>small</span><span>cat</span><span>sat</span><span>on</span>
+                    <span>the</span><span>mat</span><span>quietly</span><span>.</span><span>.</span>
+                    <span>.</span><span>.</span><span>.</span><span>.</span><span>.</span>
+                  </div>
+                  <span class="problem-model">Denoising model</span>
+                </div>
+                <div class="problem-node problem-dots">
+                  <span class="problem-node-label" aria-hidden="true">...</span>
+                </div>
+                <div class="problem-node">
+                  <span class="problem-node-label">Step \(T-1\)</span>
+                  <div class="token-board">
+                    <span>The</span><span>small</span><span>cat</span><span>sat</span><span>on</span>
+                    <span>the</span><span>mat</span><span>quietly</span><span>.</span><span>.</span>
+                    <span>.</span><span>.</span><span>.</span><span>.</span><span>.</span>
+                  </div>
+                  <span class="problem-model">Denoising model</span>
+                </div>
+                <div class="problem-node problem-final-node">
+                  <span class="problem-node-label">Step \(T\)</span>
+                  <div class="token-board token-board-final">
+                    <span>The</span><span>small</span><span>cat</span><span>sat</span><span>on</span>
+                    <span>the</span><span>mat</span><span>quietly</span><span>.</span><span>.</span>
+                    <span>.</span><span>.</span><span>.</span><span>.</span><span>.</span>
+                  </div>
+                  <span class="problem-model">Denoising model</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption>
+            The issue is the outer loop: each denoising step can update many pixels or tokens in
+            parallel, but the next step still depends on the previous one. IDLM attacks this
+            sequential sampling bottleneck.
+          </figcaption>
+        </figure>
         <div class="token-scale-visual" aria-label="Autoregressive versus few-step generation scale">
           <div>
             <span>Autoregressive decoding</span>
