@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Blog post about IDLM: Inverse-distilled Diffusion Language Models">
   <title>IDLM Blog | David Li</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-idlm-blog">
-  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-idlm-blog">
-  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-idlm-blog">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-idlm-paper-figures">
+  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-idlm-paper-figures">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-idlm-paper-figures">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-idlm-blog">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-idlm-paper-figures">
 </head>
 <body>
   <main class="blog-shell">
@@ -40,8 +40,8 @@
         </div>
       </div>
       <figure class="blog-figure blog-hero-figure">
-        <img src="/Bio-page/static/homepage/blog/idlm-teaser.png" alt="IDLM teaser comparing standard diffusion training with inverse distillation">
-        <figcaption>Instead of only learning a slow teacher from data, IDLM fixes the teacher and trains a fast student distribution.</figcaption>
+        <img src="/Bio-page/static/homepage/blog/idlm-teaser.png" alt="Current arXiv teaser comparing diffusion training with inverse distillation">
+        <figcaption>The current arXiv teaser: DLMs train a slow diffusion model from data, while IDLM fixes the teacher and trains a fast distribution.</figcaption>
       </figure>
     </header>
 
@@ -85,8 +85,8 @@
         </p>
 
         <figure class="blog-figure">
-          <img src="/Bio-page/static/homepage/blog/idlm-method.png" alt="IDLM training loop with a student generator, frozen teacher, and fake model">
-          <figcaption>The IDLM loop alternates between fitting the fake model and updating the student using the teacher-minus-fake gap.</figcaption>
+          <img src="/Bio-page/static/homepage/blog/idlm-method.png" alt="Current arXiv IDLM training loop with generator, teacher, and fake model">
+          <figcaption>The current arXiv method figure: a student generator is diffused forward, evaluated by the frozen teacher and the fake model, and updated through the teacher-minus-fake IDLM loss.</figcaption>
         </figure>
 
         <div class="method-grid">
@@ -117,11 +117,6 @@
             </p>
           </div>
         </div>
-
-        <figure class="blog-figure">
-          <img src="/Bio-page/static/homepage/blog/idlm-sequence-semantics.png" alt="Mixture view explaining how a shared latent variable captures sequence-level semantics">
-          <figcaption>A shared latent variable lets factorized token outputs behave like a mixture of coherent sentence-level components.</figcaption>
-        </figure>
       </section>
 
       <section id="results" class="blog-section">
@@ -189,6 +184,13 @@
             diversity checks. Lower GenPPL is better, but it must be read together with entropy because
             reverse-KL-like training can become mode-seeking.
           </p>
+          <figure class="blog-figure">
+            <div class="blog-figure-grid">
+              <img src="/Bio-page/static/homepage/blog/idlm-owt-mdlm-bars.png" alt="Current arXiv OpenWebText masked diffusion bar figure">
+              <img src="/Bio-page/static/homepage/blog/idlm-owt-duo-greedy-bars.png" alt="Current arXiv OpenWebText uniform diffusion bar figure">
+            </div>
+            <figcaption>The current arXiv OpenWebText result panels compare teacher and distilled models under much smaller sampling budgets.</figcaption>
+          </figure>
           <div class="metric-grid">
             <div class="metric-card">
               <span>Masked Diffusion</span>
@@ -238,6 +240,10 @@
               </tbody>
             </table>
           </div>
+          <figure class="blog-figure">
+            <img src="/Bio-page/static/homepage/blog/idlm-owt-frontier.png" alt="Current arXiv GenPPL and entropy tradeoff plot on OpenWebText">
+            <figcaption>The current arXiv GenPPL--entropy frontier shows how IDLM sits in the low-GenPPL, high-diversity region of the tradeoff.</figcaption>
+          </figure>
         </section>
       </section>
 
