@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Blog post about IDLM: Inverse-distilled Diffusion Language Models">
   <title>IDLM Blog | David Li</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-generation-visual">
-  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-generation-visual">
-  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-generation-visual">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-parallel-token-visual">
+  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-parallel-token-visual">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-parallel-token-visual">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-generation-visual">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-parallel-token-visual">
 </head>
 <body>
   <main class="blog-shell">
@@ -156,34 +156,19 @@
           <div class="generation-card generation-card-diffusion">
             <div class="generation-card-head">
               <span>Diffusion</span>
-              <strong>many tokens refined together</strong>
+              <strong>parallel token generation</strong>
             </div>
-            <div class="diffusion-token-states" aria-label="Parallel diffusion token refinement">
-              <div>
-                <span class="token-noise">Q#</span>
-                <span class="token-noise">7G</span>
-                <span class="token-noise">?</span>
-                <span class="token-noise">WZ</span>
-                <span class="token-noise">!</span>
-              </div>
-              <div>
-                <span>The</span>
-                <span class="token-noise">small</span>
-                <span>cat</span>
-                <span class="token-noise">?</span>
-                <span>mat</span>
-              </div>
-              <div>
-                <span>The</span>
-                <span>small</span>
-                <span>cat</span>
-                <span>sat</span>
-                <span>down</span>
-              </div>
+            <div class="parallel-token-block" aria-label="Parallel diffusion token generation example">
+              <span>The</span>
+              <span class="token-noise">?</span>
+              <span>cat</span>
+              <span class="token-noise">?</span>
+              <span>down</span>
             </div>
+            <div class="parallel-token-label">parallel token generation</div>
             <p>
-              The model can look at the whole sequence and revise many positions in parallel. The
-              remaining cost is the number of denoising rounds.
+              The model can look at the whole sequence and fill or revise multiple positions together,
+              using context from both sides instead of only the prefix.
             </p>
           </div>
         </div>
