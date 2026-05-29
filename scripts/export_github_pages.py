@@ -26,6 +26,8 @@ def write_page(client, route, output_path):
         raise RuntimeError(f"{route} returned HTTP {response.status_code}")
     html = response.content.decode("utf-8")
     html = html.replace('href="/"', f'href="{BASE_PATH}/"')
+    html = html.replace('href="/blog/"', f'href="{BASE_PATH}/blog/"')
+    html = "\n".join(line.rstrip() for line in html.splitlines()) + "\n"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(html, encoding="utf-8")
 
@@ -41,6 +43,7 @@ def main():
 
     client = Client()
     write_page(client, "/", DOCS_DIR / "index.html")
+    write_page(client, "/blog/", DOCS_DIR / "blog" / "index.html")
 
     print(f"Exported GitHub Pages site to {DOCS_DIR}")
 
