@@ -83,17 +83,24 @@
     <article class="blog-article">
       <section id="motivation" class="blog-section">
         <h2>1. Motivation</h2>
-        <p class="section-kicker">Why distill diffusion language models?</p>
+        <p class="section-kicker">The denoising loop is the bottleneck</p>
         <p>
-          Today's standard language models are autoregressive: they generate the first token, then
-          the next token, and so on. A \(1024\)-token completion usually takes \(1024\) forward
-          passes. This strict token-by-token loop is one of the main bottlenecks in LLM inference.
+          Diffusion generation looks attractive because it can update a whole object in parallel.
+          For images, a model can refine many pixels at once. For text, a diffusion language model can
+          revise many token positions at once instead of committing to a strict left-to-right order.
+          This is the basic promise: replace token-by-token generation with parallel denoising.
         </p>
         <p>
-          Diffusion Language Models promise a different route: generate or refine the whole sequence
-          in parallel instead of committing to a left-to-right order. In principle this should be much
-          faster. In practice, diffusion language models often use hundreds or thousands of reverse
-          denoising steps, so the parallelism does not automatically translate into fast inference.
+          The problem is that standard diffusion samplers are still sequential in time. They start
+          from noise or random tokens, then run a chain of \(T\) denoising steps. Step \(t+1\) needs
+          the output of step \(t\), so the steps cannot be collapsed into one fully parallel call.
+          Even if each step updates all pixels or all token positions at once, inference still pays
+          for \(T\) forward passes, often \(50\), \(100\), \(250\), or \(1000\) of them.
+        </p>
+        <p>
+          The two block diagrams below show this bottleneck directly. The model does not generate the
+          final image or sentence in one shot; it repeatedly calls the same denoising network, slowly
+          moving from noise toward a clean sample.
         </p>
         <figure class="problem-figure" aria-label="Sequential denoising bottleneck">
           <div class="problem-panels">
@@ -203,11 +210,22 @@
             </div>
           </div>
           <figcaption>
-            The issue is the outer loop: each denoising step can update many pixels or tokens in
-            parallel, but the next step still depends on the previous one. IDLM attacks this
-            sequential sampling bottleneck.
+            Diffusion has parallelism inside each block, but the blocks themselves are ordered. The
+            next denoising call depends on the previous sample, so generation speed is dominated by
+            the length of this outer loop.
           </figcaption>
         </figure>
+        <h3 class="blog-subheading">Why This Hurts Language Generation</h3>
+        <p>
+          Today's standard language models are autoregressive: they generate the first token, then
+          the next token, and so on. A \(1024\)-token completion usually takes \(1024\) forward
+          passes. Diffusion language models try to escape that strict token-by-token loop, but if
+          they need hundreds or thousands of denoising steps, the inference win can disappear.
+        </p>
+        <p>
+          IDLM targets exactly this gap: keep the ability to update many token positions in parallel,
+          but reduce the number of sequential denoising calls needed at sampling time.
+        </p>
         <div class="token-scale-visual" aria-label="Autoregressive versus few-step generation scale">
           <div>
             <span>Autoregressive decoding</span>
