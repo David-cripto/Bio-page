@@ -789,84 +789,30 @@ svg {
   line-height: 1.65;
 }
 
-.generation-visual {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+.generation-animation-figure {
   margin: 30px 0 38px;
-}
-
-.generation-card {
-  min-width: 0;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(94, 217, 255, 0.18);
+  border-radius: 8px;
   background:
-    linear-gradient(135deg, rgba(25, 198, 255, 0.11), rgba(184, 107, 255, 0.07) 58%, transparent),
-    rgba(7, 21, 45, 0.88);
-  padding: 18px;
+    linear-gradient(135deg, rgba(25, 198, 255, 0.09), rgba(184, 107, 255, 0.07)),
+    rgba(3, 12, 28, 0.82);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(246, 251, 255, 0.04);
+  padding: 12px;
 }
 
-.generation-card-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 18px;
+.generation-animation {
+  width: 100%;
+  border: 1px solid rgba(1, 6, 22, 0.3);
+  border-radius: 6px;
+  background: rgba(3, 10, 28, 0.96);
+  object-fit: contain;
 }
 
-.generation-card-head span {
+.generation-animation-figure figcaption {
+  margin: 10px 2px 0;
   color: var(--quiet);
-  font-size: 0.72rem;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.generation-card-head strong {
-  color: #ffd3a2;
-  font-size: 0.82rem;
-  line-height: 1.35;
-  text-align: right;
-}
-
-.ar-token-chain,
-.parallel-token-block {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
-  align-items: center;
-}
-
-.ar-token-chain span,
-.parallel-token-block span {
-  display: grid;
-  place-items: center;
-  min-width: 0;
-  min-height: 42px;
-  border: 1px solid rgba(94, 217, 255, 0.22);
-  background: rgba(2, 8, 24, 0.66);
-  color: var(--ink);
-  font-size: 0.9rem;
-  font-weight: 800;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.ar-token-chain .token-pending,
-.parallel-token-block .token-noise {
-  border-color: rgba(184, 107, 255, 0.28);
-  background: rgba(184, 107, 255, 0.13);
-  color: #d9a8ff;
-}
-
-.ar-token-chain span,
-.parallel-token-block span {
-  min-height: 62px;
-}
-
-.generation-card p {
-  margin: 18px 0 0;
-  color: var(--muted);
-  font-size: 0.82rem;
-  line-height: 1.64;
+  font-size: 0.74rem;
+  line-height: 1.55;
 }
 
 .problem-figure {
@@ -1613,7 +1559,6 @@ svg {
   }
 
   .blog-contents ol,
-  .generation-visual,
   .token-scale-visual,
   .intuition-strip,
   .mixture-visual,

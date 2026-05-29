@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Blog post about IDLM: Inverse-distilled Diffusion Language Models">
   <title>IDLM Blog | {{ profile.name }}</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'homepage/favicon-32.png' %}?v=20260530-short-generation-intro">
-  <link rel="icon" type="image/png" sizes="192x192" href="{% static 'homepage/favicon-192.png' %}?v=20260530-short-generation-intro">
-  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'homepage/apple-touch-icon.png' %}?v=20260530-short-generation-intro">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'homepage/favicon-32.png' %}?v=20260530-generation-gif">
+  <link rel="icon" type="image/png" sizes="192x192" href="{% static 'homepage/favicon-192.png' %}?v=20260530-generation-gif">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'homepage/apple-touch-icon.png' %}?v=20260530-generation-gif">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260530-short-generation-intro">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260530-generation-gif">
 </head>
 <body>
   <main class="blog-shell">
@@ -118,43 +118,19 @@
           can use both left and right context, revising many positions in one denoising step.
         </p>
         <p>
-          The blocks below show the tradeoff: autoregression is simple but token-by-token; diffusion
+          The animation below shows the tradeoff: autoregression is simple but token-by-token; diffusion
           is parallel over positions, but must still pay for multiple denoising rounds.
         </p>
-        <div class="generation-visual" aria-label="Autoregressive versus diffusion generation">
-          <div class="generation-card generation-card-ar">
-            <div class="generation-card-head">
-              <span>Autoregressive</span>
-              <strong>one token per step</strong>
-            </div>
-            <div class="ar-token-chain" aria-label="Left-to-right autoregressive token generation">
-              <span class="token-fixed">The</span>
-              <span class="token-fixed">small</span>
-              <span class="token-fixed">cat</span>
-              <span class="token-pending">?</span>
-              <span class="token-pending">?</span>
-            </div>
-            <p>
-              Generates left-to-right, so each token waits for the prefix.
-            </p>
-          </div>
-          <div class="generation-card generation-card-diffusion">
-            <div class="generation-card-head">
-              <span>Diffusion</span>
-              <strong>many tokens at once</strong>
-            </div>
-            <div class="parallel-token-block" aria-label="Parallel diffusion token generation example">
-              <span>The</span>
-              <span class="token-noise">?</span>
-              <span>cat</span>
-              <span class="token-noise">?</span>
-              <span>down</span>
-            </div>
-            <p>
-              Uses both left and right context to fill several positions at once.
-            </p>
-          </div>
-        </div>
+        <figure class="generation-animation-figure" aria-label="Autoregressive versus diffusion generation animation">
+          <img
+            class="generation-animation"
+            src="{% static 'homepage/blog/idlm-generation-comparison.gif' %}?v=20260530-generation-gif"
+            alt="Animated comparison of autoregressive generation filling tokens one by one and diffusion generation filling missing tokens in parallel">
+          <figcaption>
+            Autoregression advances through the sentence one token at a time. Diffusion keeps a
+            whole-sequence state, so multiple positions can be revised in the same denoising call.
+          </figcaption>
+        </figure>
 
         <h3 id="diffusion-bottleneck" class="blog-subheading">1.2 The Bottleneck of Diffusion Models</h3>
         <p>
