@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Blog post about IDLM: Inverse-distilled Diffusion Language Models">
   <title>IDLM Blog | David Li</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-contents-editorial">
-  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-contents-editorial">
-  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-contents-editorial">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-motivation-structure">
+  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-motivation-structure">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-motivation-structure">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-contents-editorial">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-motivation-structure">
 </head>
 <body>
   <main class="blog-shell">
@@ -73,7 +73,12 @@
       <ol>
         <li>
           <a href="#motivation">Motivation</a>
-          <span class="toc-note">Why diffusion generation is slow, and why fewer denoising calls matter.</span>
+          <span class="toc-note">From generation paradigms to the need for fast diffusion sampling.</span>
+          <ol>
+            <li><a href="#generation-approaches">Generation Approaches</a></li>
+            <li><a href="#diffusion-bottleneck">Diffusion Bottleneck</a></li>
+            <li><a href="#distillation-path">Distillation Path</a></li>
+          </ol>
         </li>
         <li>
           <a href="#method">Method</a>
@@ -97,24 +102,47 @@
     <article class="blog-article">
       <section id="motivation" class="blog-section">
         <h2>1. Motivation</h2>
-        <p class="section-kicker">The denoising loop is the bottleneck</p>
+        <p class="section-kicker">From generation paradigms to fast diffusion sampling</p>
+        <h3 id="generation-approaches" class="blog-subheading">1.1 General Approaches for Generation</h3>
         <p>
-          Diffusion generation looks attractive because it can update a whole object in parallel.
-          For images, a model can refine many pixels at once. For text, a diffusion language model can
-          revise many token positions at once instead of committing to a strict left-to-right order.
-          This is the basic promise: replace token-by-token generation with parallel denoising.
+          There are two broad ways to think about generation. The first is the autoregressive
+          approach: generate one token, condition on it, then generate the next token. This is the
+          dominant paradigm in text today because it scales well, produces strong samples, and fits
+          naturally with causal transformer training. Its weakness is sampling time: a \(1024\)-token
+          completion usually requires \(1024\) sequential forward passes.
         </p>
         <p>
-          The problem is that standard diffusion samplers are still sequential in time. They start
-          from noise or random tokens, then run a chain of \(T\) denoising steps. Step \(t+1\) needs
-          the output of step \(t\), so the steps cannot be collapsed into one fully parallel call.
-          Even if each step updates all pixels or all token positions at once, inference still pays
-          for \(T\) forward passes, often \(50\), \(100\), \(250\), or \(1000\) of them.
+          The second is the diffusion approach: start from noise, then repeatedly denoise until the
+          sample becomes clean. In images, this means refining pixels. In language, it means starting
+          from random or masked tokens and iteratively revising many token positions. This changes the
+          structure of generation: instead of committing left-to-right, a diffusion language model can
+          use bidirectional context and update the whole sequence in parallel at each denoising step.
         </p>
         <p>
-          The two block diagrams below show this bottleneck directly. The model does not generate the
-          final image or sentence in one shot; it repeatedly calls the same denoising network, slowly
-          moving from noise toward a clean sample.
+          Autoregressive models are still the standard approach in the text domain, but diffusion
+          language models have recently become a serious alternative. They are attractive because they
+          promise parallel generation and bidirectional reasoning, while recent discrete diffusion
+          models have shown that the quality gap can be made much smaller than before.
+        </p>
+
+        <h3 id="diffusion-bottleneck" class="blog-subheading">1.2 The Bottleneck of Diffusion Models</h3>
+        <p>
+          The catch is inference speed. Although diffusion models can achieve remarkable sample
+          quality, standard samplers remain sequential in time. They run a chain of \(T\) denoising
+          steps, and step \(t+1\) depends on the output of step \(t\). As a result, the sampler still
+          pays for many forward passes, often \(50\), \(100\), \(250\), or even \(1000\).
+        </p>
+        <p>
+          This can make diffusion generation slower than autoregressive generation in practice,
+          especially when the number of denoising steps is large. At the same time, diffusion has a
+          clear acceleration opportunity: each denoising step can update all pixels or token positions
+          at once. If we can reduce the number of sequential denoising calls, the parallelism inside
+          each call becomes much more valuable.
+        </p>
+        <p>
+          The two block diagrams below show the problem directly. The model does not generate the
+          final image or sentence in one shot; it repeatedly calls the same denoising network, moving
+          from noise toward a clean sample.
         </p>
         <figure class="problem-figure" aria-label="Sequential denoising bottleneck">
           <div class="problem-panels">
@@ -229,16 +257,18 @@
             the length of this outer loop.
           </figcaption>
         </figure>
-        <h3 class="blog-subheading">Why This Hurts Language Generation</h3>
+        <h3 id="distillation-path" class="blog-subheading">1.3 Distillation as an Acceleration Path</h3>
         <p>
-          Today's standard language models are autoregressive: they generate the first token, then
-          the next token, and so on. A \(1024\)-token completion usually takes \(1024\) forward
-          passes. Diffusion language models try to escape that strict token-by-token loop, but if
-          they need hundreds or thousands of denoising steps, the inference win can disappear.
+          In image generation, this sequential bottleneck was largely attacked with distillation.
+          A high-quality teacher diffusion model may use many denoising steps, but a student sampler
+          can be trained to imitate the teacher with far fewer steps. This is one of the reasons
+          modern image diffusion systems can be much faster than the original many-step samplers.
         </p>
         <p>
-          IDLM targets exactly this gap: keep the ability to update many token positions in parallel,
-          but reduce the number of sequential denoising calls needed at sampling time.
+          This naturally suggests the same question for language: can we transfer the distillation
+          idea to diffusion language models? If the answer is yes, we could keep the useful part of
+          diffusion generation, parallel updates over many token positions, while reducing the number
+          of sequential denoising calls needed at sampling time.
         </p>
         <div class="token-scale-visual" aria-label="Autoregressive versus few-step generation scale">
           <div>
@@ -258,17 +288,17 @@
           </div>
         </div>
         <p>
-          The hard part is not predicting \(64\) tokens independently. The hard part is modeling the
-          joint distribution over all possible \(64\)-token continuations. With a GPT-2-scale vocabulary
-          of about \(60{,}000\) tokens, the number of possible \(64\)-token blocks is
-          \(60{,}000^{64} \approx 10^{306}\). We cannot enumerate, store, or explicitly simulate that
-          distribution.
+          Transferring distillation to text is not plug-and-play. The hard part is not predicting
+          \(64\) tokens independently. The hard part is modeling the joint distribution over all
+          possible \(64\)-token continuations. With a GPT-2-scale vocabulary of about \(60{,}000\)
+          tokens, the number of possible \(64\)-token blocks is \(60{,}000^{64} \approx 10^{306}\).
+          We cannot enumerate, store, or explicitly simulate that distribution.
         </p>
         <div class="blog-callout">
           <strong>Core question.</strong>
           <span>Can we generate many tokens in parallel while keeping the model complexity roughly linear in sequence length?</span>
         </div>
-        <h3 class="blog-subheading">Why Latent Mixtures Help</h3>
+        <h4 class="blog-minor-heading">Why Latent Mixtures Help</h4>
         <p>
           A useful answer is to introduce a latent variable \(\varepsilon\) from a simple latent space.
           Conditioned on \(\varepsilon\), the generator can output tokens independently. After averaging
@@ -307,13 +337,14 @@
           a single factorized distribution is too weak for structured text, but a mixture of
           factorized distributions can express rich dependencies. The remaining problem is training.
           VAE-style objectives can be fragile because reconstruction and regularization must be
-          balanced carefully. IDLM asks whether inverse distillation gives a cleaner loss for training
-          these fast generator distributions.
+          balanced carefully. IDLM adapts inverse distillation for this setting: use a pretrained
+          diffusion teacher to train a fast generator distribution. We describe that objective in
+          Section 2.
         </p>
         <div class="intuition-strip" aria-label="IDLM intuition summary">
           <div>
             <span class="intuition-step">01</span>
-            <h3>The teacher is a data critic</h3>
+            <h4>The teacher is a data critic</h4>
             <p>
               A pretrained diffusion model knows how real text should denoise at many noise levels.
               IDLM reuses that knowledge instead of retraining it from scratch.
@@ -321,7 +352,7 @@
           </div>
           <div>
             <span class="intuition-step">02</span>
-            <h3>The fake model is a mirror</h3>
+            <h4>The fake model is a mirror</h4>
             <p>
               The fake model learns only from current student samples. If it explains a sample too
               well, that sample may be an artifact of the student rather than the data distribution.
@@ -329,7 +360,7 @@
           </div>
           <div>
             <span class="intuition-step">03</span>
-            <h3>The gap becomes the signal</h3>
+            <h4>The gap becomes the signal</h4>
             <p>
               IDLM updates the generator toward samples where the teacher is better than the fake
               model. That contrast gives a practical direction for few-step generation.

@@ -711,9 +711,17 @@ svg {
 }
 
 .blog-subheading {
+  scroll-margin-top: 82px;
   margin: 36px 0 14px;
   color: #ffd3a2;
   font-size: clamp(1.08rem, 1.8vw, 1.42rem);
+  line-height: 1.35;
+}
+
+.blog-minor-heading {
+  margin: 34px 0 14px;
+  color: #ffd3a2;
+  font-size: clamp(1rem, 1.45vw, 1.22rem);
   line-height: 1.35;
 }
 
@@ -1063,7 +1071,7 @@ svg {
   font-weight: 800;
 }
 
-.intuition-strip h3 {
+.intuition-strip h4 {
   margin: 18px 0 10px;
   color: var(--ink);
   font-size: 1rem;
