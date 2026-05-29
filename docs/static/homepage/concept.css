@@ -818,15 +818,15 @@ svg {
   text-align: right;
 }
 
-.ar-token-chain {
+.ar-token-chain,
+.parallel-token-block {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 10px;
   align-items: center;
-  position: relative;
 }
 
-.ar-token-chain span:not(.chain-arrow),
+.ar-token-chain span,
 .parallel-token-block span {
   display: grid;
   place-items: center;
@@ -839,40 +839,6 @@ svg {
   font-weight: 800;
   line-height: 1;
   white-space: nowrap;
-}
-
-.ar-token-chain .chain-arrow {
-  display: grid;
-  place-items: center;
-  position: absolute;
-  top: 50%;
-  z-index: 2;
-  width: 20px;
-  height: 20px;
-  min-height: 0;
-  border-radius: 999px;
-  background: rgba(7, 21, 45, 0.9);
-  color: #ffd3a2;
-  font-size: 0.9rem;
-  font-weight: 800;
-  line-height: 1;
-  transform: translate(-50%, -50%);
-}
-
-.ar-token-chain .chain-arrow:nth-child(2) {
-  left: 20%;
-}
-
-.ar-token-chain .chain-arrow:nth-child(4) {
-  left: 40%;
-}
-
-.ar-token-chain .chain-arrow:nth-child(6) {
-  left: 60%;
-}
-
-.ar-token-chain .chain-arrow:nth-child(8) {
-  left: 80%;
 }
 
 .ar-token-chain .token-active {
@@ -895,26 +861,7 @@ svg {
   color: var(--quiet);
 }
 
-.generation-time {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 10px;
-  color: var(--quiet);
-  font-size: 0.58rem;
-  font-weight: 800;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.parallel-token-block {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 30px;
-}
-
-.ar-token-chain span:not(.chain-arrow),
+.ar-token-chain span,
 .parallel-token-block span {
   min-height: 62px;
 }
