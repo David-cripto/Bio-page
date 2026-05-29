@@ -515,12 +515,12 @@ svg {
 
 .blog-hero-heading h1 {
   margin: 0;
-  max-width: 100%;
+  max-width: 1120px;
   color: var(--ink);
-  font-size: clamp(1.85rem, 2.85vw, 2.45rem);
-  line-height: 1.08;
+  font-size: clamp(3.1rem, 5.45vw, 4.8rem);
+  line-height: 0.96;
   letter-spacing: 0;
-  white-space: nowrap;
+  text-wrap: balance;
   text-shadow: 0 0 34px rgba(25, 198, 255, 0.24);
 }
 
@@ -829,8 +829,7 @@ svg {
   }
 
   .blog-hero-heading h1 {
-    font-size: clamp(1.9rem, 6.4vw, 3.2rem);
-    white-space: normal;
+    font-size: clamp(2.4rem, 8vw, 4rem);
   }
 
   .method-grid,
