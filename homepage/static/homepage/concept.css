@@ -719,14 +719,6 @@ svg {
   padding: 16px;
 }
 
-.problem-cat-timeline {
-  width: 100%;
-  min-width: 760px;
-  border: 1px solid rgba(94, 217, 255, 0.2);
-  border-radius: 6px;
-  background: #091226;
-}
-
 .problem-panel-head {
   display: flex;
   align-items: center;
@@ -783,6 +775,10 @@ svg {
   top: 88px;
 }
 
+.problem-image-steps .problem-node:not(:last-child)::after {
+  top: 88px;
+}
+
 .problem-dots {
   align-self: center;
   min-height: 128px;
@@ -799,6 +795,22 @@ svg {
   display: flex;
   align-items: flex-end;
   min-height: 34px;
+}
+
+.cat-board {
+  display: block;
+  width: 132px;
+  height: 94px;
+  border: 1px solid rgba(94, 217, 255, 0.34);
+  border-radius: 8px;
+  background: rgba(246, 251, 255, 0.05);
+  object-fit: cover;
+  box-shadow: inset 0 0 20px rgba(1, 6, 22, 0.2);
+}
+
+.cat-board-final {
+  border-color: rgba(181, 240, 124, 0.54);
+  box-shadow: 0 0 0 1px rgba(181, 240, 124, 0.16), inset 0 0 20px rgba(1, 6, 22, 0.2);
 }
 
 .image-tile {

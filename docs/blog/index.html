@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Blog post about IDLM: Inverse-distilled Diffusion Language Models">
   <title>IDLM Blog | David Li</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-idlm-cat-caption-fix">
-  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-idlm-cat-caption-fix">
-  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-idlm-cat-caption-fix">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-idlm-cat-blocks">
+  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-idlm-cat-blocks">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-idlm-cat-blocks">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-idlm-cat-caption-fix">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-idlm-cat-blocks">
 </head>
 <body>
   <main class="blog-shell">
@@ -99,7 +99,44 @@
         <figure class="problem-figure" aria-label="Sequential denoising bottleneck">
           <div class="problem-panels">
             <div class="problem-panel problem-panel-image">
-              <img class="problem-cat-timeline" src="/Bio-page/static/homepage/blog/idlm-cat-denoising-timeline.png?v=20260529-cat-caption-fix" alt="Cat image diffusion timeline from random noise through sequential denoising steps to a final tabby cat image">
+              <div class="problem-panel-head">
+                <span>Image diffusion problem</span>
+                <strong>\(T\) sequential image-denoising steps</strong>
+              </div>
+              <div class="problem-steps problem-image-steps" aria-label="Cat image denoising timeline">
+                <div class="problem-node">
+                  <span class="problem-node-label">Input noise</span>
+                  <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-noise.png?v=20260529-cat-blocks" alt="Random image noise before denoising">
+                </div>
+                <div class="problem-node">
+                  <span class="problem-node-label">Step \(1\)</span>
+                  <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-1.png?v=20260529-cat-blocks" alt="First cat image denoising step">
+                  <span class="problem-model">Denoising model</span>
+                </div>
+                <div class="problem-node">
+                  <span class="problem-node-label">Step \(2\)</span>
+                  <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-2.png?v=20260529-cat-blocks" alt="Second cat image denoising step with emerging cat silhouette">
+                  <span class="problem-model">Denoising model</span>
+                </div>
+                <div class="problem-node">
+                  <span class="problem-node-label">Step \(3\)</span>
+                  <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-3.png?v=20260529-cat-blocks" alt="Third cat image denoising step with clearer cat">
+                  <span class="problem-model">Denoising model</span>
+                </div>
+                <div class="problem-node problem-dots">
+                  <span class="problem-node-label" aria-hidden="true">...</span>
+                </div>
+                <div class="problem-node">
+                  <span class="problem-node-label">Step \(T-1\)</span>
+                  <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-late.png?v=20260529-cat-blocks" alt="Almost final denoised tabby cat image">
+                  <span class="problem-model">Denoising model</span>
+                </div>
+                <div class="problem-node problem-final-node">
+                  <span class="problem-node-label">Step \(T\)</span>
+                  <img class="cat-board cat-board-final" src="/Bio-page/static/homepage/blog/idlm-cat-step-final.png?v=20260529-cat-blocks" alt="Final generated tabby cat image">
+                  <span class="problem-model">Denoising model</span>
+                </div>
+              </div>
             </div>
             <div class="problem-panel problem-panel-text">
               <div class="problem-panel-head">
