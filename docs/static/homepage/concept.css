@@ -780,6 +780,134 @@ svg {
   line-height: 1.65;
 }
 
+.generation-visual {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 30px 0 38px;
+}
+
+.generation-card {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgba(25, 198, 255, 0.11), rgba(184, 107, 255, 0.07) 58%, transparent),
+    rgba(7, 21, 45, 0.88);
+  padding: 18px;
+}
+
+.generation-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.generation-card-head span {
+  color: var(--quiet);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.generation-card-head strong {
+  color: #ffd3a2;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  text-align: right;
+}
+
+.ar-token-chain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1fr) 16px minmax(0, 1fr) 16px minmax(0, 1fr) 16px minmax(0, 1fr);
+  gap: 6px;
+  align-items: center;
+}
+
+.ar-token-chain span:not(.chain-arrow),
+.diffusion-token-states span {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 42px;
+  border: 1px solid rgba(94, 217, 255, 0.22);
+  background: rgba(2, 8, 24, 0.66);
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ar-token-chain .chain-arrow {
+  display: grid;
+  place-items: center;
+  min-height: 42px;
+  color: #ffd3a2;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.ar-token-chain .token-active {
+  border-color: rgba(255, 211, 162, 0.5);
+  background: rgba(255, 211, 162, 0.15);
+  color: #ffe3bd;
+}
+
+.ar-token-chain .token-pending,
+.diffusion-token-states .token-noise {
+  border-color: rgba(184, 107, 255, 0.28);
+  background: rgba(184, 107, 255, 0.13);
+  color: var(--quiet);
+}
+
+.generation-time {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+  color: var(--quiet);
+  font-size: 0.58rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.diffusion-token-states {
+  display: grid;
+  gap: 8px;
+}
+
+.diffusion-token-states > div {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 9px;
+  position: relative;
+}
+
+.diffusion-token-states > div:not(:last-child)::after {
+  content: "denoise all positions";
+  justify-self: center;
+  position: absolute;
+  bottom: -14px;
+  color: #ffd3a2;
+  font-size: 0.58rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.diffusion-token-states > div + div {
+  margin-top: 12px;
+}
+
+.generation-card p {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.64;
+}
+
 .problem-figure {
   margin: 34px 0 30px;
 }
@@ -1524,6 +1652,7 @@ svg {
   }
 
   .blog-contents ol,
+  .generation-visual,
   .token-scale-visual,
   .intuition-strip,
   .mixture-visual,
