@@ -658,6 +658,14 @@ svg {
   margin: 0 0 18px;
 }
 
+.blog-section > .section-kicker {
+  margin: -6px 0 22px;
+  color: #ffd3a2;
+  font-size: clamp(1rem, 1.65vw, 1.35rem);
+  font-weight: 800;
+  line-height: 1.42;
+}
+
 .blog-callout,
 .blog-equation,
 .method-grid > div,

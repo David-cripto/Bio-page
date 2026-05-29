@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Blog post about IDLM: Inverse-distilled Diffusion Language Models">
   <title>IDLM Blog | David Li</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-idlm-deeper-intuition">
-  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-idlm-deeper-intuition">
-  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-idlm-deeper-intuition">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260529-idlm-section-hierarchy">
+  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260529-idlm-section-hierarchy">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260529-idlm-section-hierarchy">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-idlm-deeper-intuition">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260529-idlm-section-hierarchy">
 </head>
 <body>
   <main class="blog-shell">
@@ -83,8 +83,8 @@
 
     <article class="blog-article">
       <section id="motivation" class="blog-section">
-        <p class="label">1. Motivation</p>
-        <h2>Why Distill Diffusion Language Models?</h2>
+        <h2>1. Motivation</h2>
+        <p class="section-kicker">Why distill diffusion language models?</p>
         <p>
           Today's standard language models are autoregressive: they generate the first token, then
           the next token, and so on. A \(1024\)-token completion usually takes \(1024\) forward
@@ -195,8 +195,8 @@
       </section>
 
       <section id="method" class="blog-section">
-        <p class="label">2. Method</p>
-        <h2>Teacher-vs-Fake Distribution Matching</h2>
+        <h2>2. Method</h2>
+        <p class="section-kicker">Teacher-vs-fake distribution matching</p>
         <p>
           Standard diffusion training starts from data. We have samples from the real distribution
           \(p^\star\), and train a diffusion model \(f^\star\) by minimizing
@@ -309,8 +309,8 @@
       </section>
 
       <section id="results" class="blog-section">
-        <p class="label">3. Results</p>
-        <h2>Fewer Reverse Steps, Similar Teacher Quality</h2>
+        <h2>3. Results</h2>
+        <p class="section-kicker">Fewer reverse steps, similar teacher quality</p>
         <p>
           IDLM is evaluated on conditional math generation and unconditional text generation. On
           OpenWebText, all models are tracked with generation perplexity and entropy. The goal is
@@ -454,8 +454,8 @@
       </section>
 
       <section id="conclusion" class="blog-section">
-        <p class="label">4. Conclusion</p>
-        <h2>What IDLM Teaches Us</h2>
+        <h2>4. Conclusion</h2>
+        <p class="section-kicker">What IDLM teaches us</p>
         <p>
           IDLM shows that diffusion language model distillation can be framed as a distribution-matching
           problem: train a fast student \(p_\theta\) whose samples are supported by the teacher \(f^\star\) more than by a fake
