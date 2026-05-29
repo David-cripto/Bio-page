@@ -467,7 +467,7 @@ svg {
 }
 
 .blog-shell {
-  width: min(100% - 48px, 1120px);
+  width: min(100% - 48px, 1280px);
   margin: 0 auto;
   padding: 28px 0 86px;
 }
@@ -515,7 +515,7 @@ svg {
 
 .blog-hero-heading h1 {
   margin: 0;
-  max-width: 1120px;
+  max-width: 1280px;
   color: var(--ink);
   font-size: clamp(3.1rem, 5.45vw, 4.8rem);
   line-height: 0.96;
@@ -557,7 +557,7 @@ svg {
 }
 
 .blog-hero-copy p:not(.label) {
-  max-width: 720px;
+  max-width: none;
   margin: 24px 0 0;
 }
 
@@ -654,7 +654,7 @@ svg {
 }
 
 .blog-section > p {
-  max-width: 880px;
+  max-width: none;
   margin: 0 0 18px;
 }
 
@@ -927,7 +927,6 @@ svg {
 }
 
 .problem-figure figcaption {
-  max-width: 880px;
   margin: 14px 0 0;
   color: var(--quiet);
   font-size: 0.76rem;
@@ -1011,7 +1010,6 @@ svg {
 }
 
 .blog-equation {
-  max-width: 860px;
   margin: 22px 0;
   overflow-x: auto;
   padding: 18px 20px;
@@ -1052,7 +1050,6 @@ svg {
   grid-template-columns: 150px minmax(0, 1fr);
   gap: 16px;
   align-items: center;
-  max-width: 920px;
   margin: 26px 0 24px;
   padding: 18px;
 }
@@ -1101,7 +1098,6 @@ svg {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
-  max-width: 920px;
   margin: 26px 0;
 }
 
@@ -1128,7 +1124,6 @@ svg {
 .contrast-visual {
   display: grid;
   gap: 12px;
-  max-width: 920px;
   margin: 28px 0 30px;
   padding: 14px;
 }
@@ -1280,7 +1275,6 @@ svg {
 .sampling-visual {
   display: grid;
   gap: 14px;
-  max-width: 920px;
   margin: 28px 0 36px;
   padding: 18px;
 }
