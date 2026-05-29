@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Blog post about IDLM: Inverse-distilled Diffusion Language Models">
   <title>IDLM Blog | {{ profile.name }}</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'homepage/favicon-32.png' %}?v=20260530-uniform-token-styles">
-  <link rel="icon" type="image/png" sizes="192x192" href="{% static 'homepage/favicon-192.png' %}?v=20260530-uniform-token-styles">
-  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'homepage/apple-touch-icon.png' %}?v=20260530-uniform-token-styles">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'homepage/favicon-32.png' %}?v=20260530-short-generation-intro">
+  <link rel="icon" type="image/png" sizes="192x192" href="{% static 'homepage/favicon-192.png' %}?v=20260530-short-generation-intro">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'homepage/apple-touch-icon.png' %}?v=20260530-short-generation-intro">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260530-uniform-token-styles">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260530-short-generation-intro">
 </head>
 <body>
   <main class="blog-shell">
@@ -105,24 +105,21 @@
         <p class="section-kicker">From generation paradigms to fast diffusion sampling</p>
         <h3 id="generation-approaches" class="blog-subheading">1.1 General Approaches for Generation</h3>
         <p>
-          There are two broad ways to think about generation. The first is the autoregressive
-          approach: generate one token, condition on it, then generate the next token. This is the
-          dominant paradigm in text today because it scales well, produces strong samples, and fits
-          naturally with causal transformer training. Its weakness is sampling time: a \(1024\)-token
-          completion usually requires \(1024\) sequential forward passes.
+          Most text models follow the autoregressive recipe: predict one token, append it, and repeat.
+          This <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener noreferrer">Transformer</a>/<a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf" target="_blank" rel="noopener noreferrer">GPT-style</a>
+          path is strong and scalable, but its sampling loop is sequential: a \(1024\)-token completion
+          usually needs about \(1024\) forward passes.
         </p>
         <p>
-          The second is the diffusion approach: start from noise, then repeatedly denoise until the
-          sample becomes clean. In images, this means refining pixels. In language, it means starting
-          from random or masked tokens and iteratively revising many token positions. This changes the
-          structure of generation: instead of committing left-to-right, a diffusion language model can
-          use bidirectional context and update the whole sequence in parallel at each denoising step.
+          Diffusion changes the shape of the problem. Instead of committing left-to-right, it starts
+          from noisy or masked content and repeatedly denoises it. In language, this means models such
+          as <a href="https://arxiv.org/abs/2107.03006" target="_blank" rel="noopener noreferrer">D3PM</a>
+          and <a href="https://openreview.net/forum?id=L4uaAR4ArM" target="_blank" rel="noopener noreferrer">MDLM</a>
+          can use both left and right context, revising many positions in one denoising step.
         </p>
         <p>
-          Autoregressive models are still the standard approach in the text domain, but diffusion
-          language models have recently become a serious alternative. They are attractive because they
-          promise parallel generation and bidirectional reasoning, while recent discrete diffusion
-          models have shown that the quality gap can be made much smaller than before.
+          The blocks below show the tradeoff: autoregression is simple but token-by-token; diffusion
+          is parallel over positions, but must still pay for multiple denoising rounds.
         </p>
         <div class="generation-visual" aria-label="Autoregressive versus diffusion generation">
           <div class="generation-card generation-card-ar">

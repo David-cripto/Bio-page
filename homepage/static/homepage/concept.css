@@ -556,6 +556,15 @@ svg {
   line-height: 1.82;
 }
 
+.blog-section > p a,
+.result-block > p a {
+  color: #7de7ff;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-color: rgba(125, 231, 255, 0.34);
+  text-underline-offset: 0.18em;
+}
+
 .blog-hero-copy p:not(.label) {
   max-width: none;
   margin: 24px 0 0;
