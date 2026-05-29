@@ -623,6 +623,21 @@ svg {
   color: #d8fbff;
 }
 
+.blog-section mjx-container[jax="SVG"]:not([display="true"]) {
+  display: inline-block !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  margin: 0 0.04em !important;
+  overflow: visible !important;
+  vertical-align: -0.12em;
+}
+
+.blog-section mjx-container[jax="SVG"]:not([display="true"]) svg {
+  display: inline-block;
+  overflow: visible;
+}
+
 .blog-equation mjx-container[jax="SVG"][display="true"] {
   margin: 0;
   max-width: 100%;
