@@ -192,26 +192,24 @@
         <div class="factorization-visual" aria-label="Large factorized jump versus small denoising steps">
           <div class="factorization-card factorization-gif-card">
             <span>Large factorized jump</span>
-            <strong>Independent choices can conflict</strong>
+            <strong>Correlation can break</strong>
             <img
               class="factorization-gif"
               src="{% static 'homepage/blog/idlm-factorization-large-step.gif' %}?v=20260530-factorization-gifs"
               alt="Large factorized denoising jump producing a noun-verb agreement conflict">
             <p>
-              A single product-form jump must sample many positions at once. If different positions
-              choose incompatible modes, the sentence can become globally inconsistent.
+              One product-form jump samples positions separately, so agreement can fail.
             </p>
           </div>
           <div class="factorization-card factorization-gif-card">
             <span>Many small steps</span>
-            <strong>Errors remain correctable</strong>
+            <strong>Small errors get repaired</strong>
             <img
               class="factorization-gif"
               src="{% static 'homepage/blog/idlm-factorization-small-steps.gif' %}?v=20260530-factorization-gifs"
               alt="Many small denoising steps correcting a noun-verb agreement conflict">
             <p>
-              With small transitions, the current state already carries context. Later denoising
-              calls can see the mismatch and repair it before the sample is final.
+              Small transitions keep enough context for later denoising calls to fix mistakes.
             </p>
           </div>
         </div>
