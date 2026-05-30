@@ -1224,6 +1224,11 @@ svg {
   padding: 18px;
 }
 
+.factorization-gif-card {
+  display: grid;
+  align-content: start;
+}
+
 .factorization-card-wide {
   grid-column: 1 / -1;
 }
@@ -1248,6 +1253,15 @@ svg {
   color: var(--muted);
   font-size: 0.8rem;
   line-height: 1.62;
+}
+
+.factorization-gif {
+  width: 100%;
+  margin: 4px 0 14px;
+  border: 1px solid rgba(94, 217, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(3, 10, 28, 0.96);
+  box-shadow: inset 0 1px 0 rgba(246, 251, 255, 0.04);
 }
 
 .factor-token-row,
