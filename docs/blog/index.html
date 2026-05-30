@@ -171,14 +171,23 @@
 
         <h3 id="diffusion-bottleneck" class="blog-subheading">1.2 The Bottleneck of Diffusion Models</h3>
         <p>
-          The practical bottleneck is simple: diffusion generation is slow. A sampler starts from
-          noise and repeatedly calls the denoising network; every call consumes the output of the
-          previous one. Even though one denoising call can update all positions in parallel, the
-          outer loop is still sequential, so standard <a href="https://arxiv.org/abs/2006.11239" target="_blank" rel="noopener noreferrer">DDPM-style</a>
+          Diffusion models have achieved remarkable generation quality across domains. In images,
+          works such as <a href="https://arxiv.org/abs/2006.11239" target="_blank" rel="noopener noreferrer">DDPM</a>
+          and <a href="https://arxiv.org/abs/2206.00364" target="_blank" rel="noopener noreferrer">EDM</a>
+          established iterative denoising as a powerful route to high-fidelity synthesis. In text,
+          recent discrete and masked diffusion models, including
+          <a href="https://openreview.net/forum?id=L4uaAR4ArM" target="_blank" rel="noopener noreferrer">MDLM</a>,
+          <a href="https://arxiv.org/abs/2412.10193" target="_blank" rel="noopener noreferrer">UDLM</a>,
+          and <a href="https://arxiv.org/abs/2502.09992" target="_blank" rel="noopener noreferrer">LLaDA</a>,
+          show that diffusion-style generation can also be competitive for language. The main
+          obstacle is inference: a sampler starts from noise and repeatedly applies a denoising
+          network, with each state depending on the previous one. Thus, even when a single denoising
+          call updates all positions in parallel, the time dimension remains sequential, and common
           samplers may require \(50\), \(100\), \(250\), or even \(1000\) forward passes before the
-          sample is clean. The obvious goal is to replace this long chain with a few larger
-          denoising jumps. But large jumps are not only an engineering shortcut; they change what
-          the model has to represent.
+          sample is clean. Accelerating diffusion therefore means replacing many small reverse
+          transitions with a few larger jumps. The difficulty is that larger jumps ask the reverse
+          model to represent stronger cross-position correlations, which exposes the factorization
+          bottleneck below.
         </p>
         <p>
           This is where the structural bottleneck appears. Diffusion samplers usually
