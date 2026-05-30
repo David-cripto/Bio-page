@@ -146,12 +146,17 @@
 
         <h3 id="diffusion-bottleneck" class="blog-subheading">1.2 The Bottleneck of Diffusion Models</h3>
         <p>
-          The catch is inference speed. In <a href="https://arxiv.org/abs/2006.11239" target="_blank" rel="noopener noreferrer">DDPM-style</a>
-          sampling, step \(t+1\) depends on step \(t\), so generation still needs a sequential chain
-          of denoising calls, often \(50\), \(100\), \(250\), or even \(1000\) forward passes.
+          The practical bottleneck is simple: diffusion generation is slow. A sampler starts from
+          noise and repeatedly calls the denoising network; every call consumes the output of the
+          previous one. Even though one denoising call can update all positions in parallel, the
+          outer loop is still sequential, so standard <a href="https://arxiv.org/abs/2006.11239" target="_blank" rel="noopener noreferrer">DDPM-style</a>
+          samplers may require \(50\), \(100\), \(250\), or even \(1000\) forward passes before the
+          sample is clean. The obvious goal is to replace this long chain with a few larger
+          denoising jumps. But large jumps are not only an engineering shortcut; they change what
+          the model has to represent.
         </p>
         <p>
-          There is also a structural reason this chain is hard to shorten. Diffusion samplers usually
+          This is where the structural bottleneck appears. Diffusion samplers usually
           factorize the reverse transition across positions. The model can look at the whole noisy
           sequence \(x_t^{1:L}\), but once \(x_t^{1:L}\) is fixed it predicts the next sequence
           \(x_{t-1}^{1:L}\) position by position. Here \(x_t^{(i)}\) is the \(i\)-th token or pixel:
