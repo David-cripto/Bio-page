@@ -171,25 +171,19 @@
 
         <h3 id="diffusion-bottleneck" class="blog-subheading">1.2 The Bottleneck of Diffusion Models</h3>
         <p>
-          This whole-sequence view is what makes diffusion appealing as a generation paradigm. Rather
-          than committing to a single left-to-right trajectory, the model maintains a noisy global
-          state and can revise many coordinates under bidirectional context. Empirically, this
-          paradigm has already led to remarkable generation quality: in images, works such as
+          This whole-sequence view is promising: diffusion can revise many positions at once instead
+          of committing left-to-right. It has already worked very well in images, where
           <a href="https://arxiv.org/abs/2006.11239" target="_blank" rel="noopener noreferrer">DDPM</a>
           and <a href="https://arxiv.org/abs/2206.00364" target="_blank" rel="noopener noreferrer">EDM</a>
-          established iterative denoising as a powerful route to high-fidelity synthesis; in text,
-          recent discrete and masked diffusion models, including
+          made iterative denoising a standard recipe, and it is becoming competitive in language
+          through models such as
           <a href="https://openreview.net/forum?id=L4uaAR4ArM" target="_blank" rel="noopener noreferrer">MDLM</a>,
           <a href="https://arxiv.org/abs/2412.10193" target="_blank" rel="noopener noreferrer">UDLM</a>,
-          and <a href="https://arxiv.org/abs/2502.09992" target="_blank" rel="noopener noreferrer">LLaDA</a>,
-          show that diffusion-style generation can also be competitive for language. The drawback is
-          inference: a sampler still starts from noise and repeatedly applies a denoising network,
-          with each state depending on the previous one. Thus, even though a single denoising call
-          updates all positions in parallel, the time dimension remains sequential, and common
-          samplers may require \(50\), \(100\), \(250\), or even \(1000\) forward passes before the
-          sample is clean. Accelerating diffusion means replacing many small reverse transitions with
-          a few larger jumps. The difficulty is that larger jumps ask the reverse model to represent
-          stronger cross-position correlations, which exposes the factorization bottleneck below.
+          and <a href="https://arxiv.org/abs/2502.09992" target="_blank" rel="noopener noreferrer">LLaDA</a>.
+          The drawback is speed. Sampling still runs a sequential denoising chain, often \(50\),
+          \(100\), \(250\), or even \(1000\) forward passes. To accelerate it, we would like to
+          replace many small steps with a few large jumps. But large jumps must capture stronger
+          cross-position correlations, which exposes the factorization bottleneck below.
         </p>
         <p>
           This is where the structural bottleneck appears. Diffusion samplers usually
