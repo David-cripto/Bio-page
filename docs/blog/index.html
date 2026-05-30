@@ -158,8 +158,8 @@
         <p>
           This is where the structural bottleneck appears. Diffusion samplers usually
           factorize the reverse transition across positions. The model can look at the whole noisy
-          sequence \(x_t^{1:L}\), but once \(x_t^{1:L}\) is fixed it predicts the next sequence
-          \(x_{t-1}^{1:L}\) position by position. Here \(x_t^{(i)}\) is the \(i\)-th token or pixel:
+          sequence \(x_t^{1:L}\), but then it predicts each token or pixel of the next sequence
+          \(x_{t-1}^{1:L}\) independently. Here \(x_t^{(i)}\) is the \(i\)-th token or pixel:
         </p>
         <div class="blog-equation">
           \[
