@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Blog post about IDLM: Inverse-distilled Diffusion Language Models">
   <title>IDLM Blog | David Li</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260530-factorization-gifs">
-  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260530-factorization-gifs">
-  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260530-factorization-gifs">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260530-factorization-gifs-v2">
+  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260530-factorization-gifs-v2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260530-factorization-gifs-v2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260530-factorization-gifs">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260530-factorization-gifs-v2">
 </head>
 <body>
   <main class="blog-shell">
@@ -195,10 +195,10 @@
             <strong>Correlation can break</strong>
             <img
               class="factorization-gif"
-              src="/Bio-page/static/homepage/blog/idlm-factorization-large-step.gif?v=20260530-factorization-gifs"
+              src="/Bio-page/static/homepage/blog/idlm-factorization-large-step.gif?v=20260530-factorization-gifs-v2"
               alt="Large factorized denoising jump producing a noun-verb agreement conflict">
             <p>
-              One product-form jump samples positions separately, so agreement can fail.
+              The noun and verb are sampled separately: `cat` plus `are` breaks agreement.
             </p>
           </div>
           <div class="factorization-card factorization-gif-card">
@@ -206,10 +206,10 @@
             <strong>Small errors get repaired</strong>
             <img
               class="factorization-gif"
-              src="/Bio-page/static/homepage/blog/idlm-factorization-small-steps.gif?v=20260530-factorization-gifs"
+              src="/Bio-page/static/homepage/blog/idlm-factorization-small-steps.gif?v=20260530-factorization-gifs-v2"
               alt="Many small denoising steps correcting a noun-verb agreement conflict">
             <p>
-              Small transitions keep enough context for later denoising calls to fix mistakes.
+              The noun is fixed first, then the next small step chooses the matching verb.
             </p>
           </div>
         </div>
