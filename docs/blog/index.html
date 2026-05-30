@@ -213,74 +213,6 @@
           require \(50\), \(100\), \(250\), or \(1000\) forward passes before the sequence becomes
           clean.
         </p>
-        <div class="blog-callout">
-          <strong>The target regime</strong>
-          <span>
-            Generating \(1024\) tokens in \(16\) forward passes means producing \(1024/16=64\)
-            tokens per pass. This is exactly the kind of regime where diffusion could be useful,
-            but only if the denoising chain can be compressed safely.
-          </span>
-        </div>
-        <p>
-          The natural acceleration idea is to replace many small denoising steps with a few large
-          jumps. But the reverse transition used by many discrete diffusion samplers is factorized
-          over positions:
-        </p>
-        <div class="blog-equation">
-          \[
-            p_\theta(x_{t-1}^{1:L} \mid x_t^{1:L})
-            =
-            \prod_{i=1}^{L}
-            p_\theta(x_{t-1}^{(i)} \mid x_t^{1:L}).
-          \]
-        </div>
-        <p>
-          This works well when the jump from \(x_t^{1:L}\) to \(x_{t-1}^{1:L}\) is small: most
-          sentence structure is already present, and each token only needs a local correction. A
-          large skip from \(x_t^{1:L}\) to \(x_{t-\Delta}^{1:L}\) asks one factorized transition to
-          capture stronger cross-token dependencies:
-        </p>
-        <div class="blog-equation">
-          \[
-            p_\theta(x_{t-\Delta}^{1:L} \mid x_t^{1:L})
-            \not\approx
-            \prod_{i=1}^{L}
-            p_\theta(x_{t-\Delta}^{(i)} \mid x_t^{1:L}),
-            \qquad \Delta \gg 1.
-          \]
-        </div>
-        <p>
-          This is the central tension. A composition of many small factorized transitions can still
-          represent a rich final distribution, because later steps can repair earlier local mistakes.
-          If we remove most of those steps, one factorized jump must suddenly coordinate agreement,
-          syntax, semantics, and long-range dependencies. That is where naive step-skipping becomes
-          fragile.
-        </p>
-        <div class="factorization-visual" aria-label="Large factorized jump versus small denoising steps">
-          <div class="factorization-card factorization-gif-card">
-            <span>Large factorized jump</span>
-            <strong>Correlation can break</strong>
-            <img
-              class="factorization-gif"
-              src="/Bio-page/static/homepage/blog/idlm-factorization-large-step.gif?v=20260530-slower-gifs"
-              alt="Large factorized denoising jump producing a noun-verb agreement conflict">
-            <p>
-              Independent choices can create incompatible tokens, for example <code>cat</code> with
-              <code>are</code>.
-            </p>
-          </div>
-          <div class="factorization-card factorization-gif-card">
-            <span>Many small steps</span>
-            <strong>Small errors get repaired</strong>
-            <img
-              class="factorization-gif"
-              src="/Bio-page/static/homepage/blog/idlm-factorization-small-steps.gif?v=20260530-slower-gifs"
-              alt="Many small denoising steps correcting a noun-verb agreement conflict">
-            <p>
-              A short correction can use the partially cleaned context before choosing the next token.
-            </p>
-          </div>
-        </div>
         <figure class="problem-figure" aria-label="Sequential language denoising bottleneck">
           <div class="problem-panels">
             <div class="problem-panel problem-panel-text">
@@ -353,7 +285,74 @@
             ordered outer loop is the part we want to compress.
           </figcaption>
         </figure>
-
+        <div class="blog-callout">
+          <strong>The target regime</strong>
+          <span>
+            Generating \(1024\) tokens in \(16\) forward passes means producing \(1024/16=64\)
+            tokens per pass. This is exactly the kind of regime where diffusion could be useful,
+            but only if the denoising chain can be compressed safely.
+          </span>
+        </div>
+        <p>
+          The natural acceleration idea is to replace many small denoising steps with a few large
+          jumps. But the reverse transition used by many discrete diffusion samplers is factorized
+          over positions:
+        </p>
+        <div class="blog-equation">
+          \[
+            p_\theta(x_{t-1}^{1:L} \mid x_t^{1:L})
+            =
+            \prod_{i=1}^{L}
+            p_\theta(x_{t-1}^{(i)} \mid x_t^{1:L}).
+          \]
+        </div>
+        <p>
+          This works well when the jump from \(x_t^{1:L}\) to \(x_{t-1}^{1:L}\) is small: most
+          sentence structure is already present, and each token only needs a local correction. A
+          large skip from \(x_t^{1:L}\) to \(x_{t-\Delta}^{1:L}\) asks one factorized transition to
+          capture stronger cross-token dependencies:
+        </p>
+        <div class="blog-equation">
+          \[
+            p_\theta(x_{t-\Delta}^{1:L} \mid x_t^{1:L})
+            \not\approx
+            \prod_{i=1}^{L}
+            p_\theta(x_{t-\Delta}^{(i)} \mid x_t^{1:L}),
+            \qquad \Delta \gg 1.
+          \]
+        </div>
+        <p>
+          This is the central tension. A composition of many small factorized transitions can still
+          represent a rich final distribution, because later steps can repair earlier local mistakes.
+          If we remove most of those steps, one factorized jump must suddenly coordinate agreement,
+          syntax, semantics, and long-range dependencies. That is where naive step-skipping becomes
+          fragile.
+        </p>
+        <div class="factorization-visual" aria-label="Large factorized jump versus small denoising steps">
+          <div class="factorization-card factorization-gif-card">
+            <span>Large factorized jump</span>
+            <strong>Correlation can break</strong>
+            <img
+              class="factorization-gif"
+              src="/Bio-page/static/homepage/blog/idlm-factorization-large-step.gif?v=20260530-slower-gifs"
+              alt="Large factorized denoising jump producing a noun-verb agreement conflict">
+            <p>
+              Independent choices can create incompatible tokens, for example <code>cat</code> with
+              <code>are</code>.
+            </p>
+          </div>
+          <div class="factorization-card factorization-gif-card">
+            <span>Many small steps</span>
+            <strong>Small errors get repaired</strong>
+            <img
+              class="factorization-gif"
+              src="/Bio-page/static/homepage/blog/idlm-factorization-small-steps.gif?v=20260530-slower-gifs"
+              alt="Many small denoising steps correcting a noun-verb agreement conflict">
+            <p>
+              A short correction can use the partially cleaned context before choosing the next token.
+            </p>
+          </div>
+        </div>
         <h3 id="image-distillation" class="blog-subheading">1.3 Distillation in Image Diffusion</h3>
         <p>
           Image diffusion faced this problem first. Models such as
