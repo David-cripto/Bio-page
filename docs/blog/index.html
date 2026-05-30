@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Blog post about IDLM: Inverse-distilled Diffusion Language Models">
   <title>IDLM Blog | David Li</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260530-wide-diffusion-panels">
-  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260530-wide-diffusion-panels">
-  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260530-wide-diffusion-panels">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260530-factorized-bottleneck">
+  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260530-factorized-bottleneck">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260530-factorized-bottleneck">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260530-wide-diffusion-panels">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260530-factorized-bottleneck">
 </head>
 <body>
   <main class="blog-shell">
@@ -149,6 +149,76 @@
           The catch is inference speed. In <a href="https://arxiv.org/abs/2006.11239" target="_blank" rel="noopener noreferrer">DDPM-style</a>
           sampling, step \(t+1\) depends on step \(t\), so generation still needs a sequential chain
           of denoising calls, often \(50\), \(100\), \(250\), or even \(1000\) forward passes.
+        </p>
+        <p>
+          There is also a structural reason this chain is hard to shorten. Diffusion samplers usually
+          factorize the reverse transition across positions. The model can look at the whole noisy
+          state \(x_t\), but once \(x_t\) is fixed it predicts the next state position by position:
+        </p>
+        <div class="blog-equation">
+          \[
+            p_\theta(x_{t-1} \mid x_t)
+            =
+            \prod_{i=1}^{L}
+            p_\theta(x_{t-1}^{(i)} \mid x_t).
+          \]
+        </div>
+        <p>
+          This factorization is reasonable when the transition from \(x_t\) to \(x_{t-1}\) is small:
+          most of the global structure is already present, and each position only needs a local
+          correction. But if we try to replace many denoising steps with one large jump, the model
+          must choose a correlated multi-token or multi-pixel state. A product of independent
+          position-wise choices cannot directly represent an arbitrary joint update:
+        </p>
+        <div class="blog-equation">
+          \[
+            p(x_{t-k} \mid x_t)
+            \not\approx
+            \prod_{i=1}^{L} p(x_{t-k}^{(i)} \mid x_t)
+            \quad \text{when } k \text{ is large.}
+          \]
+        </div>
+        <div class="factorization-visual" aria-label="Factorized reverse transition intuition">
+          <div class="factorization-card">
+            <span>Large jump</span>
+            <strong>Needs a joint choice</strong>
+            <div class="factor-token-row factor-token-row-joint" aria-label="Correlated phrase tokens">
+              <span>The</span><span>small</span><span>cat</span><span>sat</span>
+            </div>
+            <p>The phrase works because the tokens agree with one another as a block.</p>
+          </div>
+          <div class="factorization-card">
+            <span>Factorized step</span>
+            <strong>Samples positions separately</strong>
+            <div class="factor-product" aria-label="Product of position-wise distributions">
+              <span>\(p_1\)</span><b>\(\times\)</b><span>\(p_2\)</span><b>\(\times\)</b><span>\(p_3\)</span><b>\(\times\)</b><span>\(p_4\)</span>
+            </div>
+            <p>Each output sees \(x_t\), but the sampled positions are conditionally independent.</p>
+          </div>
+          <div class="factorization-card factorization-card-wide">
+            <span>Why many small steps work</span>
+            <strong>Small corrections need less global coordination</strong>
+            <div class="factor-transition">
+              <div class="factor-mini-board">
+                <span>The</span><span>small</span><span>cat</span>
+                <span>sat</span><span>on</span><span>?</span>
+                <span>mat</span><span>quietly</span><span>.</span>
+              </div>
+              <div class="factor-transition-arrow">small denoising move</div>
+              <div class="factor-mini-board factor-mini-board-clean">
+                <span>The</span><span>small</span><span>cat</span>
+                <span>sat</span><span>on</span><span>the</span>
+                <span>mat</span><span>quietly</span><span>.</span>
+              </div>
+            </div>
+            <p>Long chains make the factorized assumption easier by turning one hard global jump into many small local updates.</p>
+          </div>
+        </div>
+        <p>
+          In other words, the expressive final distribution of a standard diffusion model comes from
+          composing many small factorized transitions. If we remove most of the transitions naively,
+          we ask one factorized step to model the whole final distribution, which is exactly where
+          the assumption is weakest.
         </p>
         <p>
           The diagrams below show the tension. Image diffusion refines all pixels inside each block,

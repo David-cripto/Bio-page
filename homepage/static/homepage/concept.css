@@ -762,6 +762,7 @@ svg {
 .token-scale-visual > div,
 .mixture-visual,
 .inverse-flow > div,
+.factorization-card,
 .problem-panel {
   border: 1px solid var(--line);
   background:
@@ -1196,6 +1197,162 @@ svg {
   padding: 2px 0;
 }
 
+.factorization-visual {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 26px 0 32px;
+}
+
+.factorization-card {
+  min-width: 0;
+  padding: 18px;
+}
+
+.factorization-card-wide {
+  grid-column: 1 / -1;
+}
+
+.factorization-card > span {
+  color: var(--quiet);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.factorization-card strong {
+  display: block;
+  margin: 10px 0 14px;
+  color: var(--ink);
+  font-size: clamp(1rem, 1.45vw, 1.18rem);
+  line-height: 1.35;
+}
+
+.factorization-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.62;
+}
+
+.factor-token-row,
+.factor-product {
+  margin: 18px 0 14px;
+}
+
+.factor-token-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.factor-token-row-joint::before {
+  content: "";
+  position: absolute;
+  left: 9%;
+  right: 9%;
+  top: 50%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(181, 240, 124, 0.72), transparent);
+  transform: translateY(-50%);
+}
+
+.factor-token-row span,
+.factor-product span,
+.factor-mini-board span {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 38px;
+  border: 1px solid rgba(184, 107, 255, 0.3);
+  background: rgba(184, 107, 255, 0.15);
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+}
+
+.factor-token-row-joint span,
+.factor-mini-board-clean span {
+  border-color: rgba(181, 240, 124, 0.36);
+  background: rgba(181, 240, 124, 0.13);
+  color: #dfffd7;
+}
+
+.factor-product {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+}
+
+.factor-product b {
+  display: grid;
+  place-items: center;
+  color: #ffd3a2;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.factor-product span {
+  min-height: 46px;
+}
+
+.factor-product span::after {
+  content: "independent";
+  margin-top: 6px;
+  color: var(--quiet);
+  font-size: 0.48rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.factor-transition {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(112px, 0.34fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  margin: 18px 0 14px;
+}
+
+.factor-mini-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  border: 1px solid rgba(184, 107, 255, 0.26);
+  background: rgba(246, 251, 255, 0.05);
+  padding: 8px;
+}
+
+.factor-mini-board span {
+  min-height: 28px;
+  font-size: 0.62rem;
+}
+
+.factor-mini-board:not(.factor-mini-board-clean) span:nth-child(6) {
+  border-color: rgba(184, 107, 255, 0.52);
+  background: rgba(184, 107, 255, 0.28);
+  color: #ead7ff;
+}
+
+.factor-transition-arrow {
+  display: grid;
+  place-items: center;
+  min-height: 40px;
+  border-top: 1px solid rgba(94, 217, 255, 0.26);
+  border-bottom: 1px solid rgba(94, 217, 255, 0.26);
+  color: #ffd3a2;
+  font-size: 0.66rem;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .mixture-visual {
   display: grid;
   grid-template-columns: 150px minmax(0, 1fr);
@@ -1588,8 +1745,21 @@ svg {
   .method-grid,
   .metric-grid,
   .generation-animation-grid,
+  .factorization-visual,
   .blog-figure-grid {
     grid-template-columns: 1fr;
+  }
+
+  .factorization-card-wide {
+    grid-column: auto;
+  }
+
+  .factor-transition {
+    grid-template-columns: 1fr;
+  }
+
+  .factor-transition-arrow {
+    min-height: 34px;
   }
 
   .mixture-visual p {
