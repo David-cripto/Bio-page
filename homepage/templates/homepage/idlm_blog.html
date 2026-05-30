@@ -175,14 +175,14 @@
           This factorization is reasonable when the transition from \(x_t^{1:L}\) to
           \(x_{t-1}^{1:L}\) is small: most of the global structure is already present, and each
           position only needs a local correction. But if we skip \(\Delta\) denoising levels at once,
-          the target is a correlated large-step transition from \(x_t^{1:L}\) to
-          \(x_{t-\Delta}^{1:L}\). A product of independent position-wise choices is a weak
-          approximation to that joint update:
+          the model has to approximate a much more correlated transition from \(x_t^{1:L}\) to
+          \(x_{t-\Delta}^{1:L}\). This full-sequence transition is not well captured by the same
+          independent product form:
         </p>
         <div class="blog-equation">
           \[
             \begin{aligned}
-            p_{\mathrm{joint}}(x_{t-\Delta}^{1:L} \mid x_t^{1:L})
+            p_\theta(x_{t-\Delta}^{1:L} \mid x_t^{1:L})
             &\not\approx
             \prod_{i=1}^{L}
             p_\theta(x_{t-\Delta}^{(i)} \mid x_t^{1:L}),
@@ -191,8 +191,9 @@
           \]
         </div>
         <p>
-          Here \(p_{\mathrm{joint}}\) denotes the desired correlated large-step transition, while the
-          product form is what we get if positions are sampled independently.
+          The GIFs below show the same issue with two linked blanks: a large factorized jump can
+          sample incompatible words, while small denoising steps can use the partially cleaned
+          context to stay consistent.
         </p>
         <div class="factorization-visual" aria-label="Large factorized jump versus small denoising steps">
           <div class="factorization-card factorization-gif-card">
