@@ -573,17 +573,68 @@ svg {
 .blog-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 12px;
   margin-top: 26px;
 }
 
 .blog-actions a {
+  position: relative;
   display: inline-grid;
   place-items: center;
-  min-height: 42px;
+  width: 46px;
+  height: 46px;
   border: 1px solid rgba(25, 198, 255, 0.42);
+  border-radius: 6px;
   background: rgba(7, 21, 45, 0.78);
-  padding: 9px 14px;
+  padding: 0;
+  text-decoration: none;
+  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.resource-icon svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
+}
+
+.resource-icon:hover,
+.resource-icon:focus-visible {
+  border-color: rgba(255, 211, 162, 0.78);
+  background: rgba(25, 198, 255, 0.15);
+  color: #ffd3a2;
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.resource-icon::after {
+  content: attr(aria-label);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  z-index: 8;
+  min-width: max-content;
+  border: 1px solid rgba(255, 211, 162, 0.36);
+  border-radius: 4px;
+  background: rgba(3, 10, 28, 0.96);
+  color: #ffd3a2;
+  padding: 5px 8px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  opacity: 0;
+  pointer-events: none;
+  text-transform: uppercase;
+  transform: translate(-50%, 4px);
+  transition: opacity 140ms ease, transform 140ms ease;
+}
+
+.resource-icon:hover::after,
+.resource-icon:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 .blog-article {
