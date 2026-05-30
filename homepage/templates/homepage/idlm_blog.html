@@ -51,15 +51,12 @@
       </div>
       <div class="blog-hero-copy">
         <p>
-          What would it take for a language model to generate a 1024-token continuation in only
-          16 forward passes? That is 64 tokens per pass, a speed regime that standard
-          autoregressive decoding cannot naturally reach because it commits to text one token at a
-          time.
+          Can a language model generate 1024 tokens in only 16 forward passes? That means producing
+          64 tokens per pass, instead of decoding one token at a time.
         </p>
         <p>
-          IDLM asks whether diffusion language models can make this kind of parallel generation
-          practical: keep the bidirectional denoising view, compress the long sampling chain into a
-          few reliable steps, and preserve the structure of the generated text.
+          IDLM makes this kind of parallel generation practical for diffusion language models by
+          compressing long denoising chains into a few reliable steps.
         </p>
         <div class="blog-actions">
           <a class="resource-icon" href="https://david-cripto.github.io/idlm-project-page/" target="_blank" rel="noopener noreferrer" aria-label="Project page">
