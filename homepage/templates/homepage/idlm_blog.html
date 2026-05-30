@@ -35,7 +35,8 @@
       <a href="{% url 'home' %}">Home</a>
       <a href="#contents">Contents</a>
       <a href="#motivation">Motivation</a>
-      <a href="#method">Method</a>
+      <a href="#inverse-distillation">Inverse Distillation</a>
+      <a href="#idlm">IDLM</a>
       <a href="#results">Results</a>
       <a href="#conclusion">Conclusion</a>
     </nav>
@@ -102,16 +103,30 @@
       <ol>
         <li>
           <a href="#motivation">Motivation</a>
-          <span class="toc-note">From generation paradigms to the need for fast diffusion sampling.</span>
+          <span class="toc-note">Why language diffusion is attractive, and why its inference loop is still the bottleneck.</span>
           <ol>
-            <li><a href="#generation-approaches">Generation Approaches</a></li>
-            <li><a href="#diffusion-bottleneck">Diffusion Bottleneck</a></li>
-            <li><a href="#distillation-path">Distillation Path</a></li>
+            <li><a href="#generation-approaches">Autoregression vs Diffusion</a></li>
+            <li><a href="#diffusion-inference">Diffusion Inference</a></li>
+            <li><a href="#image-distillation">Image Distillation</a></li>
           </ol>
         </li>
         <li>
-          <a href="#method">Method</a>
-          <span class="toc-note">How inverse distillation trains a fast generator from a fixed teacher.</span>
+          <a href="#inverse-distillation">Inverse Distillation</a>
+          <span class="toc-note">The distribution-matching view behind IDLM.</span>
+          <ol>
+            <li><a href="#distillation-families">Two Distillation Families</a></li>
+            <li><a href="#inverse-view">Inverse Distillation View</a></li>
+            <li><a href="#language-transfer">From Images to Language</a></li>
+          </ol>
+        </li>
+        <li>
+          <a href="#idlm">IDLM</a>
+          <span class="toc-note">How the inverse objective becomes a practical discrete-language method.</span>
+          <ol>
+            <li><a href="#theory">Theoretical Guarantees</a></li>
+            <li><a href="#discrete-practice">Discrete Non-Smoothness</a></li>
+            <li><a href="#loss-intuition">Loss Intuition</a></li>
+          </ol>
         </li>
         <li>
           <a href="#results">Results</a>
@@ -131,20 +146,24 @@
     <article class="blog-article">
       <section id="motivation" class="blog-section">
         <h2>1. Motivation</h2>
-        <p class="section-kicker">From generation paradigms to fast diffusion sampling</p>
+        <p class="section-kicker">Language generation has two useful views: token-by-token prediction and iterative denoising.</p>
+
         <h3 id="generation-approaches" class="blog-subheading">1.1 General Approaches: Autoregression vs Diffusion</h3>
         <p>
-          Most text models follow the autoregressive recipe: predict one token, append it, and repeat.
-          This <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener noreferrer">Transformer</a>/<a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf" target="_blank" rel="noopener noreferrer">GPT-style</a>
-          path is strong and scalable, but its sampling loop is sequential: a \(1024\)-token completion
-          usually needs about \(1024\) forward passes.
+          Autoregressive language models generate text by extending a prefix. They predict the next
+          token, append it, and repeat. This is the dominant paradigm in text because it is simple,
+          scalable, and extremely strong, but a \(L\)-token completion usually requires \(L\)
+          sequential forward passes.
         </p>
         <p>
-          Diffusion changes the shape of the problem. Instead of committing left-to-right, it starts
-          from noisy content and repeatedly denoises it. In language, this means models such
-          as <a href="https://arxiv.org/abs/2107.03006" target="_blank" rel="noopener noreferrer">D3PM</a>
-          and <a href="https://openreview.net/forum?id=L4uaAR4ArM" target="_blank" rel="noopener noreferrer">MDLM</a>
-          can use both left and right context, revising many positions in one denoising step.
+          Diffusion language models use a different generation view. They start from a noisy sequence
+          and repeatedly denoise it, so each denoising call can look at the whole sequence and revise
+          many token positions together. Recent models such as
+          <a href="https://arxiv.org/abs/2107.03006" target="_blank" rel="noopener noreferrer">D3PM</a>,
+          <a href="https://openreview.net/forum?id=L4uaAR4ArM" target="_blank" rel="noopener noreferrer">MDLM</a>,
+          <a href="https://arxiv.org/abs/2412.10193" target="_blank" rel="noopener noreferrer">UDLM</a>,
+          and <a href="https://arxiv.org/abs/2502.09992" target="_blank" rel="noopener noreferrer">LLaDA</a>
+          show that this bidirectional, whole-sequence paradigm can be competitive for language.
         </p>
         <figure class="generation-animation-figure" aria-label="Autoregressive versus diffusion generation animation">
           <div class="generation-animation-grid">
@@ -164,58 +183,44 @@
             </div>
           </div>
           <figcaption>
-            Autoregression advances through the sentence one token at a time. Diffusion keeps a
-            whole-sequence state, so multiple positions can be revised in the same denoising call.
+            Autoregression moves left to right. Diffusion maintains a whole-sequence state, which is
+            the source of its parallel-generation appeal.
           </figcaption>
         </figure>
 
-        <h3 id="diffusion-bottleneck" class="blog-subheading">1.2 The Bottleneck of Diffusion Models</h3>
+        <h3 id="diffusion-inference" class="blog-subheading">1.2 The Problem of Diffusion Inference</h3>
         <p>
-          This whole-sequence view is promising: diffusion can revise many positions at once instead
-          of committing left-to-right. In language, recent diffusion models such as
-          <a href="https://openreview.net/forum?id=L4uaAR4ArM" target="_blank" rel="noopener noreferrer">MDLM</a>,
-          <a href="https://arxiv.org/abs/2412.10193" target="_blank" rel="noopener noreferrer">UDLM</a>,
-          and <a href="https://arxiv.org/abs/2502.09992" target="_blank" rel="noopener noreferrer">LLaDA</a>
-          show that this alternative can be competitive with autoregressive generation. The challenge
-          is that this quality still comes from an iterative sampler: generation runs a sequential
-          denoising chain, often \(50\), \(100\), \(250\), or even \(1000\) forward passes. To
-          accelerate it, we would like to replace many small steps with a few large jumps. But large
-          jumps also make the reverse step much harder, because several token decisions must stay
-          correlated at the same time.
+          The drawback is inference speed. A diffusion sampler still runs a chain of denoising calls,
+          and each call consumes the output of the previous one. Even if one call updates all tokens
+          in parallel, the outer loop is sequential and may require \(50\), \(100\), \(250\), or
+          \(1000\) forward passes.
         </p>
         <p>
-          Standard diffusion samplers handle this reverse step with a factorized prediction across
-          positions. The model can look at the whole noisy sequence \(x_t^{1:L}\), but then it
-          predicts each token of the next sequence \(x_{t-1}^{1:L}\) independently. Here
-          \(x_t^{(i)}\) is the \(i\)-th token:
+          The natural acceleration idea is to replace many small denoising steps with a few large
+          jumps. But the reverse transition used by many discrete diffusion samplers is factorized
+          over positions:
         </p>
         <div class="blog-equation">
           \[
-            \begin{aligned}
             p_\theta(x_{t-1}^{1:L} \mid x_t^{1:L})
-            &=
+            =
             \prod_{i=1}^{L}
             p_\theta(x_{t-1}^{(i)} \mid x_t^{1:L}).
-            \end{aligned}
           \]
         </div>
         <p>
-          This factorization is reasonable when the transition from \(x_t^{1:L}\) to
-          \(x_{t-1}^{1:L}\) is small: most of the global structure is already present, and each
-          position only needs a local correction. But if we skip \(\Delta\) denoising levels at once,
-          the model has to approximate a much more correlated transition from \(x_t^{1:L}\) to
-          \(x_{t-\Delta}^{1:L}\). This full-sequence transition is not well captured by the same
-          independent product form:
+          This works well when the jump from \(x_t^{1:L}\) to \(x_{t-1}^{1:L}\) is small: most
+          sentence structure is already present, and each token only needs a local correction. A
+          large skip from \(x_t^{1:L}\) to \(x_{t-\Delta}^{1:L}\) asks one factorized transition to
+          capture stronger cross-token dependencies:
         </p>
         <div class="blog-equation">
           \[
-            \begin{aligned}
             p_\theta(x_{t-\Delta}^{1:L} \mid x_t^{1:L})
-            &\not\approx
+            \not\approx
             \prod_{i=1}^{L}
             p_\theta(x_{t-\Delta}^{(i)} \mid x_t^{1:L}),
             \qquad \Delta \gg 1.
-            \end{aligned}
           \]
         </div>
         <div class="factorization-visual" aria-label="Large factorized jump versus small denoising steps">
@@ -227,7 +232,8 @@
               src="{% static 'homepage/blog/idlm-factorization-large-step.gif' %}?v=20260530-slower-gifs"
               alt="Large factorized denoising jump producing a noun-verb agreement conflict">
             <p>
-              The noun and verb are sampled separately: `cat` plus `are` breaks agreement.
+              Independent choices can create incompatible tokens, for example <code>cat</code> with
+              <code>are</code>.
             </p>
           </div>
           <div class="factorization-card factorization-gif-card">
@@ -238,24 +244,10 @@
               src="{% static 'homepage/blog/idlm-factorization-small-steps.gif' %}?v=20260530-slower-gifs"
               alt="Many small denoising steps correcting a noun-verb agreement conflict">
             <p>
-              The noun is fixed first, then the next small step chooses the matching verb.
+              A short correction can use the partially cleaned context before choosing the next token.
             </p>
           </div>
         </div>
-        <p>
-          In other words, the expressive final distribution of a standard diffusion model comes from
-          composing many small factorized transitions. If we remove most of the transitions naively,
-          we ask one factorized step to model the whole final distribution, which is exactly where
-          the assumption is weakest.
-        </p>
-        <p>
-          The diagram below shows the same bottleneck for language diffusion. A method such as
-          <a href="https://arxiv.org/abs/2107.03006" target="_blank" rel="noopener noreferrer">D3PM</a>
-          or <a href="https://openreview.net/forum?id=L4uaAR4ArM" target="_blank" rel="noopener noreferrer">MDLM</a>
-          can revise many tokens inside one denoising call, but the calls themselves remain ordered:
-          the model moves from random tokens to clean text by repeatedly applying the denoising
-          network. This outer loop is the part we want to compress.
-        </p>
         <figure class="problem-figure" aria-label="Sequential language denoising bottleneck">
           <div class="problem-panels">
             <div class="problem-panel problem-panel-text">
@@ -324,23 +316,26 @@
             </div>
           </div>
           <figcaption>
-            Diffusion has parallelism inside each block, but the blocks themselves are ordered. The
-            next denoising call depends on the previous sample, so generation speed is dominated by
-            the length of this outer loop.
+            Each denoising block can update several tokens, but the blocks remain ordered. This
+            ordered outer loop is the part we want to compress.
           </figcaption>
         </figure>
-        <h3 id="distillation-path" class="blog-subheading">1.3 Distillation as an Acceleration Path</h3>
+
+        <h3 id="image-distillation" class="blog-subheading">1.3 Distillation in Image Diffusion</h3>
         <p>
-          In image generation, this sequential bottleneck was largely attacked with distillation.
-          A high-quality teacher diffusion model may use many denoising steps, but a student sampler
-          can be trained to imitate the teacher with far fewer steps. This is one of the reasons
-          modern image diffusion systems can be much faster than the original many-step samplers.
+          Image diffusion faced the same kind of outer-loop bottleneck. Early samplers used many
+          denoising steps to turn noise into a clean image; later distillation methods trained a
+          student sampler to imitate the teacher trajectory with far fewer calls.
         </p>
+        <figure class="blog-figure">
+          <img src="{% static 'homepage/blog/idlm-cat-denoising-timeline.png' %}?v=20260529-cat-blocks" alt="Cat image diffusion timeline with many sequential denoising steps">
+          <figcaption>A standard image diffusion sampler improves the whole image at each step, but still follows a sequential denoising chain.</figcaption>
+        </figure>
         <figure class="distill-figure" aria-label="Distilled image diffusion with four denoising steps">
           <div class="problem-panel distill-panel">
             <div class="problem-panel-head">
               <span>Distilled image diffusion</span>
-              <strong>4 student denoising steps instead of T</strong>
+              <strong>4 student denoising steps instead of \(T\)</strong>
             </div>
             <div class="problem-steps distill-steps" aria-label="Four-step distilled cat image denoising timeline">
               <div class="problem-node">
@@ -370,63 +365,183 @@
             </div>
           </div>
           <figcaption>
-            Distillation teaches a student sampler to take larger jumps along the teacher trajectory:
-            instead of following a long chain of denoising calls, it approximates the same endpoint
-            with a short sequence.
+            Distillation teaches a student to take larger, reliable jumps along the teacher's path.
           </figcaption>
         </figure>
         <p>
-          This naturally suggests the same question for language: can we transfer the distillation
-          idea to diffusion language models? If the answer is yes, we could keep the useful part of
-          diffusion generation, parallel updates over many token positions, while reducing the number
-          of sequential denoising calls needed at sampling time.
+          This is the motivation for IDLM: keep the parallel, bidirectional view of language
+          diffusion, but transfer the distillation idea into the discrete text domain.
         </p>
-        <div class="token-scale-visual" aria-label="Autoregressive versus few-step generation scale">
+      </section>
+
+      <section id="inverse-distillation" class="blog-section">
+        <h2>2. Inverse Distillation</h2>
+        <p class="section-kicker">Rather than only shortening a path, IDLM asks which distribution the teacher came from.</p>
+
+        <h3 id="distillation-families" class="blog-subheading">2.1 Two General Distillation Approaches</h3>
+        <p>
+          Continuous diffusion distillation is often organized into two families. The first is
+          consistency-like distillation: the student learns to jump along the teacher trajectory, so
+          the same endpoint can be reached with fewer denoising steps.
+        </p>
+        <p>
+          The second is distribution-matching distillation. Here we directly parameterize a student
+          distribution \(p_\theta\) and train it to match the teacher-supported data distribution
+          \(p^\star\). This view is usually more involved because it needs an auxiliary signal, but
+          it gives a stronger target than simply imitating local teacher steps.
+        </p>
+        <div class="inverse-flow" aria-label="Two distillation families">
           <div>
-            <span>Autoregressive decoding</span>
-            <strong>\(1024\)</strong>
-            <p>forward passes for a \(1024\)-token sequence</p>
+            <span>Consistency-like</span>
+            <strong>shorten the trajectory</strong>
+            <p>Learn a student transition that skips several teacher denoising steps.</p>
           </div>
           <div>
-            <span>IDLM target</span>
-            <strong>\(16\)</strong>
-            <p>forward passes for the same sequence length</p>
-          </div>
-          <div>
-            <span>Parallel rate</span>
-            <strong>\(64\)</strong>
-            <p>tokens must be produced per forward pass</p>
+            <span>Distribution matching</span>
+            <strong>match \(p_\theta\) to \(p^\star\)</strong>
+            <p>Train the generator distribution itself to look like the teacher's data distribution.</p>
           </div>
         </div>
+
+        <h3 id="inverse-view" class="blog-subheading">2.2 The Inverse Distillation View</h3>
         <p>
-          Transferring distillation to text is not plug-and-play. The hard part is not predicting
-          \(64\) tokens independently. The hard part is modeling the joint distribution over all
-          possible \(64\)-token continuations. With a GPT-2-scale vocabulary of about \(60{,}000\)
-          tokens, the number of possible \(64\)-token blocks is \(60{,}000^{64} \approx 10^{306}\).
-          We cannot enumerate, store, or explicitly simulate that distribution.
-        </p>
-        <div class="blog-callout">
-          <strong>Core question.</strong>
-          <span>Can we generate many tokens in parallel while keeping the model complexity roughly linear in sequence length?</span>
-        </div>
-        <h4 class="blog-minor-heading">Why Latent Mixtures Help</h4>
-        <p>
-          A useful answer is to introduce a latent variable \(\varepsilon\) from a simple latent space.
-          Conditioned on \(\varepsilon\), the generator can output tokens independently. After averaging
-          over all possible latent variables, the final text distribution becomes a mixture of many
-          factorized distributions:
+          Standard diffusion training starts from data. Given samples from \(p^\star\), we train a
+          diffusion model \(f^\star\) by minimizing a diffusion loss \(\mathcal{L}(f,p^\star)\):
         </p>
         <div class="blog-equation">
           \[
-            \begin{aligned}
-            p_\theta(x^{1:L})
-            &=
-            \int p(\varepsilon)
-            \prod_{i=1}^{L} p_\theta(x^{(i)} \mid \varepsilon)
-            \, d\varepsilon .
-            \end{aligned}
+            f^\star = \arg\min_f \mathcal{L}(f,p^\star).
           \]
         </div>
+        <p>
+          Inverse distillation flips the question. We are given the pretrained teacher \(f^\star\).
+          We then learn a generator distribution \(p_\theta\) such that the same diffusion training
+          procedure would recover this teacher:
+        </p>
+        <div class="blog-equation">
+          \[
+            f^\star = \arg\min_f \mathcal{L}(f,p_\theta).
+          \]
+        </div>
+        <p>
+          The direct objective contains an inner optimization, so practical inverse distillation
+          compares the teacher with a fake diffusion model \(f\) trained on the current student
+          samples:
+        </p>
+        <div class="blog-equation">
+          \[
+            \mathcal{L}_{\mathrm{inv}}(\theta)
+            =
+            \mathcal{L}(f^\star,p_\theta)
+            -
+            \min_f \mathcal{L}(f,p_\theta).
+          \]
+        </div>
+        <div class="contrast-visual" aria-label="Teacher fake contrast visualization">
+          <div class="contrast-lane">
+            <div class="contrast-card contrast-card-teacher">
+              <span>Frozen teacher</span>
+              <strong>\(f^\star\)</strong>
+              <p>trained on real data</p>
+            </div>
+            <div class="contrast-arrow">scores</div>
+            <div class="contrast-card contrast-card-sample">
+              <span>Student sample</span>
+              <strong>\(p_\theta\)</strong>
+              <p>fast generator distribution</p>
+            </div>
+          </div>
+          <div class="contrast-lane">
+            <div class="contrast-card contrast-card-fake">
+              <span>Fake model</span>
+              <strong>\(f\)</strong>
+              <p>trained on student samples</p>
+            </div>
+            <div class="contrast-arrow">contrasts</div>
+            <div class="contrast-card contrast-card-loss">
+              <span>Loss gap</span>
+              <strong>\(\mathcal{L}(f^\star)-\mathcal{L}(f)\)</strong>
+              <p>student update signal</p>
+            </div>
+          </div>
+        </div>
+        <p>
+          If the inverse problem is solved perfectly, the generator recovers the same data
+          distribution that produced the teacher. This inverse-distillation idea was developed in
+          the continuous domain, including image-generation settings, where the objective has a
+          clean uniqueness theory and works in practice.
+        </p>
+
+        <h3 id="language-transfer" class="blog-subheading">2.3 From Images to Language</h3>
+        <p>
+          The discrete language setting changes the problem. Tokens are categorical, generator
+          outputs can be non-smooth one-hot choices, and sampling an intermediate token can block
+          gradients. A relaxed token may be differentiable, but it can also be out of distribution
+          for a teacher trained on hard token states.
+        </p>
+        <p>
+          So the goal is not just "apply image distillation to text." The goal is to keep the
+          distribution-matching promise of inverse distillation while making the objective valid and
+          trainable for discrete diffusion language models. This is exactly the role of IDLM.
+        </p>
+      </section>
+
+      <section id="idlm" class="blog-section">
+        <h2>3. IDLM</h2>
+        <p class="section-kicker">IDLM extends inverse distillation to discrete diffusion language models.</p>
+
+        <h3 id="theory" class="blog-subheading">3.1 Theoretical Guarantees</h3>
+        <p>
+          The first contribution is theoretical. A naive inverse objective in a discrete space might
+          have bad minimizers, so IDLM proves the right uniqueness statement for the discrete
+          diffusion losses used by SEDD, MDLM, and Duo. In the idealized setting,
+        </p>
+        <div class="blog-equation">
+          \[
+            \mathcal{L}_{\mathrm{IDLM}}(\theta)
+            \geq
+            D_{\mathrm{KL}}(p_\theta \,\Vert\, p^\star)
+            \geq 0,
+            \qquad
+            \mathcal{L}_{\mathrm{IDLM}}(\theta)=0
+            \iff
+            p_\theta=p^\star .
+          \]
+        </div>
+        <p>
+          The proof also gives a useful interpretation: IDLM matches full diffusion trajectories,
+          not only noised marginals at isolated time points,
+        </p>
+        <div class="blog-equation">
+          \[
+            \mathcal{L}_{\mathrm{IDLM}}(\theta)
+            =
+            D_{\mathrm{KL}}(\mathbb{P}^{\theta}\,\Vert\,\mathbb{P}^{\star}).
+          \]
+        </div>
+        <p>
+          Since the clean sample is part of the trajectory, matching paths also controls the final
+          student distribution.
+        </p>
+
+        <h3 id="discrete-practice" class="blog-subheading">3.2 Handling Discrete Non-Smoothness</h3>
+        <p>
+          In practice, IDLM parameterizes \(p_\theta\) with a student generator \(G_\theta\). To make
+          gradients usable, the generator outputs points on the probability simplex instead of hard
+          one-hot tokens during training. This keeps the token loss differentiable while still
+          representing a distribution over vocabulary items.
+        </p>
+        <p>
+          Masked diffusion has a special simplification. With the \(\mathrm{SUBS}\) parameterization,
+          revealed tokens are copied, so the teacher and fake model agree on those branches. The IDLM
+          signal survives only at masked positions, which avoids the worst gradient-through-sampling
+          issue for MDLM.
+        </p>
+        <p>
+          Uniform diffusion is harder because tokens can be revised repeatedly. IDLM uses the Duo
+          relaxation to keep a differentiable path through intermediate states. This matters because
+          uniform diffusion must learn both which token to choose and when to move between states.
+        </p>
         <div class="mixture-visual" aria-label="Latent mixture intuition">
           <div class="latent-node">
             <span>latent</span>
@@ -440,172 +555,51 @@
             <span>\(x^{(L)}\)</span>
           </div>
           <p>
-            Tokens are independent only after conditioning on \(\varepsilon\). Marginally, the latent
-            variable carries global structure such as topic, style, long-range dependencies, and token
-            correlations.
+            A shared latent variable controls the whole sequence. Conditioned on \(\varepsilon\),
+            positions can factorize; after averaging over \(\varepsilon\), the generator becomes a
+            mixture of sequence-level components.
           </p>
         </div>
-        <p>
-          This is the same intuition behind recent latent-mixture directions such as Di4C and VADD:
-          a single factorized distribution is too weak for structured text, but a mixture of
-          factorized distributions can express rich dependencies. The remaining problem is training.
-          VAE-style objectives can be fragile because reconstruction and regularization must be
-          balanced carefully. IDLM adapts inverse distillation for this setting: use a pretrained
-          diffusion teacher to train a fast generator distribution. We describe that objective in
-          Section 2.
-        </p>
-        <div class="intuition-strip" aria-label="IDLM intuition summary">
-          <div>
-            <span class="intuition-step">01</span>
-            <h4>The teacher is a data critic</h4>
-            <p>
-              A pretrained diffusion model knows how real text should denoise at many noise levels.
-              IDLM reuses that knowledge instead of retraining it from scratch.
-            </p>
-          </div>
-          <div>
-            <span class="intuition-step">02</span>
-            <h4>The fake model is a mirror</h4>
-            <p>
-              The fake model learns only from current student samples. If it explains a sample too
-              well, that sample may be an artifact of the student rather than the data distribution.
-            </p>
-          </div>
-          <div>
-            <span class="intuition-step">03</span>
-            <h4>The gap becomes the signal</h4>
-            <p>
-              IDLM updates the generator toward samples where the teacher is better than the fake
-              model. That contrast gives a practical direction for few-step generation.
-            </p>
-          </div>
-        </div>
-      </section>
 
-      <section id="method" class="blog-section">
-        <h2>2. Method</h2>
-        <p class="section-kicker">Teacher-vs-fake distribution matching</p>
+        <h3 id="loss-intuition" class="blog-subheading">3.3 Loss Intuition</h3>
         <p>
-          Standard diffusion training starts from data. We have samples from the real distribution
-          \(p^\star\), and train a diffusion model \(f^\star\) by minimizing
-          \(\mathcal{L}(f, p^\star)\). Inverse distillation flips that direction. We start from a
-          pretrained teacher \(f^\star\), then learn a generator distribution \(p_\theta\) such that
-          the teacher would be optimal if diffusion training were run on samples from \(p_\theta\):
-        </p>
-        <div class="inverse-flow" aria-label="Forward training versus inverse distillation">
-          <div>
-            <span>Standard training</span>
-            <strong>\(p^\star \rightarrow f^\star\)</strong>
-            <p>\(f^\star = \arg\min_f \mathcal{L}(f, p^\star)\)</p>
-          </div>
-          <div>
-            <span>Inverse distillation</span>
-            <strong>\(f^\star \rightarrow p_\theta\)</strong>
-            <p>learn \(p_\theta\) so \(f^\star = \arg\min_f \mathcal{L}(f, p_\theta)\)</p>
-          </div>
-        </div>
-        <p>
-          If this inverse problem is solved perfectly, the generator recovers the same distribution
-          that produced the teacher, \(p_\theta = p^\star\). The generator does not just imitate
-          individual samples; it produces samples whose induced diffusion training process matches
-          the teacher.
-        </p>
-        <p>
-          The direct objective contains an inner optimization over diffusion models, which we cannot
-          differentiate through in practice. IDLM therefore compares the frozen teacher loss on
-          student samples with the loss of a fake diffusion model trained on the current student
-          distribution:
+          Training alternates between two updates. First, fit the fake model \(f\) on current student
+          samples. Second, freeze \(f\) and update \(G_\theta\) with the teacher-minus-fake gap:
         </p>
         <div class="blog-equation">
           \[
-            \begin{aligned}
             \mathcal{L}_{\mathrm{IDLM}}(\theta)
-            &=
-            \mathcal{L}(f^\star, p_\theta)
+            =
+            \mathcal{L}(f^\star,p_\theta)
             -
-            \min_f \mathcal{L}(f, p_\theta).
-            \end{aligned}
+            \mathcal{L}(f,p_\theta).
           \]
         </div>
         <p>
-          The fake model is important. It represents what the current student can already explain by
-          itself. The teacher provides attraction toward data-like samples; the fake model provides a
-          repulsive signal against samples that are only supported by the student's own artifacts.
-          Minimizing the gap trains \(G_\theta\) to produce samples for which the teacher is already
-          the best denoiser.
+          This gap has a simple attraction-repulsion meaning. Samples that the teacher explains
+          better than the fake model are attractive: they look more like real data than like current
+          student artifacts. Samples that the fake model explains too well are repulsive: they are
+          easy for the student's own distribution to reproduce, but not necessarily supported by the
+          teacher.
         </p>
-        <div class="contrast-visual" aria-label="Teacher fake contrast visualization">
-          <div class="contrast-lane">
-            <div class="contrast-card contrast-card-teacher">
-              <span>Frozen teacher</span>
-              <strong>\(f^\star\)</strong>
-              <p>trained on real text</p>
-            </div>
-            <div class="contrast-arrow">scores</div>
-            <div class="contrast-card contrast-card-sample">
-              <span>Student sample</span>
-              <strong>\(G_\theta\)</strong>
-              <p>few-step candidate</p>
-            </div>
-          </div>
-          <div class="contrast-lane">
-            <div class="contrast-card contrast-card-fake">
-              <span>Fake model</span>
-              <strong>\(f\)</strong>
-              <p>trained on student text</p>
-            </div>
-            <div class="contrast-arrow">compares</div>
-            <div class="contrast-card contrast-card-loss">
-              <span>Update signal</span>
-              <strong>\(\mathcal{L}(f^\star)-\mathcal{L}(f)\)</strong>
-              <p>move toward teacher-supported samples</p>
-            </div>
-          </div>
-        </div>
-
+        <p>
+          For MDLM, this becomes especially transparent. At a masked position, the local advantage is
+          \(a_t=\log f^\star(m,t)-\log f(m,t)\). Gradient descent increases a token logit when that
+          token's teacher-over-fake advantage is above the generator's current average advantage.
+        </p>
         <figure class="blog-figure">
           <img src="{% static 'homepage/blog/idlm-method.png' %}" alt="Current arXiv IDLM training loop with generator, teacher, and fake model">
-          <figcaption>The current arXiv method figure: the student \(G_\theta\) is diffused forward, evaluated by the frozen teacher \(f^\star\) and fake model \(f\), and updated through the teacher-minus-fake IDLM loss.</figcaption>
+          <figcaption>The current arXiv method figure: the student is evaluated by the frozen teacher and the fake model, and the contrast gives the generator update.</figcaption>
         </figure>
-
-        <div class="method-grid">
-          <div>
-            <h3>Path Matching, Not Just Marginal Matching</h3>
-            <p>
-              The theory shows that the ideal IDLM loss matches full diffusion paths,
-              \(\mathrm{KL}(P_\theta \,\Vert\, P^\star)\). DMD-like methods instead match noised marginals at
-              sampled times. A stop-gradient reduction can make inverse distillation look DMD-like,
-              but that changes the full gradient.
-            </p>
-          </div>
-          <div>
-            <h3>Discrete Tokens Need Process-Aware Gradients</h3>
-            <p>
-              For masked diffusion, the \(\mathrm{SUBS}\) parameterization copies revealed tokens, so
-              non-mask branches cancel and only masked positions carry signal. For uniform diffusion,
-              tokens can be revised repeatedly, so the Duo relaxation keeps gradients through
-              intermediate states.
-            </p>
-          </div>
-          <div>
-            <h3>Few-step, Not One-step</h3>
-            <p>
-              One-step text generation is unstable for masked diffusion because the terminal state is
-              fully masked and too deterministic. IDLM therefore targets practical few-step generation,
-              where the student can reuse the teacher-style sampling procedure with far fewer steps.
-            </p>
-          </div>
-        </div>
       </section>
 
       <section id="results" class="blog-section">
-        <h2>3. Results</h2>
-        <p class="section-kicker">Fewer reverse steps, similar teacher quality</p>
+        <h2>4. Results</h2>
+        <p class="section-kicker">The experiments test whether few-step students can preserve teacher-level quality.</p>
         <p>
-          IDLM is evaluated on conditional math generation and unconditional text generation. On
-          OpenWebText, all models are tracked with generation perplexity and entropy. The goal is
-          direct: reduce the number of diffusion steps as much as possible while keeping quality and
-          diversity signals almost unchanged.
+          IDLM is evaluated on conditional math generation and unconditional text generation. The
+          main question is whether a student can reduce the number of reverse steps while preserving
+          the teacher's quality and diversity signals.
         </p>
         <div class="sampling-visual" aria-label="Sampling budget comparison">
           <div class="sampling-row sampling-teacher">
@@ -626,12 +620,11 @@
         </div>
 
         <section id="gsm8k" class="result-block">
-          <h3>3.1 GSM8K</h3>
+          <h3>4.1 GSM8K</h3>
           <p>
-            The conditional generation experiment follows the TinyGSM/GSM8K protocol. The prompt is
-            clamped and the model generates the solution region. IDLM preserves diffusion-teacher
-            accuracy with fewer sampling steps, although autoregressive baselines remain much stronger
-            on this reasoning benchmark.
+            GSM8K tests conditional generation. The prompt is clamped, and the model generates the
+            solution region. Autoregressive baselines are still much stronger, but IDLM recovers
+            diffusion-teacher accuracy with far fewer reverse steps.
           </p>
           <div class="result-table-wrap">
             <table class="result-table">
@@ -664,6 +657,12 @@
                 </tr>
                 <tr>
                   <td>IDLM-Duo</td>
+                  <td>\(128\)</td>
+                  <td>\(21.38\%\)</td>
+                  <td>Best reported distilled result</td>
+                </tr>
+                <tr>
+                  <td>IDLM-Duo</td>
                   <td>\(64\)</td>
                   <td>\(19.03\%\)</td>
                   <td>Teacher-level with \(16\times\) fewer steps</td>
@@ -674,34 +673,34 @@
         </section>
 
         <section id="openwebtext" class="result-block">
-          <h3>3.2 OpenWebText</h3>
+          <h3>4.2 OpenWebText</h3>
           <p>
             OpenWebText evaluates unconditional generation with GenPPL, MAUVE, entropy, and related
-            diversity checks. Lower GenPPL is better, but it must be read together with entropy because
-            reverse-\(\mathrm{KL}\)-like training can become mode-seeking.
+            diversity metrics. GenPPL alone is not enough: a model can improve it by losing diversity,
+            so entropy is tracked as a guardrail.
           </p>
           <figure class="blog-figure">
             <div class="blog-figure-grid">
               <img src="{% static 'homepage/blog/idlm-owt-mdlm-bars.png' %}" alt="Current arXiv OpenWebText masked diffusion bar figure">
               <img src="{% static 'homepage/blog/idlm-owt-duo-greedy-bars.png' %}" alt="Current arXiv OpenWebText uniform diffusion bar figure">
             </div>
-            <figcaption>The current arXiv OpenWebText result panels compare teacher and distilled models under much smaller sampling budgets.</figcaption>
+            <figcaption>The current arXiv OpenWebText panels compare teacher and distilled models under much smaller sampling budgets.</figcaption>
           </figure>
           <div class="metric-grid">
             <div class="metric-card">
-              <span>Masked Diffusion</span>
+              <span>Masked diffusion</span>
               <strong>\(64\times\)</strong>
-              <p>IDLM-MDLM reaches strong \(16\)-step quality against a \(1024\)-step MDLM teacher.</p>
+              <p>IDLM-MDLM reduces a \(1024\)-step MDLM teacher to \(16\) reverse steps.</p>
             </div>
             <div class="metric-card">
-              <span>Uniform Diffusion</span>
-              <strong>\(128\times\)-\(256\times\)</strong>
-              <p>IDLM-DCD remains competitive in aggressive low-step Duo/DCD settings.</p>
+              <span>Uniform diffusion</span>
+              <strong>\(256\times\)</strong>
+              <p>IDLM-DCD reaches a \(4\)-step greedy sampling regime.</p>
             </div>
             <div class="metric-card">
-              <span>SEDD</span>
-              <strong>\(4\times\)</strong>
-              <p>IDLM-SEDD validates the general CTMC score-entropy formulation in the appendix.</p>
+              <span>Main signal</span>
+              <strong>quality</strong>
+              <p>The best students preserve GenPPL and entropy close to teacher-level behavior.</p>
             </div>
           </div>
           <div class="result-table-wrap">
@@ -738,26 +737,26 @@
           </div>
           <figure class="blog-figure">
             <img src="{% static 'homepage/blog/idlm-owt-frontier.png' %}" alt="Current arXiv GenPPL and entropy tradeoff plot on OpenWebText">
-            <figcaption>The current arXiv GenPPL--entropy frontier shows how IDLM sits in the low-GenPPL, high-diversity region of the tradeoff.</figcaption>
+            <figcaption>The GenPPL-entropy frontier shows why diversity must be read together with perplexity.</figcaption>
           </figure>
         </section>
       </section>
 
       <section id="conclusion" class="blog-section">
-        <h2>4. Conclusion</h2>
-        <p class="section-kicker">What IDLM teaches us</p>
+        <h2>5. Conclusion</h2>
+        <p class="section-kicker">IDLM turns inverse distillation into a discrete-language distillation method.</p>
         <p>
-          IDLM shows that diffusion language model distillation can be framed as a distribution-matching
-          problem: train a fast student \(p_\theta\) whose samples are supported by the teacher \(f^\star\) more than by a fake
-          model trained on the student's current distribution. This viewpoint gives a clean theoretical
-          target and a practical few-step training recipe.
+          Diffusion language models offer parallel, bidirectional generation, but their long
+          denoising chains make inference slow. Image diffusion suggests the right high-level move:
+          distill the sampler. IDLM makes this move in the language domain by using inverse
+          distillation, a distribution-matching objective rather than only a trajectory-shortening
+          objective.
         </p>
         <p>
-          The most useful intuition is teacher-vs-fake contrast. For masked diffusion, this contrast
-          becomes a clean mask-only update because \(\mathrm{SUBS}\) copies revealed tokens. For uniform
-          diffusion, the same idea teaches both which token to choose and when to jump between
-          intermediate states. Across the reported experiments, this produces substantial sampling
-          acceleration while preserving the teacher's generation quality and diversity.
+          The result is a few-step generator with a clean target: match the teacher-supported data
+          distribution. The theory gives a unique optimum, the practical method handles discrete
+          non-smoothness, and the experiments show substantial step reductions on GSM8K and
+          OpenWebText while keeping the teacher's quality signals largely intact.
         </p>
       </section>
     </article>
