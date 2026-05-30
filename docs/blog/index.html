@@ -176,11 +176,12 @@
           <a href="https://openreview.net/forum?id=L4uaAR4ArM" target="_blank" rel="noopener noreferrer">MDLM</a>,
           <a href="https://arxiv.org/abs/2412.10193" target="_blank" rel="noopener noreferrer">UDLM</a>,
           and <a href="https://arxiv.org/abs/2502.09992" target="_blank" rel="noopener noreferrer">LLaDA</a>
-          show that this alternative can be competitive with autoregressive generation. The drawback
-          is speed. Sampling still runs a sequential denoising chain, often \(50\), \(100\), \(250\),
-          or even \(1000\) forward passes. To accelerate it, we would like to replace many small
-          steps with a few large jumps. But large jumps must capture stronger cross-token
-          correlations, which exposes the factorization bottleneck below.
+          show that this alternative can be competitive with autoregressive generation. The challenge
+          is that this quality still comes from an iterative sampler: generation runs a sequential
+          denoising chain, often \(50\), \(100\), \(250\), or even \(1000\) forward passes. To
+          accelerate it, we would like to replace many small steps with a few large jumps. But large
+          jumps must capture stronger cross-token correlations, which exposes the factorization
+          bottleneck below.
         </p>
         <p>
           This is where the structural bottleneck appears. Diffusion samplers usually
