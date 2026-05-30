@@ -1161,15 +1161,18 @@ svg {
 }
 
 .blog-equation {
-  width: min(100%, 920px);
-  margin: 18px auto 24px;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  margin: 20px auto 28px;
   border: 0;
   background: transparent;
   box-shadow: none;
   overflow-x: auto;
-  padding: 6px 0 8px;
-  color: #d8fbff;
-  font-size: 1rem;
+  padding: 10px 0 12px;
+  color: #e7fcff;
+  font-size: clamp(1.1rem, 1.38vw, 1.28rem);
+  text-shadow: 0 0 18px rgba(25, 198, 255, 0.14);
   text-align: center;
 }
 
@@ -1193,11 +1196,20 @@ svg {
 }
 
 .blog-equation mjx-container[jax="SVG"][display="true"] {
+  display: inline-block !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: min(100%, 940px);
   margin: 0 auto !important;
-  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 2px 0;
+  padding: 4px 0;
+  text-align: center !important;
+}
+
+.blog-equation mjx-container[jax="SVG"][display="true"] svg {
+  display: block;
+  margin: 0 auto;
 }
 
 .factorization-visual {

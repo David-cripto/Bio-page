@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Blog post about IDLM: Inverse-distilled Diffusion Language Models">
   <title>IDLM Blog | {{ profile.name }}</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'homepage/favicon-32.png' %}?v=20260530-clean-equations">
-  <link rel="icon" type="image/png" sizes="192x192" href="{% static 'homepage/favicon-192.png' %}?v=20260530-clean-equations">
-  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'homepage/apple-touch-icon.png' %}?v=20260530-clean-equations">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'homepage/favicon-32.png' %}?v=20260530-centered-equations">
+  <link rel="icon" type="image/png" sizes="192x192" href="{% static 'homepage/favicon-192.png' %}?v=20260530-centered-equations">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'homepage/apple-touch-icon.png' %}?v=20260530-centered-equations">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260530-clean-equations">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260530-centered-equations">
 </head>
 <body>
   <main class="blog-shell">
@@ -157,10 +157,12 @@
         </p>
         <div class="blog-equation">
           \[
+            \begin{aligned}
             p_\theta(x_{t-1} \mid x_t)
-            =
+            &=
             \prod_{i=1}^{L}
             p_\theta(x_{t-1}^{(i)} \mid x_t).
+            \end{aligned}
           \]
         </div>
         <p>
@@ -172,10 +174,12 @@
         </p>
         <div class="blog-equation">
           \[
+            \begin{aligned}
             p(x_{t-k} \mid x_t)
-            \not\approx
-            \prod_{i=1}^{L} p(x_{t-k}^{(i)} \mid x_t)
-            \quad \text{when } k \text{ is large.}
+            &\not\approx
+            \prod_{i=1}^{L} p(x_{t-k}^{(i)} \mid x_t),
+            \qquad k \gg 1.
+            \end{aligned}
           \]
         </div>
         <div class="factorization-visual" aria-label="Factorized reverse transition intuition">
@@ -430,11 +434,13 @@
         </p>
         <div class="blog-equation">
           \[
+            \begin{aligned}
             p_\theta(x_{1:L})
-            =
+            &=
             \int p(\varepsilon)
             \prod_{i=1}^{L} p_\theta(x_i \mid \varepsilon)
             \, d\varepsilon .
+            \end{aligned}
           \]
         </div>
         <div class="mixture-visual" aria-label="Latent mixture intuition">
@@ -528,11 +534,13 @@
         </p>
         <div class="blog-equation">
           \[
+            \begin{aligned}
             \mathcal{L}_{\mathrm{IDLM}}(\theta)
-            =
+            &=
             \mathcal{L}(f^\star, p_\theta)
             -
-            \min_f \mathcal{L}(f, p_\theta)
+            \min_f \mathcal{L}(f, p_\theta).
+            \end{aligned}
           \]
         </div>
         <p>
