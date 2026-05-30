@@ -800,6 +800,25 @@ svg {
   padding: 12px;
 }
 
+.generation-animation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.generation-animation-item {
+  min-width: 0;
+}
+
+.generation-animation-item > span {
+  display: block;
+  margin: 0 0 8px 2px;
+  color: #ffd3a2;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
 .generation-animation {
   width: 100%;
   border: 1px solid rgba(1, 6, 22, 0.3);
@@ -1565,6 +1584,7 @@ svg {
   .inverse-flow,
   .method-grid,
   .metric-grid,
+  .generation-animation-grid,
   .blog-figure-grid {
     grid-template-columns: 1fr;
   }
