@@ -180,14 +180,14 @@
           is that this quality still comes from an iterative sampler: generation runs a sequential
           denoising chain, often \(50\), \(100\), \(250\), or even \(1000\) forward passes. To
           accelerate it, we would like to replace many small steps with a few large jumps. But large
-          jumps must capture stronger cross-token correlations, which exposes the factorization
-          bottleneck below.
+          jumps also make the reverse step much harder, because several token decisions must stay
+          correlated at the same time.
         </p>
         <p>
-          This is where the structural bottleneck appears. Diffusion samplers usually
-          factorize the reverse transition across positions. The model can look at the whole noisy
-          sequence \(x_t^{1:L}\), but then it predicts each token of the next sequence
-          \(x_{t-1}^{1:L}\) independently. Here \(x_t^{(i)}\) is the \(i\)-th token:
+          Standard diffusion samplers handle this reverse step with a factorized prediction across
+          positions. The model can look at the whole noisy sequence \(x_t^{1:L}\), but then it
+          predicts each token of the next sequence \(x_{t-1}^{1:L}\) independently. Here
+          \(x_t^{(i)}\) is the \(i\)-th token:
         </p>
         <div class="blog-equation">
           \[
