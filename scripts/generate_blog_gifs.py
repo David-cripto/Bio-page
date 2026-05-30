@@ -230,7 +230,7 @@ def generation_gifs() -> None:
             draw_generation_frame(["The", "small", "cat", "sat", "?"], ["settled", "settled", "settled", "active", "unknown"]),
             draw_generation_frame(["The", "small", "cat", "sat", "down"], ["settled", "settled", "settled", "settled", "active"]),
         ],
-        [520, 560, 560, 560, 1150],
+        [900, 980, 980, 980, 1700],
     )
     save_gif(
         OUT / "idlm-diffusion-generation.gif",
@@ -241,7 +241,7 @@ def generation_gifs() -> None:
             draw_generation_frame(["The", "small", "cat", "sat", "down"], ["settled", "active", "settled", "active", "settled"]),
             draw_generation_frame(["The", "small", "cat", "sat", "down"], ["settled"] * 5),
         ],
-        [520, 560, 560, 560, 1150],
+        [900, 980, 980, 980, 1700],
     )
 
 
@@ -282,7 +282,7 @@ def factorization_gifs() -> None:
                 underline_bad=True,
             ),
         ],
-        [520, 620, 720, 980],
+        [900, 1050, 1200, 1500],
     )
     save_gif(
         OUT / "idlm-factorization-small-steps.gif",
@@ -312,7 +312,7 @@ def factorization_gifs() -> None:
                 arc=GREEN,
             ),
         ],
-        [520, 620, 720, 980],
+        [900, 1050, 1200, 1500],
     )
 
 
