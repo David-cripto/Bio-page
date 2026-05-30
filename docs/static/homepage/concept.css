@@ -850,7 +850,8 @@ svg {
 .problem-panel {
   min-width: 0;
   overflow-x: auto;
-  padding: 16px;
+  --problem-gap: clamp(12px, 1.45vw, 20px);
+  padding: 14px 12px 16px;
 }
 
 .problem-panel-head {
@@ -858,7 +859,8 @@ svg {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  min-width: 930px;
+  width: 100%;
+  min-width: 1080px;
   margin-bottom: 14px;
 }
 
@@ -877,23 +879,24 @@ svg {
 
 .problem-steps {
   display: grid;
-  grid-template-columns: 128px 138px 138px 138px 54px 138px 138px;
-  gap: 22px;
+  grid-template-columns: minmax(132px, 0.92fr) repeat(3, minmax(148px, 1fr)) minmax(38px, 0.28fr) repeat(2, minmax(148px, 1fr));
+  gap: var(--problem-gap);
   align-items: start;
-  min-width: 930px;
+  width: 100%;
+  min-width: 1080px;
 }
 
 .distill-panel .problem-panel-head {
-  min-width: 768px;
+  min-width: 860px;
 }
 
 .distill-steps {
-  grid-template-columns: 128px repeat(4, 138px);
-  min-width: 768px;
+  grid-template-columns: minmax(132px, 0.92fr) repeat(4, minmax(148px, 1fr));
+  min-width: 860px;
 }
 
 .problem-panel-text .problem-steps {
-  grid-template-columns: 138px 138px 138px 138px 54px 138px 138px;
+  grid-template-columns: repeat(4, minmax(150px, 1fr)) minmax(38px, 0.28fr) repeat(2, minmax(150px, 1fr));
 }
 
 .problem-node {
@@ -913,7 +916,7 @@ svg {
   content: ">";
   position: absolute;
   top: 78px;
-  right: -17px;
+  right: calc(var(--problem-gap) * -0.7);
   color: #ffd3a2;
   font-size: 1.2rem;
 }
@@ -950,8 +953,8 @@ svg {
 
 .cat-board {
   display: block;
-  width: 132px;
-  height: 94px;
+  width: min(100%, 168px);
+  aspect-ratio: 66 / 47;
   border: 1px solid rgba(94, 217, 255, 0.34);
   border-radius: 8px;
   background: rgba(246, 251, 255, 0.05);
@@ -1025,7 +1028,7 @@ svg {
   display: inline-grid;
   place-items: center;
   min-height: 34px;
-  width: min(100%, 122px);
+  width: min(100%, 150px);
   border: 1px solid rgba(94, 217, 255, 0.5);
   background: rgba(25, 198, 255, 0.1);
   color: var(--quiet);
@@ -1037,7 +1040,7 @@ svg {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 4px;
-  width: 138px;
+  width: min(100%, 158px);
   min-height: 114px;
   border: 1px solid rgba(184, 107, 255, 0.28);
   background: rgba(246, 251, 255, 0.05);
