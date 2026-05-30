@@ -172,24 +172,21 @@
         <h3 id="diffusion-bottleneck" class="blog-subheading">1.2 The Bottleneck of Diffusion Models</h3>
         <p>
           This whole-sequence view is promising: diffusion can revise many positions at once instead
-          of committing left-to-right. It has already worked very well in images, where
-          <a href="https://arxiv.org/abs/2006.11239" target="_blank" rel="noopener noreferrer">DDPM</a>
-          and <a href="https://arxiv.org/abs/2206.00364" target="_blank" rel="noopener noreferrer">EDM</a>
-          made iterative denoising a standard recipe, and it is becoming competitive in language
-          through models such as
+          of committing left-to-right. In language, recent diffusion models such as
           <a href="https://openreview.net/forum?id=L4uaAR4ArM" target="_blank" rel="noopener noreferrer">MDLM</a>,
           <a href="https://arxiv.org/abs/2412.10193" target="_blank" rel="noopener noreferrer">UDLM</a>,
-          and <a href="https://arxiv.org/abs/2502.09992" target="_blank" rel="noopener noreferrer">LLaDA</a>.
-          The drawback is speed. Sampling still runs a sequential denoising chain, often \(50\),
-          \(100\), \(250\), or even \(1000\) forward passes. To accelerate it, we would like to
-          replace many small steps with a few large jumps. But large jumps must capture stronger
-          cross-position correlations, which exposes the factorization bottleneck below.
+          and <a href="https://arxiv.org/abs/2502.09992" target="_blank" rel="noopener noreferrer">LLaDA</a>
+          show that this alternative can be competitive with autoregressive generation. The drawback
+          is speed. Sampling still runs a sequential denoising chain, often \(50\), \(100\), \(250\),
+          or even \(1000\) forward passes. To accelerate it, we would like to replace many small
+          steps with a few large jumps. But large jumps must capture stronger cross-token
+          correlations, which exposes the factorization bottleneck below.
         </p>
         <p>
           This is where the structural bottleneck appears. Diffusion samplers usually
           factorize the reverse transition across positions. The model can look at the whole noisy
-          sequence \(x_t^{1:L}\), but then it predicts each token or pixel of the next sequence
-          \(x_{t-1}^{1:L}\) independently. Here \(x_t^{(i)}\) is the \(i\)-th token or pixel:
+          sequence \(x_t^{1:L}\), but then it predicts each token of the next sequence
+          \(x_{t-1}^{1:L}\) independently. Here \(x_t^{(i)}\) is the \(i\)-th token:
         </p>
         <div class="blog-equation">
           \[
@@ -256,55 +253,15 @@
           the assumption is weakest.
         </p>
         <p>
-          The diagrams below show the tension. Image diffusion refines all pixels inside each block,
-          and language diffusion methods such as <a href="https://arxiv.org/abs/2107.03006" target="_blank" rel="noopener noreferrer">D3PM</a>
-          and <a href="https://openreview.net/forum?id=L4uaAR4ArM" target="_blank" rel="noopener noreferrer">MDLM</a>
-          can revise many tokens with bidirectional context. But the blocks themselves remain ordered:
-          the model moves from noise to a clean sample by repeatedly calling the denoising network.
-          This is the part we want to compress.
+          The diagram below shows the same bottleneck for language diffusion. A method such as
+          <a href="https://arxiv.org/abs/2107.03006" target="_blank" rel="noopener noreferrer">D3PM</a>
+          or <a href="https://openreview.net/forum?id=L4uaAR4ArM" target="_blank" rel="noopener noreferrer">MDLM</a>
+          can revise many tokens inside one denoising call, but the calls themselves remain ordered:
+          the model moves from random tokens to clean text by repeatedly applying the denoising
+          network. This outer loop is the part we want to compress.
         </p>
-        <figure class="problem-figure" aria-label="Sequential denoising bottleneck">
+        <figure class="problem-figure" aria-label="Sequential language denoising bottleneck">
           <div class="problem-panels">
-            <div class="problem-panel problem-panel-image">
-              <div class="problem-panel-head">
-                <span>Image diffusion generation</span>
-                <strong>\(T\) sequential image-denoising steps</strong>
-              </div>
-              <div class="problem-steps problem-image-steps" aria-label="Cat image denoising timeline">
-                <div class="problem-node">
-                  <span class="problem-node-label">Input noise</span>
-                  <img class="cat-board" src="{% static 'homepage/blog/idlm-cat-step-noise.png' %}?v=20260529-cat-blocks" alt="Random image noise before denoising">
-                </div>
-                <div class="problem-node">
-                  <span class="problem-node-label">Step&nbsp;\(1\)</span>
-                  <img class="cat-board" src="{% static 'homepage/blog/idlm-cat-step-1.png' %}?v=20260529-cat-blocks" alt="First cat image denoising step">
-                  <span class="problem-model">Denoising model</span>
-                </div>
-                <div class="problem-node">
-                  <span class="problem-node-label">Step&nbsp;\(2\)</span>
-                  <img class="cat-board" src="{% static 'homepage/blog/idlm-cat-step-2.png' %}?v=20260529-cat-blocks" alt="Second cat image denoising step with emerging cat silhouette">
-                  <span class="problem-model">Denoising model</span>
-                </div>
-                <div class="problem-node">
-                  <span class="problem-node-label">Step&nbsp;\(3\)</span>
-                  <img class="cat-board" src="{% static 'homepage/blog/idlm-cat-step-3.png' %}?v=20260529-cat-blocks" alt="Third cat image denoising step with clearer cat">
-                  <span class="problem-model">Denoising model</span>
-                </div>
-                <div class="problem-node problem-dots">
-                  <span class="problem-node-label" aria-hidden="true">...</span>
-                </div>
-                <div class="problem-node">
-                  <span class="problem-node-label">Step&nbsp;\(T-1\)</span>
-                  <img class="cat-board" src="{% static 'homepage/blog/idlm-cat-step-late.png' %}?v=20260529-cat-blocks" alt="Almost final denoised tabby cat image">
-                  <span class="problem-model">Denoising model</span>
-                </div>
-                <div class="problem-node problem-final-node">
-                  <span class="problem-node-label">Step&nbsp;\(T\)</span>
-                  <img class="cat-board cat-board-final" src="{% static 'homepage/blog/idlm-cat-step-final.png' %}?v=20260529-cat-blocks" alt="Final generated tabby cat image">
-                  <span class="problem-model">Denoising model</span>
-                </div>
-              </div>
-            </div>
             <div class="problem-panel problem-panel-text">
               <div class="problem-panel-head">
                 <span>Language diffusion generation</span>
