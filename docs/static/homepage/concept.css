@@ -752,7 +752,6 @@ svg {
 }
 
 .blog-callout,
-.blog-equation,
 .method-grid > div,
 .metric-card,
 .result-table-wrap,
@@ -1162,11 +1161,15 @@ svg {
 }
 
 .blog-equation {
-  margin: 22px 0;
+  width: min(100%, 920px);
+  margin: 18px auto 24px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
   overflow-x: auto;
-  padding: 18px 20px;
+  padding: 6px 0 8px;
   color: #d8fbff;
-  font-size: 0.95rem;
+  font-size: 1rem;
   text-align: center;
 }
 
@@ -1190,7 +1193,7 @@ svg {
 }
 
 .blog-equation mjx-container[jax="SVG"][display="true"] {
-  margin: 0;
+  margin: 0 auto !important;
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
