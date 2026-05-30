@@ -985,6 +985,20 @@ svg {
   grid-template-columns: repeat(4, minmax(150px, 1fr)) minmax(38px, 0.28fr) repeat(2, minmax(150px, 1fr));
 }
 
+.image-diffusion-panel .problem-panel-head {
+  min-width: 1080px;
+}
+
+.image-diffusion-steps {
+  grid-template-columns: repeat(6, minmax(154px, 1fr));
+  min-width: 1080px;
+}
+
+.image-diffusion-steps .cat-board {
+  width: min(100%, 168px);
+  aspect-ratio: 1 / 1;
+}
+
 .problem-node {
   position: relative;
   display: grid;
@@ -1017,6 +1031,14 @@ svg {
 
 .distill-steps .problem-node:not(:last-child)::after {
   top: 88px;
+}
+
+.image-diffusion-steps .problem-node:not(:last-child)::after {
+  top: 93px;
+}
+
+.problem-final-node .problem-node-label {
+  color: #b5f07c;
 }
 
 .problem-dots {
