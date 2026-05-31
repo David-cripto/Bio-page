@@ -1620,7 +1620,7 @@ svg {
 }
 
 .distill-map-window {
-  fill: rgba(2, 8, 24, 0.44);
+  fill: transparent;
   stroke: none;
 }
 
