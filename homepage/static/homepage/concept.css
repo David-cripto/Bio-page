@@ -1644,13 +1644,12 @@ svg {
 .teacher-curve,
 .teacher-jump-curve path {
   fill: none;
-  stroke: #7deaff;
-  stroke-width: 4.4;
+  stroke: #6ee8ff;
+  stroke-width: 3.2;
   stroke-linecap: round;
-  stroke-dasharray: 13 11;
-  opacity: 0.96;
-  filter: drop-shadow(0 0 8px rgba(110, 232, 255, 0.32));
-  animation: distillDash 8.2s linear infinite;
+  stroke-dasharray: 7 11;
+  opacity: 0.74;
+  animation: distillDash 7.2s linear infinite;
 }
 
 .teacher-jump-curve path:nth-child(2) {
