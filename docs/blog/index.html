@@ -481,6 +481,18 @@
             Distillation teaches a student to take larger, reliable jumps along the teacher's path.
           </figcaption>
         </figure>
+        <div class="blog-callout">
+          <strong>The question of the day</strong>
+          <span>
+            Can the distillation principle that works so well for continuous image diffusion be
+            transferred to diffusion language models? The challenge is not only to reduce the
+            number of denoising calls. A language student must preserve the teacher's distribution
+            over structured discrete sequences, even though token sampling is non-differentiable,
+            reverse transitions are often factorized over positions, and large jumps must still
+            maintain syntax, semantics, agreement, and long-range dependencies. The rest of the post
+            explains how inverse distillation gives IDLM a way to ask this question directly.
+          </span>
+        </div>
       </section>
 
       <section id="inverse-distillation" class="blog-section">
