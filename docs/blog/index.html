@@ -422,6 +422,16 @@
           </div>
           <figcaption>A standard image diffusion sampler improves the whole image at each step, but still follows a sequential denoising chain.</figcaption>
         </figure>
+        <p>
+          Distillation changed that story. Methods such as
+          <a href="https://arxiv.org/abs/2202.00512" target="_blank" rel="noopener noreferrer">progressive distillation</a>,
+          <a href="https://arxiv.org/abs/2303.01469" target="_blank" rel="noopener noreferrer">consistency models</a>,
+          and <a href="https://arxiv.org/abs/2311.18828" target="_blank" rel="noopener noreferrer">distribution matching distillation</a>
+          trained students that need far fewer denoising calls. This is the motivation for IDLM:
+          keep the parallel, bidirectional view of language diffusion, but transfer the successful
+          distillation idea into the discrete text domain, where tokens and gradients behave very
+          differently from pixels.
+        </p>
         <figure class="distill-figure" aria-label="Distilled image diffusion with k denoising steps">
           <div class="problem-panel distill-panel">
             <div class="problem-panel-head">
@@ -459,16 +469,6 @@
             Distillation teaches a student to take larger, reliable jumps along the teacher's path.
           </figcaption>
         </figure>
-        <p>
-          Distillation changed that story. Methods such as
-          <a href="https://arxiv.org/abs/2202.00512" target="_blank" rel="noopener noreferrer">progressive distillation</a>,
-          <a href="https://arxiv.org/abs/2303.01469" target="_blank" rel="noopener noreferrer">consistency models</a>,
-          and <a href="https://arxiv.org/abs/2311.18828" target="_blank" rel="noopener noreferrer">distribution matching distillation</a>
-          trained students that need far fewer denoising calls. This is the motivation for IDLM:
-          keep the parallel, bidirectional view of language diffusion, but transfer the successful
-          distillation idea into the discrete text domain, where tokens and gradients behave very
-          differently from pixels.
-        </p>
       </section>
 
       <section id="inverse-distillation" class="blog-section">
