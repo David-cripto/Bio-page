@@ -149,12 +149,11 @@
         <div class="blog-callout">
           <strong>TL;DR</strong>
           <span>
-            Autoregressive models dominate language generation but decode one token at a time.
-            Diffusion language models offer a whole-sequence, bidirectional alternative, yet their
-            denoising chains can still be slow. Image diffusion suggests a remedy: distill many
-            teacher steps into a few student jumps. IDLM asks whether this idea can be transferred
-            to discrete text, where token choices are non-differentiable and large jumps must still
-            preserve linguistic structure.
+            Autoregressive models dominate text but decode token by token. Diffusion language models
+            can update whole sequences, but their denoising chains are slow. Image diffusion shows a
+            path forward: distill many teacher steps into a few student jumps. IDLM asks whether
+            this can work for discrete text, where jumps must preserve linguistic structure despite
+            non-differentiable token choices.
           </span>
         </div>
 
