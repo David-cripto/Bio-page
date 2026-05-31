@@ -1625,20 +1625,6 @@ svg {
   stroke-width: 1.5;
 }
 
-.distill-contour {
-  stroke-width: 2;
-}
-
-.distill-contour-noise {
-  fill: url("#noiseGlow");
-  stroke: rgba(184, 107, 255, 0.28);
-}
-
-.distill-contour-data {
-  fill: url("#dataGlow");
-  stroke: rgba(181, 240, 124, 0.32);
-}
-
 .distill-cloud circle,
 .target-samples circle,
 .student-samples circle {
@@ -1691,6 +1677,24 @@ svg {
 .student-anchors circle {
   stroke: rgba(2, 8, 24, 0.9);
   stroke-width: 3;
+}
+
+.density-consistency-noise ellipse {
+  fill: url("#noiseGlow");
+  stroke: rgba(184, 107, 255, 0.36);
+  stroke-width: 2;
+}
+
+.density-consistency-data ellipse {
+  fill: url("#dataGlow");
+  stroke: rgba(181, 240, 124, 0.34);
+  stroke-width: 2;
+}
+
+.density-consistency-noise ellipse + ellipse,
+.density-consistency-data ellipse + ellipse {
+  fill: none;
+  stroke-width: 1.6;
 }
 
 .density-target ellipse {
