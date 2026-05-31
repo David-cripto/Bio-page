@@ -1641,6 +1641,40 @@ svg {
   opacity: 0.86;
 }
 
+.distill-math-labels {
+  pointer-events: none;
+}
+
+.distill-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  paint-order: stroke fill;
+  stroke: rgba(3, 9, 24, 0.84);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.label-noise {
+  fill: #c69aff;
+}
+
+.label-data,
+.label-target-dist {
+  fill: #b5f07c;
+}
+
+.label-teacher,
+.label-match-loss {
+  fill: #6ee8ff;
+}
+
+.label-student,
+.label-student-dist {
+  fill: #ffd3a2;
+}
+
 .teacher-curve,
 .teacher-jump-curve path {
   fill: none;
@@ -1664,11 +1698,19 @@ svg {
   animation-delay: 0.6s;
 }
 
-.teacher-beads circle {
+.teacher-tracer-path {
+  fill: none;
+  stroke: none;
+  pointer-events: none;
+}
+
+.teacher-tracer {
   fill: #6ee8ff;
-  opacity: 0.3;
-  animation: beadPulse 3.4s ease-in-out infinite;
-  animation-delay: var(--delay);
+  stroke: rgba(230, 250, 255, 0.9);
+  stroke-width: 1.4;
+  opacity: 0.96;
+  filter: drop-shadow(0 0 12px rgba(110, 232, 255, 0.78));
+  animation: tracerPulse 1.8s ease-in-out infinite;
 }
 
 .student-shortcut {
@@ -1783,16 +1825,14 @@ svg {
   }
 }
 
-@keyframes beadPulse {
+@keyframes tracerPulse {
   0%,
   100% {
-    opacity: 0.22;
-    r: 4;
+    opacity: 0.78;
   }
 
-  45% {
+  50% {
     opacity: 1;
-    r: 6;
   }
 }
 
