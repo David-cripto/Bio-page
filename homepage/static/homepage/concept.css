@@ -1668,6 +1668,27 @@ svg {
   animation: studentGlow 3.6s ease-in-out infinite;
 }
 
+.student-jump-arrows path {
+  fill: none;
+  stroke: #ff4b2e;
+  stroke-width: 3.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 8px rgba(255, 75, 46, 0.32));
+}
+
+.student-jump-arrows path:nth-child(1) {
+  opacity: 0.96;
+}
+
+.student-jump-arrows path:nth-child(2) {
+  opacity: 0.9;
+}
+
+.student-jump-arrows path:nth-child(3) {
+  opacity: 0.84;
+}
+
 .student-anchors circle,
 .student-samples circle {
   fill: #ffd3a2;

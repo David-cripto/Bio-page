@@ -540,6 +540,9 @@
                   <marker id="studentArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
                     <path d="M1,1 L5.5,3 L1,5 Z" fill="#ffd3a2" />
                   </marker>
+                  <marker id="jumpArrow" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto" markerUnits="strokeWidth">
+                    <path d="M1,1 L7,4 L1,7 Z" fill="#ff4b2e" />
+                  </marker>
                   <radialGradient id="noiseGlow" cx="50%" cy="50%" r="55%">
                     <stop offset="0%" stop-color="#b86bff" stop-opacity="0.55" />
                     <stop offset="100%" stop-color="#19c6ff" stop-opacity="0.04" />
@@ -587,6 +590,11 @@
                   <circle cx="431" cy="79" r="4" style="--delay: 2.1s" />
                 </g>
                 <path class="student-shortcut" d="M86 246 C179 170 286 158 369 111 C417 84 463 74 498 105" marker-end="url(#studentArrow)" />
+                <g class="student-jump-arrows">
+                  <path d="M86 246 C71 183 134 163 199 178" marker-end="url(#jumpArrow)" />
+                  <path d="M275 150 C256 93 319 78 369 111" marker-end="url(#jumpArrow)" />
+                  <path d="M498 105 C475 55 528 48 516 101" marker-end="url(#jumpArrow)" />
+                </g>
                 <g class="student-anchors">
                   <circle cx="86" cy="246" r="7" />
                   <circle cx="275" cy="150" r="7" />
