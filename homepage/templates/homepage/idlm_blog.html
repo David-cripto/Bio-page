@@ -207,11 +207,11 @@
 
         <h3 id="diffusion-inference" class="blog-subheading">1.2 The Problem of Diffusion Inference</h3>
         <p>
-          The drawback is that diffusion still has a sequential time axis. A sampler starts from
-          noise and repeatedly calls the denoising network; call \(k\) consumes the output of call
-          \(k+1\). So even though one call can update all tokens in parallel, the outer loop may
-          require \(50\), \(100\), \(250\), or \(1000\) forward passes before the sequence becomes
-          clean.
+          Despite their strong potential for high-quality generation, diffusion models retain a
+          central practical limitation: inference is slow. A sampler starts from noise and
+          repeatedly calls the denoising network; call \(k\) consumes the output of call \(k+1\).
+          So even though one call can update all tokens in parallel, the outer loop may require
+          \(50\), \(100\), \(250\), or \(1000\) forward passes before the sequence becomes clean.
         </p>
         <figure class="problem-figure" aria-label="Sequential language denoising bottleneck">
           <div class="problem-panels">
