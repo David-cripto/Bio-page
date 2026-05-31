@@ -1050,7 +1050,7 @@ svg {
 }
 
 .problem-dots::after {
-  display: none;
+  display: block;
 }
 
 .problem-node-label {
