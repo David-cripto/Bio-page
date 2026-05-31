@@ -1684,7 +1684,6 @@ svg {
 }
 
 .student-anchors circle,
-.distill-step-count .student-dot,
 .student-samples circle {
   fill: #ffd3a2;
 }
@@ -1692,17 +1691,6 @@ svg {
 .student-anchors circle {
   stroke: rgba(2, 8, 24, 0.9);
   stroke-width: 3;
-}
-
-.distill-step-count circle {
-  fill: #6ee8ff;
-  opacity: 0.72;
-}
-
-.distill-step-count path {
-  stroke: rgba(167, 189, 219, 0.46);
-  stroke-width: 2;
-  stroke-dasharray: 3 9;
 }
 
 .density-target ellipse {
