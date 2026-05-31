@@ -1621,8 +1621,7 @@ svg {
 
 .distill-map-window {
   fill: rgba(2, 8, 24, 0.44);
-  stroke: rgba(94, 217, 255, 0.12);
-  stroke-width: 1.5;
+  stroke: none;
 }
 
 .distill-cloud circle,
