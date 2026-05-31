@@ -1641,7 +1641,8 @@ svg {
   opacity: 0.86;
 }
 
-.teacher-curve {
+.teacher-curve,
+.teacher-jump-curve path {
   fill: none;
   stroke: #6ee8ff;
   stroke-width: 3.2;
@@ -1649,6 +1650,18 @@ svg {
   stroke-dasharray: 7 11;
   opacity: 0.74;
   animation: distillDash 7.2s linear infinite;
+}
+
+.teacher-jump-curve path:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.teacher-jump-curve path:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.teacher-jump-curve path:nth-child(4) {
+  animation-delay: 0.6s;
 }
 
 .teacher-beads circle {
@@ -1666,27 +1679,6 @@ svg {
   opacity: 0.9;
   filter: drop-shadow(0 0 12px rgba(255, 211, 162, 0.24));
   animation: studentGlow 3.6s ease-in-out infinite;
-}
-
-.student-jump-arrows path {
-  fill: none;
-  stroke: #ff4b2e;
-  stroke-width: 3.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 0 8px rgba(255, 75, 46, 0.32));
-}
-
-.student-jump-arrows path:nth-child(1) {
-  opacity: 0.96;
-}
-
-.student-jump-arrows path:nth-child(2) {
-  opacity: 0.9;
-}
-
-.student-jump-arrows path:nth-child(3) {
-  opacity: 0.84;
 }
 
 .student-anchors circle,
