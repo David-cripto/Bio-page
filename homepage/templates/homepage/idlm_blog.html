@@ -355,13 +355,27 @@
         </div>
         <h3 id="image-distillation" class="blog-subheading">1.3 Distillation in Image Diffusion</h3>
         <p>
-          Image diffusion faced this problem first. Models such as
+          Image diffusion made this tradeoff visible before language diffusion did. Models such as
           <a href="https://arxiv.org/abs/2006.11239" target="_blank" rel="noopener noreferrer">DDPM</a>,
           <a href="https://arxiv.org/abs/2011.13456" target="_blank" rel="noopener noreferrer">score-based SDEs</a>,
           and <a href="https://arxiv.org/abs/2206.00364" target="_blank" rel="noopener noreferrer">EDM</a>
-          showed that iterative denoising can produce very high-quality images, but the original
-          samplers were expensive. A long chain is fine for a demo; it is much less pleasant when
-          every sample needs dozens or hundreds of network evaluations.
+          showed that a noisy sample can be transformed into a high-quality image by following a
+          reverse denoising process. In DDPM this process is a long reverse Markov chain; in
+          score-based SDEs it can be viewed as integrating a reverse-time stochastic or deterministic
+          dynamics; in EDM the same idea is refined through better noise parameterizations and
+          sampler design.
+        </p>
+        <p>
+          The cost is that each reverse step requires another neural network evaluation. The
+          original DDPM-style samplers commonly used very long chains, while accelerated samplers
+          such as
+          <a href="https://arxiv.org/abs/2010.02502" target="_blank" rel="noopener noreferrer">DDIM</a>
+          and
+          <a href="https://arxiv.org/abs/2102.09672" target="_blank" rel="noopener noreferrer">Improved DDPM</a>
+          reduced the number of evaluations but did not remove the sequential nature of sampling.
+          This is why image diffusion became the natural testbed for distillation: if a student can
+          replace many small denoising moves with a few reliable jumps, we can keep most of the
+          teacher's visual quality while paying for far fewer forward passes.
         </p>
         <figure class="problem-figure image-diffusion-figure" aria-label="Sequential image denoising bottleneck">
           <div class="problem-panels">
