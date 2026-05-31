@@ -423,14 +423,26 @@
           <figcaption>A standard image diffusion sampler improves the whole image at each step, but still follows a sequential denoising chain.</figcaption>
         </figure>
         <p>
-          Distillation changed that story. Methods such as
-          <a href="https://arxiv.org/abs/2202.00512" target="_blank" rel="noopener noreferrer">progressive distillation</a>,
-          <a href="https://arxiv.org/abs/2303.01469" target="_blank" rel="noopener noreferrer">consistency models</a>,
-          and <a href="https://arxiv.org/abs/2311.18828" target="_blank" rel="noopener noreferrer">distribution matching distillation</a>
-          trained students that need far fewer denoising calls. This is the motivation for IDLM:
-          keep the parallel, bidirectional view of language diffusion, but transfer the successful
-          distillation idea into the discrete text domain, where tokens and gradients behave very
-          differently from pixels.
+          Distillation changed that story by asking a sharper question: can we keep the distribution
+          learned by a strong teacher while reducing the number of sequential denoising calls?
+          <a href="https://arxiv.org/abs/2202.00512" target="_blank" rel="noopener noreferrer">Progressive distillation</a>,
+          for example, trains a student sampler to imitate multiple teacher steps with one larger
+          step, then repeats this compression. <a href="https://arxiv.org/abs/2303.01469" target="_blank" rel="noopener noreferrer">Consistency models</a>
+          learn a shortcut from points along a diffusion trajectory back to the clean sample, which
+          makes one-step or few-step generation possible; this idea was later scaled in systems such
+          as <a href="https://arxiv.org/abs/2310.04378" target="_blank" rel="noopener noreferrer">latent consistency models</a>.
+          A complementary line,
+          <a href="https://arxiv.org/abs/2311.18828" target="_blank" rel="noopener noreferrer">distribution matching distillation</a>,
+          directly trains the student distribution to match the teacher-supported data distribution,
+          rather than only copying local transitions.
+        </p>
+        <p>
+          The lesson from image diffusion is that acceleration is not only a faster sampler; it is a
+          training problem. The student must take larger jumps without drifting away from the
+          teacher's distribution. This is the motivation for IDLM: keep the parallel, bidirectional
+          view of language diffusion, but transfer the successful distillation idea into the
+          discrete text domain, where tokens are not continuous pixels, gradients cannot flow through
+          token choices in the same way, and large factorized jumps can break cross-token structure.
         </p>
         <figure class="distill-figure" aria-label="Distilled image diffusion with k denoising steps">
           <div class="problem-panel distill-panel">
