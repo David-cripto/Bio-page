@@ -408,13 +408,13 @@
           </div>
           <figcaption>A standard image diffusion sampler improves the whole image at each step, but still follows a sequential denoising chain.</figcaption>
         </figure>
-        <figure class="distill-figure" aria-label="Distilled image diffusion with four denoising steps">
+        <figure class="distill-figure" aria-label="Distilled image diffusion with k denoising steps">
           <div class="problem-panel distill-panel">
             <div class="problem-panel-head">
               <span>Distilled image diffusion</span>
-              <strong>4 student denoising steps instead of \(T\)</strong>
+              <strong>\(k\) student denoising steps, \(k \ll T\)</strong>
             </div>
-            <div class="problem-steps distill-steps" aria-label="Four-step distilled cat image denoising timeline">
+            <div class="problem-steps distill-steps" aria-label="k-step distilled cat image denoising timeline">
               <div class="problem-node">
                 <span class="problem-node-label">Input noise</span>
                 <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-noise.png?v=20260529-cat-blocks" alt="Random image noise before distilled denoising">
@@ -435,7 +435,7 @@
                 <span class="problem-model">Student denoiser</span>
               </div>
               <div class="problem-node problem-final-node">
-                <span class="problem-node-label">Step&nbsp;\(4\)</span>
+                <span class="problem-node-label">Step&nbsp;\(k\)</span>
                 <img class="cat-board cat-board-final" src="/Bio-page/static/homepage/blog/idlm-cat-step-final.png?v=20260529-cat-blocks" alt="Final distilled generated tabby cat image">
                 <span class="problem-model">Student denoiser</span>
               </div>
