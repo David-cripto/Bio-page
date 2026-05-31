@@ -482,18 +482,140 @@
           model must be trained while the student changes, but the target is stronger: match the
           distribution, not merely a local denoising shortcut.
         </p>
-        <div class="inverse-flow" aria-label="Two distillation families">
-          <div>
-            <span>Consistency-like</span>
-            <strong>shorten the trajectory</strong>
-            <p>Learn a student transition that skips several teacher denoising steps.</p>
+        <figure class="distillation-map" aria-label="Two diffusion distillation views in a two-dimensional toy space">
+          <div class="distillation-map-grid">
+            <div class="distill-map-panel">
+              <div class="distill-map-head">
+                <span>Consistency-like</span>
+                <strong>shorten the trajectory</strong>
+              </div>
+              <svg class="distill-svg" viewBox="0 0 560 330" role="img" aria-labelledby="consistency-map-title consistency-map-desc">
+                <title id="consistency-map-title">Consistency-like distillation shortens a teacher trajectory</title>
+                <desc id="consistency-map-desc">A long teacher denoising curve is replaced by a few larger student jumps in a two-dimensional space.</desc>
+                <defs>
+                  <marker id="teacherArrow" markerWidth="7" markerHeight="7" refX="5.6" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#6ee8ff" />
+                  </marker>
+                  <marker id="studentArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+                    <path d="M1,1 L5.5,3 L1,5 Z" fill="#ffd3a2" />
+                  </marker>
+                  <radialGradient id="noiseGlow" cx="50%" cy="50%" r="55%">
+                    <stop offset="0%" stop-color="#b86bff" stop-opacity="0.55" />
+                    <stop offset="100%" stop-color="#19c6ff" stop-opacity="0.04" />
+                  </radialGradient>
+                  <radialGradient id="dataGlow" cx="50%" cy="50%" r="58%">
+                    <stop offset="0%" stop-color="#b5f07c" stop-opacity="0.52" />
+                    <stop offset="100%" stop-color="#19c6ff" stop-opacity="0.05" />
+                  </radialGradient>
+                </defs>
+                <rect class="distill-map-window" x="24" y="28" width="512" height="258" rx="22" />
+                <path class="distill-contour distill-contour-noise" d="M57 249 C48 215 71 190 104 194 C137 198 154 225 139 254 C124 283 68 286 57 249Z" />
+                <path class="distill-contour distill-contour-data" d="M430 78 C462 43 520 58 520 108 C520 154 469 173 431 151 C397 131 398 111 430 78Z" />
+                <g class="distill-cloud noise-cloud">
+                  <circle cx="73" cy="240" r="12" />
+                  <circle cx="103" cy="220" r="8" />
+                  <circle cx="124" cy="248" r="10" />
+                  <circle cx="86" cy="266" r="7" />
+                  <circle cx="132" cy="211" r="6" />
+                  <circle cx="65" cy="215" r="6" />
+                </g>
+                <g class="distill-cloud data-cloud">
+                  <circle cx="456" cy="109" r="12" />
+                  <circle cx="489" cy="94" r="9" />
+                  <circle cx="504" cy="128" r="7" />
+                  <circle cx="430" cy="135" r="8" />
+                  <circle cx="474" cy="151" r="6" />
+                  <circle cx="516" cy="105" r="5" />
+                </g>
+                <path class="teacher-curve" d="M86 246 C130 204 163 211 196 178 C235 140 263 159 300 126 C337 93 373 113 409 88 C443 64 481 69 498 105" marker-end="url(#teacherArrow)" />
+                <g class="teacher-beads">
+                  <circle cx="121" cy="216" r="4" style="--delay: 0s" />
+                  <circle cx="164" cy="196" r="4" style="--delay: .35s" />
+                  <circle cx="209" cy="164" r="4" style="--delay: .7s" />
+                  <circle cx="260" cy="145" r="4" style="--delay: 1.05s" />
+                  <circle cx="314" cy="119" r="4" style="--delay: 1.4s" />
+                  <circle cx="370" cy="102" r="4" style="--delay: 1.75s" />
+                  <circle cx="431" cy="79" r="4" style="--delay: 2.1s" />
+                </g>
+                <path class="student-shortcut" d="M86 246 C179 170 286 158 369 111 C417 84 463 74 498 105" marker-end="url(#studentArrow)" />
+                <g class="student-anchors">
+                  <circle cx="86" cy="246" r="7" />
+                  <circle cx="275" cy="150" r="7" />
+                  <circle cx="498" cy="105" r="7" />
+                </g>
+                <g class="distill-step-count">
+                  <circle cx="80" cy="304" r="4" />
+                  <circle cx="96" cy="304" r="4" />
+                  <circle cx="112" cy="304" r="4" />
+                  <circle cx="128" cy="304" r="4" />
+                  <circle cx="144" cy="304" r="4" />
+                  <path d="M174 304 H374" />
+                  <circle class="student-dot" cx="420" cy="304" r="5" />
+                  <circle class="student-dot" cx="442" cy="304" r="5" />
+                  <circle class="student-dot" cx="464" cy="304" r="5" />
+                </g>
+              </svg>
+            </div>
+            <div class="distill-map-panel">
+              <div class="distill-map-head">
+                <span>Distribution matching</span>
+                <strong>match \(p_\theta\) to \(p^\star\)</strong>
+              </div>
+              <svg class="distill-svg" viewBox="0 0 560 330" role="img" aria-labelledby="matching-map-title matching-map-desc">
+                <title id="matching-map-title">Distribution matching aligns a student distribution with the target distribution</title>
+                <desc id="matching-map-desc">A student point cloud is pushed toward a target point cloud instead of following individual teacher trajectories.</desc>
+                <defs>
+                  <marker id="matchArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#ffd3a2" />
+                  </marker>
+                  <radialGradient id="targetDensity" cx="50%" cy="50%" r="60%">
+                    <stop offset="0%" stop-color="#b5f07c" stop-opacity="0.5" />
+                    <stop offset="100%" stop-color="#6ee8ff" stop-opacity="0.04" />
+                  </radialGradient>
+                  <radialGradient id="studentDensity" cx="50%" cy="50%" r="60%">
+                    <stop offset="0%" stop-color="#ffd3a2" stop-opacity="0.46" />
+                    <stop offset="100%" stop-color="#eb7a50" stop-opacity="0.04" />
+                  </radialGradient>
+                </defs>
+                <rect class="distill-map-window" x="24" y="28" width="512" height="258" rx="22" />
+                <g class="density-target">
+                  <ellipse cx="378" cy="150" rx="132" ry="76" transform="rotate(-11 378 150)" />
+                  <ellipse cx="378" cy="150" rx="92" ry="50" transform="rotate(-11 378 150)" />
+                  <ellipse cx="378" cy="150" rx="52" ry="29" transform="rotate(-11 378 150)" />
+                </g>
+                <g class="density-student">
+                  <ellipse cx="164" cy="201" rx="104" ry="56" transform="rotate(15 164 201)" />
+                  <ellipse cx="164" cy="201" rx="68" ry="34" transform="rotate(15 164 201)" />
+                </g>
+                <g class="match-arrows">
+                  <path d="M167 202 C228 178 272 153 333 142" marker-end="url(#matchArrow)" />
+                  <path d="M132 174 C208 127 270 113 346 124" marker-end="url(#matchArrow)" />
+                  <path d="M200 232 C251 225 307 203 375 184" marker-end="url(#matchArrow)" />
+                </g>
+                <g class="target-samples">
+                  <circle cx="333" cy="132" r="6" />
+                  <circle cx="360" cy="101" r="8" />
+                  <circle cx="392" cy="121" r="6" />
+                  <circle cx="425" cy="142" r="9" />
+                  <circle cx="373" cy="160" r="7" />
+                  <circle cx="326" cy="177" r="8" />
+                  <circle cx="460" cy="176" r="6" />
+                  <circle cx="401" cy="202" r="7" />
+                  <circle cx="458" cy="114" r="5" />
+                </g>
+                <g class="student-samples">
+                  <circle class="match-student m1" cx="110" cy="184" r="7" style="--dx: 218px; --dy: -54px" />
+                  <circle class="match-student m2" cx="150" cy="160" r="8" style="--dx: 206px; --dy: -56px" />
+                  <circle class="match-student m3" cx="177" cy="198" r="6" style="--dx: 196px; --dy: -36px" />
+                  <circle class="match-student m4" cx="202" cy="225" r="8" style="--dx: 190px; --dy: -26px" />
+                  <circle class="match-student m5" cx="136" cy="234" r="7" style="--dx: 190px; --dy: -58px" />
+                  <circle class="match-student m6" cx="221" cy="181" r="6" style="--dx: 208px; --dy: -38px" />
+                </g>
+                <path class="matched-outline" d="M285 161 C318 87 430 74 488 127 C537 173 488 237 395 235 C306 233 258 218 285 161Z" />
+              </svg>
+            </div>
           </div>
-          <div>
-            <span>Distribution matching</span>
-            <strong>match \(p_\theta\) to \(p^\star\)</strong>
-            <p>Train the generator distribution itself to look like the teacher's data distribution.</p>
-          </div>
-        </div>
+        </figure>
 
         <h3 id="inverse-view" class="blog-subheading">2.2 The Inverse Distillation View</h3>
         <p>

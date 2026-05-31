@@ -847,6 +847,7 @@ svg {
 .token-scale-visual > div,
 .mixture-visual,
 .inverse-flow > div,
+.distill-map-panel,
 .factorization-card,
 .problem-panel {
   border: 1px solid var(--line);
@@ -1207,6 +1208,7 @@ svg {
 
 .token-scale-visual span,
 .inverse-flow span,
+.distill-map-head span,
 .latent-node span {
   color: var(--quiet);
   font-size: 0.72rem;
@@ -1566,6 +1568,245 @@ svg {
   line-height: 1.65;
 }
 
+.distillation-map {
+  margin: 28px 0 34px;
+}
+
+.distillation-map-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.distill-map-panel {
+  min-width: 0;
+  padding: 18px;
+  overflow: hidden;
+}
+
+.distill-map-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.distill-map-head strong {
+  color: var(--ink);
+  font-size: clamp(1.05rem, 1.55vw, 1.42rem);
+  line-height: 1.25;
+  text-align: right;
+}
+
+.distill-svg {
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(94, 217, 255, 0.2);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(184, 107, 255, 0.13), transparent 34%),
+    radial-gradient(circle at 78% 27%, rgba(181, 240, 124, 0.1), transparent 32%),
+    linear-gradient(135deg, rgba(2, 8, 24, 0.9), rgba(7, 21, 45, 0.72));
+  box-shadow: inset 0 1px 0 rgba(246, 251, 255, 0.05);
+}
+
+.distill-map-window {
+  fill: rgba(2, 8, 24, 0.44);
+  stroke: rgba(94, 217, 255, 0.12);
+  stroke-width: 1.5;
+}
+
+.distill-contour {
+  stroke-width: 2;
+}
+
+.distill-contour-noise {
+  fill: url("#noiseGlow");
+  stroke: rgba(184, 107, 255, 0.28);
+}
+
+.distill-contour-data {
+  fill: url("#dataGlow");
+  stroke: rgba(181, 240, 124, 0.32);
+}
+
+.distill-cloud circle,
+.target-samples circle,
+.student-samples circle {
+  filter: drop-shadow(0 0 10px rgba(25, 198, 255, 0.12));
+}
+
+.noise-cloud circle {
+  fill: #b86bff;
+  opacity: 0.72;
+}
+
+.data-cloud circle,
+.target-samples circle {
+  fill: #b5f07c;
+  opacity: 0.86;
+}
+
+.teacher-curve {
+  fill: none;
+  stroke: #6ee8ff;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-dasharray: 7 11;
+  opacity: 0.74;
+  animation: distillDash 7.2s linear infinite;
+}
+
+.teacher-beads circle {
+  fill: #6ee8ff;
+  opacity: 0.3;
+  animation: beadPulse 3.4s ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+.student-shortcut {
+  fill: none;
+  stroke: #ffd3a2;
+  stroke-width: 5.2;
+  stroke-linecap: round;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 12px rgba(255, 211, 162, 0.24));
+  animation: studentGlow 3.6s ease-in-out infinite;
+}
+
+.student-anchors circle,
+.distill-step-count .student-dot,
+.student-samples circle {
+  fill: #ffd3a2;
+}
+
+.student-anchors circle {
+  stroke: rgba(2, 8, 24, 0.9);
+  stroke-width: 3;
+}
+
+.distill-step-count circle {
+  fill: #6ee8ff;
+  opacity: 0.72;
+}
+
+.distill-step-count path {
+  stroke: rgba(167, 189, 219, 0.46);
+  stroke-width: 2;
+  stroke-dasharray: 3 9;
+}
+
+.density-target ellipse {
+  fill: url("#targetDensity");
+  stroke: rgba(181, 240, 124, 0.34);
+  stroke-width: 2;
+}
+
+.density-target ellipse + ellipse {
+  fill: none;
+  stroke-width: 1.6;
+}
+
+.density-student ellipse {
+  fill: url("#studentDensity");
+  stroke: rgba(255, 211, 162, 0.28);
+  stroke-width: 2;
+}
+
+.density-student ellipse + ellipse {
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.match-arrows path {
+  fill: none;
+  stroke: #ffd3a2;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-dasharray: 8 10;
+  opacity: 0.78;
+  animation: distillDash 6.8s linear infinite;
+}
+
+.match-student {
+  opacity: 0.9;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: matchDrift 5.8s ease-in-out infinite;
+}
+
+.match-student.m2 {
+  animation-delay: 0.15s;
+}
+
+.match-student.m3 {
+  animation-delay: 0.3s;
+}
+
+.match-student.m4 {
+  animation-delay: 0.45s;
+}
+
+.match-student.m5 {
+  animation-delay: 0.6s;
+}
+
+.match-student.m6 {
+  animation-delay: 0.75s;
+}
+
+.matched-outline {
+  fill: none;
+  stroke: #ffd3a2;
+  stroke-width: 3;
+  stroke-dasharray: 10 8;
+  opacity: 0.42;
+  animation: distillDash 7.4s linear infinite reverse;
+}
+
+@keyframes distillDash {
+  to {
+    stroke-dashoffset: -72;
+  }
+}
+
+@keyframes beadPulse {
+  0%,
+  100% {
+    opacity: 0.22;
+    r: 4;
+  }
+
+  45% {
+    opacity: 1;
+    r: 6;
+  }
+}
+
+@keyframes studentGlow {
+  0%,
+  100% {
+    opacity: 0.78;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes matchDrift {
+  0%,
+  28% {
+    transform: translate(0, 0);
+  }
+
+  76%,
+  100% {
+    transform: translate(var(--dx), var(--dy));
+  }
+}
+
 .contrast-visual {
   display: grid;
   gap: 12px;
@@ -1887,6 +2128,7 @@ svg {
   .intuition-strip,
   .mixture-visual,
   .inverse-flow,
+  .distillation-map-grid,
   .method-grid,
   .metric-grid,
   .generation-animation-grid,
