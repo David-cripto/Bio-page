@@ -1054,6 +1054,14 @@ svg {
   display: block;
 }
 
+.problem-panel-text .problem-node.problem-dots:not(:last-child)::after {
+  top: 64px;
+}
+
+.image-diffusion-steps .problem-node.problem-dots:not(:last-child)::after {
+  top: 30px;
+}
+
 .problem-node-label {
   display: flex;
   align-items: flex-end;
