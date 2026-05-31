@@ -484,13 +484,11 @@
         <div class="blog-callout">
           <strong>The question of the day</strong>
           <span>
-            Can the distillation principle that works so well for continuous image diffusion be
-            transferred to diffusion language models? The challenge is not only to reduce the
-            number of denoising calls. A language student must preserve the teacher's distribution
-            over structured discrete sequences, even though token sampling is non-differentiable,
-            reverse transitions are often factorized over positions, and large jumps must still
-            maintain syntax, semantics, agreement, and long-range dependencies. The rest of the post
-            explains how inverse distillation gives IDLM a way to ask this question directly.
+            Can image-style distillation be transferred to diffusion language models? The goal is
+            not only fewer denoising calls, but a student distribution that preserves structured
+            discrete text despite non-differentiable token choices, factorized reverse transitions,
+            and large jumps that must still maintain syntax, semantics, agreement, and long-range
+            dependencies. IDLM approaches this question through inverse distillation.
           </span>
         </div>
       </section>
