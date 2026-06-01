@@ -1472,12 +1472,11 @@
 
         <h3 id="final-algorithm" class="blog-subheading">3.5 Final Algorithm</h3>
         <p>
-          The complete IDLM procedure combines the population inverse objective with the
-          differentiable relaxations described above. Let \(f^\star\) denote the pretrained
-          diffusion teacher, \(f\) the auxiliary fake denoiser, and \(G_\theta\) the student
-          generator. Training alternates between two coupled updates: the fake model is first fitted
-          to samples produced by the current student, and the student is then updated by contrasting
-          the teacher loss against the fake-model loss on those same samples.
+          The final IDLM training loop is simple: use the frozen teacher \(f^\star\) as a quality
+          reference, train an auxiliary fake denoiser \(f\) to recognize the current student samples,
+          and update the student generator \(G_\theta\) using the difference between the two losses.
+          In other words, the fake model learns what the student is currently producing, while the
+          student is pushed toward samples that the teacher explains better than the fake model.
         </p>
         <p>
           In practice, a noised state \((x_t,t)\) is sampled from the forward process and passed to
