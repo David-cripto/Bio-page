@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-shared-latent-centered-interp-final-algorithm">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-direct-latent-map">
 </head>
 <body>
   <main class="blog-shell">
@@ -688,8 +688,7 @@
           Inverse Distillation is a distribution-matching-style distillation approach. The goal is
           to train a fast student distribution \(p_\theta\) so that it matches the target data
           distribution \(p^\star\). The central question is how to compare \(p_\theta\) with
-          \(p^\star\) when the target is available through a pretrained diffusion model rather than
-          through an explicit density. Inverse distillation answers this by comparing the diffusion
+          \(p^\star\). Inverse distillation answers this by comparing the diffusion
           models that would be learned from these two distributions.
         </p>
         <p>
@@ -790,8 +789,18 @@
               <circle cx="106" cy="229" r="7" />
             </g>
             <g class="inverse-model-paths">
-              <path class="inverse-teacher-path" d="M155 185 C284 72 470 75 617 105 C680 118 724 118 787 123" marker-end="url(#inverseTeacherArrow)" />
-              <path class="inverse-fake-path" d="M155 224 C296 309 472 319 622 288 C685 274 728 270 790 266" marker-end="url(#inverseFakeArrow)" />
+              <path id="inverseTeacherTrace" class="inverse-teacher-path" d="M155 185 C284 72 470 75 617 105 C680 118 724 118 787 123" marker-end="url(#inverseTeacherArrow)" />
+              <path id="inverseFakeTrace" class="inverse-fake-path" d="M155 224 C296 309 472 319 622 288 C685 274 728 270 790 266" marker-end="url(#inverseFakeArrow)" />
+              <circle class="inverse-moving-dot inverse-moving-teacher" r="7">
+                <animateMotion dur="6.4s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#inverseTeacherTrace" />
+                </animateMotion>
+              </circle>
+              <circle class="inverse-moving-dot inverse-moving-fake" r="7">
+                <animateMotion dur="6.4s" begin="0.35s" repeatCount="indefinite" rotate="auto">
+                  <mpath href="#inverseFakeTrace" />
+                </animateMotion>
+              </circle>
             </g>
             <g class="inverse-gap-lines">
               <path d="M298 108 C328 150 331 239 305 285" />
@@ -875,7 +884,7 @@
               <div
                 class="continuous-interp-stage"
                 role="img"
-                aria-label="A point moves on a dashed line from a dog image to a cat image, while a connected preview cross-fades between the same two images to show a continuous pixel interpolation.">
+                aria-label="An interpolated preview moves on a dashed line from a dog image to a cat image, cross-fading between the same two images to show a continuous pixel interpolation.">
                 <figure class="interp-endpoint interp-endpoint-dog">
                   <img src="/Bio-page/static/homepage/blog/idlm-dog-interpolation.png?v=20260601-real-dog" alt="Realistic dog portrait endpoint">
                 </figure>
@@ -883,7 +892,6 @@
                   <img src="/Bio-page/static/homepage/blog/idlm-cat-step-final.png?v=20260529-cat-blocks" alt="Final tabby cat image from section 1.3">
                 </figure>
                 <div class="interp-track" aria-hidden="true"></div>
-                <div class="interp-knob" aria-hidden="true"></div>
                 <div class="interp-sample" aria-hidden="true">
                   <span class="interp-tether"></span>
                   <div class="interp-sample-frame">
@@ -1303,7 +1311,7 @@
             <div class="distill-map-panel sequence-capacity-panel">
               <div class="distill-map-head">
                 <span>Latent mixture</span>
-                <strong>sample \(\varepsilon\), generate a sequence</strong>
+                <strong>draw \(\varepsilon\), obtain a sentence atom</strong>
               </div>
               <svg class="distill-svg sequence-capacity-svg" viewBox="0 0 900 360" role="img" aria-labelledby="latent-sequence-title latent-sequence-desc">
                 <title id="latent-sequence-title">Latent samples map to generated word sequences</title>
@@ -1346,69 +1354,38 @@
                     <text y="4">&epsilon;<tspan baseline-shift="sub" font-size="8">3</tspan></text>
                   </g>
                 </g>
-                <g class="sequence-generator-node" transform="translate(306 128)">
-                  <rect width="126" height="92" rx="18" />
-                  <text class="sequence-generator-main" x="63" y="43">G<tspan baseline-shift="sub" font-size="12">&theta;</tspan></text>
-                  <text class="sequence-generator-sub" x="63" y="68">student</text>
-                </g>
                 <g class="latent-rays sequence-latent-rays">
-                  <path d="M142 101 C210 100 246 128 304 154" marker-end="url(#sequenceLatentArrow)" />
-                  <path d="M204 175 C238 175 263 174 304 174" marker-end="url(#sequenceLatentArrow)" />
-                  <path d="M134 244 C209 243 250 214 304 194" marker-end="url(#sequenceLatentArrow)" />
-                  <path d="M433 154 C482 112 526 91 580 91" marker-end="url(#sequenceLatentArrow)" />
-                  <path d="M433 174 C486 174 528 174 580 174" marker-end="url(#sequenceLatentArrow)" />
-                  <path d="M433 194 C482 236 526 257 580 257" marker-end="url(#sequenceLatentArrow)" />
+                  <path d="M142 100 L536 96" marker-end="url(#sequenceLatentArrow)" />
+                  <path d="M204 175 L536 172" marker-end="url(#sequenceLatentArrow)" />
+                  <path d="M134 244 L536 248" marker-end="url(#sequenceLatentArrow)" />
                 </g>
-                <g class="sequence-atom-stack" transform="translate(590 58)">
+                <g class="sequence-atom-stack" transform="translate(552 60)">
                   <g class="sequence-atom-row atom-green" transform="translate(0 0)">
-                    <rect class="sequence-atom-frame" width="244" height="64" rx="14" />
-                    <text class="sequence-epsilon-tag" x="18" y="39">&epsilon;<tspan baseline-shift="sub" font-size="8">1</tspan></text>
-                    <g class="sequence-word-row" transform="translate(51 15)">
-                      <rect class="seq-word-token slot-green" width="48" height="34" rx="8" />
-                      <text x="24" y="22">Cats</text>
-                      <rect class="seq-word-token slot-blue" x="56" width="38" height="34" rx="8" />
-                      <text x="75" y="22">are</text>
-                      <rect class="seq-word-token slot-green" x="102" width="46" height="34" rx="8" />
-                      <text x="125" y="22">cute</text>
-                      <rect class="seq-word-token slot-yellow" x="156" width="24" height="34" rx="8" />
-                      <text x="168" y="22">.</text>
-                    </g>
+                    <line class="sequence-sentence-track" x1="0" y1="42" x2="278" y2="42" />
+                    <circle class="sequence-sentence-anchor" cx="0" cy="42" r="4" />
+                    <text class="sequence-epsilon-tag" x="28" y="31">&epsilon;<tspan baseline-shift="sub" font-size="8">1</tspan></text>
+                    <text class="sequence-sentence-text" x="72" y="31">Cats are cute.</text>
                   </g>
                   <g class="sequence-atom-row atom-purple" transform="translate(0 76)">
-                    <rect class="sequence-atom-frame" width="244" height="64" rx="14" />
-                    <text class="sequence-epsilon-tag" x="18" y="39">&epsilon;<tspan baseline-shift="sub" font-size="8">2</tspan></text>
-                    <g class="sequence-word-row" transform="translate(51 15)">
-                      <rect class="seq-word-token slot-purple" width="70" height="34" rx="8" />
-                      <text x="35" y="22">Penguins</text>
-                      <rect class="seq-word-token slot-orange" x="78" width="48" height="34" rx="8" />
-                      <text x="102" y="22">wear</text>
-                      <rect class="seq-word-token slot-purple" x="134" width="70" height="34" rx="8" />
-                      <text x="169" y="22">pajamas</text>
-                    </g>
+                    <line class="sequence-sentence-track" x1="0" y1="42" x2="278" y2="42" />
+                    <circle class="sequence-sentence-anchor" cx="0" cy="42" r="4" />
+                    <text class="sequence-epsilon-tag" x="28" y="31">&epsilon;<tspan baseline-shift="sub" font-size="8">2</tspan></text>
+                    <text class="sequence-sentence-text" x="72" y="31">Penguins wear pajamas.</text>
                   </g>
                   <g class="sequence-atom-row atom-blue" transform="translate(0 152)">
-                    <rect class="sequence-atom-frame" width="244" height="64" rx="14" />
-                    <text class="sequence-epsilon-tag" x="18" y="39">&epsilon;<tspan baseline-shift="sub" font-size="8">3</tspan></text>
-                    <g class="sequence-word-row" transform="translate(51 15)">
-                      <rect class="seq-word-token slot-blue" width="42" height="34" rx="8" />
-                      <text x="21" y="22">The</text>
-                      <rect class="seq-word-token slot-green" x="50" width="48" height="34" rx="8" />
-                      <text x="74" y="22">model</text>
-                      <rect class="seq-word-token slot-yellow" x="106" width="54" height="34" rx="8" />
-                      <text x="133" y="22">writes</text>
-                      <rect class="seq-word-token slot-orange" x="168" width="40" height="34" rx="8" />
-                      <text x="188" y="22">text</text>
-                    </g>
+                    <line class="sequence-sentence-track" x1="0" y1="42" x2="278" y2="42" />
+                    <circle class="sequence-sentence-anchor" cx="0" cy="42" r="4" />
+                    <text class="sequence-epsilon-tag" x="28" y="31">&epsilon;<tspan baseline-shift="sub" font-size="8">3</tspan></text>
+                    <text class="sequence-sentence-text" x="72" y="31">The model writes text.</text>
                   </g>
                 </g>
-                <text class="sequence-output-label" x="712" y="306">generated sequences</text>
+                <text class="sequence-output-label" x="688" y="306">generated sequences</text>
               </svg>
             </div>
           </div>
           <figcaption>
-            Different latent draws \(\varepsilon\sim p_{\mathcal E}\) are mapped by the student
-            \(G_\theta\) to different full generated sequences; averaging over these draws gives
-            the sequence-level mixture.
+            Different latent draws \(\varepsilon\sim p_{\mathcal E}\) map to different full
+            generated sequences; averaging over these draws gives the sequence-level mixture.
           </figcaption>
         </figure>
 

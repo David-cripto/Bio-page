@@ -2082,14 +2082,6 @@ svg {
   stroke: #b86bff;
 }
 
-.sequence-latent-rays path:nth-child(5) {
-  stroke: #6ee8ff;
-}
-
-.sequence-latent-rays path:nth-child(6) {
-  stroke: #b86bff;
-}
-
 .sequence-prior-label,
 .sequence-output-label {
   fill: var(--muted);
@@ -2098,48 +2090,54 @@ svg {
   text-anchor: middle;
 }
 
-.sequence-generator-node rect {
-  fill: rgba(2, 8, 24, 0.78);
-  stroke: rgba(110, 232, 255, 0.5);
-  stroke-width: 1.8;
-  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.26));
-}
-
-.sequence-generator-main {
-  fill: #9beeff;
-  font-size: 30px;
-  font-weight: 800;
-  text-anchor: middle;
-}
-
-.sequence-generator-sub {
-  fill: var(--muted);
-  font-size: 12px;
-  font-weight: 800;
-  text-anchor: middle;
-  text-transform: uppercase;
-}
-
-.sequence-atom-row {
-  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.22));
-}
-
-.sequence-atom-frame {
-  fill: rgba(2, 8, 24, 0.74);
-  stroke: rgba(246, 251, 255, 0.14);
+.sequence-sentence-track {
+  stroke: rgba(246, 251, 255, 0.2);
   stroke-width: 1.4;
+  stroke-linecap: round;
 }
 
-.atom-green .sequence-atom-frame {
-  stroke: rgba(181, 240, 124, 0.44);
+.sequence-sentence-anchor {
+  stroke: rgba(2, 8, 24, 0.9);
+  stroke-width: 2;
 }
 
-.atom-purple .sequence-atom-frame {
-  stroke: rgba(184, 107, 255, 0.42);
+.atom-green .sequence-sentence-track,
+.atom-green .sequence-sentence-anchor {
+  stroke: rgba(181, 240, 124, 0.7);
 }
 
-.atom-blue .sequence-atom-frame {
-  stroke: rgba(110, 232, 255, 0.42);
+.atom-purple .sequence-sentence-track,
+.atom-purple .sequence-sentence-anchor {
+  stroke: rgba(184, 107, 255, 0.68);
+}
+
+.atom-blue .sequence-sentence-track,
+.atom-blue .sequence-sentence-anchor {
+  stroke: rgba(110, 232, 255, 0.68);
+}
+
+.atom-green .sequence-sentence-anchor {
+  fill: #b5f07c;
+}
+
+.atom-purple .sequence-sentence-anchor {
+  fill: #b86bff;
+}
+
+.atom-blue .sequence-sentence-anchor {
+  fill: #6ee8ff;
+}
+
+.atom-green .sequence-epsilon-tag {
+  fill: #b5f07c;
+}
+
+.atom-purple .sequence-epsilon-tag {
+  fill: #b86bff;
+}
+
+.atom-blue .sequence-epsilon-tag {
+  fill: #6ee8ff;
 }
 
 .seq-token-slot {
@@ -2147,21 +2145,16 @@ svg {
 }
 
 .sequence-epsilon-tag {
-  fill: var(--muted);
   font-size: 13px;
   font-weight: 800;
-  text-anchor: middle;
+  text-anchor: start;
 }
 
-.sequence-word-row text {
+.sequence-sentence-text {
   fill: var(--ink);
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 800;
-  text-anchor: middle;
-}
-
-.seq-word-token {
-  stroke-width: 1.2;
+  text-anchor: start;
 }
 
 .seq-token-slot.slot-green {
@@ -2189,30 +2182,6 @@ svg {
   stroke: rgba(255, 211, 162, 0.62);
 }
 
-.seq-word-token.slot-green {
-  fill: rgba(181, 240, 124, 0.34);
-  stroke: rgba(181, 240, 124, 0.66);
-}
-
-.seq-word-token.slot-blue {
-  fill: rgba(110, 232, 255, 0.28);
-  stroke: rgba(110, 232, 255, 0.62);
-}
-
-.seq-word-token.slot-yellow {
-  fill: rgba(255, 211, 107, 0.32);
-  stroke: rgba(255, 211, 107, 0.62);
-}
-
-.seq-word-token.slot-purple {
-  fill: rgba(184, 107, 255, 0.3);
-  stroke: rgba(184, 107, 255, 0.62);
-}
-
-.seq-word-token.slot-orange {
-  fill: rgba(255, 211, 162, 0.3);
-  stroke: rgba(255, 211, 162, 0.62);
-}
 
 .sequence-mixture-brace path {
   fill: none;
@@ -2354,6 +2323,22 @@ svg {
   animation: distillDash 8.4s linear infinite reverse;
 }
 
+.inverse-moving-dot {
+  opacity: 0.96;
+  stroke: rgba(2, 8, 24, 0.86);
+  stroke-width: 2.4;
+}
+
+.inverse-moving-teacher {
+  fill: #6ee8ff;
+  filter: drop-shadow(0 0 14px rgba(110, 232, 255, 0.42));
+}
+
+.inverse-moving-fake {
+  fill: #ffd3a2;
+  filter: drop-shadow(0 0 14px rgba(255, 211, 162, 0.34));
+}
+
 .inverse-gap-lines path {
   stroke: #ffd36b;
   stroke-width: 1.8;
@@ -2493,21 +2478,6 @@ svg {
 .interp-track::after {
   right: -2px;
   border-left: 10px solid #6ee8ff;
-}
-
-.interp-knob {
-  position: absolute;
-  top: clamp(80px, 29%, 98px);
-  left: 44%;
-  z-index: 4;
-  width: 18px;
-  height: 18px;
-  border: 2px solid rgba(230, 250, 255, 0.94);
-  border-radius: 999px;
-  background: #6ee8ff;
-  box-shadow: 0 0 18px rgba(110, 232, 255, 0.72);
-  transform: translate(-50%, -50%);
-  animation: interpSlide 6s linear infinite;
 }
 
 .interp-sample {
