@@ -2550,6 +2550,227 @@ svg {
   }
 }
 
+.discrete-panel-label,
+.discrete-axis-label,
+.mask-signal-label,
+.duo-time-label {
+  letter-spacing: 0;
+}
+
+.discrete-panel-label {
+  fill: #9beeff;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.discrete-axis-label {
+  fill: var(--quiet);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.discrete-token-pill,
+.duo-station-frame,
+.duo-options rect,
+.discrete-summary-chip rect {
+  stroke-width: 1.6;
+}
+
+.discrete-token-pill {
+  fill: rgba(7, 21, 45, 0.86);
+  stroke: rgba(246, 251, 255, 0.2);
+}
+
+.token-pill-muted {
+  fill: rgba(246, 251, 255, 0.07);
+  stroke: rgba(246, 251, 255, 0.24);
+}
+
+.token-pill-blue {
+  fill: rgba(110, 232, 255, 0.13);
+  stroke: rgba(110, 232, 255, 0.5);
+}
+
+.token-pill-orange {
+  fill: rgba(255, 211, 162, 0.14);
+  stroke: rgba(255, 211, 162, 0.52);
+}
+
+.token-pill-green {
+  fill: rgba(181, 240, 124, 0.14);
+  stroke: rgba(181, 240, 124, 0.52);
+}
+
+.token-pill-mask {
+  fill: rgba(184, 107, 255, 0.15);
+  stroke: rgba(184, 107, 255, 0.56);
+}
+
+.token-pill-row text,
+.duo-token-text,
+.duo-options text,
+.discrete-summary-chip text {
+  fill: var(--ink);
+  font-size: 16px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.duo-options text,
+.discrete-summary-chip text {
+  font-size: 12px;
+}
+
+.discrete-arrow,
+.simplex-local-gradient,
+.duo-soft-path,
+.duo-time-rail,
+.mask-signal-bracket {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.discrete-arrow-soft,
+.simplex-local-gradient,
+.duo-soft-path {
+  stroke: #6ee8ff;
+  stroke-width: 4;
+  stroke-dasharray: 9 10;
+  filter: drop-shadow(0 0 12px rgba(110, 232, 255, 0.22));
+  animation: distillDash 7s linear infinite;
+}
+
+.discrete-arrow-copy {
+  stroke: #b5f07c;
+  stroke-width: 4;
+  stroke-dasharray: 7 9;
+  animation: distillDash 7s linear infinite;
+}
+
+.discrete-arrow-signal {
+  stroke: #ffd3a2;
+  stroke-width: 4.2;
+  stroke-dasharray: 9 10;
+  filter: drop-shadow(0 0 12px rgba(255, 211, 162, 0.2));
+  animation: distillDash 6.5s linear infinite;
+}
+
+.signal-lower {
+  opacity: 0.58;
+  animation-direction: reverse;
+}
+
+.soft-simplex-face {
+  fill: rgba(110, 232, 255, 0.09);
+  stroke: rgba(110, 232, 255, 0.52);
+  stroke-width: 2.2;
+}
+
+.soft-simplex-grid {
+  fill: none;
+  stroke: rgba(246, 251, 255, 0.16);
+  stroke-width: 1.2;
+}
+
+.simplex-corner circle {
+  fill: rgba(2, 8, 24, 0.9);
+  stroke: #ffd3a2;
+  stroke-width: 2.4;
+}
+
+.simplex-corner text {
+  fill: #ffd3a2;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.simplex-soft-state {
+  fill: #6ee8ff;
+  stroke: rgba(230, 250, 255, 0.95);
+  stroke-width: 2.2;
+  filter: drop-shadow(0 0 16px rgba(110, 232, 255, 0.62));
+  animation: simplexBreath 2.8s ease-in-out infinite;
+}
+
+.discrete-summary-chip rect {
+  fill: rgba(4, 13, 31, 0.82);
+}
+
+.chip-blue rect {
+  stroke: rgba(110, 232, 255, 0.5);
+}
+
+.chip-blue text {
+  fill: #9beeff;
+}
+
+.chip-green rect {
+  stroke: rgba(181, 240, 124, 0.5);
+}
+
+.chip-green text {
+  fill: #b5f07c;
+}
+
+.chip-orange rect {
+  stroke: rgba(255, 211, 162, 0.54);
+}
+
+.chip-orange text {
+  fill: #ffd3a2;
+}
+
+.mask-equals {
+  fill: #b5f07c;
+  font-size: 26px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.mask-signal-bracket {
+  stroke: #ffd3a2;
+  stroke-width: 3.2;
+}
+
+.mask-signal-label {
+  fill: #ffd3a2;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.duo-time-rail {
+  stroke: rgba(246, 251, 255, 0.18);
+  stroke-width: 2;
+}
+
+.duo-soft-path {
+  stroke-width: 4.4;
+}
+
+.duo-station-frame {
+  fill: rgba(2, 8, 24, 0.5);
+  stroke: rgba(246, 251, 255, 0.12);
+}
+
+.duo-time-label {
+  fill: var(--quiet);
+  font-size: 14px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.duo-options rect {
+  fill: rgba(246, 251, 255, 0.06);
+  stroke: rgba(246, 251, 255, 0.18);
+}
+
+.duo-options text {
+  fill: var(--muted);
+  font-size: 10.5px;
+}
+
 .blog-figure {
   min-width: 0;
   margin: 32px 0;
@@ -2812,6 +3033,16 @@ svg {
   .factorization-visual,
   .blog-figure-grid {
     grid-template-columns: 1fr;
+  }
+
+  .distill-map-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .distill-map-head strong {
+    text-align: left;
   }
 
   .factorization-card-wide {
