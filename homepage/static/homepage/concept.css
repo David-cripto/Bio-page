@@ -2101,12 +2101,19 @@ svg {
   stroke: #b86bff;
 }
 
-.sequence-prior-label,
 .sequence-output-label {
   fill: var(--muted);
   font-size: 14px;
   font-weight: 800;
   text-anchor: middle;
+}
+
+.sequence-prior-label {
+  fill: #b5f07c;
+  font-size: 24px;
+  font-weight: 900;
+  text-anchor: middle;
+  filter: drop-shadow(0 0 12px rgba(181, 240, 124, 0.36));
 }
 
 .sequence-sentence-track {
