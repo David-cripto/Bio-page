@@ -1699,7 +1699,8 @@ svg {
   stroke-width: 3;
 }
 
-.consistency-callouts {
+.consistency-callouts,
+.distribution-callouts {
   pointer-events: none;
 }
 
