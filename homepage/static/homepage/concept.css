@@ -2458,6 +2458,7 @@ svg {
   --interp-size: clamp(92px, 25cqw, 128px);
   --interp-half-size: clamp(46px, 12.5cqw, 64px);
   --interp-top: 34px;
+  --interp-duration: 16s;
 
   position: relative;
   overflow: hidden;
@@ -2538,7 +2539,7 @@ svg {
   left: var(--interp-inset);
   z-index: 3;
   width: var(--interp-size);
-  animation: interpSlide 6s linear infinite;
+  animation: interpSlide var(--interp-duration) linear infinite;
 }
 
 .interp-tether {
@@ -2559,7 +2560,7 @@ svg {
   position: absolute;
   inset: 0;
   opacity: 0;
-  animation: interpCatBlend 6s linear infinite;
+  animation: interpCatBlend var(--interp-duration) linear infinite;
 }
 
 .token-state-card {
