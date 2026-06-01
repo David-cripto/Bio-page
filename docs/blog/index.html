@@ -715,34 +715,89 @@
             \min_f \mathcal{L}(f,p_\theta).
           \]
         </div>
-        <div class="contrast-visual" aria-label="Teacher fake contrast visualization">
-          <div class="contrast-lane">
-            <div class="contrast-card contrast-card-teacher">
-              <span>Frozen teacher</span>
-              <strong>\(f^\star\)</strong>
-              <p>trained on real data</p>
-            </div>
-            <div class="contrast-arrow">scores</div>
-            <div class="contrast-card contrast-card-sample">
-              <span>Student sample</span>
-              <strong>\(p_\theta\)</strong>
-              <p>fast generator distribution</p>
-            </div>
-          </div>
-          <div class="contrast-lane">
-            <div class="contrast-card contrast-card-fake">
-              <span>Fake model</span>
-              <strong>\(f\)</strong>
-              <p>trained on student samples</p>
-            </div>
-            <div class="contrast-arrow">contrasts</div>
-            <div class="contrast-card contrast-card-loss">
-              <span>Loss gap</span>
-              <strong>\(\mathcal{L}(f^\star)-\mathcal{L}(f)\)</strong>
-              <p>student update signal</p>
-            </div>
-          </div>
-        </div>
+        <figure class="inverse-contrast-visual" aria-label="Inverse distillation score contrast in a two-dimensional toy space">
+          <svg class="distill-svg inverse-contrast-svg" viewBox="0 0 900 360" role="img" aria-labelledby="inverse-contrast-title inverse-contrast-desc">
+            <title id="inverse-contrast-title">Inverse distillation compares a frozen teacher with a fake model</title>
+            <desc id="inverse-contrast-desc">A student distribution is pushed away from its fake-model density and toward the teacher-supported target distribution.</desc>
+            <defs>
+              <marker id="inverseUpdateArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                <path d="M1,1 L6,3.5 L1,6 Z" fill="#ffd3a2" />
+              </marker>
+              <marker id="inverseTeacherArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                <path d="M1,1 L6,3.5 L1,6 Z" fill="#6ee8ff" />
+              </marker>
+              <radialGradient id="inverseFakeGlow" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="#ffd3a2" stop-opacity="0.48" />
+                <stop offset="100%" stop-color="#eb7a50" stop-opacity="0.04" />
+              </radialGradient>
+              <radialGradient id="inverseTargetGlow" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="#b5f07c" stop-opacity="0.5" />
+                <stop offset="100%" stop-color="#6ee8ff" stop-opacity="0.04" />
+              </radialGradient>
+            </defs>
+            <rect class="distill-map-window" x="24" y="28" width="852" height="292" rx="22" />
+            <g class="inverse-density-fake">
+              <ellipse cx="246" cy="218" rx="154" ry="76" transform="rotate(14 246 218)" />
+              <ellipse cx="246" cy="218" rx="100" ry="47" transform="rotate(14 246 218)" />
+              <ellipse cx="246" cy="218" rx="52" ry="24" transform="rotate(14 246 218)" />
+            </g>
+            <g class="inverse-density-target">
+              <ellipse cx="662" cy="156" rx="178" ry="90" transform="rotate(-11 662 156)" />
+              <ellipse cx="662" cy="156" rx="118" ry="58" transform="rotate(-11 662 156)" />
+              <ellipse cx="662" cy="156" rx="62" ry="30" transform="rotate(-11 662 156)" />
+            </g>
+            <g class="inverse-fake-field">
+              <ellipse cx="246" cy="218" rx="122" ry="56" transform="rotate(14 246 218)" />
+              <path d="M286 183 C325 170 367 164 411 170" />
+              <path d="M297 242 C348 237 398 232 448 225" />
+            </g>
+            <g class="inverse-teacher-field">
+              <ellipse cx="662" cy="156" rx="138" ry="70" transform="rotate(-13 662 156)" />
+              <path d="M548 156 C590 118 655 101 724 123" marker-end="url(#inverseTeacherArrow)" />
+              <path d="M584 205 C641 188 704 183 759 196" marker-end="url(#inverseTeacherArrow)" />
+            </g>
+            <g class="inverse-update-arrows">
+              <path d="M245 182 C355 101 492 83 604 125" marker-end="url(#inverseUpdateArrow)" />
+              <path d="M213 222 C356 165 492 142 629 151" marker-end="url(#inverseUpdateArrow)" />
+              <path d="M293 252 C425 238 532 210 666 194" marker-end="url(#inverseUpdateArrow)" />
+            </g>
+            <g class="inverse-student-particles">
+              <circle cx="150" cy="212" r="7" />
+              <circle cx="203" cy="186" r="7" />
+              <circle cx="245" cy="182" r="7" />
+              <circle cx="213" cy="222" r="7" />
+              <circle cx="293" cy="252" r="7" />
+              <circle cx="282" cy="214" r="7" />
+            </g>
+            <g class="inverse-target-particles">
+              <circle cx="604" cy="125" r="7" />
+              <circle cx="656" cy="145" r="7" />
+              <circle cx="719" cy="136" r="7" />
+              <circle cx="617" cy="186" r="7" />
+              <circle cx="692" cy="210" r="7" />
+              <circle cx="754" cy="189" r="7" />
+              <circle cx="737" cy="107" r="7" />
+            </g>
+            <g class="inverse-contrast-callouts" aria-hidden="true">
+              <g class="plot-callout plot-callout-orange" transform="translate(70 84)">
+                <rect class="plot-callout-bg" width="151" height="27" rx="8" />
+                <text x="14" y="18">student distribution p<tspan baseline-shift="sub" font-size="8">&theta;</tspan></text>
+              </g>
+              <g class="plot-callout plot-callout-orange" transform="translate(318 266)">
+                <rect class="plot-callout-bg" width="84" height="27" rx="8" />
+                <text x="14" y="18">fake f</text>
+              </g>
+              <g class="plot-callout plot-callout-blue" transform="translate(548 69)">
+                <rect class="plot-callout-bg" width="117" height="27" rx="8" />
+                <text x="14" y="18">teacher f<tspan baseline-shift="super" font-size="8">*</tspan></text>
+              </g>
+              <g class="plot-callout plot-callout-green" transform="translate(648 34)">
+                <rect class="plot-callout-bg" width="151" height="27" rx="8" />
+                <text x="14" y="18">target distribution p<tspan baseline-shift="super" font-size="8">*</tspan></text>
+              </g>
+            </g>
+          </svg>
+        </figure>
         <p>
           If the inverse problem is solved perfectly, the generator recovers the same data
           distribution that produced the teacher. This inverse-distillation line started from
