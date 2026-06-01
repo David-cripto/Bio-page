@@ -2303,6 +2303,16 @@ svg {
   gap: 16px;
 }
 
+.discrete-single-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.discrete-compact-map .discrete-map-panel {
+  max-width: 780px;
+  margin: 0 auto;
+  width: 100%;
+}
+
 .discrete-map-panel {
   min-width: 0;
   padding: 18px;
