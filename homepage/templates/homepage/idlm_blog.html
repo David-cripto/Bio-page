@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260601-sequence-map-compact-consistent-colors">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260601-sequence-map-compact-consistent-colors-clean-simplex">
 </head>
 <body>
   <main class="blog-shell">
@@ -1045,7 +1045,7 @@
                 <span>Simplex relaxation</span>
                 <strong>G_theta outputs probabilities</strong>
               </div>
-              <svg class="distill-svg discrete-svg" viewBox="0 0 760 270" role="img" aria-labelledby="simplex-relax-title simplex-relax-desc">
+              <svg class="distill-svg discrete-svg" viewBox="0 0 760 220" role="img" aria-labelledby="simplex-relax-title simplex-relax-desc">
                 <title id="simplex-relax-title">The student generator outputs a probability vector on the simplex</title>
                 <desc id="simplex-relax-desc">A latent input goes through the student generator. Instead of sampling one token during training, the generator outputs a horizontal vector of token probabilities that sums to one, and the same vector appears as a point inside the probability simplex.</desc>
                 <defs>
@@ -1053,43 +1053,39 @@
                     <path d="M1,1 L7,4 L1,7 Z" fill="#6ee8ff" />
                   </marker>
                 </defs>
-                <rect class="distill-map-window" x="24" y="26" width="712" height="188" rx="22" />
-                <g class="simplex-pipeline" transform="translate(54 76)">
-                  <text class="discrete-panel-label" x="0" y="-18">student output during training</text>
-                  <g class="simplex-input-node token-pill-row" transform="translate(0 22)">
+                <rect class="distill-map-window" x="24" y="26" width="712" height="144" rx="22" />
+                <g class="simplex-pipeline" transform="translate(54 62)">
+                  <g class="simplex-input-node token-pill-row" transform="translate(0 20)">
                     <rect class="discrete-token-pill token-pill-muted" width="70" height="38" rx="12" />
                     <text x="35" y="25">&epsilon;</text>
                   </g>
-                  <path class="simplex-flow-line" d="M80 41 L118 41" marker-end="url(#simplexFlowArrow)" />
-                  <g class="simplex-generator-node" transform="translate(132 0)">
-                    <rect width="116" height="82" rx="18" />
-                    <text class="simplex-generator-main" x="58" y="39">G<tspan baseline-shift="sub" font-size="12">&theta;</tspan></text>
-                    <text class="simplex-generator-sub" x="58" y="63">generator</text>
+                  <path class="simplex-flow-line" d="M80 39 L122 39" marker-end="url(#simplexFlowArrow)" />
+                  <g class="simplex-generator-node" transform="translate(138 8)">
+                    <rect width="86" height="62" rx="17" />
+                    <text class="simplex-generator-main" x="43" y="39">G<tspan baseline-shift="sub" font-size="12">&theta;</tspan></text>
                   </g>
-                  <path class="simplex-flow-line" d="M260 41 L298 41" marker-end="url(#simplexFlowArrow)" />
-                  <g class="simplex-vector-card" transform="translate(312 -4)">
-                    <rect width="222" height="90" rx="18" />
-                    <text class="simplex-vector-title" x="111" y="25">G<tspan baseline-shift="sub" font-size="10">&theta;</tspan>(&epsilon;) = p</text>
-                    <g class="simplex-prob-chip prob-chip-cat" transform="translate(16 38)">
+                  <path class="simplex-flow-line" d="M238 39 L280 39" marker-end="url(#simplexFlowArrow)" />
+                  <g class="simplex-vector-card" transform="translate(294 6)">
+                    <rect width="222" height="66" rx="18" />
+                    <g class="simplex-prob-chip prob-chip-cat" transform="translate(16 16)">
                       <rect width="58" height="34" rx="10" />
                       <text x="29" y="14">cat</text>
                       <text class="simplex-prob-value" x="29" y="29">0.16</text>
                     </g>
-                    <g class="simplex-prob-chip prob-chip-the" transform="translate(82 38)">
+                    <g class="simplex-prob-chip prob-chip-the" transform="translate(82 16)">
                       <rect width="58" height="34" rx="10" />
                       <text x="29" y="14">the</text>
                       <text class="simplex-prob-value" x="29" y="29">0.68</text>
                     </g>
-                    <g class="simplex-prob-chip prob-chip-mat" transform="translate(148 38)">
+                    <g class="simplex-prob-chip prob-chip-mat" transform="translate(148 16)">
                       <rect width="58" height="34" rx="10" />
                       <text x="29" y="14">mat</text>
                       <text class="simplex-prob-value" x="29" y="29">0.16</text>
                     </g>
-                    <text class="simplex-vector-note" x="111" y="82">sum p_i = 1</text>
                   </g>
-                  <path class="simplex-flow-line" d="M546 41 L590 41" marker-end="url(#simplexFlowArrow)" />
+                  <path class="simplex-flow-line" d="M528 39 L586 39" marker-end="url(#simplexFlowArrow)" />
                 </g>
-                <g class="simplex-diagram simplex-inline-diagram" transform="translate(590 74)">
+                <g class="simplex-diagram simplex-inline-diagram" transform="translate(590 58)">
                   <polygon class="soft-simplex-face" points="40,102 86,18 134,102" />
                   <path class="soft-simplex-grid" d="M55 72 L119 72 M69 46 L104 46 M64 58 L86 25 M111 58 L91 25 M69 102 L108 32 M106 102 L69 32" />
                   <g class="simplex-corner" transform="translate(40 102)">
@@ -1104,12 +1100,7 @@
                     <circle r="9" />
                     <text x="12" y="24">mat</text>
                   </g>
-                  <circle class="simplex-soft-state" cx="87" cy="58" r="12" />
-                  <text class="simplex-point-label" x="103" y="62">same p</text>
-                </g>
-                <g class="discrete-summary-chip chip-blue" transform="translate(216 174)">
-                  <rect width="296" height="30" rx="10" />
-                  <text x="148" y="20">soft probabilities move continuously</text>
+                  <circle class="simplex-soft-state" cx="87" cy="58" r="8" />
                 </g>
               </svg>
             </div>
