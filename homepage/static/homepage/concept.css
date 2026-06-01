@@ -1879,13 +1879,13 @@ svg {
 }
 
 .inverse-density-fake ellipse {
-  fill: url("#inverseFakeGlow");
+  fill: rgba(255, 211, 162, 0.16);
   stroke: rgba(255, 211, 162, 0.34);
   stroke-width: 2;
 }
 
 .inverse-density-target ellipse {
-  fill: url("#inverseTargetGlow");
+  fill: rgba(181, 240, 124, 0.14);
   stroke: rgba(181, 240, 124, 0.34);
   stroke-width: 2;
 }
