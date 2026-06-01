@@ -2623,6 +2623,10 @@ svg {
   text-transform: uppercase;
 }
 
+.latent-hub.sequence-latent-points text {
+  text-transform: none;
+}
+
 .latent-rays path {
   fill: none;
   stroke: #b5f07c;
