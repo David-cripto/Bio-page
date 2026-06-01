@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-prior-label-green-interp-endpoint-match">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-prior-label-green-interp-endpoint-match-pseudocode-algorithms">
 </head>
 <body>
   <main class="blog-shell">
@@ -1030,74 +1030,71 @@
                 <span>Simplex relaxation</span>
                 <strong>G_theta outputs probabilities</strong>
               </div>
-              <svg class="distill-svg discrete-svg" viewBox="0 0 640 430" role="img" aria-labelledby="simplex-relax-title simplex-relax-desc">
+              <svg class="distill-svg discrete-svg" viewBox="0 0 760 270" role="img" aria-labelledby="simplex-relax-title simplex-relax-desc">
                 <title id="simplex-relax-title">The student generator outputs a probability vector on the simplex</title>
-                <desc id="simplex-relax-desc">A latent input goes through the student generator. Instead of sampling one token during training, the generator outputs a vector of token probabilities that sums to one, and the same vector appears as a point inside the probability simplex.</desc>
+                <desc id="simplex-relax-desc">A latent input goes through the student generator. Instead of sampling one token during training, the generator outputs a horizontal vector of token probabilities that sums to one, and the same vector appears as a point inside the probability simplex.</desc>
                 <defs>
                   <marker id="simplexFlowArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
                     <path d="M1,1 L7,4 L1,7 Z" fill="#6ee8ff" />
                   </marker>
                 </defs>
-                <rect class="distill-map-window" x="24" y="26" width="592" height="358" rx="22" />
-                <g class="simplex-pipeline" transform="translate(54 62)">
+                <rect class="distill-map-window" x="24" y="26" width="712" height="188" rx="22" />
+                <g class="simplex-pipeline" transform="translate(54 76)">
                   <text class="discrete-panel-label" x="0" y="-18">student output during training</text>
-                  <g class="simplex-input-node token-pill-row" transform="translate(0 28)">
-                    <rect class="discrete-token-pill token-pill-muted" width="78" height="42" rx="13" />
-                    <text x="39" y="27">&epsilon;</text>
+                  <g class="simplex-input-node token-pill-row" transform="translate(0 22)">
+                    <rect class="discrete-token-pill token-pill-muted" width="70" height="38" rx="12" />
+                    <text x="35" y="25">&epsilon;</text>
                   </g>
-                  <path class="simplex-flow-line" d="M88 49 L126 49" marker-end="url(#simplexFlowArrow)" />
-                  <g class="simplex-generator-node" transform="translate(140 8)">
-                    <rect width="122" height="82" rx="18" />
-                    <text class="simplex-generator-main" x="61" y="39">G<tspan baseline-shift="sub" font-size="12">&theta;</tspan></text>
-                    <text class="simplex-generator-sub" x="61" y="63">generator</text>
+                  <path class="simplex-flow-line" d="M80 41 L118 41" marker-end="url(#simplexFlowArrow)" />
+                  <g class="simplex-generator-node" transform="translate(132 0)">
+                    <rect width="116" height="82" rx="18" />
+                    <text class="simplex-generator-main" x="58" y="39">G<tspan baseline-shift="sub" font-size="12">&theta;</tspan></text>
+                    <text class="simplex-generator-sub" x="58" y="63">generator</text>
                   </g>
-                  <path class="simplex-flow-line" d="M274 49 L316 49" marker-end="url(#simplexFlowArrow)" />
-                  <g class="simplex-vector-card" transform="translate(332 0)">
-                    <rect width="222" height="142" rx="18" />
-                    <text class="simplex-vector-title" x="111" y="28">G<tspan baseline-shift="sub" font-size="10">&theta;</tspan>(&epsilon;) = p in simplex</text>
-                    <g class="simplex-prob-row" transform="translate(18 49)">
-                      <text x="0" y="12">cat</text>
-                      <rect class="simplex-prob-track" x="44" y="0" width="112" height="14" rx="7" />
-                      <rect class="simplex-prob-fill prob-cat" x="44" y="0" width="28" height="14" rx="7" />
-                      <text class="simplex-prob-value" x="181" y="12">0.16</text>
+                  <path class="simplex-flow-line" d="M260 41 L298 41" marker-end="url(#simplexFlowArrow)" />
+                  <g class="simplex-vector-card" transform="translate(312 -4)">
+                    <rect width="222" height="90" rx="18" />
+                    <text class="simplex-vector-title" x="111" y="25">G<tspan baseline-shift="sub" font-size="10">&theta;</tspan>(&epsilon;) = p</text>
+                    <g class="simplex-prob-chip prob-chip-cat" transform="translate(16 38)">
+                      <rect width="58" height="34" rx="10" />
+                      <text x="29" y="14">cat</text>
+                      <text class="simplex-prob-value" x="29" y="29">0.16</text>
                     </g>
-                    <g class="simplex-prob-row" transform="translate(18 78)">
-                      <text x="0" y="12">the</text>
-                      <rect class="simplex-prob-track" x="44" y="0" width="112" height="14" rx="7" />
-                      <rect class="simplex-prob-fill prob-the" x="44" y="0" width="76" height="14" rx="7" />
-                      <text class="simplex-prob-value" x="181" y="12">0.68</text>
+                    <g class="simplex-prob-chip prob-chip-the" transform="translate(82 38)">
+                      <rect width="58" height="34" rx="10" />
+                      <text x="29" y="14">the</text>
+                      <text class="simplex-prob-value" x="29" y="29">0.68</text>
                     </g>
-                    <g class="simplex-prob-row" transform="translate(18 107)">
-                      <text x="0" y="12">mat</text>
-                      <rect class="simplex-prob-track" x="44" y="0" width="112" height="14" rx="7" />
-                      <rect class="simplex-prob-fill prob-mat" x="44" y="0" width="28" height="14" rx="7" />
-                      <text class="simplex-prob-value" x="181" y="12">0.16</text>
+                    <g class="simplex-prob-chip prob-chip-mat" transform="translate(148 38)">
+                      <rect width="58" height="34" rx="10" />
+                      <text x="29" y="14">mat</text>
+                      <text class="simplex-prob-value" x="29" y="29">0.16</text>
                     </g>
-                    <text class="simplex-vector-note" x="111" y="133">0.16 + 0.68 + 0.16 = 1</text>
+                    <text class="simplex-vector-note" x="111" y="82">sum p_i = 1</text>
                   </g>
+                  <path class="simplex-flow-line" d="M546 41 L590 41" marker-end="url(#simplexFlowArrow)" />
                 </g>
-                <g class="simplex-diagram" transform="translate(364 252)">
-                  <polygon class="soft-simplex-face" points="58,78 118,0 182,78" />
-                  <path class="soft-simplex-grid" d="M77 55 L162 55 M95 32 L141 32 M88 43 L118 7 M150 43 L123 7 M96 78 L146 12 M144 78 L96 12" />
-                  <g class="simplex-corner" transform="translate(58 78)">
+                <g class="simplex-diagram simplex-inline-diagram" transform="translate(590 74)">
+                  <polygon class="soft-simplex-face" points="40,102 86,18 134,102" />
+                  <path class="soft-simplex-grid" d="M55 72 L119 72 M69 46 L104 46 M64 58 L86 25 M111 58 L91 25 M69 102 L108 32 M106 102 L69 32" />
+                  <g class="simplex-corner" transform="translate(40 102)">
                     <circle r="9" />
-                    <text x="-38" y="27">cat</text>
+                    <text x="-34" y="24">cat</text>
                   </g>
-                  <g class="simplex-corner" transform="translate(118 0)">
+                  <g class="simplex-corner" transform="translate(86 18)">
                     <circle r="9" />
                     <text x="-20" y="-14">the</text>
                   </g>
-                  <g class="simplex-corner" transform="translate(182 78)">
+                  <g class="simplex-corner" transform="translate(134 102)">
                     <circle r="9" />
-                    <text x="15" y="27">mat</text>
+                    <text x="12" y="24">mat</text>
                   </g>
-                  <circle class="simplex-soft-state" cx="119" cy="37" r="13" />
-                  <text class="simplex-point-label" x="138" y="42">same p</text>
+                  <circle class="simplex-soft-state" cx="87" cy="58" r="12" />
+                  <text class="simplex-point-label" x="103" y="62">same p</text>
                 </g>
-                <path class="simplex-flow-line simplex-vector-to-point" d="M488 208 C502 232 501 252 484 276" marker-end="url(#simplexFlowArrow)" />
-                <g class="discrete-summary-chip chip-blue" transform="translate(68 334)">
-                  <rect width="278" height="30" rx="10" />
-                  <text x="139" y="20">no hard token is sampled in this path</text>
+                <g class="discrete-summary-chip chip-blue" transform="translate(216 174)">
+                  <rect width="296" height="30" rx="10" />
+                  <text x="148" y="20">soft probabilities move continuously</text>
                 </g>
               </svg>
             </div>
@@ -1461,48 +1458,46 @@
               <span>Algorithm 1</span>
               <strong>IDLM Training</strong>
             </div>
-            <pre class="algorithm-code" aria-label="IDLM training pseudocode"><code>def train_idlm(teacher, fake_model, generator, data):
-    # The teacher is frozen. Only fake_model and generator are trained.
-    while not converged:
-        x0 = sample(data)                  # clean text sequence
-        t = uniform(0.0, 1.0)              # diffusion time
-        xt = teacher.forward_noise(x0, t)  # noised state from q_t
+            <pre class="algorithm-code" aria-label="IDLM training pseudocode"><code><span class="alg-key">Algorithm</span> Train-IDLM(<span class="alg-teacher">f_star</span>, <span class="alg-fake">f</span>, <span class="alg-student">G_theta</span>, data)
+<span class="alg-comment">// f_star is frozen; f and G_theta are optimized.</span>
+<span class="alg-key">repeat</span>
+    x0 <span class="alg-op">&larr;</span> sample(data)              <span class="alg-comment">// clean sequence</span>
+    t  <span class="alg-op">&larr;</span> Uniform(0, 1)             <span class="alg-comment">// diffusion time</span>
+    xt <span class="alg-op">&larr;</span> q_t(. | x0)               <span class="alg-comment">// forward noising</span>
 
-        x_hat = generator(xt, t)           # student's clean prediction
+    x_hat <span class="alg-op">&larr;</span> <span class="alg-student">G_theta</span>(xt, t)        <span class="alg-comment">// student proposal</span>
 
-        # Step A: fit the fake model to current student samples.
-        fake_loss = sequence_diffusion_loss(fake_model, x_hat)
-        update(fake_model, fake_loss)
+    <span class="alg-comment">// fake model: learn the student's current samples</span>
+    <span class="alg-loss">L_fake</span> <span class="alg-op">&larr;</span> L_seq(<span class="alg-fake">f</span>, x_hat)
+    update <span class="alg-fake">f</span> using <span class="alg-loss">L_fake</span>
 
-        # Step B: update the student with the teacher-minus-fake gap.
-        teacher_loss = sequence_diffusion_loss(teacher, x_hat)
-        fake_score = stop_gradient(
-            sequence_diffusion_loss(fake_model, x_hat)
-        )
-        generator_loss = teacher_loss - fake_score
-        update(generator, generator_loss)</code></pre>
+    <span class="alg-comment">// student: prefer teacher-supported samples</span>
+    <span class="alg-loss">L_gap</span> <span class="alg-op">&larr;</span> L_seq(<span class="alg-teacher">f_star</span>, x_hat)
+             <span class="alg-op">-</span> stop_grad(L_seq(<span class="alg-fake">f</span>, x_hat))
+    update <span class="alg-student">G_theta</span> using <span class="alg-loss">L_gap</span>
+<span class="alg-key">until</span> convergence</code></pre>
           </div>
           <div class="algorithm-panel">
             <div class="algorithm-head">
               <span>Algorithm 2</span>
               <strong>Few-step Sampling</strong>
             </div>
-            <pre class="algorithm-code" aria-label="IDLM sampling pseudocode"><code>def sample_idlm(generator, process, num_steps):
-    # A short grid replaces the long teacher denoising chain.
-    times = make_reverse_grid(num_steps)   # e.g. 1.0 -> 0.0
-    x = process.sample_terminal_state()    # fully noised text state
+            <pre class="algorithm-code" aria-label="IDLM sampling pseudocode"><code><span class="alg-key">Algorithm</span> Sample-IDLM(<span class="alg-student">G_theta</span>, process, K)
+<span class="alg-comment">// A short grid replaces the long teacher chain.</span>
+tau_K, ..., tau_0 <span class="alg-op">&larr;</span> reverse_grid(K)
+x_K <span class="alg-op">&larr;</span> terminal_noise(process)
 
-    for t_high, t_low in zip(times[:-1], times[1:]):
-        x_hat = generator(x, t_high)       # predict the clean sequence
+<span class="alg-key">for</span> k = K, ..., 1 <span class="alg-key">do</span>
+    x0_hat <span class="alg-op">&larr;</span> <span class="alg-student">G_theta</span>(x_k, tau_k)
+             <span class="alg-comment">// predicted clean sequence</span>
 
-        x = process.reverse_step(
-            x_t=x,
-            x0_hat=x_hat,
-            from_t=t_high,
-            to_t=t_low,
-        )                                  # MDLM mask step or Duo uniform step
+    x_{k-1} <span class="alg-op">&larr;</span> reverse_step(
+        x_k, x0_hat, tau_k <span class="alg-op">&rarr;</span> tau_{k-1}
+    )
+             <span class="alg-comment">// MDLM mask step or Duo uniform step</span>
+<span class="alg-key">end for</span>
 
-    return process.decode(x)</code></pre>
+<span class="alg-key">return</span> decode(x_0)</code></pre>
           </div>
         </div>
         <p>

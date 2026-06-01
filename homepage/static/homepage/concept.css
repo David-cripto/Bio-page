@@ -1282,7 +1282,7 @@ svg {
 
 .algorithm-explainer {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   margin: 26px 0 24px;
 }
@@ -1322,17 +1322,53 @@ svg {
   border-radius: 6px;
   background: rgba(2, 8, 24, 0.68);
   color: #e7fcff;
-  font-size: 0.82rem;
-  line-height: 1.64;
+  font-size: 0.74rem;
+  line-height: 1.6;
   overflow-x: auto;
-  padding: 16px;
+  overflow-wrap: anywhere;
+  padding: 14px;
   tab-size: 4;
-  white-space: pre;
+  white-space: pre-wrap;
 }
 
 .algorithm-code code {
   color: inherit;
   font: inherit;
+}
+
+.alg-key {
+  color: #ffd3a2;
+  font-weight: 800;
+}
+
+.alg-teacher {
+  color: #94e2ff;
+  font-weight: 800;
+}
+
+.alg-fake {
+  color: #ff9f80;
+  font-weight: 800;
+}
+
+.alg-student {
+  color: #b8f48b;
+  font-weight: 800;
+}
+
+.alg-loss {
+  color: #f7c4ff;
+  font-weight: 800;
+}
+
+.alg-op {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.alg-comment {
+  color: #90a8c7;
+  font-style: italic;
 }
 
 .algorithm-steps {
@@ -3134,6 +3170,37 @@ svg {
 .simplex-prob-row .simplex-prob-value {
   fill: var(--quiet);
   text-anchor: end;
+}
+
+.simplex-prob-chip rect {
+  stroke-width: 1.2;
+}
+
+.simplex-prob-chip text {
+  fill: rgba(2, 8, 24, 0.88);
+  font-size: 10px;
+  font-weight: 900;
+  text-anchor: middle;
+}
+
+.simplex-prob-chip .simplex-prob-value {
+  fill: rgba(2, 8, 24, 0.74);
+  font-size: 11px;
+}
+
+.prob-chip-cat rect {
+  fill: rgba(181, 240, 124, 0.74);
+  stroke: rgba(181, 240, 124, 0.92);
+}
+
+.prob-chip-the rect {
+  fill: rgba(110, 232, 255, 0.78);
+  stroke: rgba(110, 232, 255, 0.96);
+}
+
+.prob-chip-mat rect {
+  fill: rgba(255, 211, 162, 0.78);
+  stroke: rgba(255, 211, 162, 0.96);
 }
 
 .simplex-prob-track {
