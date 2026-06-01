@@ -2147,26 +2147,8 @@ svg {
   fill: #6ee8ff;
 }
 
-.atom-green .sequence-epsilon-tag {
-  fill: #b5f07c;
-}
-
-.atom-purple .sequence-epsilon-tag {
-  fill: #b86bff;
-}
-
-.atom-blue .sequence-epsilon-tag {
-  fill: #6ee8ff;
-}
-
 .seq-token-slot {
   stroke-width: 1.2;
-}
-
-.sequence-epsilon-tag {
-  font-size: 13px;
-  font-weight: 800;
-  text-anchor: start;
 }
 
 .sequence-sentence-text {
