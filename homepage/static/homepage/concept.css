@@ -2303,9 +2303,10 @@ svg {
 }
 
 .inverse-contrast-visual {
-  max-width: 720px;
-  margin: 24px auto 28px;
-  padding: 14px;
+  width: 100%;
+  max-width: none;
+  margin: 28px 0 34px;
+  padding: 18px;
 }
 
 .inverse-contrast-svg {
