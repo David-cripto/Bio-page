@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-discrete-figure-redesign">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-discrete-figure-two-panel">
 </head>
 <body>
   <main class="blog-shell">
@@ -958,63 +958,6 @@
                 <g class="plot-callout plot-callout-orange" transform="translate(139 268)">
                   <rect class="plot-callout-bg" width="151" height="27" rx="8" />
                   <text x="14" y="18">gradient has no road</text>
-                </g>
-              </svg>
-            </div>
-            <div class="distill-map-panel language-transfer-panel">
-              <div class="distill-map-head">
-                <span>IDLM</span>
-                <strong>soft bridge for gradients</strong>
-              </div>
-              <svg class="distill-svg language-transfer-svg" viewBox="0 0 420 330" role="img" aria-labelledby="relax-space-title relax-space-desc">
-                <title id="relax-space-title">IDLM uses a relaxation to recover a gradient path</title>
-                <desc id="relax-space-desc">A soft simplex bridge lets gradients move through token distributions, while the corners remain hard token states supported by the teacher.</desc>
-                <defs>
-                  <marker id="relaxArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#b5f07c" />
-                  </marker>
-                  <marker id="relaxSoftArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#6ee8ff" />
-                  </marker>
-                </defs>
-                <rect class="distill-map-window" x="24" y="28" width="372" height="258" rx="22" />
-                <path class="token-simplex-face" d="M90 247 L329 247 L212 74 Z" />
-                <path class="token-simplex-grid" d="M132 247 L212 74 M174 247 L212 74 M216 247 L212 74 M258 247 L212 74 M90 247 L212 74 M329 247 L212 74" />
-                <g class="teacher-hard-support">
-                  <circle cx="90" cy="247" r="34" />
-                  <circle cx="329" cy="247" r="34" />
-                  <circle cx="212" cy="74" r="34" />
-                </g>
-                <g class="token-vertex token-vertex-a" transform="translate(90 247)">
-                  <circle r="20" />
-                  <text x="0" y="4">the</text>
-                </g>
-                <g class="token-vertex token-vertex-b" transform="translate(329 247)">
-                  <circle r="20" />
-                  <text x="0" y="4">cat</text>
-                </g>
-                <g class="token-vertex token-vertex-c" transform="translate(212 74)">
-                  <circle r="20" />
-                  <text x="0" y="4">mat</text>
-                </g>
-                <path class="relax-gradient-road" d="M112 232 C153 197 178 178 207 157 C237 136 264 109 212 94" marker-end="url(#relaxSoftArrow)" />
-                <path class="relax-gradient-road relax-gradient-road-alt" d="M205 180 C239 196 277 222 311 239" marker-end="url(#relaxArrow)" />
-                <circle class="token-soft-point" cx="205" cy="180" r="12" />
-                <circle class="relax-soft-ring" cx="205" cy="180" r="40" />
-                <g class="sequence-token-row relax-token-row" transform="translate(58 270)">
-                  <rect width="304" height="34" rx="11" />
-                  <text x="25" y="22">soft</text>
-                  <text x="87" y="22">valid</text>
-                  <text x="160" y="22">simplex</text>
-                  <text x="245" y="22">gradient</text>
-                </g>
-                <g class="plot-callout plot-callout-blue" transform="translate(43 52)">
-                  <rect class="plot-callout-bg" width="92" height="27" rx="8" />
-                  <text x="14" y="18">relaxation</text>
-                </g>
-                <g class="plot-callout plot-callout-green" transform="translate(246 52)">
-                  <rect class="plot-callout-bg" width="101" height="27" rx="8" />
-                  <text x="14" y="18">hard tokens</text>
                 </g>
               </svg>
             </div>
