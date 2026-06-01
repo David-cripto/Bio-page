@@ -846,6 +846,7 @@ svg {
 .sampling-visual,
 .token-scale-visual > div,
 .mixture-visual,
+.algorithm-panel,
 .inverse-flow > div,
 .distill-map-panel,
 .discrete-map-panel,
@@ -1277,6 +1278,93 @@ svg {
   color: var(--muted);
   font-size: 0.82rem;
   line-height: 1.68;
+}
+
+.algorithm-explainer {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 26px 0 24px;
+}
+
+.algorithm-panel {
+  min-width: 0;
+  padding: 18px;
+}
+
+.algorithm-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid rgba(94, 217, 255, 0.18);
+  padding-bottom: 12px;
+}
+
+.algorithm-head span {
+  color: #ffd3a2;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.algorithm-head strong {
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.35;
+  text-align: right;
+}
+
+.algorithm-steps {
+  display: grid;
+  gap: 12px;
+  margin: 16px 0 0;
+  padding: 0;
+  counter-reset: algorithm-step;
+  list-style: none;
+}
+
+.algorithm-steps li {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 10px 12px;
+  align-items: start;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.52;
+  counter-increment: algorithm-step;
+}
+
+.algorithm-steps li::before {
+  content: counter(algorithm-step, decimal-leading-zero);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 24px;
+  border: 1px solid rgba(255, 211, 162, 0.28);
+  color: #ffd3a2;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.algorithm-steps span {
+  min-width: 0;
+}
+
+.algorithm-steps code {
+  grid-column: 2;
+  justify-self: start;
+  max-width: 100%;
+  border: 1px solid rgba(94, 217, 255, 0.17);
+  border-radius: 6px;
+  background: rgba(2, 8, 24, 0.58);
+  color: #e7fcff;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  padding: 6px 8px;
 }
 
 .blog-equation {
@@ -3005,6 +3093,94 @@ svg {
   animation: simplexBreath 2.8s ease-in-out infinite;
 }
 
+.simplex-flow-line {
+  fill: none;
+  stroke: #6ee8ff;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 12px rgba(110, 232, 255, 0.2));
+}
+
+.simplex-generator-node rect,
+.simplex-vector-card > rect {
+  fill: rgba(2, 8, 24, 0.66);
+  stroke: rgba(110, 232, 255, 0.36);
+  stroke-width: 1.7;
+}
+
+.simplex-generator-main,
+.simplex-generator-sub,
+.simplex-vector-title,
+.simplex-vector-note,
+.simplex-prob-row text,
+.simplex-point-label {
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.simplex-generator-main {
+  fill: var(--ink);
+  font-size: 24px;
+  text-anchor: middle;
+}
+
+.simplex-generator-sub {
+  fill: var(--quiet);
+  font-size: 12px;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
+.simplex-vector-title {
+  fill: #9beeff;
+  font-size: 12px;
+  text-anchor: middle;
+}
+
+.simplex-vector-note {
+  fill: #b5f07c;
+  font-size: 11px;
+  text-anchor: middle;
+}
+
+.simplex-prob-row text {
+  fill: var(--ink);
+  font-size: 12px;
+}
+
+.simplex-prob-row .simplex-prob-value {
+  fill: var(--quiet);
+  text-anchor: end;
+}
+
+.simplex-prob-track {
+  fill: rgba(246, 251, 255, 0.08);
+  stroke: rgba(246, 251, 255, 0.12);
+  stroke-width: 1;
+}
+
+.simplex-prob-fill {
+  stroke: none;
+}
+
+.prob-cat {
+  fill: rgba(181, 240, 124, 0.72);
+}
+
+.prob-the {
+  fill: rgba(110, 232, 255, 0.78);
+}
+
+.prob-mat {
+  fill: rgba(255, 211, 162, 0.72);
+}
+
+.simplex-point-label {
+  fill: #9beeff;
+  font-size: 13px;
+}
+
 .discrete-summary-chip rect {
   fill: rgba(4, 13, 31, 0.82);
 }
@@ -3080,6 +3256,114 @@ svg {
 .duo-options text {
   fill: var(--muted);
   font-size: 10.5px;
+}
+
+.duo-gaussian-contours ellipse {
+  fill: rgba(110, 232, 255, 0.04);
+  stroke: rgba(110, 232, 255, 0.24);
+  stroke-width: 1.6;
+}
+
+.duo-gaussian-contours ellipse:nth-child(2) {
+  stroke: rgba(110, 232, 255, 0.34);
+}
+
+.duo-gaussian-contours ellipse:nth-child(3) {
+  stroke: rgba(255, 211, 162, 0.32);
+}
+
+.duo-gaussian-trace,
+.duo-map-arrow,
+.duo-simplex-soft-path,
+.duo-gradient-path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.duo-gaussian-trace {
+  stroke: #ffd3a2;
+  stroke-width: 3.4;
+  stroke-dasharray: 8 9;
+  filter: drop-shadow(0 0 12px rgba(255, 211, 162, 0.18));
+  animation: distillDash 7s linear infinite;
+}
+
+.duo-map-arrow,
+.duo-simplex-soft-path {
+  stroke: #6ee8ff;
+  stroke-width: 4.2;
+  stroke-dasharray: 9 10;
+  filter: drop-shadow(0 0 12px rgba(110, 232, 255, 0.22));
+  animation: distillDash 7s linear infinite;
+}
+
+.duo-gradient-path {
+  stroke: #ffd3a2;
+  stroke-width: 3.4;
+  stroke-dasharray: 8 11;
+  opacity: 0.82;
+  filter: drop-shadow(0 0 12px rgba(255, 211, 162, 0.18));
+  animation: distillDash 8s linear infinite reverse;
+}
+
+.duo-gaussian-point circle,
+.duo-simplex-point circle {
+  stroke: rgba(2, 8, 24, 0.9);
+  stroke-width: 2;
+}
+
+.duo-gaussian-point circle {
+  fill: #ffd3a2;
+}
+
+.duo-simplex-point circle {
+  fill: #6ee8ff;
+}
+
+.duo-gaussian-point text,
+.duo-simplex-point text,
+.duo-gradient-label {
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.duo-gaussian-point text {
+  fill: #ffd3a2;
+  font-size: 12px;
+}
+
+.duo-simplex-point text {
+  fill: #9beeff;
+  font-size: 12px;
+}
+
+.duo-softmax-node rect {
+  fill: rgba(2, 8, 24, 0.68);
+  stroke: rgba(110, 232, 255, 0.42);
+  stroke-width: 1.8;
+}
+
+.duo-softmax-main {
+  fill: var(--ink);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-anchor: middle;
+}
+
+.duo-softmax-sub {
+  fill: #9beeff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
+.duo-gradient-label {
+  fill: #ffd3a2;
+  font-size: 13px;
 }
 
 .blog-figure {
@@ -3338,6 +3622,7 @@ svg {
   .inverse-flow,
   .distillation-map-grid,
   .discrete-map-grid,
+  .algorithm-explainer,
   .method-grid,
   .metric-grid,
   .generation-animation-grid,
@@ -3383,6 +3668,7 @@ svg {
 
   .method-grid > div,
   .metric-card,
+  .algorithm-panel,
   .token-scale-visual > div,
   .intuition-strip > div {
     min-height: 0;

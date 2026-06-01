@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-shared-latent-centered-interp">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-shared-latent-centered-interp-final-algorithm">
 </head>
 <body>
   <main class="blog-shell">
@@ -127,6 +127,7 @@
             <li><a href="#discrete-practice">Discrete Non-Smoothness</a></li>
             <li><a href="#sequence-capacity">Sequence-Level Generative Capacity</a></li>
             <li><a href="#loss-intuition">Loss Intuition</a></li>
+            <li><a href="#final-algorithm">Final Algorithm</a></li>
           </ol>
         </li>
         <li>
@@ -1019,62 +1020,83 @@
             <div class="discrete-map-panel discrete-simplex-panel">
               <div class="distill-map-head">
                 <span>Simplex relaxation</span>
-                <strong>hard corner to soft point</strong>
+                <strong>G_theta outputs probabilities</strong>
               </div>
-              <svg class="distill-svg discrete-svg" viewBox="0 0 640 360" role="img" aria-labelledby="simplex-relax-title simplex-relax-desc">
-                <title id="simplex-relax-title">Simplex relaxation turns hard token corners into a soft differentiable point</title>
-                <desc id="simplex-relax-desc">Three hard token choices sit at simplex corners. During training the generator outputs one soft point inside the simplex, giving the loss a continuous direction to follow.</desc>
+              <svg class="distill-svg discrete-svg" viewBox="0 0 640 430" role="img" aria-labelledby="simplex-relax-title simplex-relax-desc">
+                <title id="simplex-relax-title">The student generator outputs a probability vector on the simplex</title>
+                <desc id="simplex-relax-desc">A latent input goes through the student generator. Instead of sampling one token during training, the generator outputs a vector of token probabilities that sums to one, and the same vector appears as a point inside the probability simplex.</desc>
                 <defs>
-                  <marker id="simplexSoftArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
+                  <marker id="simplexFlowArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
                     <path d="M1,1 L7,4 L1,7 Z" fill="#6ee8ff" />
                   </marker>
                 </defs>
-                <rect class="distill-map-window" x="24" y="26" width="592" height="288" rx="22" />
-                <g class="simplex-token-list" transform="translate(55 73)">
-                  <text class="discrete-panel-label" x="0" y="-22">one-hot token corners</text>
-                  <g class="token-pill-row" transform="translate(0 0)">
-                    <rect class="discrete-token-pill token-pill-muted" width="118" height="38" rx="12" />
-                    <text x="59" y="25">cat</text>
+                <rect class="distill-map-window" x="24" y="26" width="592" height="358" rx="22" />
+                <g class="simplex-pipeline" transform="translate(54 62)">
+                  <text class="discrete-panel-label" x="0" y="-18">student output during training</text>
+                  <g class="simplex-input-node token-pill-row" transform="translate(0 28)">
+                    <rect class="discrete-token-pill token-pill-muted" width="78" height="42" rx="13" />
+                    <text x="39" y="27">&epsilon;</text>
                   </g>
-                  <g class="token-pill-row" transform="translate(0 62)">
-                    <rect class="discrete-token-pill token-pill-muted" width="118" height="38" rx="12" />
-                    <text x="59" y="25">the</text>
+                  <path class="simplex-flow-line" d="M88 49 L126 49" marker-end="url(#simplexFlowArrow)" />
+                  <g class="simplex-generator-node" transform="translate(140 8)">
+                    <rect width="122" height="82" rx="18" />
+                    <text class="simplex-generator-main" x="61" y="39">G<tspan baseline-shift="sub" font-size="12">&theta;</tspan></text>
+                    <text class="simplex-generator-sub" x="61" y="63">generator</text>
                   </g>
-                  <g class="token-pill-row" transform="translate(0 124)">
-                    <rect class="discrete-token-pill token-pill-muted" width="118" height="38" rx="12" />
-                    <text x="59" y="25">mat</text>
+                  <path class="simplex-flow-line" d="M274 49 L316 49" marker-end="url(#simplexFlowArrow)" />
+                  <g class="simplex-vector-card" transform="translate(332 0)">
+                    <rect width="222" height="142" rx="18" />
+                    <text class="simplex-vector-title" x="111" y="28">G<tspan baseline-shift="sub" font-size="10">&theta;</tspan>(&epsilon;) = p in simplex</text>
+                    <g class="simplex-prob-row" transform="translate(18 49)">
+                      <text x="0" y="12">cat</text>
+                      <rect class="simplex-prob-track" x="44" y="0" width="112" height="14" rx="7" />
+                      <rect class="simplex-prob-fill prob-cat" x="44" y="0" width="28" height="14" rx="7" />
+                      <text class="simplex-prob-value" x="181" y="12">0.16</text>
+                    </g>
+                    <g class="simplex-prob-row" transform="translate(18 78)">
+                      <text x="0" y="12">the</text>
+                      <rect class="simplex-prob-track" x="44" y="0" width="112" height="14" rx="7" />
+                      <rect class="simplex-prob-fill prob-the" x="44" y="0" width="76" height="14" rx="7" />
+                      <text class="simplex-prob-value" x="181" y="12">0.68</text>
+                    </g>
+                    <g class="simplex-prob-row" transform="translate(18 107)">
+                      <text x="0" y="12">mat</text>
+                      <rect class="simplex-prob-track" x="44" y="0" width="112" height="14" rx="7" />
+                      <rect class="simplex-prob-fill prob-mat" x="44" y="0" width="28" height="14" rx="7" />
+                      <text class="simplex-prob-value" x="181" y="12">0.16</text>
+                    </g>
+                    <text class="simplex-vector-note" x="111" y="133">0.16 + 0.68 + 0.16 = 1</text>
                   </g>
                 </g>
-                <path class="discrete-arrow discrete-arrow-soft" d="M205 163 C252 116 301 105 349 118" marker-end="url(#simplexSoftArrow)" />
-                <text class="discrete-axis-label" x="248" y="102">relax during training</text>
-                <g class="simplex-diagram" transform="translate(322 49)">
-                  <polygon class="soft-simplex-face" points="88,230 178,46 274,230" />
-                  <path class="soft-simplex-grid" d="M118 169 L244 169 M145 112 L213 112 M133 141 L177 53 M229 141 L184 53 M144 230 L220 74 M218 230 L147 74" />
-                  <g class="simplex-corner" transform="translate(88 230)">
+                <g class="simplex-diagram" transform="translate(364 252)">
+                  <polygon class="soft-simplex-face" points="58,78 118,0 182,78" />
+                  <path class="soft-simplex-grid" d="M77 55 L162 55 M95 32 L141 32 M88 43 L118 7 M150 43 L123 7 M96 78 L146 12 M144 78 L96 12" />
+                  <g class="simplex-corner" transform="translate(58 78)">
                     <circle r="9" />
-                    <text x="-42" y="33">cat</text>
+                    <text x="-38" y="27">cat</text>
                   </g>
-                  <g class="simplex-corner" transform="translate(178 46)">
+                  <g class="simplex-corner" transform="translate(118 0)">
                     <circle r="9" />
-                    <text x="-20" y="-18">the</text>
+                    <text x="-20" y="-14">the</text>
                   </g>
-                  <g class="simplex-corner" transform="translate(274 230)">
+                  <g class="simplex-corner" transform="translate(182 78)">
                     <circle r="9" />
-                    <text x="15" y="33">mat</text>
+                    <text x="15" y="27">mat</text>
                   </g>
-                  <circle class="simplex-soft-state" cx="179" cy="146" r="14" />
-                  <path class="simplex-local-gradient" d="M145 174 C158 160 167 153 179 146" marker-end="url(#simplexSoftArrow)" />
+                  <circle class="simplex-soft-state" cx="119" cy="37" r="13" />
+                  <text class="simplex-point-label" x="138" y="42">same p</text>
                 </g>
-                <g class="discrete-summary-chip chip-blue" transform="translate(371 274)">
-                  <rect width="183" height="30" rx="10" />
-                  <text x="91.5" y="20">loss has a direction</text>
+                <path class="simplex-flow-line simplex-vector-to-point" d="M488 208 C502 232 501 252 484 276" marker-end="url(#simplexFlowArrow)" />
+                <g class="discrete-summary-chip chip-blue" transform="translate(68 334)">
+                  <rect width="278" height="30" rx="10" />
+                  <text x="139" y="20">no hard token is sampled in this path</text>
                 </g>
               </svg>
             </div>
           </div>
           <figcaption>
-            IDLM trains on a soft simplex point instead of a hard sampled token, so the token
-            loss has a continuous direction to follow.
+            The generator output is already a simplex vector: a distribution over vocabulary
+            tokens. Training keeps this vector soft, so gradients can move its probabilities.
           </figcaption>
         </figure>
         <p>
@@ -1163,67 +1185,98 @@
             <div class="discrete-map-panel discrete-uniform-panel">
               <div class="distill-map-head">
                 <span>Uniform diffusion + Duo</span>
-                <strong>revisions need a smooth path</strong>
+                <strong>Gaussian logits to softmax path</strong>
               </div>
               <svg class="distill-svg discrete-svg" viewBox="0 0 1180 360" role="img" aria-labelledby="uniform-duo-title uniform-duo-desc">
-                <title id="uniform-duo-title">Uniform diffusion revises tokens repeatedly, so Duo keeps one smooth training path</title>
-                <desc id="uniform-duo-desc">Uniform diffusion can change the same position at several reverse steps. A Duo relaxation connects the intermediate token choices with a smooth path, allowing gradients to pass through both timing and token decisions.</desc>
+                <title id="uniform-duo-title">Duo maps Gaussian logits through softmax to simplex-valued token states</title>
+                <desc id="uniform-duo-desc">Gaussian reparameterized logits are mapped through a smooth softmax function into points on the probability simplex. Nearby Gaussian samples become nearby soft token distributions, so gradients can pass through the intermediate states.</desc>
                 <defs>
-                  <marker id="duoPathArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
+                  <marker id="duoSoftmaxArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
                     <path d="M1,1 L7,4 L1,7 Z" fill="#6ee8ff" />
+                  </marker>
+                  <marker id="duoGradientArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
+                    <path d="M1,1 L7,4 L1,7 Z" fill="#ffd3a2" />
                   </marker>
                 </defs>
                 <rect class="distill-map-window" x="24" y="26" width="1132" height="288" rx="22" />
-                <g class="duo-timeline" transform="translate(72 70)">
-                  <path class="duo-time-rail" d="M82 116 L934 116" />
-                  <path class="duo-soft-path" d="M82 116 C190 44 298 185 406 116 S622 47 730 116 S850 183 934 116" marker-end="url(#duoPathArrow)" />
-                  <g class="duo-station" transform="translate(0 0)">
-                    <text class="duo-time-label" x="82" y="-22">t3</text>
-                    <rect class="duo-station-frame" x="10" y="76" width="144" height="82" rx="16" />
-                    <rect class="discrete-token-pill token-pill-muted" x="32" y="98" width="100" height="38" rx="12" />
-                    <text class="duo-token-text" x="82" y="123">cat</text>
+                <g class="duo-gaussian-block" transform="translate(62 62)">
+                  <text class="discrete-panel-label" x="0" y="-18">Gaussian sample path</text>
+                  <g class="duo-gaussian-contours" transform="translate(0 10)">
+                    <ellipse cx="124" cy="102" rx="116" ry="62" transform="rotate(-12 124 102)" />
+                    <ellipse cx="124" cy="102" rx="78" ry="40" transform="rotate(-12 124 102)" />
+                    <ellipse cx="124" cy="102" rx="42" ry="22" transform="rotate(-12 124 102)" />
                   </g>
-                  <g class="duo-station" transform="translate(282 0)">
-                    <text class="duo-time-label" x="124" y="-22">t2</text>
-                    <rect class="duo-station-frame" x="52" y="76" width="144" height="82" rx="16" />
-                    <rect class="discrete-token-pill token-pill-orange" x="74" y="98" width="100" height="38" rx="12" />
-                    <text class="duo-token-text" x="124" y="123">mat</text>
-                    <g class="duo-options" transform="translate(58 168)">
-                      <rect width="42" height="24" rx="8" />
-                      <text x="21" y="17">cat</text>
-                      <rect x="50" width="42" height="24" rx="8" />
-                      <text x="71" y="17">the</text>
-                      <rect x="100" width="42" height="24" rx="8" />
-                      <text x="121" y="17">mat</text>
-                    </g>
+                  <path class="duo-gaussian-trace" d="M64 139 C91 102 124 78 164 86 C191 91 210 114 226 141" />
+                  <g class="duo-gaussian-point" transform="translate(64 139)">
+                    <circle r="8" />
+                    <text x="-18" y="25">z3</text>
                   </g>
-                  <g class="duo-station" transform="translate(606 0)">
-                    <text class="duo-time-label" x="124" y="-22">t1</text>
-                    <rect class="duo-station-frame" x="52" y="76" width="144" height="82" rx="16" />
-                    <rect class="discrete-token-pill token-pill-blue" x="74" y="98" width="100" height="38" rx="12" />
-                    <text class="duo-token-text" x="124" y="123">the</text>
-                    <g class="discrete-summary-chip chip-orange" transform="translate(24 168)">
-                      <rect width="200" height="30" rx="10" />
-                      <text x="100" y="20">same position can change</text>
-                    </g>
+                  <g class="duo-gaussian-point" transform="translate(122 88)">
+                    <circle r="8" />
+                    <text x="-18" y="-14">z2</text>
                   </g>
-                  <g class="duo-station" transform="translate(852 0)">
-                    <text class="duo-time-label" x="82" y="-22">t0</text>
-                    <rect class="duo-station-frame" x="10" y="76" width="144" height="82" rx="16" />
-                    <rect class="discrete-token-pill token-pill-green" x="32" y="98" width="100" height="38" rx="12" />
-                    <text class="duo-token-text" x="82" y="123">cat</text>
+                  <g class="duo-gaussian-point" transform="translate(178 92)">
+                    <circle r="8" />
+                    <text x="12" y="-11">z1</text>
+                  </g>
+                  <g class="duo-gaussian-point" transform="translate(226 141)">
+                    <circle r="8" />
+                    <text x="12" y="25">z0</text>
+                  </g>
+                  <g class="discrete-summary-chip chip-orange" transform="translate(38 194)">
+                    <rect width="178" height="30" rx="10" />
+                    <text x="89" y="20">z = mu + sigma eps</text>
                   </g>
                 </g>
-                <g class="discrete-summary-chip chip-blue" transform="translate(414 274)">
-                  <rect width="330" height="30" rx="10" />
-                  <text x="165" y="20">Duo keeps gradients through token choice and timing</text>
+                <path class="duo-map-arrow" d="M334 160 L430 160" marker-end="url(#duoSoftmaxArrow)" />
+                <g class="duo-softmax-node" transform="translate(448 108)">
+                  <rect width="210" height="104" rx="18" />
+                  <text class="duo-softmax-main" x="105" y="43">softmax(z / tau)</text>
+                  <text class="duo-softmax-sub" x="105" y="68">smooth map</text>
                 </g>
+                <path class="duo-map-arrow" d="M674 160 L770 160" marker-end="url(#duoSoftmaxArrow)" />
+                <g class="duo-simplex-block" transform="translate(804 55)">
+                  <text class="discrete-panel-label" x="0" y="-14">simplex-valued token states</text>
+                  <polygon class="soft-simplex-face" points="96,214 194,30 298,214" />
+                  <path class="soft-simplex-grid" d="M128 154 L266 154 M158 96 L233 96 M147 124 L194 41 M249 124 L200 41 M158 214 L240 56 M236 214 L158 56" />
+                  <g class="simplex-corner" transform="translate(96 214)">
+                    <circle r="9" />
+                    <text x="-42" y="31">cat</text>
+                  </g>
+                  <g class="simplex-corner" transform="translate(194 30)">
+                    <circle r="9" />
+                    <text x="-20" y="-18">the</text>
+                  </g>
+                  <g class="simplex-corner" transform="translate(298 214)">
+                    <circle r="9" />
+                    <text x="16" y="31">mat</text>
+                  </g>
+                  <path class="duo-simplex-soft-path" d="M129 177 C158 126 186 91 212 105 C238 118 238 157 267 180" marker-end="url(#duoSoftmaxArrow)" />
+                  <g class="duo-simplex-point" transform="translate(129 177)">
+                    <circle r="8" />
+                    <text x="-23" y="24">p3</text>
+                  </g>
+                  <g class="duo-simplex-point" transform="translate(184 104)">
+                    <circle r="8" />
+                    <text x="-24" y="-12">p2</text>
+                  </g>
+                  <g class="duo-simplex-point" transform="translate(224 122)">
+                    <circle r="8" />
+                    <text x="12" y="-10">p1</text>
+                  </g>
+                  <g class="duo-simplex-point" transform="translate(267 180)">
+                    <circle r="8" />
+                    <text x="12" y="24">p0</text>
+                  </g>
+                </g>
+                <path class="duo-gradient-path" d="M870 283 C738 316 496 309 242 276" marker-end="url(#duoGradientArrow)" />
+                <text class="duo-gradient-label" x="436" y="299">gradient flows back through softmax</text>
               </svg>
             </div>
           </div>
           <figcaption>
-            Uniform diffusion can revise the same position across reverse steps, so Duo keeps the
-            intermediate token choices on one differentiable path.
+            Duo keeps uniform diffusion differentiable by reparameterizing Gaussian logits and
+            mapping them through softmax into soft token distributions on the simplex.
           </figcaption>
         </figure>
 
@@ -1411,9 +1464,69 @@
             </p>
           </div>
         </div>
+
+        <h3 id="final-algorithm" class="blog-subheading">3.5 Final Algorithm</h3>
+        <p>
+          The complete IDLM procedure combines the population inverse objective with the
+          differentiable relaxations described above. Let \(f^\star\) denote the pretrained
+          diffusion teacher, \(f\) the auxiliary fake denoiser, and \(G_\theta\) the student
+          generator. Training alternates between two coupled updates: the fake model is first fitted
+          to samples produced by the current student, and the student is then updated by contrasting
+          the teacher loss against the fake-model loss on those same samples.
+        </p>
+        <p>
+          In practice, a noised state \((x_t,t)\) is sampled from the forward process and passed to
+          \(G_\theta\). The resulting prediction is evaluated under both \(f^\star\) and \(f\). The
+          fake model minimizes the ordinary diffusion loss on the student distribution, while the
+          generator minimizes the teacher-minus-fake objective. This alternating scheme implements
+          the inverse-distillation gap without differentiating through an exact inner argmin.
+        </p>
+        <div class="algorithm-explainer">
+          <div class="algorithm-panel">
+            <div class="algorithm-head">
+              <span>Algorithm 1</span>
+              <strong>IDLM Training</strong>
+            </div>
+            <ol class="algorithm-steps">
+              <li><span>Draw a clean sequence</span><code>x_0 ~ p_data</code></li>
+              <li><span>Sample a diffusion time</span><code>t ~ Uniform(0, 1)</code></li>
+              <li><span>Corrupt the sequence with the teacher process</span><code>x_t ~ q_t(. | x_0)</code></li>
+              <li><span>Ask the student for a clean prediction</span><code>x_hat = G_theta(x_t, t)</code></li>
+              <li>
+                <span>If this is a fake-model step, fit the fake model to the student's current samples</span>
+                <code>L_fake = L_seq(f, x_hat)</code>
+              </li>
+              <li>
+                <span>If this is a student step, update the generator with the teacher-minus-fake gap</span>
+                <code>L_student = L_seq(f*, x_hat) - L_seq(f, x_hat)</code>
+              </li>
+            </ol>
+          </div>
+          <div class="algorithm-panel">
+            <div class="algorithm-head">
+              <span>Algorithm 2</span>
+              <strong>Few-step Sampling</strong>
+            </div>
+            <ol class="algorithm-steps">
+              <li><span>Choose a short reverse-time grid</span><code>t_K &gt; ... &gt; t_0</code></li>
+              <li><span>Sample the terminal noisy state</span><code>x_t = sample_terminal(process)</code></li>
+              <li><span>For each reverse step, predict the clean sequence</span><code>x_hat = G_theta(x_t, t)</code></li>
+              <li><span>Use the process-specific reverse transition</span><code>x_prev ~ p(x_prev | x_t, x_hat)</code></li>
+              <li><span>Replace the current state and continue</span><code>x_t = x_prev</code></li>
+              <li><span>Return the final denoised sequence</span><code>return x_t</code></li>
+            </ol>
+          </div>
+        </div>
+        <p>
+          The notation \(L_{\mathrm{seq}}\) denotes the sequence-level diffusion loss for the chosen
+          teacher family. For MDLM, the reverse transition follows the masked-diffusion rule; for
+          Duo, it follows the uniform-diffusion rule with the Gaussian-softmax relaxation. The
+          training algorithm teaches \(G_\theta\) how to replace many small teacher denoising moves,
+          and the sampling algorithm then reuses the same reverse process on a much shorter grid.
+        </p>
         <figure class="blog-figure">
           <img src="/Bio-page/static/homepage/blog/idlm-method.png" alt="Current arXiv IDLM training loop with generator, teacher, and fake model">
-          <figcaption>The current arXiv method figure: the student is evaluated by the frozen teacher and the fake model, and the contrast gives the generator update.</figcaption>
+          <figcaption>The current arXiv method figure: the student generator is evaluated by the frozen teacher and the auxiliary fake model, and their contrast defines the generator update.</figcaption>
         </figure>
       </section>
 
