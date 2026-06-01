@@ -1717,27 +1717,12 @@ svg {
   letter-spacing: 0;
 }
 
-.callout-leader {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.callout-leader {
-  stroke-width: 1.5;
-  opacity: 0.72;
-}
-
 .plot-callout-blue .plot-callout-bg {
   stroke: rgba(110, 232, 255, 0.5);
 }
 
 .plot-callout-blue text {
   fill: #9beeff;
-}
-
-.callout-leader-blue {
-  stroke: #6ee8ff;
 }
 
 .plot-callout-orange .plot-callout-bg {
@@ -1748,20 +1733,12 @@ svg {
   fill: #ffd3a2;
 }
 
-.callout-leader-orange {
-  stroke: #ffd3a2;
-}
-
 .plot-callout-green .plot-callout-bg {
   stroke: rgba(181, 240, 124, 0.5);
 }
 
 .plot-callout-green text {
   fill: #b5f07c;
-}
-
-.callout-leader-green {
-  stroke: #b5f07c;
 }
 
 .density-consistency-noise ellipse {
