@@ -1994,14 +1994,19 @@ svg {
   line-height: 1.55;
 }
 
+.sequence-capacity-map {
+  max-width: 640px;
+  margin: 22px auto 28px;
+}
+
 .sequence-capacity-grid {
   grid-template-columns: minmax(0, 1fr);
 }
 
 .sequence-capacity-panel {
-  width: min(100%, 980px);
+  width: min(100%, 620px);
   margin: 0 auto;
-  padding: 12px;
+  padding: 5px;
 }
 
 .sequence-capacity-svg text {
