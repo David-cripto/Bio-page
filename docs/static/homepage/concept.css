@@ -1716,15 +1716,10 @@ svg {
   letter-spacing: 0;
 }
 
-.plot-callout-swatch,
 .callout-leader {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-.plot-callout-swatch {
-  stroke-width: 3;
 }
 
 .callout-leader {
@@ -1740,7 +1735,6 @@ svg {
   fill: #9beeff;
 }
 
-.plot-callout-blue .plot-callout-swatch,
 .callout-leader-blue {
   stroke: #6ee8ff;
 }
@@ -1753,7 +1747,6 @@ svg {
   fill: #ffd3a2;
 }
 
-.plot-callout-orange .plot-callout-swatch,
 .callout-leader-orange {
   stroke: #ffd3a2;
 }
@@ -1766,7 +1759,6 @@ svg {
   fill: #b5f07c;
 }
 
-.plot-callout-green .plot-callout-swatch,
 .callout-leader-green {
   stroke: #b5f07c;
 }
