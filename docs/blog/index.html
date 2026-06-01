@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-direct-latent-no-blue-point">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-direct-latent-no-blue-point-final-algorithm-code">
 </head>
 <body>
   <main class="blog-shell">
@@ -1464,34 +1464,48 @@
               <span>Algorithm 1</span>
               <strong>IDLM Training</strong>
             </div>
-            <ol class="algorithm-steps">
-              <li><span>Draw a clean sequence</span><code>x_0 ~ p_data</code></li>
-              <li><span>Sample a diffusion time</span><code>t ~ Uniform(0, 1)</code></li>
-              <li><span>Corrupt the sequence with the teacher process</span><code>x_t ~ q_t(. | x_0)</code></li>
-              <li><span>Ask the student for a clean prediction</span><code>x_hat = G_theta(x_t, t)</code></li>
-              <li>
-                <span>If this is a fake-model step, fit the fake model to the student's current samples</span>
-                <code>L_fake = L_seq(f, x_hat)</code>
-              </li>
-              <li>
-                <span>If this is a student step, update the generator with the teacher-minus-fake gap</span>
-                <code>L_student = L_seq(f*, x_hat) - L_seq(f, x_hat)</code>
-              </li>
-            </ol>
+            <pre class="algorithm-code" aria-label="IDLM training pseudocode"><code>def train_idlm(teacher, fake_model, generator, data):
+    # The teacher is frozen. Only fake_model and generator are trained.
+    while not converged:
+        x0 = sample(data)                  # clean text sequence
+        t = uniform(0.0, 1.0)              # diffusion time
+        xt = teacher.forward_noise(x0, t)  # noised state from q_t
+
+        x_hat = generator(xt, t)           # student's clean prediction
+
+        # Step A: fit the fake model to current student samples.
+        fake_loss = sequence_diffusion_loss(fake_model, x_hat)
+        update(fake_model, fake_loss)
+
+        # Step B: update the student with the teacher-minus-fake gap.
+        teacher_loss = sequence_diffusion_loss(teacher, x_hat)
+        fake_score = stop_gradient(
+            sequence_diffusion_loss(fake_model, x_hat)
+        )
+        generator_loss = teacher_loss - fake_score
+        update(generator, generator_loss)</code></pre>
           </div>
           <div class="algorithm-panel">
             <div class="algorithm-head">
               <span>Algorithm 2</span>
               <strong>Few-step Sampling</strong>
             </div>
-            <ol class="algorithm-steps">
-              <li><span>Choose a short reverse-time grid</span><code>t_K &gt; ... &gt; t_0</code></li>
-              <li><span>Sample the terminal noisy state</span><code>x_t = sample_terminal(process)</code></li>
-              <li><span>For each reverse step, predict the clean sequence</span><code>x_hat = G_theta(x_t, t)</code></li>
-              <li><span>Use the process-specific reverse transition</span><code>x_prev ~ p(x_prev | x_t, x_hat)</code></li>
-              <li><span>Replace the current state and continue</span><code>x_t = x_prev</code></li>
-              <li><span>Return the final denoised sequence</span><code>return x_t</code></li>
-            </ol>
+            <pre class="algorithm-code" aria-label="IDLM sampling pseudocode"><code>def sample_idlm(generator, process, num_steps):
+    # A short grid replaces the long teacher denoising chain.
+    times = make_reverse_grid(num_steps)   # e.g. 1.0 -> 0.0
+    x = process.sample_terminal_state()    # fully noised text state
+
+    for t_high, t_low in zip(times[:-1], times[1:]):
+        x_hat = generator(x, t_high)       # predict the clean sequence
+
+        x = process.reverse_step(
+            x_t=x,
+            x0_hat=x_hat,
+            from_t=t_high,
+            to_t=t_low,
+        )                                  # MDLM mask step or Duo uniform step
+
+    return process.decode(x)</code></pre>
           </div>
         </div>
         <p>

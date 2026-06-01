@@ -1282,8 +1282,8 @@ svg {
 
 .algorithm-explainer {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
   margin: 26px 0 24px;
 }
 
@@ -1314,6 +1314,25 @@ svg {
   font-size: 1rem;
   line-height: 1.35;
   text-align: right;
+}
+
+.algorithm-code {
+  margin: 16px 0 0;
+  border: 1px solid rgba(94, 217, 255, 0.17);
+  border-radius: 6px;
+  background: rgba(2, 8, 24, 0.68);
+  color: #e7fcff;
+  font-size: 0.82rem;
+  line-height: 1.64;
+  overflow-x: auto;
+  padding: 16px;
+  tab-size: 4;
+  white-space: pre;
+}
+
+.algorithm-code code {
+  color: inherit;
+  font: inherit;
 }
 
 .algorithm-steps {
