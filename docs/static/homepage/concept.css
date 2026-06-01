@@ -2003,6 +2003,37 @@ svg {
   margin: 0 auto;
 }
 
+.sequence-capacity-panel .distill-map-head {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  max-width: 100%;
+  margin-bottom: 10px;
+  padding: 5px 9px;
+  border: 1px solid rgba(181, 240, 124, 0.28);
+  border-radius: 999px;
+  background: rgba(2, 8, 24, 0.58);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.sequence-capacity-panel .distill-map-head span {
+  color: #b5f07c;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.sequence-capacity-panel .distill-map-head strong {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+  text-align: left;
+  white-space: nowrap;
+}
+
 .sequence-capacity-svg text {
   font-family: var(--font-mono);
 }
