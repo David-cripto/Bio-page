@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260601-prior-label-green-interp-endpoint-match-pseudocode-algorithms">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260601-horizontal-simplex-pseudocode-algorithms">
 </head>
 <body>
   <main class="blog-shell">
@@ -1472,8 +1472,7 @@
     update <span class="alg-fake">f</span> using <span class="alg-loss">L_fake</span>
 
     <span class="alg-comment">// student: prefer teacher-supported samples</span>
-    <span class="alg-loss">L_gap</span> <span class="alg-op">&larr;</span> L_seq(<span class="alg-teacher">f_star</span>, x_hat)
-             <span class="alg-op">-</span> stop_grad(L_seq(<span class="alg-fake">f</span>, x_hat))
+    <span class="alg-loss">L_gap</span> <span class="alg-op">&larr;</span> L_seq(<span class="alg-teacher">f_star</span>, x_hat) <span class="alg-op">-</span> stop_grad(L_seq(<span class="alg-fake">f</span>, x_hat))
     update <span class="alg-student">G_theta</span> using <span class="alg-loss">L_gap</span>
 <span class="alg-key">until</span> convergence</code></pre>
           </div>
