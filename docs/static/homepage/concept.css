@@ -1895,6 +1895,13 @@ svg {
   height: auto;
 }
 
+.inverse-contrast-visual figcaption {
+  margin: 14px 4px 0;
+  color: var(--quiet);
+  font-size: 0.76rem;
+  line-height: 1.62;
+}
+
 .inverse-density-terminal ellipse,
 .inverse-density-target ellipse,
 .inverse-density-student ellipse {

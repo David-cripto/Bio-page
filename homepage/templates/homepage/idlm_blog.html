@@ -812,6 +812,12 @@
               </g>
             </g>
           </svg>
+          <figcaption>
+            Both reverse models start from the same terminal distribution \(q_T\): the frozen teacher
+            \(f^\star\) was learned from \(p^\star\), while the fake model \(f\) is relearned from the
+            current student \(p_\theta\). IDLM minimizes the gap
+            \(\mathcal{L}(f^\star,p_\theta)-\mathcal{L}(f,p_\theta)\).
+          </figcaption>
         </figure>
         <p>
           If the inverse problem is solved perfectly, the generator recovers the same data
@@ -826,6 +832,20 @@
         </p>
 
         <h3 id="language-transfer" class="blog-subheading">2.3 From Images to Language</h3>
+        <p>
+          The discrete language setting changes the problem. Tokens are categorical, generator
+          outputs can be non-smooth one-hot choices, and sampling an intermediate token can block
+          gradients. A relaxed token may be differentiable, but it can also be out of distribution
+          for a teacher trained on hard token states.
+        </p>
+        <p>
+          There is also a sequence-level issue. A text generator cannot just choose \(64\) tokens
+          independently and hope the sentence is coherent. It has to coordinate topic, grammar,
+          agreement, style, and long-range dependencies. So the goal is not simply "apply image
+          distillation to text." The goal is to keep the distribution-matching promise of inverse
+          distillation while making the objective valid and trainable for discrete diffusion
+          language models. This is exactly the role of IDLM.
+        </p>
         <figure class="language-transfer-map" aria-label="Visual intuition for moving inverse distillation from images to language">
           <div class="distillation-map-grid language-transfer-grid">
             <div class="distill-map-panel language-transfer-panel">
