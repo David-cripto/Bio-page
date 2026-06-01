@@ -2303,9 +2303,9 @@ svg {
 }
 
 .inverse-contrast-visual {
-  max-width: 640px;
-  margin: 22px auto 26px;
-  padding: 12px;
+  max-width: 720px;
+  margin: 24px auto 28px;
+  padding: 14px;
 }
 
 .inverse-contrast-svg {
@@ -2315,9 +2315,9 @@ svg {
 }
 
 .inverse-contrast-visual figcaption {
-  margin: 10px 2px 0;
+  margin: 11px 3px 0;
   color: var(--quiet);
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   line-height: 1.52;
 }
 
