@@ -1742,6 +1742,22 @@ svg {
   fill: #b5f07c;
 }
 
+.plot-callout-purple .plot-callout-bg {
+  stroke: rgba(184, 107, 255, 0.54);
+}
+
+.plot-callout-purple text {
+  fill: #d7b8ff;
+}
+
+.plot-callout-yellow .plot-callout-bg {
+  stroke: rgba(255, 211, 107, 0.56);
+}
+
+.plot-callout-yellow text {
+  fill: #ffd36b;
+}
+
 .density-consistency-noise ellipse {
   fill: url("#noiseGlow");
   stroke: rgba(184, 107, 255, 0.36);
@@ -1879,59 +1895,70 @@ svg {
   height: auto;
 }
 
-.inverse-density-fake ellipse {
-  fill: rgba(255, 211, 162, 0.16);
-  stroke: rgba(255, 211, 162, 0.34);
+.inverse-density-terminal ellipse,
+.inverse-density-target ellipse,
+.inverse-density-student ellipse {
   stroke-width: 2;
+}
+
+.inverse-density-terminal ellipse {
+  fill: rgba(184, 107, 255, 0.16);
+  stroke: rgba(184, 107, 255, 0.42);
 }
 
 .inverse-density-target ellipse {
   fill: rgba(181, 240, 124, 0.14);
-  stroke: rgba(181, 240, 124, 0.34);
-  stroke-width: 2;
+  stroke: rgba(181, 240, 124, 0.38);
 }
 
-.inverse-density-fake ellipse + ellipse,
-.inverse-density-target ellipse + ellipse {
+.inverse-density-student ellipse {
+  fill: rgba(255, 211, 162, 0.14);
+  stroke: rgba(255, 211, 162, 0.38);
+}
+
+.inverse-density-terminal ellipse + ellipse,
+.inverse-density-target ellipse + ellipse,
+.inverse-density-student ellipse + ellipse {
   fill: none;
   stroke-width: 1.6;
 }
 
-.inverse-teacher-field ellipse,
-.inverse-teacher-field path,
-.inverse-fake-field ellipse,
-.inverse-fake-field path,
-.inverse-update-arrows path {
+.inverse-model-paths path,
+.inverse-gap-lines path {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.inverse-teacher-field ellipse,
-.inverse-teacher-field path {
+.inverse-teacher-path {
   stroke: #6ee8ff;
-  stroke-width: 2.2;
-  stroke-dasharray: 8 10;
-  opacity: 0.64;
-  animation: distillDash 7.2s linear infinite;
-}
-
-.inverse-fake-field ellipse,
-.inverse-fake-field path {
-  stroke: #ffd3a2;
-  stroke-width: 2;
-  stroke-dasharray: 9 10;
-  opacity: 0.34;
-  animation: distillDash 8s linear infinite reverse;
-}
-
-.inverse-update-arrows path {
-  stroke: #ffd3a2;
-  stroke-width: 4.2;
+  stroke-width: 4.4;
   stroke-dasharray: 10 12;
-  opacity: 0.88;
-  filter: drop-shadow(0 0 12px rgba(255, 211, 162, 0.22));
-  animation: distillDash 6.8s linear infinite;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 12px rgba(110, 232, 255, 0.18));
+  animation: distillDash 8.4s linear infinite;
+}
+
+.inverse-fake-path {
+  stroke: #ffd3a2;
+  stroke-width: 4.4;
+  stroke-dasharray: 10 12;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 12px rgba(255, 211, 162, 0.18));
+  animation: distillDash 8.4s linear infinite reverse;
+}
+
+.inverse-gap-lines path {
+  stroke: #ffd36b;
+  stroke-width: 1.8;
+  stroke-dasharray: 4 8;
+  opacity: 0.46;
+}
+
+.inverse-terminal-particles circle {
+  fill: #b86bff;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 10px rgba(184, 107, 255, 0.18));
 }
 
 .inverse-student-particles circle {
@@ -1942,8 +1969,22 @@ svg {
 
 .inverse-target-particles circle {
   fill: #b5f07c;
-  opacity: 0.88;
+  opacity: 0.9;
   filter: drop-shadow(0 0 10px rgba(181, 240, 124, 0.14));
+}
+
+.inverse-path-dots circle {
+  opacity: 0.95;
+  stroke: rgba(2, 8, 24, 0.8);
+  stroke-width: 2;
+}
+
+.inverse-teacher-dots circle {
+  fill: #6ee8ff;
+}
+
+.inverse-fake-dots circle {
+  fill: #ffd3a2;
 }
 
 .inverse-contrast-callouts {
@@ -1976,13 +2017,13 @@ svg {
 }
 
 .image-density-noise ellipse {
-  fill: url("#imageNoiseDensity");
+  fill: rgba(184, 107, 255, 0.18);
   stroke: rgba(184, 107, 255, 0.34);
   stroke-width: 2;
 }
 
 .image-density-data ellipse {
-  fill: url("#imageSmoothDensity");
+  fill: rgba(181, 240, 124, 0.16);
   stroke: rgba(181, 240, 124, 0.34);
   stroke-width: 2;
 }
@@ -2036,14 +2077,14 @@ svg {
 }
 
 .discrete-island path {
-  fill: rgba(2, 8, 24, 0.78);
-  stroke: rgba(255, 211, 162, 0.34);
+  fill: rgba(255, 211, 162, 0.08);
+  stroke: rgba(255, 211, 162, 0.5);
   stroke-width: 1.8;
-  filter: drop-shadow(0 0 14px rgba(255, 211, 162, 0.1));
+  filter: drop-shadow(0 0 14px rgba(255, 211, 162, 0.14));
 }
 
 .discrete-island circle {
-  fill: rgba(2, 8, 24, 0.94);
+  fill: rgba(255, 211, 162, 0.18);
   stroke: #ffd3a2;
   stroke-width: 2.6;
   filter: drop-shadow(0 0 12px rgba(255, 211, 162, 0.26));
@@ -2075,7 +2116,7 @@ svg {
 }
 
 .token-vertex circle {
-  fill: rgba(2, 8, 24, 0.92);
+  fill: rgba(181, 240, 124, 0.12);
   stroke: #ffd3a2;
   stroke-width: 2.4;
   filter: drop-shadow(0 0 10px rgba(255, 211, 162, 0.2));

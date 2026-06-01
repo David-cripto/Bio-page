@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-discrete-smoothness-fix">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-discrete-smoothness-fill-fix">
 </head>
 <body>
   <main class="blog-shell">
@@ -715,77 +715,100 @@
             \min_f \mathcal{L}(f,p_\theta).
           \]
         </div>
-        <figure class="inverse-contrast-visual" aria-label="Inverse distillation score contrast in a two-dimensional toy space">
-          <svg class="distill-svg inverse-contrast-svg" viewBox="0 0 900 360" role="img" aria-labelledby="inverse-contrast-title inverse-contrast-desc">
+        <figure class="inverse-contrast-visual" aria-label="Inverse distillation compares teacher and fake reverse dynamics">
+          <svg class="distill-svg inverse-contrast-svg" viewBox="0 0 900 390" role="img" aria-labelledby="inverse-contrast-title inverse-contrast-desc">
             <title id="inverse-contrast-title">Inverse distillation compares a frozen teacher with a fake model</title>
-            <desc id="inverse-contrast-desc">A student distribution is pushed away from its fake-model density and toward the teacher-supported target distribution.</desc>
+            <desc id="inverse-contrast-desc">The teacher diffusion model and a fake diffusion model both start from the same terminal distribution. The teacher reverses toward the target distribution, while the fake model reverses toward the current student distribution. The loss compares these two reverse dynamics on student samples.</desc>
             <defs>
-              <marker id="inverseUpdateArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                <path d="M1,1 L6,3.5 L1,6 Z" fill="#ffd3a2" />
-              </marker>
               <marker id="inverseTeacherArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
                 <path d="M1,1 L6,3.5 L1,6 Z" fill="#6ee8ff" />
               </marker>
+              <marker id="inverseFakeArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                <path d="M1,1 L6,3.5 L1,6 Z" fill="#ffd3a2" />
+              </marker>
             </defs>
-            <rect class="distill-map-window" x="24" y="28" width="852" height="292" rx="22" />
-            <g class="inverse-density-fake">
-              <ellipse cx="246" cy="218" rx="154" ry="76" transform="rotate(14 246 218)" />
-              <ellipse cx="246" cy="218" rx="100" ry="47" transform="rotate(14 246 218)" />
-              <ellipse cx="246" cy="218" rx="52" ry="24" transform="rotate(14 246 218)" />
+            <rect class="distill-map-window" x="24" y="28" width="852" height="326" rx="22" />
+            <g class="inverse-density-terminal">
+              <ellipse cx="130" cy="205" rx="94" ry="58" transform="rotate(-8 130 205)" />
+              <ellipse cx="130" cy="205" rx="62" ry="37" transform="rotate(-8 130 205)" />
+              <ellipse cx="130" cy="205" rx="32" ry="20" transform="rotate(-8 130 205)" />
             </g>
             <g class="inverse-density-target">
-              <ellipse cx="662" cy="156" rx="178" ry="90" transform="rotate(-11 662 156)" />
-              <ellipse cx="662" cy="156" rx="118" ry="58" transform="rotate(-11 662 156)" />
-              <ellipse cx="662" cy="156" rx="62" ry="30" transform="rotate(-11 662 156)" />
+              <ellipse cx="728" cy="124" rx="126" ry="60" transform="rotate(-9 728 124)" />
+              <ellipse cx="728" cy="124" rx="82" ry="39" transform="rotate(-9 728 124)" />
+              <ellipse cx="728" cy="124" rx="42" ry="21" transform="rotate(-9 728 124)" />
             </g>
-            <g class="inverse-fake-field">
-              <ellipse cx="246" cy="218" rx="122" ry="56" transform="rotate(14 246 218)" />
-              <path d="M286 183 C325 170 367 164 411 170" />
-              <path d="M297 242 C348 237 398 232 448 225" />
-            </g>
-            <g class="inverse-teacher-field">
-              <ellipse cx="662" cy="156" rx="138" ry="70" transform="rotate(-13 662 156)" />
-              <path d="M548 156 C590 118 655 101 724 123" marker-end="url(#inverseTeacherArrow)" />
-              <path d="M584 205 C641 188 704 183 759 196" marker-end="url(#inverseTeacherArrow)" />
-            </g>
-            <g class="inverse-update-arrows">
-              <path d="M245 182 C355 101 492 83 604 125" marker-end="url(#inverseUpdateArrow)" />
-              <path d="M213 222 C356 165 492 142 629 151" marker-end="url(#inverseUpdateArrow)" />
-              <path d="M293 252 C425 238 532 210 666 194" marker-end="url(#inverseUpdateArrow)" />
-            </g>
-            <g class="inverse-student-particles">
-              <circle cx="150" cy="212" r="7" />
-              <circle cx="203" cy="186" r="7" />
-              <circle cx="245" cy="182" r="7" />
-              <circle cx="213" cy="222" r="7" />
-              <circle cx="293" cy="252" r="7" />
-              <circle cx="282" cy="214" r="7" />
+            <g class="inverse-density-student">
+              <ellipse cx="724" cy="270" rx="124" ry="58" transform="rotate(8 724 270)" />
+              <ellipse cx="724" cy="270" rx="82" ry="38" transform="rotate(8 724 270)" />
+              <ellipse cx="724" cy="270" rx="42" ry="20" transform="rotate(8 724 270)" />
             </g>
             <g class="inverse-target-particles">
-              <circle cx="604" cy="125" r="7" />
-              <circle cx="656" cy="145" r="7" />
-              <circle cx="719" cy="136" r="7" />
-              <circle cx="617" cy="186" r="7" />
-              <circle cx="692" cy="210" r="7" />
-              <circle cx="754" cy="189" r="7" />
-              <circle cx="737" cy="107" r="7" />
+              <circle cx="680" cy="130" r="7" />
+              <circle cx="712" cy="102" r="7" />
+              <circle cx="746" cy="146" r="7" />
+              <circle cx="778" cy="119" r="7" />
+              <circle cx="716" cy="153" r="7" />
+              <circle cx="762" cy="94" r="7" />
+            </g>
+            <g class="inverse-student-particles">
+              <circle cx="680" cy="272" r="7" />
+              <circle cx="713" cy="247" r="7" />
+              <circle cx="748" cy="288" r="7" />
+              <circle cx="782" cy="263" r="7" />
+              <circle cx="718" cy="300" r="7" />
+              <circle cx="758" cy="230" r="7" />
+            </g>
+            <g class="inverse-terminal-particles">
+              <circle cx="95" cy="198" r="7" />
+              <circle cx="126" cy="174" r="7" />
+              <circle cx="157" cy="209" r="7" />
+              <circle cx="137" cy="237" r="7" />
+              <circle cx="106" cy="229" r="7" />
+            </g>
+            <g class="inverse-model-paths">
+              <path class="inverse-teacher-path" d="M155 185 C284 72 470 75 617 105 C680 118 724 118 787 123" marker-end="url(#inverseTeacherArrow)" />
+              <path class="inverse-fake-path" d="M155 224 C296 309 472 319 622 288 C685 274 728 270 790 266" marker-end="url(#inverseFakeArrow)" />
+            </g>
+            <g class="inverse-path-dots inverse-teacher-dots">
+              <circle cx="300" cy="114" r="6" />
+              <circle cx="470" cy="91" r="6" />
+              <circle cx="636" cy="109" r="6" />
+            </g>
+            <g class="inverse-path-dots inverse-fake-dots">
+              <circle cx="300" cy="279" r="6" />
+              <circle cx="470" cy="309" r="6" />
+              <circle cx="636" cy="284" r="6" />
+            </g>
+            <g class="inverse-gap-lines">
+              <path d="M300 120 C330 158 330 232 300 273" />
+              <path d="M470 98 C512 151 512 246 470 302" />
+              <path d="M636 116 C670 158 670 235 636 277" />
             </g>
             <g class="inverse-contrast-callouts" aria-hidden="true">
-              <g class="plot-callout plot-callout-orange" transform="translate(70 84)">
-                <rect class="plot-callout-bg" width="151" height="27" rx="8" />
-                <text x="14" y="18">student distribution p<tspan baseline-shift="sub" font-size="8">&theta;</tspan></text>
+              <g class="plot-callout plot-callout-purple" transform="translate(58 78)">
+                <rect class="plot-callout-bg" width="100" height="27" rx="8" />
+                <text x="14" y="18">terminal q<tspan baseline-shift="sub" font-size="8">T</tspan></text>
               </g>
-              <g class="plot-callout plot-callout-orange" transform="translate(318 266)">
-                <rect class="plot-callout-bg" width="84" height="27" rx="8" />
-                <text x="14" y="18">fake f</text>
-              </g>
-              <g class="plot-callout plot-callout-blue" transform="translate(548 69)">
-                <rect class="plot-callout-bg" width="117" height="27" rx="8" />
+              <g class="plot-callout plot-callout-blue" transform="translate(339 48)">
+                <rect class="plot-callout-bg" width="102" height="27" rx="8" />
                 <text x="14" y="18">teacher f<tspan baseline-shift="super" font-size="8">*</tspan></text>
               </g>
-              <g class="plot-callout plot-callout-green" transform="translate(648 34)">
+              <g class="plot-callout plot-callout-orange" transform="translate(351 312)">
+                <rect class="plot-callout-bg" width="73" height="27" rx="8" />
+                <text x="14" y="18">fake f</text>
+              </g>
+              <g class="plot-callout plot-callout-yellow" transform="translate(410 180)">
+                <rect class="plot-callout-bg" width="142" height="30" rx="9" />
+                <text x="14" y="20">compare f<tspan baseline-shift="super" font-size="8">*</tspan> vs f</text>
+              </g>
+              <g class="plot-callout plot-callout-green" transform="translate(642 50)">
                 <rect class="plot-callout-bg" width="151" height="27" rx="8" />
                 <text x="14" y="18">target distribution p<tspan baseline-shift="super" font-size="8">*</tspan></text>
+              </g>
+              <g class="plot-callout plot-callout-orange" transform="translate(621 310)">
+                <rect class="plot-callout-bg" width="151" height="27" rx="8" />
+                <text x="14" y="18">student distribution p<tspan baseline-shift="sub" font-size="8">&theta;</tspan></text>
               </g>
             </g>
           </svg>
