@@ -2023,122 +2023,184 @@ svg {
   letter-spacing: 0;
 }
 
-.image-density-noise ellipse {
-  fill: rgba(184, 107, 255, 0.18);
-  stroke: rgba(184, 107, 255, 0.34);
-  stroke-width: 2;
-}
-
-.image-density-data ellipse {
-  fill: rgba(181, 240, 124, 0.16);
-  stroke: rgba(181, 240, 124, 0.34);
-  stroke-width: 2;
-}
-
-.image-density-noise ellipse + ellipse,
-.image-density-data ellipse + ellipse {
-  fill: none;
-  stroke-width: 1.5;
-}
-
-.image-smooth-field path {
+.image-interp-line {
   fill: none;
   stroke: #6ee8ff;
-  stroke-width: 3.2;
+  stroke-width: 4;
   stroke-linecap: round;
-  stroke-dasharray: 8 10;
-  opacity: 0.78;
-  animation: distillDash 6.8s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(110, 232, 255, 0.28));
 }
 
-.image-smooth-field path:nth-child(2) {
-  animation-delay: 0.15s;
-}
-
-.image-smooth-field path:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-.image-smooth-field path:nth-child(4) {
-  animation-delay: 0.45s;
-}
-
-.image-smooth-tracer {
-  fill: #6ee8ff;
+.image-interp-end {
+  fill: #b5f07c;
   stroke: rgba(230, 250, 255, 0.9);
   stroke-width: 1.4;
-  filter: drop-shadow(0 0 12px rgba(110, 232, 255, 0.72));
-  animation: tracerPulse 1.8s ease-in-out infinite;
 }
 
-.discrete-island path {
-  fill: rgba(255, 211, 162, 0.08);
-  stroke: rgba(255, 211, 162, 0.5);
+.image-interp-point {
+  fill: #6ee8ff;
+  stroke: rgba(230, 250, 255, 0.95);
   stroke-width: 1.8;
-  filter: drop-shadow(0 0 14px rgba(255, 211, 162, 0.14));
+  filter: drop-shadow(0 0 12px rgba(110, 232, 255, 0.7));
 }
 
-.discrete-island circle {
-  fill: rgba(255, 211, 162, 0.18);
-  stroke: #ffd3a2;
-  stroke-width: 2.6;
-  filter: drop-shadow(0 0 12px rgba(255, 211, 162, 0.26));
+.animal-frame,
+.image-mix-card rect,
+.token-card-frame {
+  fill: rgba(2, 8, 24, 0.74);
+  stroke: rgba(110, 232, 255, 0.32);
+  stroke-width: 1.7;
 }
 
-.discrete-island text {
+.animal-sky {
+  fill: rgba(15, 45, 77, 0.72);
+}
+
+.animal-ground {
+  fill: rgba(181, 240, 124, 0.16);
+}
+
+.dog-body,
+.dog-head,
+.dog-ear,
+.mix-dog ellipse,
+.mix-dog circle,
+.mix-dog path {
   fill: #ffd3a2;
-  font-size: 11px;
-  font-weight: 800;
+}
+
+.dog-snout {
+  fill: #ffe7c6;
+}
+
+.dog-tail,
+.dog-leg,
+.cat-tail,
+.cat-leg,
+.cat-whisker {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dog-tail,
+.dog-leg {
+  stroke: #ffd3a2;
+  stroke-width: 5;
+}
+
+.cat-body,
+.cat-head,
+.cat-ear,
+.mix-cat ellipse,
+.mix-cat circle,
+.mix-cat path {
+  fill: #b5f07c;
+}
+
+.cat-tail,
+.cat-leg {
+  stroke: #b5f07c;
+  stroke-width: 5;
+}
+
+.cat-whisker {
+  stroke: rgba(230, 250, 255, 0.78);
+  stroke-width: 1.7;
+}
+
+.animal-eye,
+.animal-nose {
+  fill: #020818;
+}
+
+.cat-nose {
+  fill: #020818;
+}
+
+.image-mix-card rect {
+  stroke: rgba(181, 240, 124, 0.32);
+}
+
+.mix-dog {
+  opacity: 0.48;
+}
+
+.mix-cat {
+  opacity: 0.52;
+}
+
+.image-mix-dot {
+  fill: #6ee8ff;
+  filter: drop-shadow(0 0 10px rgba(110, 232, 255, 0.62));
+}
+
+.token-state-card {
+  filter: drop-shadow(0 0 13px rgba(255, 211, 162, 0.12));
+}
+
+.token-card-frame {
+  stroke: rgba(255, 211, 162, 0.42);
+}
+
+.token-word {
+  fill: #ffd3a2;
+  font-size: 17px;
+  font-weight: 900;
   text-anchor: middle;
 }
 
-.discrete-gap-lines path {
+.token-onehot rect {
+  fill: rgba(255, 211, 162, 0.12);
+  stroke: rgba(255, 211, 162, 0.24);
+  stroke-width: 1;
+}
+
+.token-onehot .active {
+  fill: #ffd3a2;
+  filter: drop-shadow(0 0 8px rgba(255, 211, 162, 0.35));
+}
+
+.token-hard-jump,
+.token-invalid-line {
   fill: none;
-  stroke: rgba(235, 122, 80, 0.52);
-  stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 5 8;
+}
+
+.token-hard-jump {
+  stroke: #ffd3a2;
+  stroke-width: 3.8;
+  opacity: 0.84;
+}
+
+.token-hard-jump-low {
+  stroke-dasharray: 7 9;
+  opacity: 0.66;
+  animation: distillDash 6.8s linear infinite;
+}
+
+.token-invalid-line {
+  stroke: #eb7a50;
+  stroke-width: 3.2;
+  stroke-dasharray: 9 11;
   animation: distillDash 7.2s linear infinite reverse;
 }
 
-.token-hard-sample {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.token-hard-sample,
-.token-broken-gradient {
-  stroke: #ffd3a2;
-  stroke-width: 4;
-  opacity: 0.88;
-}
-
-.token-broken-gradient {
-  stroke: #eb7a50;
-  stroke-dasharray: 10 12;
-  opacity: 0.76;
-  animation: distillDash 6.6s linear infinite;
-}
-
-.token-gradient-break path,
-.token-gradient-break circle {
+.token-invalid-midpoint circle,
+.token-invalid-midpoint path {
   fill: none;
   stroke: #eb7a50;
   stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
-.token-gradient-break path {
-  stroke-width: 3.2;
-}
-
-.token-gradient-break circle {
-  stroke-width: 1.6;
+.token-invalid-midpoint circle {
+  stroke-width: 1.7;
   stroke-dasharray: 5 7;
-  opacity: 0.66;
-  animation: distillDash 7s linear infinite reverse;
+}
+
+.token-invalid-midpoint path {
+  stroke-width: 4;
 }
 
 .sequence-manifold,
