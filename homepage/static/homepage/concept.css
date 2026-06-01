@@ -2303,8 +2303,9 @@ svg {
 }
 
 .inverse-contrast-visual {
-  margin: 28px 0 30px;
-  padding: 18px;
+  max-width: 640px;
+  margin: 22px auto 26px;
+  padding: 12px;
 }
 
 .inverse-contrast-svg {
@@ -2314,10 +2315,10 @@ svg {
 }
 
 .inverse-contrast-visual figcaption {
-  margin: 14px 4px 0;
+  margin: 10px 2px 0;
   color: var(--quiet);
-  font-size: 0.76rem;
-  line-height: 1.62;
+  font-size: 0.68rem;
+  line-height: 1.52;
 }
 
 .inverse-density-terminal ellipse,

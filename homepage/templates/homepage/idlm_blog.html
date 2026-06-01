@@ -841,9 +841,11 @@
             </g>
           </svg>
           <figcaption>
-            Both reverse models start from the same terminal distribution \(q_T\): the frozen teacher
-            \(f^\star\) was learned from \(p^\star\), while the fake model \(f\) is relearned from the
-            current student \(p_\theta\). IDLM minimizes the gap
+            The two dashed trajectories share the same terminal distribution \(q_T\). The upper
+            trajectory is induced by the frozen teacher \(f^\star\), trained on the target
+            distribution \(p^\star\), while the lower trajectory is induced by the fake model \(f\),
+            retrained on samples from the current student distribution \(p_\theta\). IDLM updates
+            the student by minimizing the teacher--fake loss gap
             \(\mathcal{L}(f^\star,p_\theta)-\mathcal{L}(f,p_\theta)\).
           </figcaption>
         </figure>
