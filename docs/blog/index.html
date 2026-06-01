@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-image-token-interpolation">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-real-image-interpolation">
 </head>
 <body>
   <main class="blog-shell">
@@ -125,6 +125,7 @@
           <ol>
             <li><a href="#theory">Theoretical Guarantees</a></li>
             <li><a href="#discrete-practice">Discrete Non-Smoothness</a></li>
+            <li><a href="#sequence-capacity">Sequence-Level Generative Capacity</a></li>
             <li><a href="#loss-intuition">Loss Intuition</a></li>
           </ol>
         </li>
@@ -770,26 +771,22 @@
               <path class="inverse-teacher-path" d="M155 185 C284 72 470 75 617 105 C680 118 724 118 787 123" marker-end="url(#inverseTeacherArrow)" />
               <path class="inverse-fake-path" d="M155 224 C296 309 472 319 622 288 C685 274 728 270 790 266" marker-end="url(#inverseFakeArrow)" />
             </g>
+            <g class="inverse-gap-lines">
+              <path d="M298 108 C328 150 331 239 305 285" />
+              <path d="M461 87 C511 145 516 247 467 304" />
+              <path d="M624 106 C669 151 672 241 629 287" />
+            </g>
             <g class="inverse-path-dots inverse-teacher-dots">
-              <circle cx="300" cy="114" r="6" />
-              <circle cx="470" cy="91" r="6" />
-              <circle cx="636" cy="109" r="6" />
+              <circle cx="298" cy="108" r="6" />
+              <circle cx="461" cy="87" r="6" />
+              <circle cx="624" cy="106" r="6" />
             </g>
             <g class="inverse-path-dots inverse-fake-dots">
-              <circle cx="300" cy="279" r="6" />
-              <circle cx="470" cy="309" r="6" />
-              <circle cx="636" cy="284" r="6" />
-            </g>
-            <g class="inverse-gap-lines">
-              <path d="M300 120 C330 158 330 232 300 273" />
-              <path d="M470 98 C512 151 512 246 470 302" />
-              <path d="M636 116 C670 158 670 235 636 277" />
+              <circle cx="305" cy="285" r="6" />
+              <circle cx="467" cy="304" r="6" />
+              <circle cx="629" cy="287" r="6" />
             </g>
             <g class="inverse-contrast-callouts" aria-hidden="true">
-              <g class="plot-callout plot-callout-purple" transform="translate(58 78)">
-                <rect class="plot-callout-bg" width="100" height="27" rx="8" />
-                <text x="14" y="18">terminal q<tspan baseline-shift="sub" font-size="8">T</tspan></text>
-              </g>
               <g class="plot-callout plot-callout-blue" transform="translate(339 48)">
                 <rect class="plot-callout-bg" width="102" height="27" rx="8" />
                 <text x="14" y="18">teacher f<tspan baseline-shift="super" font-size="8">*</tspan></text>
@@ -853,79 +850,26 @@
                 <span>Images</span>
                 <strong>smooth interpolation</strong>
               </div>
-              <svg class="distill-svg language-transfer-svg" viewBox="0 0 420 330" role="img" aria-labelledby="image-space-title image-space-desc">
-                <title id="image-space-title">Image pixels can move along a smooth interpolation path</title>
-                <desc id="image-space-desc">A point moves on a straight pixel-space line from a dog image to a cat image, with blended intermediate images still being valid continuous states.</desc>
-                <defs>
-                  <marker id="imageInterpArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#6ee8ff" />
-                  </marker>
-                </defs>
-                <rect class="distill-map-window" x="24" y="28" width="372" height="258" rx="22" />
-                <path id="imageInterpPath" class="image-interp-line" d="M154 136 L266 136" marker-end="url(#imageInterpArrow)" />
-                <circle class="image-interp-end" cx="154" cy="136" r="5" />
-                <circle class="image-interp-end" cx="266" cy="136" r="5" />
-                <circle class="image-interp-point" r="8">
-                  <animateMotion dur="5.8s" repeatCount="indefinite" rotate="auto">
-                    <mpath href="#imageInterpPath" />
-                  </animateMotion>
-                </circle>
-                <g class="animal-card animal-card-dog" transform="translate(44 76)">
-                  <rect class="animal-frame" width="110" height="118" rx="18" />
-                  <rect class="animal-sky" x="10" y="10" width="90" height="98" rx="13" />
-                  <ellipse class="animal-ground" cx="55" cy="88" rx="35" ry="10" />
-                  <path class="dog-tail" d="M82 73 C101 58 98 45 87 41" />
-                  <ellipse class="dog-body" cx="57" cy="72" rx="31" ry="20" />
-                  <circle class="dog-head" cx="48" cy="45" r="23" />
-                  <path class="dog-ear" d="M30 35 C19 43 21 61 34 61 C37 50 37 42 30 35Z" />
-                  <path class="dog-ear" d="M63 33 C78 38 77 57 62 60 C58 49 57 40 63 33Z" />
-                  <ellipse class="dog-snout" cx="52" cy="53" rx="14" ry="10" />
-                  <circle class="animal-eye" cx="41" cy="42" r="2.5" />
-                  <circle class="animal-eye" cx="56" cy="42" r="2.5" />
-                  <circle class="animal-nose" cx="51" cy="52" r="3" />
-                  <path class="dog-leg" d="M39 86 L35 99 M67 86 L72 99" />
-                </g>
-                <g class="animal-card animal-card-cat" transform="translate(266 76)">
-                  <rect class="animal-frame" width="110" height="118" rx="18" />
-                  <rect class="animal-sky" x="10" y="10" width="90" height="98" rx="13" />
-                  <ellipse class="animal-ground" cx="55" cy="88" rx="35" ry="10" />
-                  <path class="cat-tail" d="M83 78 C102 59 99 34 82 34" />
-                  <ellipse class="cat-body" cx="59" cy="76" rx="29" ry="21" />
-                  <circle class="cat-head" cx="52" cy="45" r="22" />
-                  <path class="cat-ear" d="M35 30 L43 12 L51 32Z" />
-                  <path class="cat-ear" d="M57 31 L72 14 L72 38Z" />
-                  <circle class="animal-eye" cx="44" cy="43" r="2.4" />
-                  <circle class="animal-eye" cx="59" cy="43" r="2.4" />
-                  <path class="cat-nose" d="M50 51 L56 51 L53 55Z" />
-                  <path class="cat-whisker" d="M38 53 H19 M39 58 H23 M67 53 H86 M66 58 H82" />
-                  <path class="cat-leg" d="M45 90 L41 101 M69 90 L74 101" />
-                </g>
-                <g class="image-mix-card" transform="translate(166 204)">
-                  <rect width="88" height="62" rx="16" />
-                  <g class="mix-dog" transform="translate(7 2)">
-                    <ellipse cx="39" cy="41" rx="23" ry="14" />
-                    <circle cx="33" cy="24" r="16" />
-                    <path d="M21 20 C14 27 16 38 24 38 C26 30 26 25 21 20Z" />
-                    <ellipse cx="36" cy="31" rx="10" ry="7" />
-                  </g>
-                  <g class="mix-cat" transform="translate(18 2)">
-                    <ellipse cx="39" cy="42" rx="22" ry="15" />
-                    <circle cx="34" cy="24" r="16" />
-                    <path d="M22 14 L29 2 L34 16Z" />
-                    <path d="M40 16 L52 4 L51 22Z" />
-                    <path d="M29 30 H13 M45 30 H61" />
-                  </g>
-                  <circle class="image-mix-dot" cx="44" cy="30" r="5" />
-                </g>
-                <g class="plot-callout plot-callout-blue" transform="translate(140 52)">
-                  <rect class="plot-callout-bg" width="138" height="27" rx="8" />
-                  <text x="14" y="18">linear pixel path</text>
-                </g>
-                <g class="plot-callout plot-callout-green" transform="translate(142 270)">
-                  <rect class="plot-callout-bg" width="137" height="27" rx="8" />
-                  <text x="14" y="18">valid in-between</text>
-                </g>
-              </svg>
+              <div
+                class="continuous-interp-stage"
+                role="img"
+                aria-label="A point moves on a dashed line from a dog image to a cat image, while a connected preview cross-fades between the same two images to show a continuous pixel interpolation.">
+                <figure class="interp-endpoint interp-endpoint-dog">
+                  <img src="/Bio-page/static/homepage/blog/idlm-dog-interpolation.png?v=20260601-real-dog" alt="Realistic dog portrait endpoint">
+                </figure>
+                <figure class="interp-endpoint interp-endpoint-cat">
+                  <img src="/Bio-page/static/homepage/blog/idlm-cat-step-final.png?v=20260529-cat-blocks" alt="Final tabby cat image from section 1.3">
+                </figure>
+                <div class="interp-track" aria-hidden="true"></div>
+                <div class="interp-knob" aria-hidden="true"></div>
+                <div class="interp-sample" aria-hidden="true">
+                  <span class="interp-tether"></span>
+                  <div class="interp-sample-frame">
+                    <img class="interp-sample-dog" src="/Bio-page/static/homepage/blog/idlm-dog-interpolation.png?v=20260601-real-dog" alt="">
+                    <img class="interp-sample-cat" src="/Bio-page/static/homepage/blog/idlm-cat-step-final.png?v=20260529-cat-blocks" alt="">
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="distill-map-panel language-transfer-panel">
               <div class="distill-map-head">
@@ -1261,10 +1205,13 @@
             intermediate token choices on one differentiable path.
           </figcaption>
         </figure>
+
+        <h3 id="sequence-capacity" class="blog-subheading">3.3 Sequence-Level Generative Capacity</h3>
         <p>
-          At the sequence level, the student is a latent mixture. For a shared latent variable
-          \(\varepsilon\), the conditional token distribution may factorize, but the same
-          \(\varepsilon\) controls every position:
+          At the sequence level, the student distribution can be interpreted as a latent mixture.
+          For a shared latent variable \(\varepsilon\), the conditional token distribution may
+          factorize across positions; nevertheless, the same \(\varepsilon\) governs the entire
+          sequence:
         </p>
         <div class="blog-equation">
           \[
@@ -1277,27 +1224,184 @@
             \right].
           \]
         </div>
-        <div class="mixture-visual" aria-label="Latent mixture intuition">
-          <div class="latent-node">
-            <span>latent</span>
-            <strong>\(\varepsilon\)</strong>
+        <figure class="sequence-capacity-map distillation-map" aria-label="Two-dimensional intuition for sequence-level latent mixtures">
+          <div class="distillation-map-grid sequence-capacity-grid">
+            <div class="distill-map-panel sequence-capacity-panel">
+              <div class="distill-map-head">
+                <span>Token-wise view</span>
+                <strong>local choices drift separately</strong>
+              </div>
+              <svg class="distill-svg sequence-capacity-svg" viewBox="0 0 560 330" role="img" aria-labelledby="tokenwise-sequence-title tokenwise-sequence-desc">
+                <title id="tokenwise-sequence-title">Independent token choices in a two-dimensional token space</title>
+                <desc id="tokenwise-sequence-desc">Each position is pulled toward its own local token basin, so the resulting sequence has no shared latent source tying the positions together.</desc>
+                <defs>
+                  <marker id="sequenceTokenArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#ffd3a2" />
+                  </marker>
+                  <radialGradient id="sequenceWellBlue" cx="50%" cy="50%" r="58%">
+                    <stop offset="0%" stop-color="#6ee8ff" stop-opacity="0.38" />
+                    <stop offset="100%" stop-color="#6ee8ff" stop-opacity="0.04" />
+                  </radialGradient>
+                  <radialGradient id="sequenceWellGreen" cx="50%" cy="50%" r="58%">
+                    <stop offset="0%" stop-color="#b5f07c" stop-opacity="0.38" />
+                    <stop offset="100%" stop-color="#b5f07c" stop-opacity="0.04" />
+                  </radialGradient>
+                  <radialGradient id="sequenceWellOrange" cx="50%" cy="50%" r="58%">
+                    <stop offset="0%" stop-color="#ffd3a2" stop-opacity="0.36" />
+                    <stop offset="100%" stop-color="#ffd3a2" stop-opacity="0.04" />
+                  </radialGradient>
+                  <radialGradient id="sequenceWellPurple" cx="50%" cy="50%" r="58%">
+                    <stop offset="0%" stop-color="#b86bff" stop-opacity="0.36" />
+                    <stop offset="100%" stop-color="#b86bff" stop-opacity="0.04" />
+                  </radialGradient>
+                </defs>
+                <rect class="distill-map-window" x="24" y="28" width="512" height="258" rx="22" />
+                <g class="sequence-token-wells">
+                  <ellipse class="well-blue" cx="136" cy="96" rx="86" ry="47" transform="rotate(-15 136 96)" />
+                  <ellipse class="well-green" cx="404" cy="94" rx="88" ry="48" transform="rotate(12 404 94)" />
+                  <ellipse class="well-orange" cx="170" cy="218" rx="94" ry="50" transform="rotate(15 170 218)" />
+                  <ellipse class="well-purple" cx="410" cy="218" rx="90" ry="48" transform="rotate(-12 410 218)" />
+                  <ellipse class="well-inner" cx="136" cy="96" rx="48" ry="25" transform="rotate(-15 136 96)" />
+                  <ellipse class="well-inner" cx="404" cy="94" rx="50" ry="26" transform="rotate(12 404 94)" />
+                  <ellipse class="well-inner" cx="170" cy="218" rx="54" ry="27" transform="rotate(15 170 218)" />
+                  <ellipse class="well-inner" cx="410" cy="218" rx="50" ry="26" transform="rotate(-12 410 218)" />
+                </g>
+                <g class="independent-slot-rays">
+                  <path d="M86 276 C94 206 104 143 136 96" marker-end="url(#sequenceTokenArrow)" />
+                  <path d="M188 276 C254 197 328 129 404 94" marker-end="url(#sequenceTokenArrow)" />
+                  <path d="M290 276 C260 250 220 232 170 218" marker-end="url(#sequenceTokenArrow)" />
+                  <path d="M392 276 C402 255 410 238 410 218" marker-end="url(#sequenceTokenArrow)" />
+                  <path d="M494 276 C431 232 370 168 404 94" marker-end="url(#sequenceTokenArrow)" />
+                </g>
+                <g class="independent-token-cloud">
+                  <circle class="seq-dot-blue" cx="128" cy="92" r="7" />
+                  <circle class="seq-dot-blue" cx="156" cy="112" r="6" />
+                  <circle class="seq-dot-green" cx="398" cy="82" r="7" />
+                  <circle class="seq-dot-green" cx="426" cy="105" r="6" />
+                  <circle class="seq-dot-orange" cx="160" cy="208" r="7" />
+                  <circle class="seq-dot-orange" cx="192" cy="230" r="6" />
+                  <circle class="seq-dot-purple" cx="402" cy="210" r="7" />
+                  <circle class="seq-dot-purple" cx="432" cy="230" r="6" />
+                </g>
+                <g class="sequence-slot-row independent-slots" transform="translate(58 282)">
+                  <g transform="translate(0 0)">
+                    <rect width="58" height="32" rx="9" />
+                    <text x="29" y="21">x<tspan baseline-shift="super" font-size="8">1</tspan></text>
+                  </g>
+                  <g transform="translate(102 0)">
+                    <rect width="58" height="32" rx="9" />
+                    <text x="29" y="21">x<tspan baseline-shift="super" font-size="8">2</tspan></text>
+                  </g>
+                  <g transform="translate(204 0)">
+                    <rect width="58" height="32" rx="9" />
+                    <text x="29" y="21">x<tspan baseline-shift="super" font-size="8">3</tspan></text>
+                  </g>
+                  <g transform="translate(306 0)">
+                    <rect width="58" height="32" rx="9" />
+                    <text x="29" y="21">x<tspan baseline-shift="super" font-size="8">4</tspan></text>
+                  </g>
+                  <g transform="translate(408 0)">
+                    <rect width="58" height="32" rx="9" />
+                    <text x="29" y="21">x<tspan baseline-shift="super" font-size="8">L</tspan></text>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="distill-map-panel sequence-capacity-panel">
+              <div class="distill-map-head">
+                <span>Sequence-level view</span>
+                <strong>one latent selects a component</strong>
+              </div>
+              <svg class="distill-svg sequence-capacity-svg" viewBox="0 0 560 330" role="img" aria-labelledby="latent-sequence-title latent-sequence-desc">
+                <title id="latent-sequence-title">A shared latent variable selects a coherent sequence component</title>
+                <desc id="latent-sequence-desc">A two-dimensional latent space is partitioned into basins. Each latent sample points to an entire sequence row, so marginalization over latent variables gives a mixture over sequence-level components.</desc>
+                <defs>
+                  <marker id="sequenceLatentArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#b5f07c" />
+                  </marker>
+                  <radialGradient id="latentBasinGreen" cx="50%" cy="50%" r="58%">
+                    <stop offset="0%" stop-color="#b5f07c" stop-opacity="0.42" />
+                    <stop offset="100%" stop-color="#b5f07c" stop-opacity="0.04" />
+                  </radialGradient>
+                  <radialGradient id="latentBasinBlue" cx="50%" cy="50%" r="58%">
+                    <stop offset="0%" stop-color="#6ee8ff" stop-opacity="0.38" />
+                    <stop offset="100%" stop-color="#6ee8ff" stop-opacity="0.04" />
+                  </radialGradient>
+                  <radialGradient id="latentBasinPurple" cx="50%" cy="50%" r="58%">
+                    <stop offset="0%" stop-color="#b86bff" stop-opacity="0.36" />
+                    <stop offset="100%" stop-color="#b86bff" stop-opacity="0.04" />
+                  </radialGradient>
+                </defs>
+                <rect class="distill-map-window" x="24" y="28" width="512" height="258" rx="22" />
+                <g class="sequence-latent-basins">
+                  <ellipse class="latent-basin-green" cx="146" cy="92" rx="84" ry="50" transform="rotate(-14 146 92)" />
+                  <ellipse class="latent-basin-blue" cx="116" cy="216" rx="90" ry="52" transform="rotate(18 116 216)" />
+                  <ellipse class="latent-basin-purple" cx="246" cy="168" rx="78" ry="46" transform="rotate(-7 246 168)" />
+                  <ellipse class="latent-inner" cx="146" cy="92" rx="46" ry="25" transform="rotate(-14 146 92)" />
+                  <ellipse class="latent-inner" cx="116" cy="216" rx="50" ry="26" transform="rotate(18 116 216)" />
+                  <ellipse class="latent-inner" cx="246" cy="168" rx="42" ry="23" transform="rotate(-7 246 168)" />
+                </g>
+                <path class="sequence-manifold-glow" d="M74 232 C91 129 139 56 206 91 C260 119 286 162 266 203 C231 272 138 273 74 232Z" />
+                <path class="sequence-manifold" d="M74 232 C91 129 139 56 206 91 C260 119 286 162 266 203 C231 272 138 273 74 232Z" />
+                <g class="latent-hub sequence-latent-points">
+                  <g transform="translate(145 91)">
+                    <circle r="10" />
+                    <text y="3">&epsilon;</text>
+                  </g>
+                  <g transform="translate(116 216)">
+                    <circle r="10" />
+                    <text y="3">&epsilon;</text>
+                  </g>
+                  <g transform="translate(246 168)">
+                    <circle r="10" />
+                    <text y="3">&epsilon;</text>
+                  </g>
+                </g>
+                <g class="latent-rays sequence-latent-rays">
+                  <path d="M156 91 C236 72 284 74 336 80" marker-end="url(#sequenceLatentArrow)" />
+                  <path d="M126 216 C220 234 284 232 336 230" marker-end="url(#sequenceLatentArrow)" />
+                  <path d="M256 168 C293 170 316 160 338 156" marker-end="url(#sequenceLatentArrow)" />
+                </g>
+                <g class="sequence-atom-stack" transform="translate(344 58)">
+                  <g class="sequence-atom-row atom-green" transform="translate(0 0)">
+                    <rect class="sequence-atom-frame" width="162" height="48" rx="13" />
+                    <rect class="seq-token-slot slot-green" x="14" y="12" width="20" height="24" rx="6" />
+                    <rect class="seq-token-slot slot-blue" x="42" y="12" width="20" height="24" rx="6" />
+                    <rect class="seq-token-slot slot-green" x="70" y="12" width="20" height="24" rx="6" />
+                    <rect class="seq-token-slot slot-yellow" x="98" y="12" width="20" height="24" rx="6" />
+                    <rect class="seq-token-slot slot-blue" x="126" y="12" width="20" height="24" rx="6" />
+                  </g>
+                  <g class="sequence-atom-row atom-purple" transform="translate(0 76)">
+                    <rect class="sequence-atom-frame" width="162" height="48" rx="13" />
+                    <rect class="seq-token-slot slot-purple" x="14" y="12" width="20" height="24" rx="6" />
+                    <rect class="seq-token-slot slot-orange" x="42" y="12" width="20" height="24" rx="6" />
+                    <rect class="seq-token-slot slot-purple" x="70" y="12" width="20" height="24" rx="6" />
+                    <rect class="seq-token-slot slot-blue" x="98" y="12" width="20" height="24" rx="6" />
+                    <rect class="seq-token-slot slot-orange" x="126" y="12" width="20" height="24" rx="6" />
+                  </g>
+                  <g class="sequence-atom-row atom-blue" transform="translate(0 152)">
+                    <rect class="sequence-atom-frame" width="162" height="48" rx="13" />
+                    <rect class="seq-token-slot slot-blue" x="14" y="12" width="20" height="24" rx="6" />
+                    <rect class="seq-token-slot slot-green" x="42" y="12" width="20" height="24" rx="6" />
+                    <rect class="seq-token-slot slot-yellow" x="70" y="12" width="20" height="24" rx="6" />
+                    <rect class="seq-token-slot slot-orange" x="98" y="12" width="20" height="24" rx="6" />
+                    <rect class="seq-token-slot slot-green" x="126" y="12" width="20" height="24" rx="6" />
+                  </g>
+                </g>
+                <g class="sequence-mixture-brace" aria-hidden="true">
+                  <path d="M523 63 C542 69 542 96 523 102 C542 108 542 135 523 141" />
+                  <path d="M523 215 C542 221 542 248 523 254 C542 260 542 287 523 293" />
+                </g>
+              </svg>
+            </div>
           </div>
-          <div class="token-row" aria-label="Conditionally independent token predictions">
-            <span>\(x^{(1)}\)</span>
-            <span>\(x^{(2)}\)</span>
-            <span>\(x^{(3)}\)</span>
-            <span>\(\cdots\)</span>
-            <span>\(x^{(L)}\)</span>
-          </div>
-          <p>
-            A shared latent variable controls the whole sequence. Conditioned on \(\varepsilon\),
-            positions can factorize; after averaging over \(\varepsilon\), the generator becomes a
-            mixture of sequence-level components. This is how a seemingly factorized generator can
-            still represent coherent sentence-level choices.
-          </p>
-        </div>
+          <figcaption>
+            The visual distinction is global: independent token choices scatter across local basins,
+            while a shared \(\varepsilon\) selects one whole sequence-level component.
+          </figcaption>
+        </figure>
 
-        <h3 id="loss-intuition" class="blog-subheading">3.3 Loss Intuition</h3>
+        <h3 id="loss-intuition" class="blog-subheading">3.4 Loss Intuition</h3>
         <p>
           Training alternates between two updates. First, fit the fake model \(f\) on current student
           samples. Second, freeze \(f\) and update \(G_\theta\) with the teacher-minus-fake gap:
