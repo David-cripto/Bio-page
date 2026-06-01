@@ -1851,6 +1851,15 @@ svg {
   line-height: 1.55;
 }
 
+.sequence-capacity-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.sequence-capacity-panel {
+  width: min(100%, 780px);
+  margin: 0 auto;
+}
+
 .sequence-capacity-svg text {
   font-family: var(--font-mono);
 }

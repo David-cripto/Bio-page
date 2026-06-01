@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-real-image-interpolation">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-shared-latent-map">
 </head>
 <body>
   <main class="blog-shell">
@@ -1228,89 +1228,8 @@
           <div class="distillation-map-grid sequence-capacity-grid">
             <div class="distill-map-panel sequence-capacity-panel">
               <div class="distill-map-head">
-                <span>Token-wise view</span>
-                <strong>local choices drift separately</strong>
-              </div>
-              <svg class="distill-svg sequence-capacity-svg" viewBox="0 0 560 330" role="img" aria-labelledby="tokenwise-sequence-title tokenwise-sequence-desc">
-                <title id="tokenwise-sequence-title">Independent token choices in a two-dimensional token space</title>
-                <desc id="tokenwise-sequence-desc">Each position is pulled toward its own local token basin, so the resulting sequence has no shared latent source tying the positions together.</desc>
-                <defs>
-                  <marker id="sequenceTokenArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#ffd3a2" />
-                  </marker>
-                  <radialGradient id="sequenceWellBlue" cx="50%" cy="50%" r="58%">
-                    <stop offset="0%" stop-color="#6ee8ff" stop-opacity="0.38" />
-                    <stop offset="100%" stop-color="#6ee8ff" stop-opacity="0.04" />
-                  </radialGradient>
-                  <radialGradient id="sequenceWellGreen" cx="50%" cy="50%" r="58%">
-                    <stop offset="0%" stop-color="#b5f07c" stop-opacity="0.38" />
-                    <stop offset="100%" stop-color="#b5f07c" stop-opacity="0.04" />
-                  </radialGradient>
-                  <radialGradient id="sequenceWellOrange" cx="50%" cy="50%" r="58%">
-                    <stop offset="0%" stop-color="#ffd3a2" stop-opacity="0.36" />
-                    <stop offset="100%" stop-color="#ffd3a2" stop-opacity="0.04" />
-                  </radialGradient>
-                  <radialGradient id="sequenceWellPurple" cx="50%" cy="50%" r="58%">
-                    <stop offset="0%" stop-color="#b86bff" stop-opacity="0.36" />
-                    <stop offset="100%" stop-color="#b86bff" stop-opacity="0.04" />
-                  </radialGradient>
-                </defs>
-                <rect class="distill-map-window" x="24" y="28" width="512" height="258" rx="22" />
-                <g class="sequence-token-wells">
-                  <ellipse class="well-blue" cx="136" cy="96" rx="86" ry="47" transform="rotate(-15 136 96)" />
-                  <ellipse class="well-green" cx="404" cy="94" rx="88" ry="48" transform="rotate(12 404 94)" />
-                  <ellipse class="well-orange" cx="170" cy="218" rx="94" ry="50" transform="rotate(15 170 218)" />
-                  <ellipse class="well-purple" cx="410" cy="218" rx="90" ry="48" transform="rotate(-12 410 218)" />
-                  <ellipse class="well-inner" cx="136" cy="96" rx="48" ry="25" transform="rotate(-15 136 96)" />
-                  <ellipse class="well-inner" cx="404" cy="94" rx="50" ry="26" transform="rotate(12 404 94)" />
-                  <ellipse class="well-inner" cx="170" cy="218" rx="54" ry="27" transform="rotate(15 170 218)" />
-                  <ellipse class="well-inner" cx="410" cy="218" rx="50" ry="26" transform="rotate(-12 410 218)" />
-                </g>
-                <g class="independent-slot-rays">
-                  <path d="M86 276 C94 206 104 143 136 96" marker-end="url(#sequenceTokenArrow)" />
-                  <path d="M188 276 C254 197 328 129 404 94" marker-end="url(#sequenceTokenArrow)" />
-                  <path d="M290 276 C260 250 220 232 170 218" marker-end="url(#sequenceTokenArrow)" />
-                  <path d="M392 276 C402 255 410 238 410 218" marker-end="url(#sequenceTokenArrow)" />
-                  <path d="M494 276 C431 232 370 168 404 94" marker-end="url(#sequenceTokenArrow)" />
-                </g>
-                <g class="independent-token-cloud">
-                  <circle class="seq-dot-blue" cx="128" cy="92" r="7" />
-                  <circle class="seq-dot-blue" cx="156" cy="112" r="6" />
-                  <circle class="seq-dot-green" cx="398" cy="82" r="7" />
-                  <circle class="seq-dot-green" cx="426" cy="105" r="6" />
-                  <circle class="seq-dot-orange" cx="160" cy="208" r="7" />
-                  <circle class="seq-dot-orange" cx="192" cy="230" r="6" />
-                  <circle class="seq-dot-purple" cx="402" cy="210" r="7" />
-                  <circle class="seq-dot-purple" cx="432" cy="230" r="6" />
-                </g>
-                <g class="sequence-slot-row independent-slots" transform="translate(58 282)">
-                  <g transform="translate(0 0)">
-                    <rect width="58" height="32" rx="9" />
-                    <text x="29" y="21">x<tspan baseline-shift="super" font-size="8">1</tspan></text>
-                  </g>
-                  <g transform="translate(102 0)">
-                    <rect width="58" height="32" rx="9" />
-                    <text x="29" y="21">x<tspan baseline-shift="super" font-size="8">2</tspan></text>
-                  </g>
-                  <g transform="translate(204 0)">
-                    <rect width="58" height="32" rx="9" />
-                    <text x="29" y="21">x<tspan baseline-shift="super" font-size="8">3</tspan></text>
-                  </g>
-                  <g transform="translate(306 0)">
-                    <rect width="58" height="32" rx="9" />
-                    <text x="29" y="21">x<tspan baseline-shift="super" font-size="8">4</tspan></text>
-                  </g>
-                  <g transform="translate(408 0)">
-                    <rect width="58" height="32" rx="9" />
-                    <text x="29" y="21">x<tspan baseline-shift="super" font-size="8">L</tspan></text>
-                  </g>
-                </g>
-              </svg>
-            </div>
-            <div class="distill-map-panel sequence-capacity-panel">
-              <div class="distill-map-head">
-                <span>Sequence-level view</span>
-                <strong>one latent selects a component</strong>
+                <span>Shared latent</span>
+                <strong>one \(\varepsilon\) selects a whole sequence</strong>
               </div>
               <svg class="distill-svg sequence-capacity-svg" viewBox="0 0 560 330" role="img" aria-labelledby="latent-sequence-title latent-sequence-desc">
                 <title id="latent-sequence-title">A shared latent variable selects a coherent sequence component</title>
@@ -1396,8 +1315,8 @@
             </div>
           </div>
           <figcaption>
-            The visual distinction is global: independent token choices scatter across local basins,
-            while a shared \(\varepsilon\) selects one whole sequence-level component.
+            A shared \(\varepsilon\) selects one whole sequence-level component; averaging over
+            latent samples gives a mixture of coherent sequence atoms.
           </figcaption>
         </figure>
 
