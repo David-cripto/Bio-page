@@ -1699,6 +1699,78 @@ svg {
   stroke-width: 3;
 }
 
+.consistency-callouts {
+  pointer-events: none;
+}
+
+.plot-callout-bg {
+  fill: rgba(4, 13, 31, 0.78);
+  stroke-width: 1.1;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.24));
+}
+
+.plot-callout text {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.plot-callout-swatch,
+.callout-leader {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.plot-callout-swatch {
+  stroke-width: 3;
+}
+
+.callout-leader {
+  stroke-width: 1.5;
+  opacity: 0.72;
+}
+
+.plot-callout-blue .plot-callout-bg {
+  stroke: rgba(110, 232, 255, 0.5);
+}
+
+.plot-callout-blue text {
+  fill: #9beeff;
+}
+
+.plot-callout-blue .plot-callout-swatch,
+.callout-leader-blue {
+  stroke: #6ee8ff;
+}
+
+.plot-callout-orange .plot-callout-bg {
+  stroke: rgba(255, 211, 162, 0.52);
+}
+
+.plot-callout-orange text {
+  fill: #ffd3a2;
+}
+
+.plot-callout-orange .plot-callout-swatch,
+.callout-leader-orange {
+  stroke: #ffd3a2;
+}
+
+.plot-callout-green .plot-callout-bg {
+  stroke: rgba(181, 240, 124, 0.5);
+}
+
+.plot-callout-green text {
+  fill: #b5f07c;
+}
+
+.plot-callout-green .plot-callout-swatch,
+.callout-leader-green {
+  stroke: #b5f07c;
+}
+
 .density-consistency-noise ellipse {
   fill: url("#noiseGlow");
   stroke: rgba(184, 107, 255, 0.36);
