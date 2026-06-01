@@ -2254,11 +2254,11 @@ svg {
 @keyframes interpSlide {
   0%,
   100% {
-    left: 44%;
+    left: var(--interp-inset);
   }
 
   50% {
-    left: 56%;
+    left: calc(100% - var(--interp-inset) - var(--interp-size));
   }
 }
 
@@ -2452,6 +2452,12 @@ svg {
 }
 
 .continuous-interp-stage {
+  container-type: inline-size;
+  --interp-inset: clamp(22px, 8cqw, 34px);
+  --interp-size: clamp(92px, 25cqw, 128px);
+  --interp-half-size: clamp(46px, 12.5cqw, 64px);
+  --interp-top: 34px;
+
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -2466,9 +2472,9 @@ svg {
 
 .interp-endpoint {
   position: absolute;
-  top: 34px;
+  top: var(--interp-top);
   z-index: 1;
-  width: clamp(92px, 25%, 128px);
+  width: var(--interp-size);
   margin: 0;
   overflow: hidden;
   aspect-ratio: 1;
@@ -2479,11 +2485,11 @@ svg {
 }
 
 .interp-endpoint-dog {
-  left: 34px;
+  left: var(--interp-inset);
 }
 
 .interp-endpoint-cat {
-  right: 34px;
+  right: var(--interp-inset);
 }
 
 .interp-endpoint img,
@@ -2496,9 +2502,10 @@ svg {
 
 .interp-track {
   position: absolute;
-  top: clamp(80px, 29%, 98px);
-  left: 22%;
-  right: 22%;
+  top: calc(var(--interp-top) + var(--interp-half-size));
+  right: calc(var(--interp-inset) + var(--interp-size));
+  left: calc(var(--interp-inset) + var(--interp-size));
+  z-index: 0;
   border-top: 2.5px dashed rgba(110, 232, 255, 0.74);
   filter: drop-shadow(0 0 10px rgba(110, 232, 255, 0.22));
 }
@@ -2526,11 +2533,10 @@ svg {
 
 .interp-sample {
   position: absolute;
-  top: 34px;
-  left: 44%;
+  top: var(--interp-top);
+  left: var(--interp-inset);
   z-index: 3;
-  width: clamp(92px, 25%, 128px);
-  transform: translateX(-50%);
+  width: var(--interp-size);
   animation: interpSlide 6s linear infinite;
 }
 
@@ -2542,10 +2548,10 @@ svg {
   position: relative;
   overflow: hidden;
   aspect-ratio: 1;
-  border: 1px solid rgba(181, 240, 124, 0.38);
+  border: 1px solid rgba(246, 251, 255, 0.16);
   border-radius: 12px;
-  background: rgba(2, 8, 24, 0.72);
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.36), 0 0 20px rgba(181, 240, 124, 0.12);
+  background: rgba(2, 8, 24, 0.66);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32);
 }
 
 .interp-sample-cat {

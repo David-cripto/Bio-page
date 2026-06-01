@@ -861,18 +861,33 @@
 
         <h3 id="language-transfer" class="blog-subheading">2.3 From Images to Language</h3>
         <p>
-          The discrete language setting changes the problem. Tokens are categorical, generator
-          outputs can be non-smooth one-hot choices, and sampling an intermediate token can block
-          gradients. A relaxed token may be differentiable, but it can also be out of distribution
-          for a teacher trained on hard token states.
+          Of course, we would like to transfer this inverse-distillation principle to the language
+          domain: start from a strong pretrained diffusion language model, train a faster student
+          distribution \(p_\theta\), and preserve the same distribution-matching interpretation.
+          However, language introduces difficulties that are absent, or much less severe, in the
+          continuous image setting. The main obstacle is that text lives on a discrete token space.
+          A token is a categorical state, not a point that can be moved infinitesimally along a
+          smooth pixel-space direction.
         </p>
         <p>
-          There is also a sequence-level issue. A text generator cannot just choose \(64\) tokens
-          independently and hope the sentence is coherent. It has to coordinate topic, grammar,
-          agreement, style, and long-range dependencies. So the goal is not simply "apply image
-          distillation to text." The goal is to keep the distribution-matching promise of inverse
-          distillation while making the objective valid and trainable for discrete diffusion
-          language models. This is exactly the role of IDLM.
+          This discreteness creates an optimization problem. If the student generator outputs hard
+          one-hot tokens, the mapping from logits to tokens is non-smooth, and gradients cannot pass
+          through the sampling decision in the usual way. One can relax a token into a probability
+          vector on the simplex, which makes the generator output differentiable, but this introduces
+          a second problem: the pretrained teacher was typically trained on hard token states. As a
+          result, evaluating the teacher on relaxed intermediate states may produce unstable or
+          poorly calibrated training signals. Thus, simply copying the continuous inverse
+          distillation recipe into language is not mathematically or practically sufficient.
+        </p>
+        <p>
+          There is also a genuinely sequence-level issue. A language model should not generate a
+          sentence by choosing \(64\) tokens independently. The tokens must agree with one another:
+          they must maintain topic, syntax, agreement, discourse structure, style, and long-range
+          semantic dependencies. In other words, the object to be matched is not only a collection of
+          token-wise marginals, but a distribution over coherent sequences. A valid language
+          distillation objective must therefore preserve the distribution-matching promise of inverse
+          distillation while remaining differentiable, well-defined for discrete diffusion
+          processes, and sensitive to sequence-level structure. This is the role of IDLM.
         </p>
         <figure class="language-transfer-map" aria-label="Visual intuition for moving inverse distillation from images to language">
           <div class="distillation-map-grid language-transfer-grid">
@@ -1287,10 +1302,29 @@
 
         <h3 id="sequence-capacity" class="blog-subheading">3.3 Sequence-Level Generative Capacity</h3>
         <p>
-          At the sequence level, the student distribution can be interpreted as a latent mixture.
-          For a shared latent variable \(\varepsilon\), the conditional token distribution may
-          factorize across positions; nevertheless, the same \(\varepsilon\) governs the entire
-          sequence:
+          How can a generator produce coherent text if the formula below still contains a product
+          over token positions? The answer is that the product is conditional, not marginal. IDLM
+          views the student as a mixture over a shared latent draw \(\varepsilon\): after
+          \(\varepsilon\) is sampled, the generator emits one categorical distribution for each
+          position, but all of these distributions are produced from the same latent state. This is
+          closely related to the motivation behind
+          <a href="https://arxiv.org/abs/2505.17384" target="_blank" rel="noopener noreferrer">VADD</a>
+          and
+          <a href="https://proceedings.mlr.press/v267/hayakawa25a.html" target="_blank" rel="noopener noreferrer">Di4C</a>:
+          high-dimensional discrete objects, including text, contain strong correlations across
+          dimensions, and few-step discrete generation needs a mechanism that can carry those
+          correlations rather than treating every coordinate as an isolated decision.
+        </p>
+        <p>
+          In the idealized picture, distribution matching encourages each conditional component to
+          become concentrated. For a fixed \(\varepsilon\), the token-level categorical
+          distributions can degenerate toward near-delta choices, so their product behaves like one
+          sequence-level atom: a complete sentence rather than a set of unrelated token marginals.
+          Different latent draws select different atoms, and averaging over \(\varepsilon\) recovers
+          a mixture over full sequences. Thus the conditional distribution may be factorized inside
+          one component, while the marginal student distribution remains capable of representing
+          coherent sentence-level choices such as topic, syntax, agreement, and long-range semantic
+          structure:
         </p>
         <div class="blog-equation">
           \[
