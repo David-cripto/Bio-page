@@ -1472,18 +1472,23 @@
 
         <h3 id="final-algorithm" class="blog-subheading">3.5 Final Algorithm</h3>
         <p>
-          The final IDLM training loop is simple: use the frozen teacher \(f^\star\) as a quality
-          reference, train an auxiliary fake denoiser \(f\) to recognize the current student samples,
-          and update the student generator \(G_\theta\) using the difference between the two losses.
-          In other words, the fake model learns what the student is currently producing, while the
-          student is pushed toward samples that the teacher explains better than the fake model.
+          In practice, one-step text generation is a difficult learning problem: the student would
+          need to recover global structure and token-level details from a highly noisy state in a
+          single jump. IDLM therefore trains the student as a few-step denoiser on a short reverse
+          trajectory. At each training step, a noised state \((x_t,t)\) is sampled from the forward
+          process and passed to \(G_\theta\). The resulting prediction is evaluated under both
+          \(f^\star\) and \(f\). The fake model minimizes the ordinary diffusion loss on the student
+          distribution, while the generator minimizes the teacher-minus-fake objective. This
+          alternating scheme implements the inverse-distillation signal without differentiating
+          through an exact inner argmin.
         </p>
         <p>
-          In practice, a noised state \((x_t,t)\) is sampled from the forward process and passed to
-          \(G_\theta\). The resulting prediction is evaluated under both \(f^\star\) and \(f\). The
-          fake model minimizes the ordinary diffusion loss on the student distribution, while the
-          generator minimizes the teacher-minus-fake objective. This alternating scheme implements
-          the inverse-distillation gap without differentiating through an exact inner argmin.
+          The final IDLM training loop can be read as a simple two-model comparison: use the frozen
+          teacher \(f^\star\) as a quality reference, train an auxiliary fake denoiser \(f\) to
+          recognize the current student samples, and update the student generator \(G_\theta\) using
+          the difference between the two losses. In other words, the fake model learns what the
+          student is currently producing, while the student is pushed toward samples that the teacher
+          explains better than the fake model.
         </p>
         <div class="algorithm-explainer">
           <div class="algorithm-panel">
