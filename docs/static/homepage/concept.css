@@ -2001,28 +2001,7 @@ svg {
 .sequence-capacity-panel {
   width: min(100%, 980px);
   margin: 0 auto;
-}
-
-.sequence-capacity-panel .distill-map-head {
-  align-items: baseline;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.sequence-capacity-panel .distill-map-head span {
-  font-size: 0.58rem;
-  letter-spacing: 0.08em;
-  line-height: 1.1;
-}
-
-.sequence-capacity-panel .distill-map-head strong {
-  font-size: clamp(0.78rem, 1.05vw, 0.95rem);
-  font-weight: 800;
-  line-height: 1.15;
-  text-align: left;
+  padding: 12px;
 }
 
 .sequence-capacity-svg text {

@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-small-sequence-header-horizontal-simplex-pseudocode-algorithms">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-sequence-map-no-header-horizontal-simplex-pseudocode-algorithms">
 </head>
 <body>
   <main class="blog-shell">
@@ -1340,11 +1340,7 @@
         <figure class="sequence-capacity-map distillation-map" aria-label="Two-dimensional intuition for sequence-level latent mixtures">
           <div class="distillation-map-grid sequence-capacity-grid">
             <div class="distill-map-panel sequence-capacity-panel">
-              <div class="distill-map-head">
-                <span>Latent mixture</span>
-                <strong>draw \(\varepsilon\), obtain a sentence atom</strong>
-              </div>
-              <svg class="distill-svg sequence-capacity-svg" viewBox="0 0 900 360" role="img" aria-labelledby="latent-sequence-title latent-sequence-desc">
+              <svg class="distill-svg sequence-capacity-svg" viewBox="0 0 900 330" role="img" aria-labelledby="latent-sequence-title latent-sequence-desc">
                 <title id="latent-sequence-title">Latent samples map to generated word sequences</title>
                 <desc id="latent-sequence-desc">Several latent variables are sampled from a latent prior. The generator maps each latent variable to one complete generated sequence, shown as rows of word tokens.</desc>
                 <defs>
@@ -1364,13 +1360,13 @@
                     <stop offset="100%" stop-color="#b86bff" stop-opacity="0.04" />
                   </radialGradient>
                 </defs>
-                <rect class="distill-map-window" x="24" y="28" width="852" height="286" rx="22" />
+                <rect class="distill-map-window" x="24" y="24" width="852" height="278" rx="22" />
                 <g class="sequence-latent-basins">
                   <ellipse class="latent-basin-green" cx="154" cy="173" rx="108" ry="118" transform="rotate(-12 154 173)" />
                   <ellipse class="latent-basin-blue" cx="154" cy="173" rx="72" ry="78" transform="rotate(-12 154 173)" />
                   <ellipse class="latent-basin-purple" cx="154" cy="173" rx="38" ry="42" transform="rotate(-12 154 173)" />
                 </g>
-                <text class="sequence-prior-label" x="154" y="43">p<tspan baseline-shift="sub" font-size="14">&#8496;</tspan></text>
+                <text class="sequence-prior-label" x="154" y="41">p<tspan baseline-shift="sub" font-size="14">&#8496;</tspan></text>
                 <g class="latent-hub sequence-latent-points">
                   <g transform="translate(128 100)">
                     <circle r="12" />
@@ -1407,7 +1403,7 @@
                     <text class="sequence-sentence-text" x="28" y="31">The model writes text.</text>
                   </g>
                 </g>
-                <text class="sequence-output-label" x="688" y="306">generated sequences</text>
+                <text class="sequence-output-label" x="688" y="292">generated sequences</text>
               </svg>
             </div>
           </div>
