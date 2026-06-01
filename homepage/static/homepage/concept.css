@@ -794,7 +794,7 @@ svg {
 }
 
 .blog-section h2,
-.result-block h3 {
+.result-block h3:not(.blog-subheading) {
   margin: 0 0 18px;
   color: var(--ink);
   letter-spacing: 0;
@@ -820,7 +820,7 @@ svg {
   line-height: 1.35;
 }
 
-.result-block h3 {
+.result-block h3:not(.blog-subheading) {
   font-size: clamp(1.2rem, 2vw, 1.75rem);
 }
 
