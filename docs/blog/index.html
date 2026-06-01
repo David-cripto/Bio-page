@@ -841,12 +841,10 @@
             </g>
           </svg>
           <figcaption>
-            The two dashed trajectories share the same terminal distribution \(q_T\). The upper
-            trajectory is induced by the frozen teacher \(f^\star\), trained on the target
-            distribution \(p^\star\), while the lower trajectory is induced by the fake model \(f\),
-            retrained on samples from the current student distribution \(p_\theta\). IDLM updates
-            the student by minimizing the teacher--fake loss gap
-            \(\mathcal{L}(f^\star,p_\theta)-\mathcal{L}(f,p_\theta)\).
+            The upper dashed path is the frozen teacher \(f^\star\), trained on the target
+            distribution \(p^\star\); the lower dashed path is the fake model \(f\), retrained on
+            current student samples from \(p_\theta\). IDLM updates the student by minimizing the
+            teacher--fake gap \(\mathcal{L}(f^\star,p_\theta)-\mathcal{L}(f,p_\theta)\).
           </figcaption>
         </figure>
         <p>
