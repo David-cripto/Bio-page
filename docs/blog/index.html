@@ -1030,24 +1030,209 @@
         </p>
 
         <h3 id="discrete-practice" class="blog-subheading">3.2 Handling Discrete Non-Smoothness</h3>
-        <p>
-          In practice, IDLM parameterizes \(p_\theta\) with a student generator \(G_\theta\). To make
-          gradients usable, the generator outputs points on the probability simplex instead of hard
-          one-hot tokens during training. This keeps the token loss differentiable while still
-          representing a distribution over vocabulary items.
-        </p>
-        <p>
-          Masked diffusion has a special simplification. With the \(\mathrm{SUBS}\) parameterization,
-          revealed tokens are copied. Once a token is unmasked, later reverse steps carry it forward.
-          Therefore the teacher and fake model agree on copied branches, and the IDLM signal survives
-          only at masked positions. This is why IDLM-MDLM has a clean mask-only update instead of
-          needing to backpropagate through every sampled intermediate token.
-        </p>
-        <p>
-          Uniform diffusion is harder because tokens can be revised repeatedly. IDLM uses the Duo
-          relaxation to keep a differentiable path through intermediate states. This matters because
-          uniform diffusion must learn both which token to choose and when to move between states.
-        </p>
+        <figure class="discrete-smoothness-map" aria-label="Visual intuition for simplex relaxation, masked diffusion cancellation, and uniform diffusion revisions">
+          <div class="discrete-map-grid">
+            <div class="discrete-map-panel discrete-simplex-panel">
+              <div class="distill-map-head">
+                <span>Simplex relaxation</span>
+                <strong>soft token, usable gradient</strong>
+              </div>
+              <svg class="distill-svg discrete-svg" viewBox="0 0 560 330" role="img" aria-labelledby="simplex-relax-title simplex-relax-desc">
+                <title id="simplex-relax-title">Simplex relaxation replaces hard one-hot jumps with a smooth token distribution</title>
+                <desc id="simplex-relax-desc">A hard one-hot token lives on a triangle vertex, while IDLM trains with a soft point inside the probability simplex so gradients can move continuously.</desc>
+                <defs>
+                  <marker id="simplexMoveArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#ffd3a2" />
+                  </marker>
+                  <linearGradient id="simplexPlane" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#6ee8ff" stop-opacity="0.18" />
+                    <stop offset="58%" stop-color="#b86bff" stop-opacity="0.12" />
+                    <stop offset="100%" stop-color="#b5f07c" stop-opacity="0.14" />
+                  </linearGradient>
+                </defs>
+                <rect class="distill-map-window" x="24" y="28" width="512" height="258" rx="22" />
+                <polygon class="simplex-face" points="150,248 282,78 412,248" />
+                <g class="simplex-grid-lines">
+                  <path d="M176 214 L306 214" />
+                  <path d="M203 180 L333 180" />
+                  <path d="M229 146 L360 146" />
+                  <path d="M189 198 L256 112" />
+                  <path d="M239 248 L332 128" />
+                  <path d="M374 198 L307 112" />
+                  <path d="M323 248 L230 128" />
+                </g>
+                <g class="simplex-vertices">
+                  <circle cx="150" cy="248" r="10" />
+                  <circle cx="282" cy="78" r="10" />
+                  <circle cx="412" cy="248" r="10" />
+                </g>
+                <g class="simplex-hard-jump">
+                  <path d="M282 78 C259 124 249 149 247 184" marker-end="url(#simplexMoveArrow)" />
+                </g>
+                <g class="simplex-soft-drift">
+                  <path d="M218 206 C244 178 268 158 301 139" marker-end="url(#simplexMoveArrow)" />
+                  <circle cx="218" cy="206" r="8" />
+                  <circle class="simplex-soft-dot" cx="301" cy="139" r="10" />
+                </g>
+                <g class="simplex-bars" transform="translate(54 71)">
+                  <rect x="0" y="98" width="24" height="64" rx="5" />
+                  <rect x="36" y="48" width="24" height="114" rx="5" />
+                  <rect x="72" y="82" width="24" height="80" rx="5" />
+                </g>
+                <g class="plot-callout plot-callout-blue" transform="translate(42 46)">
+                  <rect class="plot-callout-bg" width="129" height="27" rx="8" />
+                  <text x="14" y="18">weighted token loss</text>
+                </g>
+                <g class="plot-callout plot-callout-orange" transform="translate(201 274)">
+                  <rect class="plot-callout-bg" width="164" height="27" rx="8" />
+                  <text x="14" y="18">G<tspan baseline-shift="sub" font-size="8">&theta;</tspan>(&epsilon;) &isin; simplex</text>
+                </g>
+                <g class="simplex-token-labels" aria-hidden="true">
+                  <text x="120" y="277">cat</text>
+                  <text x="260" y="53">the</text>
+                  <text x="393" y="277">mat</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="discrete-map-panel discrete-mask-panel">
+              <div class="distill-map-head">
+                <span>Masked diffusion</span>
+                <strong>copied branch cancels</strong>
+              </div>
+              <svg class="distill-svg discrete-svg" viewBox="0 0 560 330" role="img" aria-labelledby="masked-cancel-title masked-cancel-desc">
+                <title id="masked-cancel-title">Masked diffusion has a mask-only IDLM update</title>
+                <desc id="masked-cancel-desc">Revealed tokens are copied by both teacher and fake model, so their contribution cancels. Only the masked branch keeps a teacher-minus-fake signal.</desc>
+                <defs>
+                  <marker id="maskBranchArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#6ee8ff" />
+                  </marker>
+                  <marker id="maskSignalArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#ffd3a2" />
+                  </marker>
+                </defs>
+                <rect class="distill-map-window" x="24" y="28" width="512" height="258" rx="22" />
+                <g class="mask-token-stack" transform="translate(55 122)">
+                  <rect class="token-chip token-chip-soft" x="0" y="0" width="84" height="38" rx="10" />
+                  <text x="42" y="25">G<tspan baseline-shift="sub" font-size="8">&theta;</tspan></text>
+                </g>
+                <path class="mask-copy-path" d="M148 139 C205 82 260 79 322 91" marker-end="url(#maskBranchArrow)" />
+                <path class="mask-signal-path" d="M148 145 C211 184 258 209 325 220" marker-end="url(#maskSignalArrow)" />
+                <g class="mask-copy-row" transform="translate(330 59)">
+                  <rect class="token-chip token-chip-clean" x="0" y="0" width="74" height="34" rx="9" />
+                  <text x="37" y="23">cat</text>
+                  <rect class="token-chip token-chip-clean" x="96" y="0" width="74" height="34" rx="9" />
+                  <text x="133" y="23">cat</text>
+                  <path class="mask-cancel-stroke" d="M83 1 L180 36" />
+                  <path class="mask-cancel-stroke" d="M180 1 L83 36" />
+                </g>
+                <g class="mask-model-tags" transform="translate(333 104)">
+                  <text x="0" y="0">teacher copy</text>
+                  <text x="98" y="0">fake copy</text>
+                </g>
+                <g class="mask-signal-row" transform="translate(325 191)">
+                  <rect class="token-chip token-chip-mask" x="0" y="0" width="86" height="38" rx="10" />
+                  <text x="43" y="25">[MASK]</text>
+                  <rect class="token-chip token-chip-teacher" x="112" y="-33" width="86" height="34" rx="9" />
+                  <text x="155" y="-10">f*</text>
+                  <rect class="token-chip token-chip-fake" x="112" y="37" width="86" height="34" rx="9" />
+                  <text x="155" y="60">f</text>
+                  <path class="mask-teacher-fake-gap" d="M101 20 C128 15 138 8 154 0" marker-end="url(#maskSignalArrow)" />
+                  <path class="mask-teacher-fake-gap fake" d="M101 20 C128 26 138 33 154 38" marker-end="url(#maskSignalArrow)" />
+                </g>
+                <g class="plot-callout plot-callout-green" transform="translate(54 57)">
+                  <rect class="plot-callout-bg" width="172" height="27" rx="8" />
+                  <text x="14" y="18">revealed token: copied</text>
+                </g>
+                <g class="plot-callout plot-callout-orange" transform="translate(54 246)">
+                  <rect class="plot-callout-bg" width="176" height="27" rx="8" />
+                  <text x="14" y="18">masked token: IDLM signal</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="discrete-map-panel discrete-uniform-panel">
+              <div class="distill-map-head">
+                <span>Uniform diffusion + Duo</span>
+                <strong>choose token and timing</strong>
+              </div>
+              <svg class="distill-svg discrete-svg" viewBox="0 0 1140 360" role="img" aria-labelledby="uniform-duo-title uniform-duo-desc">
+                <title id="uniform-duo-title">Uniform diffusion needs a differentiable path through repeatedly revised states</title>
+                <desc id="uniform-duo-desc">A soft Duo trajectory moves between token basins and can revise tokens repeatedly, so IDLM keeps gradients through intermediate states.</desc>
+                <defs>
+                  <marker id="uniformPathArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#ffd3a2" />
+                  </marker>
+                  <radialGradient id="uniformBasinBlue" cx="50%" cy="50%" r="60%">
+                    <stop offset="0%" stop-color="#6ee8ff" stop-opacity="0.34" />
+                    <stop offset="100%" stop-color="#6ee8ff" stop-opacity="0.03" />
+                  </radialGradient>
+                  <radialGradient id="uniformBasinGreen" cx="50%" cy="50%" r="60%">
+                    <stop offset="0%" stop-color="#b5f07c" stop-opacity="0.34" />
+                    <stop offset="100%" stop-color="#b5f07c" stop-opacity="0.03" />
+                  </radialGradient>
+                  <radialGradient id="uniformBasinPurple" cx="50%" cy="50%" r="60%">
+                    <stop offset="0%" stop-color="#b86bff" stop-opacity="0.34" />
+                    <stop offset="100%" stop-color="#b86bff" stop-opacity="0.03" />
+                  </radialGradient>
+                </defs>
+                <rect class="distill-map-window" x="24" y="28" width="1092" height="258" rx="22" />
+                <g class="uniform-basins">
+                  <ellipse class="basin-blue" cx="179" cy="196" rx="124" ry="76" transform="rotate(-12 179 196)" />
+                  <ellipse class="basin-green" cx="533" cy="118" rx="132" ry="78" transform="rotate(9 533 118)" />
+                  <ellipse class="basin-purple" cx="863" cy="211" rx="138" ry="82" transform="rotate(-10 863 211)" />
+                  <ellipse class="basin-blue inner" cx="179" cy="196" rx="70" ry="40" transform="rotate(-12 179 196)" />
+                  <ellipse class="basin-green inner" cx="533" cy="118" rx="76" ry="42" transform="rotate(9 533 118)" />
+                  <ellipse class="basin-purple inner" cx="863" cy="211" rx="82" ry="46" transform="rotate(-10 863 211)" />
+                </g>
+                <path id="uniformDuoPath" class="uniform-soft-path" d="M132 220 C239 135 331 105 438 126 C565 151 655 244 756 224 C846 207 900 173 982 126" marker-end="url(#uniformPathArrow)" />
+                <circle class="uniform-tracer" r="8">
+                  <animateMotion dur="7.6s" repeatCount="indefinite" rotate="auto">
+                    <mpath href="#uniformDuoPath" />
+                  </animateMotion>
+                </circle>
+                <g class="uniform-jump-points">
+                  <circle cx="132" cy="220" r="7" />
+                  <circle cx="438" cy="126" r="7" />
+                  <circle cx="756" cy="224" r="7" />
+                  <circle cx="982" cy="126" r="7" />
+                </g>
+                <g class="uniform-time-axis" transform="translate(125 295)">
+                  <path d="M0 0 L865 0" />
+                  <circle cx="0" cy="0" r="5" />
+                  <circle cx="306" cy="0" r="5" />
+                  <circle cx="624" cy="0" r="5" />
+                  <circle cx="865" cy="0" r="5" />
+                  <text x="-8" y="28">t3</text>
+                  <text x="298" y="28">t2</text>
+                  <text x="616" y="28">t1</text>
+                  <text x="857" y="28">t0</text>
+                </g>
+                <g class="plot-callout plot-callout-blue" transform="translate(82 71)">
+                  <rect class="plot-callout-bg" width="144" height="27" rx="8" />
+                  <text x="14" y="18">current token state</text>
+                </g>
+                <g class="plot-callout plot-callout-orange" transform="translate(458 221)">
+                  <rect class="plot-callout-bg" width="142" height="27" rx="8" />
+                  <text x="14" y="18">Duo soft path</text>
+                </g>
+                <g class="plot-callout plot-callout-green" transform="translate(743 72)">
+                  <rect class="plot-callout-bg" width="185" height="27" rx="8" />
+                  <text x="14" y="18">revise token again later</text>
+                </g>
+                <g class="uniform-question-tags" aria-hidden="true">
+                  <text x="342" y="64">when?</text>
+                  <text x="663" y="268">which token?</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <figcaption>
+            Discrete tokens are hard corners. IDLM trains through soft simplex states; masked
+            diffusion collapses to a mask-only signal, while uniform diffusion keeps a smooth Duo
+            path because tokens can move again later.
+          </figcaption>
+        </figure>
         <p>
           At the sequence level, the student is a latent mixture. For a shared latent variable
           \(\varepsilon\), the conditional token distribution may factorize, but the same

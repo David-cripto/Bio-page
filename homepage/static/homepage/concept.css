@@ -848,6 +848,7 @@ svg {
 .mixture-visual,
 .inverse-flow > div,
 .distill-map-panel,
+.discrete-map-panel,
 .factorization-card,
 .problem-panel {
   border: 1px solid var(--line);
@@ -2244,6 +2245,263 @@ svg {
   filter: drop-shadow(0 0 10px rgba(181, 240, 124, 0.2));
 }
 
+.discrete-smoothness-map {
+  margin: 28px 0 34px;
+}
+
+.discrete-map-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.discrete-map-panel {
+  min-width: 0;
+  padding: 18px;
+  overflow: hidden;
+}
+
+.discrete-uniform-panel {
+  grid-column: 1 / -1;
+}
+
+.discrete-svg text {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.simplex-face {
+  fill: url("#simplexPlane");
+  stroke: rgba(110, 232, 255, 0.52);
+  stroke-width: 2.2;
+  filter: drop-shadow(0 0 18px rgba(25, 198, 255, 0.12));
+}
+
+.simplex-grid-lines path {
+  fill: none;
+  stroke: rgba(246, 251, 255, 0.15);
+  stroke-width: 1.2;
+}
+
+.simplex-vertices circle {
+  fill: #07152d;
+  stroke: #b5f07c;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 12px rgba(181, 240, 124, 0.2));
+}
+
+.simplex-hard-jump path {
+  fill: none;
+  stroke: rgba(184, 107, 255, 0.54);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 9 10;
+  animation: distillDash 7s linear infinite;
+}
+
+.simplex-soft-drift path {
+  fill: none;
+  stroke: #ffd3a2;
+  stroke-width: 4.4;
+  stroke-linecap: round;
+  stroke-dasharray: 10 9;
+  filter: drop-shadow(0 0 12px rgba(255, 211, 162, 0.18));
+  animation: distillDash 5.8s linear infinite;
+}
+
+.simplex-soft-drift circle {
+  fill: #ffd3a2;
+  stroke: rgba(2, 8, 24, 0.9);
+  stroke-width: 2.4;
+}
+
+.simplex-soft-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: simplexBreath 2.8s ease-in-out infinite;
+}
+
+.simplex-bars rect {
+  fill: rgba(110, 232, 255, 0.18);
+  stroke: rgba(110, 232, 255, 0.42);
+  stroke-width: 1.6;
+}
+
+.simplex-bars rect:nth-child(2) {
+  fill: rgba(255, 211, 162, 0.24);
+  stroke: rgba(255, 211, 162, 0.54);
+}
+
+.simplex-token-labels text,
+.mask-model-tags text,
+.uniform-question-tags text,
+.uniform-time-axis text {
+  fill: var(--muted);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.token-chip {
+  fill: rgba(2, 8, 24, 0.72);
+  stroke-width: 1.8;
+}
+
+.token-chip-soft {
+  stroke: rgba(255, 211, 162, 0.52);
+}
+
+.token-chip-clean {
+  fill: rgba(181, 240, 124, 0.14);
+  stroke: rgba(181, 240, 124, 0.5);
+}
+
+.token-chip-mask {
+  fill: rgba(184, 107, 255, 0.16);
+  stroke: rgba(184, 107, 255, 0.55);
+}
+
+.token-chip-teacher {
+  fill: rgba(110, 232, 255, 0.13);
+  stroke: rgba(110, 232, 255, 0.5);
+}
+
+.token-chip-fake {
+  fill: rgba(255, 211, 162, 0.14);
+  stroke: rgba(255, 211, 162, 0.5);
+}
+
+.mask-token-stack text,
+.mask-copy-row text,
+.mask-signal-row text {
+  fill: var(--ink);
+  font-size: 18px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.mask-copy-path,
+.mask-signal-path,
+.mask-teacher-fake-gap {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mask-copy-path {
+  stroke: #6ee8ff;
+  stroke-width: 4;
+  stroke-dasharray: 8 10;
+  opacity: 0.72;
+  animation: distillDash 6.8s linear infinite;
+}
+
+.mask-signal-path,
+.mask-teacher-fake-gap {
+  stroke: #ffd3a2;
+  stroke-width: 4.5;
+  stroke-dasharray: 9 10;
+  opacity: 0.88;
+  filter: drop-shadow(0 0 12px rgba(255, 211, 162, 0.2));
+  animation: distillDash 6s linear infinite;
+}
+
+.mask-teacher-fake-gap.fake {
+  stroke: rgba(255, 211, 162, 0.5);
+  stroke-width: 3;
+  animation-direction: reverse;
+}
+
+.mask-cancel-stroke {
+  fill: none;
+  stroke: rgba(255, 128, 128, 0.8);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.uniform-basins ellipse {
+  stroke-width: 2;
+}
+
+.uniform-basins .basin-blue {
+  fill: url("#uniformBasinBlue");
+  stroke: rgba(110, 232, 255, 0.34);
+}
+
+.uniform-basins .basin-green {
+  fill: url("#uniformBasinGreen");
+  stroke: rgba(181, 240, 124, 0.34);
+}
+
+.uniform-basins .basin-purple {
+  fill: url("#uniformBasinPurple");
+  stroke: rgba(184, 107, 255, 0.34);
+}
+
+.uniform-basins .inner {
+  fill: none;
+  opacity: 0.85;
+}
+
+.uniform-soft-path {
+  fill: none;
+  stroke: #ffd3a2;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 12 12;
+  filter: drop-shadow(0 0 14px rgba(255, 211, 162, 0.18));
+  animation: distillDash 7.4s linear infinite;
+}
+
+.uniform-tracer {
+  fill: #ffd3a2;
+  stroke: rgba(2, 8, 24, 0.9);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 14px rgba(255, 211, 162, 0.62));
+}
+
+.uniform-jump-points circle {
+  fill: #07152d;
+  stroke: #ffd3a2;
+  stroke-width: 3;
+}
+
+.uniform-time-axis path {
+  fill: none;
+  stroke: rgba(110, 232, 255, 0.36);
+  stroke-width: 2;
+}
+
+.uniform-time-axis circle {
+  fill: #6ee8ff;
+  stroke: rgba(2, 8, 24, 0.9);
+  stroke-width: 2;
+}
+
+.uniform-question-tags text {
+  fill: #ffd3a2;
+  font-size: 18px;
+  filter: drop-shadow(0 0 10px rgba(255, 211, 162, 0.16));
+}
+
+.discrete-smoothness-map figcaption {
+  margin: 12px 2px 0;
+  color: var(--quiet);
+  font-size: 0.74rem;
+  line-height: 1.55;
+}
+
+@keyframes simplexBreath {
+  0%,
+  100% {
+    opacity: 0.82;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+}
+
 .blog-figure {
   min-width: 0;
   margin: 32px 0;
@@ -2499,6 +2757,7 @@ svg {
   .mixture-visual,
   .inverse-flow,
   .distillation-map-grid,
+  .discrete-map-grid,
   .method-grid,
   .metric-grid,
   .generation-animation-grid,
