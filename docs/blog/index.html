@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260530-balanced-hero">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260601-discrete-smoothness-fix">
 </head>
 <body>
   <main class="blog-shell">
@@ -1030,6 +1030,24 @@
         </p>
 
         <h3 id="discrete-practice" class="blog-subheading">3.2 Handling Discrete Non-Smoothness</h3>
+        <p>
+          In practice, IDLM parameterizes \(p_\theta\) with a student generator \(G_\theta\). To make
+          gradients usable, the generator outputs points on the probability simplex instead of hard
+          one-hot tokens during training. This keeps the token loss differentiable while still
+          representing a distribution over vocabulary items.
+        </p>
+        <p>
+          Masked diffusion has a special simplification. With the \(\mathrm{SUBS}\) parameterization,
+          revealed tokens are copied. Once a token is unmasked, later reverse steps carry it forward.
+          Therefore the teacher and fake model agree on copied branches, and the IDLM signal survives
+          only at masked positions. This is why IDLM-MDLM has a clean mask-only update instead of
+          needing to backpropagate through every sampled intermediate token.
+        </p>
+        <p>
+          Uniform diffusion is harder because tokens can be revised repeatedly. IDLM uses the Duo
+          relaxation to keep a differentiable path through intermediate states. This matters because
+          uniform diffusion must learn both which token to choose and when to move between states.
+        </p>
         <figure class="discrete-smoothness-map" aria-label="Visual intuition for simplex relaxation, masked diffusion cancellation, and uniform diffusion revisions">
           <div class="discrete-map-grid">
             <div class="discrete-map-panel discrete-simplex-panel">

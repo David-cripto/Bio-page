@@ -2270,7 +2270,7 @@ svg {
 }
 
 .simplex-face {
-  fill: url("#simplexPlane");
+  fill: url("#simplexPlane") rgba(110, 232, 255, 0.1);
   stroke: rgba(110, 232, 255, 0.52);
   stroke-width: 2.2;
   filter: drop-shadow(0 0 18px rgba(25, 198, 255, 0.12));
@@ -2283,7 +2283,7 @@ svg {
 }
 
 .simplex-vertices circle {
-  fill: #07152d;
+  fill: rgba(181, 240, 124, 0.12);
   stroke: #b5f07c;
   stroke-width: 3;
   filter: drop-shadow(0 0 12px rgba(181, 240, 124, 0.2));
@@ -2341,7 +2341,7 @@ svg {
 }
 
 .token-chip {
-  fill: rgba(2, 8, 24, 0.72);
+  fill: rgba(7, 21, 45, 0.82);
   stroke-width: 1.8;
 }
 
@@ -2422,17 +2422,17 @@ svg {
 }
 
 .uniform-basins .basin-blue {
-  fill: url("#uniformBasinBlue");
+  fill: url("#uniformBasinBlue") rgba(110, 232, 255, 0.14);
   stroke: rgba(110, 232, 255, 0.34);
 }
 
 .uniform-basins .basin-green {
-  fill: url("#uniformBasinGreen");
+  fill: url("#uniformBasinGreen") rgba(181, 240, 124, 0.14);
   stroke: rgba(181, 240, 124, 0.34);
 }
 
 .uniform-basins .basin-purple {
-  fill: url("#uniformBasinPurple");
+  fill: url("#uniformBasinPurple") rgba(184, 107, 255, 0.14);
   stroke: rgba(184, 107, 255, 0.34);
 }
 
@@ -2459,7 +2459,7 @@ svg {
 }
 
 .uniform-jump-points circle {
-  fill: #07152d;
+  fill: rgba(255, 211, 162, 0.14);
   stroke: #ffd3a2;
   stroke-width: 3;
 }
