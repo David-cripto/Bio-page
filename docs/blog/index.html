@@ -1125,16 +1125,22 @@
           </figcaption>
         </figure>
         <p>
-          Masked diffusion has a special simplification. With the \(\mathrm{SUBS}\) parameterization,
-          revealed tokens are copied. Once a token is unmasked, later reverse steps carry it forward.
-          Therefore the teacher and fake model agree on copied branches, and the IDLM signal survives
-          only at masked positions. This is why IDLM-MDLM has a clean mask-only update instead of
-          needing to backpropagate through every sampled intermediate token.
+          Masked diffusion gives IDLM an important shortcut. In the \(\mathrm{SUBS}\)
+          parameterization, a token that has already been revealed is treated as fixed: later reverse
+          transitions simply copy it forward rather than resampling it. As a result, the teacher
+          model \(f^*\) and the fake model \(\hat f\) make the same prediction on these copied
+          coordinates. Their loss difference cancels there, so the useful IDLM signal is concentrated
+          exactly on the positions that remain masked and still need to be predicted.
         </p>
         <p>
-          Uniform diffusion is harder because tokens can be revised repeatedly. IDLM uses the Duo
-          relaxation to keep a differentiable path through intermediate states. This matters because
-          uniform diffusion must learn both which token to choose and when to move between states.
+          This is why IDLM-MDLM can use a clean mask-only update: it does not need to differentiate
+          through every sampled intermediate token in the reverse chain. Uniform diffusion does not
+          have this copy-once structure. A position can move from one token to another across multiple
+          reverse steps, so the training signal depends on the whole path through intermediate
+          categorical states. IDLM therefore uses the Duo relaxation to replace hard token samples
+          with differentiable simplex states during training. This keeps gradients flowing through
+          the intermediate transitions, which is essential when the model must learn both what token
+          should appear and how the reverse process should move toward it over time.
         </p>
         <figure class="discrete-smoothness-map discrete-wide-map" aria-label="Visual intuition comparing masked diffusion and uniform diffusion relaxation">
           <div class="discrete-map-grid discrete-single-grid">
@@ -1159,7 +1165,7 @@
                 <rect class="distill-map-window" x="24" y="22" width="1132" height="296" rx="22" />
                 <line class="combined-divider" x1="590" y1="55" x2="590" y2="304" />
 
-                <g class="combined-mask-panel" transform="translate(62 56)">
+                <g class="combined-mask-panel" transform="translate(57 56)">
                   <text class="combined-panel-title" x="250" y="0">Masked diffusion</text>
                   <g transform="translate(-43 36)">
                     <g class="token-pill-row" transform="translate(86 10)">
