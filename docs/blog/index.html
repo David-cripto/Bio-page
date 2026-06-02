@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260602-duo-synced-motion">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260602-token-panel-polished">
 </head>
 <body>
   <main class="blog-shell">
@@ -916,32 +916,39 @@
                 </div>
               </div>
             </div>
-            <div class="distill-map-panel language-transfer-panel">
+            <div class="distill-map-panel language-transfer-panel token-transfer-panel">
               <div class="distill-map-head">
                 <span>Tokens</span>
                 <strong>no smooth midpoint</strong>
               </div>
-              <svg class="distill-svg language-transfer-svg token-strip-svg" viewBox="0 0 420 150" role="img" aria-labelledby="token-space-title token-space-desc">
+              <svg class="distill-svg language-transfer-svg token-strip-svg" viewBox="0 0 560 180" role="img" aria-labelledby="token-space-title token-space-desc">
                 <title id="token-space-title">Language tokens are isolated word states</title>
-                <desc id="token-space-desc">The words the, met, and cat appear as three isolated points on a horizontal line. Moving between them is shown as dashed jumps rather than a smooth interpolation.</desc>
+                <desc id="token-space-desc">The words the, met, and cat appear as three isolated token points. The broken arrows between them show hard jumps instead of a smooth path.</desc>
                 <defs>
-                  <marker id="tokenJumpArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L5.5,3 L1,5 Z" fill="#ffd3a2" />
+                  <marker id="tokenJumpArrowA" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
+                    <path d="M1,1 L7,4 L1,7 Z" fill="#ffd3a2" />
+                  </marker>
+                  <marker id="tokenJumpArrowB" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
+                    <path d="M1,1 L7,4 L1,7 Z" fill="#b5f07c" />
                   </marker>
                 </defs>
-                <path class="token-hard-hop" d="M110 75 H178" marker-end="url(#tokenJumpArrow)" />
-                <path class="token-hard-hop token-hard-hop-second" d="M242 75 H310" marker-end="url(#tokenJumpArrow)" />
-                <g class="token-word-point token-word-the" transform="translate(82 75)">
-                  <circle class="token-point-core" r="24" />
-                  <text class="token-point-label" y="6">the</text>
+                <rect class="token-state-rail" x="54" y="43" width="452" height="94" rx="47" />
+                <path class="token-jump token-jump-left" d="M160 90 H236" marker-end="url(#tokenJumpArrowA)" />
+                <path class="token-jump token-jump-right" d="M324 90 H400" marker-end="url(#tokenJumpArrowB)" />
+                <g class="token-word-point token-word-the" transform="translate(116 90)">
+                  <circle class="token-node-glow" r="48" />
+                  <circle class="token-node-core" r="34" />
+                  <text class="token-node-label" y="7">the</text>
                 </g>
-                <g class="token-word-point token-word-met" transform="translate(210 75)">
-                  <circle class="token-point-core" r="24" />
-                  <text class="token-point-label" y="6">met</text>
+                <g class="token-word-point token-word-met" transform="translate(280 90)">
+                  <circle class="token-node-glow" r="48" />
+                  <circle class="token-node-core" r="34" />
+                  <text class="token-node-label" y="7">met</text>
                 </g>
-                <g class="token-word-point token-word-cat" transform="translate(338 75)">
-                  <circle class="token-point-core" r="24" />
-                  <text class="token-point-label" y="6">cat</text>
+                <g class="token-word-point token-word-cat" transform="translate(444 90)">
+                  <circle class="token-node-glow" r="48" />
+                  <circle class="token-node-core" r="34" />
+                  <text class="token-node-label" y="7">cat</text>
                 </g>
               </svg>
             </div>

@@ -2451,7 +2451,7 @@ svg {
 }
 
 .language-transfer-panel .distill-map-head strong {
-  max-width: 160px;
+  max-width: 230px;
 }
 
 .language-transfer-svg text {
@@ -2461,16 +2461,16 @@ svg {
 
 .continuous-interp-stage {
   container-type: inline-size;
-  --interp-inset: clamp(22px, 8cqw, 34px);
-  --interp-size: clamp(92px, 25cqw, 128px);
-  --interp-half-size: clamp(46px, 12.5cqw, 64px);
-  --interp-top: 34px;
+  --interp-inset: clamp(20px, 6cqw, 34px);
+  --interp-size: clamp(82px, 19cqw, 126px);
+  --interp-half-size: clamp(41px, 9.5cqw, 63px);
+  --interp-top: calc(50% - var(--interp-half-size));
   --interp-duration: 16s;
 
   position: relative;
   overflow: hidden;
   width: 100%;
-  aspect-ratio: 420 / 330;
+  aspect-ratio: 560 / 230;
   border: 1px solid rgba(94, 217, 255, 0.2);
   border-radius: 10px;
   background:
@@ -2482,7 +2482,7 @@ svg {
 .interp-endpoint {
   position: absolute;
   top: var(--interp-top);
-  z-index: 1;
+  z-index: 4;
   width: var(--interp-size);
   margin: 0;
   overflow: hidden;
@@ -2570,52 +2570,85 @@ svg {
   animation: interpCatBlend var(--interp-duration) linear infinite;
 }
 
+.token-transfer-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.token-transfer-panel .distill-map-head {
+  flex: 0 0 auto;
+  margin-bottom: 0;
+}
+
 .token-strip-svg {
   display: block;
-  width: min(100%, 380px);
-  margin: 42px auto 0;
+  align-self: center;
+  flex: 0 0 auto;
+  width: min(100%, 680px);
+  margin: auto 0;
+  overflow: visible;
+  border: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(110, 232, 255, 0.1), transparent 42%),
+    radial-gradient(circle at 22% 50%, rgba(255, 211, 162, 0.08), transparent 28%),
+    radial-gradient(circle at 78% 50%, rgba(181, 240, 124, 0.08), transparent 28%);
+  box-shadow: none;
 }
 
-.token-hard-hop {
+.token-state-rail {
+  fill: rgba(2, 8, 24, 0.48);
+  stroke: rgba(246, 251, 255, 0.12);
+  stroke-width: 1.4;
+}
+
+.token-jump {
   fill: none;
   stroke: #ffd3a2;
-  stroke-dasharray: 2 8;
+  stroke-dasharray: 2 11;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 3.4;
-  filter: drop-shadow(0 0 10px rgba(255, 211, 162, 0.18));
+  stroke-width: 5;
+  filter: drop-shadow(0 0 10px rgba(255, 211, 162, 0.2));
 }
 
-.token-hard-hop-second {
+.token-jump-right {
   stroke: #b5f07c;
+  filter: drop-shadow(0 0 10px rgba(181, 240, 124, 0.18));
 }
 
 .token-word-point {
   --token-color: #ffd3a2;
-  --token-shadow: rgba(255, 211, 162, 0.22);
+  --token-fill: rgba(255, 211, 162, 0.08);
+  --token-shadow: rgba(255, 211, 162, 0.24);
 
-  filter: drop-shadow(0 0 10px var(--token-shadow));
+  filter: drop-shadow(0 0 16px var(--token-shadow));
 }
 
 .token-word-met {
   --token-color: #6ee8ff;
-  --token-shadow: rgba(110, 232, 255, 0.22);
+  --token-fill: rgba(110, 232, 255, 0.08);
+  --token-shadow: rgba(110, 232, 255, 0.24);
 }
 
 .token-word-cat {
   --token-color: #b5f07c;
-  --token-shadow: rgba(181, 240, 124, 0.22);
+  --token-fill: rgba(181, 240, 124, 0.08);
+  --token-shadow: rgba(181, 240, 124, 0.24);
 }
 
-.token-point-core {
-  fill: rgba(2, 8, 24, 0.86);
+.token-node-glow {
+  fill: var(--token-fill);
+}
+
+.token-node-core {
+  fill: rgba(2, 8, 24, 0.9);
   stroke: var(--token-color);
-  stroke-width: 2.2;
+  stroke-width: 3.2;
 }
 
-.token-point-label {
+.token-node-label {
   fill: var(--token-color);
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 900;
   text-anchor: middle;
 }
