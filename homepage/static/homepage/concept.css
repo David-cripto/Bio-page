@@ -2439,15 +2439,17 @@ svg {
 }
 
 .language-transfer-grid {
+  align-items: start;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .language-transfer-panel {
-  padding: 16px;
+  padding: 14px;
 }
 
 .language-transfer-panel .distill-map-head {
-  min-height: 58px;
+  min-height: 0;
+  margin-bottom: 10px;
 }
 
 .language-transfer-panel .distill-map-head strong {
@@ -2470,7 +2472,7 @@ svg {
   position: relative;
   overflow: hidden;
   width: 100%;
-  aspect-ratio: 560 / 230;
+  aspect-ratio: 560 / 180;
   border: 1px solid rgba(94, 217, 255, 0.2);
   border-radius: 10px;
   background:
@@ -2577,7 +2579,7 @@ svg {
 
 .token-transfer-panel .distill-map-head {
   flex: 0 0 auto;
-  margin-bottom: 0;
+  margin-bottom: 10px;
 }
 
 .token-strip-svg {

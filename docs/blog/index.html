@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260602-token-x-uniform-process">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260602-fitted-domain-labels">
 </head>
 <body>
   <main class="blog-shell">
@@ -893,8 +893,7 @@
           <div class="distillation-map-grid language-transfer-grid">
             <div class="distill-map-panel language-transfer-panel">
               <div class="distill-map-head">
-                <span>Images</span>
-                <strong>smooth interpolation</strong>
+                <span>Continuous</span>
               </div>
               <div
                 class="continuous-interp-stage"
@@ -918,8 +917,7 @@
             </div>
             <div class="distill-map-panel language-transfer-panel token-transfer-panel">
               <div class="distill-map-head">
-                <span>Tokens</span>
-                <strong>no smooth midpoint</strong>
+                <span>Discrete</span>
               </div>
               <svg class="distill-svg language-transfer-svg token-strip-svg" viewBox="0 0 560 180" role="img" aria-labelledby="token-space-title token-space-desc">
                 <title id="token-space-title">Language tokens are isolated word states</title>
@@ -961,9 +959,20 @@
 
         <h3 id="theory" class="blog-subheading">3.1 Theoretical Guarantees</h3>
         <p>
-          The first contribution is theoretical. A naive inverse objective in a discrete space might
-          have bad minimizers, so IDLM proves the right uniqueness statement for the discrete
-          diffusion losses used by SEDD, MDLM, and Duo. In the idealized setting,
+          The first contribution of IDLM is to make the inverse-distillation objective well posed
+          for discrete diffusion. Let \(p^\star\) denote the target distribution over clean token
+          sequences, and let \(p_\theta\) be the distribution produced by the student generator
+          \(G_\theta\). The frozen teacher \(f^\star\) is the diffusion model trained on
+          \(p^\star\), while \(f\) is a fake diffusion model retrained on samples from
+          \(p_\theta\). With \(\mathcal{L}(f,p)\) denoting the population diffusion training loss
+          for a model \(f\) on clean distribution \(p\), IDLM optimizes the inverse gap
+          \(\mathcal{L}(f^\star,p_\theta)-\min_f \mathcal{L}(f,p_\theta)\).
+        </p>
+        <p>
+          In a discrete space, this gap is not automatically meaningful: a poorly chosen objective
+          could have minimizers that do not recover the data distribution. The theorem shows that
+          for the losses underlying SEDD, MDLM, and Duo in the hard-token limit, the population
+          IDLM objective has the desired unique zero-loss solution:
         </p>
         <div class="blog-equation">
           \[
@@ -978,8 +987,20 @@
           \]
         </div>
         <p>
-          The proof also gives a useful interpretation: IDLM matches full diffusion trajectories,
-          not only noised marginals at isolated time points:
+          Here \(D_{\mathrm{KL}}(p_\theta \Vert p^\star)\) measures the mismatch between the final
+          clean distributions. Therefore the inequality says something stronger than
+          non-negativity: if the IDLM loss goes to zero, then the student distribution itself must
+          converge to the target distribution. This rules out the most dangerous failure mode,
+          where the student satisfies the inverse objective but still generates from the wrong clean
+          distribution.
+        </p>
+        <p>
+          The proof also explains why the objective has this property. For a clean distribution
+          \(p\), run the corresponding discrete diffusion process and look at the entire stochastic
+          trajectory, not just the endpoint. Let \(\mathbb{P}^{\star}\) be the path distribution
+          induced by \(p^\star\), and let \(\mathbb{P}^{\theta}\) be the path distribution induced
+          by \(p_\theta\). In the ideal population setting, the IDLM gap is the KL divergence
+          between these full trajectory distributions:
         </p>
         <div class="blog-equation">
           \[
@@ -989,8 +1010,10 @@
           \]
         </div>
         <p>
-          This distinction matters. DMD-like objectives compare noised student and teacher marginals
-          at sampled times,
+          This path-level view is the key difference from marginal-matching distillation. If
+          \(p_t^\theta\) and \(p_t^\star\) are the noised marginals obtained at diffusion time
+          \(t\) from \(p_\theta\) and \(p^\star\), a DMD-like objective compares these marginals
+          time by time:
         </p>
         <div class="blog-equation">
           \[
@@ -999,10 +1022,16 @@
           \]
         </div>
         <p>
-          while IDLM keeps the path-level comparison. A stop-gradient reduction can make inverse
-          distillation look DMD-like, but it is not the same full gradient. In masked diffusion this
-          difference is partly hidden by the \(\mathrm{SUBS}\) parameterization; in uniform diffusion
-          it becomes important in practice.
+          where \(w(t)\) is a time-dependent weight. This checks whether the student and teacher
+          look similar at sampled noise levels, but it does not directly compare how probability
+          mass moves across the whole reverse chain. IDLM instead compares the joint law of the
+          full path, so the objective keeps information about the coupling between consecutive
+          states. A stop-gradient simplification can make the IDLM update resemble a DMD-style
+          marginal update, but that is not the full inverse-distillation gradient. For MDLM, the
+          \(\mathrm{SUBS}\) parameterization hides part of this distinction because already revealed
+          tokens are copied and contribute zero loss. For uniform diffusion and Duo, tokens can be
+          revised repeatedly, so the path dependence remains visible and becomes important for
+          stable optimization.
         </p>
 
         <h3 id="discrete-practice" class="blog-subheading">3.2 Handling Discrete Non-Smoothness</h3>
