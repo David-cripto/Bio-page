@@ -1401,8 +1401,11 @@
 
         <h3 id="loss-intuition" class="blog-subheading">3.4 Loss Intuition</h3>
         <p>
-          Training alternates between two updates. First, fit the fake model \(f\) on current student
-          samples. Second, freeze \(f\) and update \(G_\theta\) with the teacher-minus-fake gap:
+          The practical training loop has two coupled parts. The student generator \(G_\theta\)
+          defines the current distribution \(p_\theta\). The fake model \(f\) is then trained as an
+          ordinary diffusion model on samples from this current student distribution. After this fake
+          model has adapted to what the student currently produces, IDLM freezes \(f\) and updates
+          \(G_\theta\) using the teacher-minus-fake gap:
         </p>
         <div class="blog-equation">
           \[
@@ -1414,16 +1417,30 @@
           \]
         </div>
         <p>
-          This gap has a simple attraction-repulsion meaning. Samples that the teacher explains
-          better than the fake model are attractive: they look more like real data than like current
-          student artifacts. Samples that the fake model explains too well are repulsive: they are
-          easy for the student's own distribution to reproduce, but not necessarily supported by the
-          teacher.
+          Here \(f^\star\) is the frozen teacher trained on real data, while \(f\) is the best
+          denoiser the current student samples can teach us. This makes the gap a relative quality
+          signal. If the teacher assigns a lower diffusion loss to a sample than the fake model does,
+          the sample receives an attractive signal: it looks more compatible with the teacher's
+          data-like reverse process than with the student's current artifacts. If the fake model
+          explains the sample too well relative to the teacher, the signal becomes repulsive: the
+          sample is easy for the student distribution to reproduce, but it is not supported by the
+          teacher in the same way. The fake model therefore acts like a moving baseline for
+          \(p_\theta\), so the generator is rewarded for moving beyond its own current behavior
+          rather than merely reinforcing it.
         </p>
         <p>
-          For MDLM, this becomes especially transparent. At a masked position, the local advantage is
-          \(a_t=\log f^\star(m,t)-\log f(m,t)\). Gradient descent increases a token logit when that
-          token's teacher-over-fake advantage is above the generator's current average advantage.
+          For MDLM, the \(\mathrm{SUBS}\) parameterization makes this particularly transparent.
+          Revealed tokens are copied by both models, so they cancel out of the teacher-minus-fake
+          difference. Only masked positions remain. At such a position, the update can be read as a
+          weighted token preference:
+          \(a_t=\log f^\star(m,t)-\log f(m,t)\), where \(a_t\) is a vector over vocabulary tokens.
+          If \(G_\theta(\epsilon)=\mathrm{softmax}(z_\theta)\), then gradient descent increases the
+          logit of token \(i\) exactly when
+          \(a_{t,i}>\langle G_\theta(\epsilon),a_t\rangle\). In words, the generator does not simply
+          copy the teacher's most likely token. It promotes tokens whose teacher-over-fake advantage
+          is above the generator's current average advantage, and decreases tokens whose advantage is
+          below that baseline. When the fake model catches up to the teacher on student samples, this
+          relative advantage vanishes.
         </p>
         <div class="intuition-strip" aria-label="Teacher fake loss intuition">
           <div>
