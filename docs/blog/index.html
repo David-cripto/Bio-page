@@ -1474,12 +1474,13 @@
           In practice, one-step text generation is a difficult learning problem: the student would
           need to recover global structure and token-level details from a highly noisy state in a
           single jump. IDLM therefore trains the student as a few-step denoiser on a short reverse
-          trajectory. At each training step, a noised state \((x_t,t)\) is sampled from the forward
-          process and passed to \(G_\theta\). The resulting prediction is evaluated under both
-          \(f^\star\) and \(f\). The fake model minimizes the ordinary diffusion loss on the student
-          distribution, while the generator minimizes the teacher-minus-fake objective. This
-          alternating scheme implements the inverse-distillation signal without differentiating
-          through an exact inner argmin.
+          trajectory. In this practical parameterization, the latent variable is chosen to be
+          \(\epsilon=(x_t,t)\): a noised state together with its diffusion time. At each training
+          step, this pair is sampled from the forward process and passed to \(G_\theta\). The
+          resulting prediction is evaluated under both \(f^\star\) and \(f\). The fake model
+          minimizes the ordinary diffusion loss on the student distribution, while the generator
+          minimizes the teacher-minus-fake objective. This alternating scheme implements the
+          inverse-distillation signal without differentiating through an exact inner argmin.
         </p>
         <p>
           The final IDLM training loop can be read as a simple two-model comparison: use the frozen
