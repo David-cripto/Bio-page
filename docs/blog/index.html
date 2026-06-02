@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260602-loss-intuition-table-blocks">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260602-loss-intuition-blocks-only">
 </head>
 <body>
   <main class="blog-shell">
@@ -1467,35 +1467,6 @@
               so there is no relative teacher-over-fake signal.
             </p>
           </div>
-        </div>
-
-        <div class="loss-table-wrap" aria-label="MDLM teacher-over-fake advantage cases">
-          <table class="loss-intuition-table">
-            <thead>
-              <tr>
-                <th>Case</th>
-                <th>Token behavior</th>
-                <th>Intuition</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>\(a_{t,i}>\langle G_\theta(\epsilon),a_t\rangle\)</td>
-                <td>logit increases</td>
-                <td>\(f^\star\) prefers token \(i\) more than \(f\) does.</td>
-              </tr>
-              <tr>
-                <td>\(a_{t,i}<\langle G_\theta(\epsilon),a_t\rangle\)</td>
-                <td>logit decreases</td>
-                <td>Token \(i\) is below the generator's current average advantage.</td>
-              </tr>
-              <tr>
-                <td>\(a_t\approx 0\)</td>
-                <td>no relative signal</td>
-                <td>The fake model \(f\) has matched the teacher \(f^\star\) on student samples.</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
 
         <h3 id="final-algorithm" class="blog-subheading">3.5 Final Algorithm</h3>
