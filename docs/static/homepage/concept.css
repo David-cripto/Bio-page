@@ -3419,14 +3419,6 @@ svg {
   filter: drop-shadow(0 0 14px rgba(110, 232, 255, 0.36));
 }
 
-.combined-simplex-caption {
-  fill: #9beeff;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0;
-  text-anchor: middle;
-}
-
 .combined-bracket {
   stroke: #ffd3a2;
   stroke-width: 2.8;
