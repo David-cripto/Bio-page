@@ -3002,6 +3002,11 @@ svg {
   line-height: 1.55;
 }
 
+.discrete-compact-map figcaption {
+  max-width: 780px;
+  margin: 12px auto 0;
+}
+
 @keyframes simplexBreath {
   0%,
   100% {
