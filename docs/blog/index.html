@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260602-fixed-process-dots">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260602-coordinate-process-motion">
 </head>
 <body>
   <main class="blog-shell">
@@ -1037,10 +1037,21 @@
 
         <h3 id="discrete-practice" class="blog-subheading">3.2 Handling Discrete Non-Smoothness</h3>
         <p>
-          In practice, IDLM parameterizes \(p_\theta\) with a student generator \(G_\theta\). To make
-          gradients usable, the generator outputs points on the probability simplex instead of hard
-          one-hot tokens during training. This keeps the token loss differentiable while still
-          representing a distribution over vocabulary items.
+          In practice, IDLM does not store the student distribution \(p_\theta\) explicitly. It
+          represents it with a generator \(G_\theta\): sample a latent variable \(\epsilon\), pass it
+          through \(G_\theta\), and obtain a candidate clean sequence. The difficulty is that text is
+          discrete. If the generator immediately samples or chooses a hard one-hot token, the map
+          from its logits to the token is no longer smooth, so the IDLM loss cannot send a useful
+          gradient back into \(G_\theta\).
+        </p>
+        <p>
+          IDLM therefore trains the generator in a relaxed space. For each token position,
+          \(G_\theta(\epsilon)\) outputs a probability vector on the vocabulary simplex: all entries
+          are nonnegative and sum to one. This vector is still a valid distribution over words, but
+          it is differentiable with respect to the generator parameters. The teacher and fake
+          diffusion losses can then evaluate soft token probabilities during training, and their
+          difference can flow back through the simplex vector to update \(G_\theta\). At sampling
+          time, the model can still turn these probabilities into actual discrete tokens.
         </p>
         <figure class="discrete-smoothness-map discrete-compact-map" aria-label="Visual intuition for simplex relaxation">
           <div class="discrete-map-grid discrete-single-grid">
@@ -1133,7 +1144,7 @@
               </div>
               <svg class="distill-svg discrete-svg" viewBox="0 0 1180 330" role="img" aria-labelledby="combined-discrete-title combined-discrete-desc">
                 <title id="combined-discrete-title">Masked diffusion uses mask-only updates while uniform diffusion maps Gaussian logits through softmax</title>
-                <desc id="combined-discrete-desc">The left panel shows copied revealed tokens where teacher and fake outputs are equal, making the IDLM loss zero, while masked tokens keep the IDLM update. The right panel marks a Gaussian process path and the corresponding uniform process path on the simplex.</desc>
+                <desc id="combined-discrete-desc">The left panel shows copied revealed tokens where teacher and fake outputs are equal, making the IDLM loss zero, while masked tokens keep the IDLM update. The right panel animates a Gaussian process point and the corresponding uniform process point on the simplex.</desc>
                 <defs>
                   <marker id="combinedBlueArrow" markerWidth="4.8" markerHeight="4.8" refX="4" refY="2.4" orient="auto" markerUnits="strokeWidth">
                     <path d="M0.7,0.7 L4.2,2.4 L0.7,4.1 Z" fill="#6ee8ff" />
@@ -1200,7 +1211,11 @@
                     <ellipse cx="76" cy="78" rx="24" ry="13" transform="rotate(-12 76 78)" />
                   </g>
                   <path id="combinedGaussianMotionPath" class="duo-gaussian-trace" d="M34 136 C56 101 86 78 119 88 C142 94 157 115 166 136" />
-                  <circle class="combined-motion-dot combined-motion-orange" cx="58" cy="104" r="8" />
+                  <circle class="combined-motion-dot combined-motion-orange" cx="58" cy="104" r="8">
+                    <animate attributeName="cx" values="34;52;72;95;119;135;148;158;166;158;148;135;119;95;72;52" dur="4.8s" repeatCount="indefinite" />
+                    <animate attributeName="cy" values="136;112;95;86;88;95;106;120;136;120;106;95;88;86;95;112" dur="4.8s" repeatCount="indefinite" />
+                    <animate attributeName="r" values="7;9;7" dur="4.8s" repeatCount="indefinite" />
+                  </circle>
                   <g class="discrete-summary-chip chip-orange" transform="translate(18 226)">
                     <rect width="156" height="32" rx="11" />
                     <text x="78" y="21">gaussian process</text>
@@ -1229,7 +1244,11 @@
                         <text x="0" y="26" text-anchor="middle">mat</text>
                       </g>
                       <path id="combinedSimplexMotionPath" class="duo-simplex-soft-path" d="M70 142 C88 114 112 104 132 114 C144 122 151 138 154 148" />
-                      <circle class="combined-motion-dot combined-motion-blue" cx="96" cy="121" r="8" />
+                      <circle class="combined-motion-dot combined-motion-blue" cx="96" cy="121" r="8">
+                        <animate attributeName="cx" values="70;84;100;116;132;140;146;151;154;151;146;140;132;116;100;84" dur="4.8s" repeatCount="indefinite" />
+                        <animate attributeName="cy" values="142;124;114;110;114;121;130;140;148;140;130;121;114;110;114;124" dur="4.8s" repeatCount="indefinite" />
+                        <animate attributeName="r" values="7;9;7" dur="4.8s" repeatCount="indefinite" />
+                      </circle>
                     </g>
                     <g class="discrete-summary-chip chip-orange" transform="translate(8 202)">
                       <rect width="156" height="32" rx="11" />
@@ -1243,7 +1262,7 @@
           <figcaption>
             Masked diffusion gets a clean mask-only update because copied revealed tokens give equal
             teacher and fake outputs, so their IDLM loss is zero. Uniform diffusion: the orange and
-            blue dots mark the Gaussian process passing through softmax into the uniform
+            blue dots trace the Gaussian process passing through softmax into the uniform
             process on the simplex, so token revisions remain differentiable.
           </figcaption>
         </figure>
