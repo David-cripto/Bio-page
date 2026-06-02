@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260602-shrunk-centered-process-simplex">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260602-stable-process-dots">
 </head>
 <body>
   <main class="blog-shell">
@@ -1204,9 +1204,7 @@
                   </g>
                   <path id="combinedGaussianMotionPath" class="duo-gaussian-trace" d="M34 136 C56 101 86 78 119 88 C142 94 157 115 166 136" />
                   <circle class="combined-motion-dot combined-motion-orange" r="8">
-                    <animateMotion dur="3.8s" begin="0s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.45 0 0.2 1">
-                      <mpath href="#combinedGaussianMotionPath" />
-                    </animateMotion>
+                    <animateMotion path="M34 136 C56 101 86 78 119 88 C142 94 157 115 166 136" dur="3.8s" begin="0s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.45 0 0.2 1" />
                     <animate attributeName="r" values="7;9;7" dur="3.8s" begin="0s" repeatCount="indefinite" />
                   </circle>
                   <g class="discrete-summary-chip chip-orange" transform="translate(18 226)">
@@ -1238,13 +1236,11 @@
                       </g>
                       <path id="combinedSimplexMotionPath" class="duo-simplex-soft-path" d="M70 142 C88 114 112 104 132 114 C144 122 151 138 154 148" />
                       <circle class="combined-motion-dot combined-motion-blue" r="8">
-                        <animateMotion dur="3.8s" begin="0s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.45 0 0.2 1">
-                          <mpath href="#combinedSimplexMotionPath" />
-                        </animateMotion>
+                        <animateMotion path="M70 142 C88 114 112 104 132 114 C144 122 151 138 154 148" dur="3.8s" begin="0s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.45 0 0.2 1" />
                         <animate attributeName="r" values="7;9;7" dur="3.8s" begin="0s" repeatCount="indefinite" />
                       </circle>
                     </g>
-                    <g class="discrete-summary-chip chip-orange" transform="translate(8 194)">
+                    <g class="discrete-summary-chip chip-orange" transform="translate(8 202)">
                       <rect width="156" height="32" rx="11" />
                       <text x="78" y="21">uniform process</text>
                     </g>
