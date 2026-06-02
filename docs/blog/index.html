@@ -964,7 +964,15 @@
 
       <section id="idlm" class="blog-section">
         <h2>3. IDLM</h2>
-        <p class="section-kicker">IDLM extends inverse distillation to discrete diffusion language models.</p>
+        <div class="blog-callout">
+          <strong>TL;DR</strong>
+          <span>
+            IDLM brings inverse distillation to discrete text. It proves that the discrete objective
+            has the right target solution, then makes the training usable with simplex-valued
+            generator outputs, process-specific relaxations for masked and uniform diffusion, and a
+            teacher-minus-fake signal that trains a few-step language generator.
+          </span>
+        </div>
 
         <h3 id="theory" class="blog-subheading">3.1 Theoretical Guarantees</h3>
         <p>
