@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260602-larger-process-arrows">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260602-fixed-process-dots">
 </head>
 <body>
   <main class="blog-shell">
@@ -1030,7 +1030,7 @@
           states. A stop-gradient simplification can make the IDLM update resemble a DMD-style
           marginal update, but that is not the full inverse-distillation gradient. For MDLM, the
           \(\mathrm{SUBS}\) parameterization hides part of this distinction because already revealed
-          tokens are copied and contribute zero loss. For uniform diffusion and Duo, tokens can be
+          tokens are copied and contribute zero loss. For uniform diffusion, tokens can be
           revised repeatedly, so the path dependence remains visible and becomes important for
           stable optimization.
         </p>
@@ -1133,7 +1133,7 @@
               </div>
               <svg class="distill-svg discrete-svg" viewBox="0 0 1180 420" role="img" aria-labelledby="combined-discrete-title combined-discrete-desc">
                 <title id="combined-discrete-title">Masked diffusion uses mask-only updates while uniform diffusion maps Gaussian logits through softmax</title>
-                <desc id="combined-discrete-desc">The left panel shows copied revealed tokens where teacher and fake outputs are equal, making the IDLM loss zero, while masked tokens keep the IDLM update. The right panel shows synchronized moving dots on a Gaussian process path and the corresponding uniform process path on the simplex.</desc>
+                <desc id="combined-discrete-desc">The left panel shows copied revealed tokens where teacher and fake outputs are equal, making the IDLM loss zero, while masked tokens keep the IDLM update. The right panel marks a Gaussian process path and the corresponding uniform process path on the simplex.</desc>
                 <defs>
                   <marker id="combinedBlueArrow" markerWidth="4.8" markerHeight="4.8" refX="4" refY="2.4" orient="auto" markerUnits="strokeWidth">
                     <path d="M0.7,0.7 L4.2,2.4 L0.7,4.1 Z" fill="#6ee8ff" />
@@ -1202,10 +1202,7 @@
                     <ellipse cx="76" cy="78" rx="24" ry="13" transform="rotate(-12 76 78)" />
                   </g>
                   <path id="combinedGaussianMotionPath" class="duo-gaussian-trace" d="M34 136 C56 101 86 78 119 88 C142 94 157 115 166 136" />
-                  <circle class="combined-motion-dot combined-motion-orange" r="8">
-                    <animateMotion path="M34 136 C56 101 86 78 119 88 C142 94 157 115 166 136" dur="3.8s" begin="0s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.45 0 0.2 1" />
-                    <animate attributeName="r" values="7;9;7" dur="3.8s" begin="0s" repeatCount="indefinite" />
-                  </circle>
+                  <circle class="combined-motion-dot combined-motion-orange" cx="58" cy="104" r="8" />
                   <g class="discrete-summary-chip chip-orange" transform="translate(18 226)">
                     <rect width="156" height="32" rx="11" />
                     <text x="78" y="21">gaussian process</text>
@@ -1234,10 +1231,7 @@
                         <text x="0" y="26" text-anchor="middle">mat</text>
                       </g>
                       <path id="combinedSimplexMotionPath" class="duo-simplex-soft-path" d="M70 142 C88 114 112 104 132 114 C144 122 151 138 154 148" />
-                      <circle class="combined-motion-dot combined-motion-blue" r="8">
-                        <animateMotion path="M70 142 C88 114 112 104 132 114 C144 122 151 138 154 148" dur="3.8s" begin="0s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines="0.45 0 0.2 1" />
-                        <animate attributeName="r" values="7;9;7" dur="3.8s" begin="0s" repeatCount="indefinite" />
-                      </circle>
+                      <circle class="combined-motion-dot combined-motion-blue" cx="96" cy="121" r="8" />
                     </g>
                     <g class="discrete-summary-chip chip-orange" transform="translate(8 202)">
                       <rect width="156" height="32" rx="11" />
@@ -1250,8 +1244,8 @@
           </div>
           <figcaption>
             Masked diffusion gets a clean mask-only update because copied revealed tokens give equal
-            teacher and fake outputs, so their IDLM loss is zero. Uniform diffusion: the synchronized
-            orange and blue dots show the Gaussian process passing through softmax into the uniform
+            teacher and fake outputs, so their IDLM loss is zero. Uniform diffusion: the orange and
+            blue dots mark the Gaussian process passing through softmax into the uniform
             process on the simplex, so token revisions remain differentiable.
           </figcaption>
         </figure>
