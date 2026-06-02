@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260602-token-x-nonsmooth">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260602-token-x-uniform-process">
 </head>
 <body>
   <main class="blog-shell">
@@ -1095,7 +1095,7 @@
           relaxation to keep a differentiable path through intermediate states. This matters because
           uniform diffusion must learn both which token to choose and when to move between states.
         </p>
-        <figure class="discrete-smoothness-map discrete-wide-map" aria-label="Visual intuition comparing masked diffusion and uniform Duo relaxation">
+        <figure class="discrete-smoothness-map discrete-wide-map" aria-label="Visual intuition comparing masked diffusion and uniform diffusion relaxation">
           <div class="discrete-map-grid discrete-single-grid">
             <div class="discrete-map-panel discrete-combined-panel">
               <div class="distill-map-head">
@@ -1103,11 +1103,11 @@
                 <strong>copy when fixed, soften when editable</strong>
               </div>
               <svg class="distill-svg discrete-svg" viewBox="0 0 1180 420" role="img" aria-labelledby="combined-discrete-title combined-discrete-desc">
-                <title id="combined-discrete-title">Masked diffusion uses mask-only updates while uniform Duo maps Gaussian logits through softmax</title>
-                <desc id="combined-discrete-desc">The left panel shows copied revealed tokens where teacher and fake outputs are equal, making the IDLM loss zero, while masked tokens keep the IDLM update. The right panel shows synchronized moving dots on a Gaussian logit path and the corresponding smooth simplex path for uniform diffusion with Duo.</desc>
+                <title id="combined-discrete-title">Masked diffusion uses mask-only updates while uniform diffusion maps Gaussian logits through softmax</title>
+                <desc id="combined-discrete-desc">The left panel shows copied revealed tokens where teacher and fake outputs are equal, making the IDLM loss zero, while masked tokens keep the IDLM update. The right panel shows synchronized moving dots on a Gaussian process path and the corresponding uniform process path on the simplex.</desc>
                 <defs>
-                  <marker id="combinedBlueArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L7,4 L1,7 Z" fill="#6ee8ff" />
+                  <marker id="combinedBlueArrow" markerWidth="4.8" markerHeight="4.8" refX="4" refY="2.4" orient="auto" markerUnits="strokeWidth">
+                    <path d="M0.7,0.7 L4.2,2.4 L0.7,4.1 Z" fill="#6ee8ff" />
                   </marker>
                   <marker id="combinedGreenArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
                     <path d="M1,1 L7,4 L1,7 Z" fill="#b5f07c" />
@@ -1166,7 +1166,7 @@
                 </g>
 
                 <g class="combined-duo-panel" transform="translate(626 70)">
-                  <text class="combined-panel-title" x="250" y="0">Uniform diffusion + Duo</text>
+                  <text class="combined-panel-title" x="250" y="0">Uniform diffusion</text>
                   <g class="duo-gaussian-contours combined-gaussian" transform="translate(0 50)">
                     <ellipse cx="76" cy="78" rx="76" ry="42" transform="rotate(-12 76 78)" />
                     <ellipse cx="76" cy="78" rx="48" ry="26" transform="rotate(-12 76 78)" />
@@ -1185,14 +1185,13 @@
                   </g>
 
                   <path class="combined-arrow combined-arrow-blue" d="M188 136 L214 136" marker-end="url(#combinedBlueArrow)" />
-                  <g class="duo-softmax-node combined-softmax" transform="translate(228 98)">
-                    <rect width="116" height="76" rx="18" />
-                    <text class="duo-softmax-main" x="58" y="36">softmax</text>
-                    <text class="duo-softmax-sub" x="58" y="57">smooth</text>
+                  <g class="duo-softmax-node combined-softmax" transform="translate(228 104)">
+                    <rect width="116" height="64" rx="17" />
+                    <text class="duo-softmax-main" x="58" y="40">softmax</text>
                   </g>
                   <path class="combined-arrow combined-arrow-blue" d="M360 136 L388 136" marker-end="url(#combinedBlueArrow)" />
 
-                  <g class="combined-simplex" transform="translate(382 76)">
+                  <g class="combined-simplex" transform="translate(382 20)">
                     <polygon class="soft-simplex-face" points="24,154 78,50 132,154" />
                     <g class="simplex-corner" transform="translate(24 154)">
                       <circle r="8" />
@@ -1213,6 +1212,7 @@
                       </animateMotion>
                       <animate attributeName="r" values="7;9;7" dur="3.8s" begin="0s" repeatCount="indefinite" />
                     </circle>
+                    <text class="combined-simplex-caption" x="78" y="222">uniform process</text>
                   </g>
                 </g>
               </svg>
@@ -1220,9 +1220,9 @@
           </div>
           <figcaption>
             Masked diffusion gets a clean mask-only update because copied revealed tokens give equal
-            teacher and fake outputs, so their IDLM loss is zero. Uniform diffusion uses Duo: the
-            synchronized orange and blue dots show Gaussian logits passing through softmax into a
-            smooth simplex path, so token revisions remain differentiable.
+            teacher and fake outputs, so their IDLM loss is zero. Uniform diffusion: the synchronized
+            orange and blue dots show the Gaussian process passing through softmax into the uniform
+            process on the simplex, so token revisions remain differentiable.
           </figcaption>
         </figure>
 

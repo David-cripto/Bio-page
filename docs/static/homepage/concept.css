@@ -3349,8 +3349,8 @@ svg {
 
 .combined-arrow-blue {
   stroke: #6ee8ff;
-  stroke-width: 3.8;
-  filter: drop-shadow(0 0 12px rgba(110, 232, 255, 0.2));
+  stroke-width: 2.1;
+  filter: drop-shadow(0 0 8px rgba(110, 232, 255, 0.16));
 }
 
 .combined-faint {
@@ -3400,6 +3400,14 @@ svg {
 .combined-motion-blue {
   fill: #6ee8ff;
   filter: drop-shadow(0 0 14px rgba(110, 232, 255, 0.36));
+}
+
+.combined-simplex-caption {
+  fill: #9beeff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-anchor: middle;
 }
 
 .combined-bracket {
@@ -3484,7 +3492,7 @@ svg {
 .duo-map-arrow,
 .duo-simplex-soft-path {
   stroke: #6ee8ff;
-  stroke-width: 4.2;
+  stroke-width: 3;
   stroke-dasharray: 9 10;
   filter: drop-shadow(0 0 12px rgba(110, 232, 255, 0.22));
   animation: distillDash 7s linear infinite;
