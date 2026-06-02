@@ -3338,7 +3338,6 @@ svg {
   text-transform: uppercase;
 }
 
-.combined-row-label,
 .combined-update-label {
   fill: var(--quiet);
   font-size: 12px;
