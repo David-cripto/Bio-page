@@ -1119,15 +1119,15 @@
             </div>
           </div>
           <figcaption>
-            The generator output is already a simplex vector: a distribution over vocabulary
-            tokens. Training keeps this vector soft, so gradients can move its probabilities.
+            During training, \(G_\theta\) emits a soft point on the vocabulary simplex, not a hard
+            token. IDLM can therefore move probability mass with gradients before sampling.
           </figcaption>
         </figure>
         <p>
           Masked diffusion gives IDLM an important shortcut. In the \(\mathrm{SUBS}\)
           parameterization, a token that has already been revealed is treated as fixed: later reverse
           transitions simply copy it forward rather than resampling it. As a result, the teacher
-          model \(f^*\) and the fake model \(\hat f\) make the same prediction on these copied
+          model \(f^*\) and the fake model \(f\) make the same prediction on these copied
           coordinates. Their loss difference cancels there, so the useful IDLM signal is concentrated
           exactly on the positions that remain masked and still need to be predicted.
         </p>
