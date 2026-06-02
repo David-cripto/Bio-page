@@ -3327,6 +3327,28 @@ svg {
   text-anchor: middle;
 }
 
+.combined-zero-highlight {
+  fill: rgba(181, 240, 124, 0.06);
+  stroke: rgba(181, 240, 124, 0.76);
+  stroke-width: 1.8;
+  stroke-dasharray: 6 5;
+}
+
+.combined-zero-chip rect {
+  fill: rgba(6, 27, 36, 0.9);
+  stroke-width: 1.8;
+}
+
+.combined-zero-chip .zero-main {
+  fill: #b5f07c;
+  font-size: 12px;
+}
+
+.combined-zero-chip .zero-sub {
+  fill: #9beeff;
+  font-size: 11px;
+}
+
 .combined-bracket {
   stroke: #ffd3a2;
   stroke-width: 2.8;

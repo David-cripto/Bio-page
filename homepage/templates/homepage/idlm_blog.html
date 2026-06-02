@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260602-token-strip-combined-discrete">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260602-copied-branch-zero">
 </head>
 <body>
   <main class="blog-shell">
@@ -1098,7 +1098,7 @@
               </div>
               <svg class="distill-svg discrete-svg" viewBox="0 0 1180 420" role="img" aria-labelledby="combined-discrete-title combined-discrete-desc">
                 <title id="combined-discrete-title">Masked diffusion uses mask-only updates while uniform Duo maps Gaussian logits through softmax</title>
-                <desc id="combined-discrete-desc">The left panel shows copied revealed tokens cancelling and masked tokens keeping the IDLM update. The right panel shows Gaussian logits passed through softmax into a smooth simplex path for uniform diffusion.</desc>
+                <desc id="combined-discrete-desc">The left panel shows copied revealed tokens where teacher and fake outputs are equal, making the IDLM loss zero, while masked tokens keep the IDLM update. The right panel shows Gaussian logits passed through softmax into a smooth simplex path for uniform diffusion.</desc>
                 <defs>
                   <marker id="combinedBlueArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
                     <path d="M1,1 L7,4 L1,7 Z" fill="#6ee8ff" />
@@ -1122,6 +1122,7 @@
                       <text x="42" y="24">cat</text>
                     </g>
                     <path class="combined-arrow combined-arrow-green" d="M190 24 L252 24" marker-end="url(#combinedGreenArrow)" />
+                    <rect class="combined-zero-highlight" x="260" y="-2" width="248" height="48" rx="16" />
                     <g class="token-pill-row" transform="translate(270 6)">
                       <rect class="discrete-token-pill token-pill-green" width="88" height="36" rx="12" />
                       <text x="44" y="24">cat</text>
@@ -1131,9 +1132,10 @@
                       <rect class="discrete-token-pill token-pill-green" width="88" height="36" rx="12" />
                       <text x="44" y="24">cat</text>
                     </g>
-                    <g class="discrete-summary-chip chip-green" transform="translate(252 58)">
-                      <rect width="170" height="30" rx="10" />
-                      <text x="85" y="20">copied branch cancels</text>
+                    <g class="discrete-summary-chip chip-green combined-zero-chip" transform="translate(248 58)">
+                      <rect width="258" height="42" rx="12" />
+                      <text class="zero-main" x="129" y="17">teacher = fake</text>
+                      <text class="zero-sub" x="129" y="33">IDLM loss = 0</text>
                     </g>
                   </g>
                   <g transform="translate(0 170)">
@@ -1217,7 +1219,8 @@
             </div>
           </div>
           <figcaption>
-            Masked diffusion gets a clean mask-only update because copied branches cancel. Uniform
+            Masked diffusion gets a clean mask-only update because copied revealed tokens give equal
+            teacher and fake outputs, so their IDLM loss is zero. Uniform
             diffusion uses Duo: Gaussian logits pass through softmax to form a smooth path on the
             simplex, so token revisions remain differentiable.
           </figcaption>
