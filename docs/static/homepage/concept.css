@@ -1995,7 +1995,7 @@ svg {
 }
 
 .sequence-capacity-map {
-  max-width: 640px;
+  max-width: 960px;
   margin: 22px auto 28px;
 }
 
@@ -2004,9 +2004,9 @@ svg {
 }
 
 .sequence-capacity-panel {
-  width: min(100%, 620px);
+  width: min(100%, 930px);
   margin: 0 auto;
-  padding: 5px;
+  padding: 8px;
 }
 
 .sequence-capacity-svg text {
