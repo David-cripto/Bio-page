@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260602-token-strip">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260602-token-strip-combined-discrete">
 </head>
 <body>
   <main class="blog-shell">
@@ -1084,177 +1084,142 @@
           only at masked positions. This is why IDLM-MDLM has a clean mask-only update instead of
           needing to backpropagate through every sampled intermediate token.
         </p>
-        <figure class="discrete-smoothness-map discrete-compact-map" aria-label="Visual intuition for masked diffusion copied-token cancellation">
-          <div class="discrete-map-grid discrete-single-grid">
-            <div class="discrete-map-panel discrete-mask-panel">
-              <div class="distill-map-head">
-                <span>Masked diffusion</span>
-                <strong>copy tokens, train masks</strong>
-              </div>
-              <svg class="distill-svg discrete-svg" viewBox="0 0 640 360" role="img" aria-labelledby="masked-cancel-title masked-cancel-desc">
-                <title id="masked-cancel-title">Masked diffusion cancels copied tokens and keeps the IDLM signal on masks</title>
-                <desc id="masked-cancel-desc">A revealed token is copied by both teacher and fake model, so it gives no update. A masked token still branches to teacher and fake predictions, so IDLM trains there.</desc>
-                <defs>
-                  <marker id="maskCopyArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L7,4 L1,7 Z" fill="#b5f07c" />
-                  </marker>
-                  <marker id="maskSignalArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L7,4 L1,7 Z" fill="#ffd3a2" />
-                  </marker>
-                </defs>
-                <rect class="distill-map-window" x="24" y="26" width="592" height="288" rx="22" />
-                <g class="mask-two-branches" transform="translate(50 62)">
-                  <g class="mask-branch-card">
-                    <text class="discrete-panel-label" x="0" y="0">revealed position</text>
-                    <g class="token-pill-row" transform="translate(0 28)">
-                      <rect class="discrete-token-pill token-pill-green" width="96" height="38" rx="12" />
-                      <text x="48" y="25">cat</text>
-                    </g>
-                    <path class="discrete-arrow discrete-arrow-copy" d="M112 47 L198 47" marker-end="url(#maskCopyArrow)" />
-                    <g class="token-pill-row" transform="translate(212 28)">
-                      <rect class="discrete-token-pill token-pill-green" width="96" height="38" rx="12" />
-                      <text x="48" y="25">cat</text>
-                    </g>
-                    <text class="mask-equals" x="326" y="56">=</text>
-                    <g class="token-pill-row" transform="translate(358 28)">
-                      <rect class="discrete-token-pill token-pill-green" width="96" height="38" rx="12" />
-                      <text x="48" y="25">cat</text>
-                    </g>
-                    <g class="discrete-summary-chip chip-green" transform="translate(138 88)">
-                      <rect width="188" height="30" rx="10" />
-                      <text x="94" y="20">teacher and fake agree</text>
-                    </g>
-                  </g>
-                  <g class="mask-branch-card" transform="translate(0 145)">
-                    <text class="discrete-panel-label" x="0" y="0">masked position</text>
-                    <g class="token-pill-row" transform="translate(0 28)">
-                      <rect class="discrete-token-pill token-pill-mask" width="112" height="38" rx="12" />
-                      <text x="56" y="25">[MASK]</text>
-                    </g>
-                    <path class="discrete-arrow discrete-arrow-signal" d="M129 47 C166 20 201 17 242 29" marker-end="url(#maskSignalArrow)" />
-                    <path class="discrete-arrow discrete-arrow-signal signal-lower" d="M129 47 C166 77 201 82 242 67" marker-end="url(#maskSignalArrow)" />
-                    <g class="token-pill-row" transform="translate(260 5)">
-                      <rect class="discrete-token-pill token-pill-blue" width="112" height="36" rx="11" />
-                      <text x="56" y="24">teacher</text>
-                    </g>
-                    <g class="token-pill-row" transform="translate(260 61)">
-                      <rect class="discrete-token-pill token-pill-orange" width="112" height="36" rx="11" />
-                      <text x="56" y="24">fake</text>
-                    </g>
-                    <path class="mask-signal-bracket" d="M393 19 L421 19 L421 79 L393 79" />
-                    <text class="mask-signal-label" x="441" y="54">IDLM update</text>
-                  </g>
-                </g>
-              </svg>
-            </div>
-          </div>
-          <figcaption>
-            Revealed tokens are copied by both models and cancel out; masked positions keep the
-            useful teacher-versus-fake IDLM signal.
-          </figcaption>
-        </figure>
         <p>
           Uniform diffusion is harder because tokens can be revised repeatedly. IDLM uses the Duo
           relaxation to keep a differentiable path through intermediate states. This matters because
           uniform diffusion must learn both which token to choose and when to move between states.
         </p>
-        <figure class="discrete-smoothness-map discrete-wide-map" aria-label="Visual intuition for uniform diffusion Duo relaxation">
+        <figure class="discrete-smoothness-map discrete-wide-map" aria-label="Visual intuition comparing masked diffusion and uniform Duo relaxation">
           <div class="discrete-map-grid discrete-single-grid">
-            <div class="discrete-map-panel discrete-uniform-panel">
+            <div class="discrete-map-panel discrete-combined-panel">
               <div class="distill-map-head">
-                <span>Uniform diffusion + Duo</span>
-                <strong>Gaussian logits to softmax path</strong>
+                <span>Discrete relaxations</span>
+                <strong>copy when fixed, soften when editable</strong>
               </div>
-              <svg class="distill-svg discrete-svg" viewBox="0 0 1180 360" role="img" aria-labelledby="uniform-duo-title uniform-duo-desc">
-                <title id="uniform-duo-title">Duo maps Gaussian logits through softmax to simplex-valued token states</title>
-                <desc id="uniform-duo-desc">Gaussian reparameterized logits are mapped through a smooth softmax function into points on the probability simplex. Nearby Gaussian samples become nearby soft token distributions, so gradients can pass through the intermediate states.</desc>
+              <svg class="distill-svg discrete-svg" viewBox="0 0 1180 420" role="img" aria-labelledby="combined-discrete-title combined-discrete-desc">
+                <title id="combined-discrete-title">Masked diffusion uses mask-only updates while uniform Duo maps Gaussian logits through softmax</title>
+                <desc id="combined-discrete-desc">The left panel shows copied revealed tokens cancelling and masked tokens keeping the IDLM update. The right panel shows Gaussian logits passed through softmax into a smooth simplex path for uniform diffusion.</desc>
                 <defs>
-                  <marker id="duoSoftmaxArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
+                  <marker id="combinedBlueArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
                     <path d="M1,1 L7,4 L1,7 Z" fill="#6ee8ff" />
                   </marker>
-                  <marker id="duoGradientArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
+                  <marker id="combinedGreenArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
+                    <path d="M1,1 L7,4 L1,7 Z" fill="#b5f07c" />
+                  </marker>
+                  <marker id="combinedOrangeArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
                     <path d="M1,1 L7,4 L1,7 Z" fill="#ffd3a2" />
                   </marker>
                 </defs>
-                <rect class="distill-map-window" x="24" y="26" width="1132" height="288" rx="22" />
-                <g class="duo-gaussian-block" transform="translate(62 62)">
-                  <text class="discrete-panel-label" x="0" y="-18">Gaussian sample path</text>
-                  <g class="duo-gaussian-contours" transform="translate(0 10)">
-                    <ellipse cx="124" cy="102" rx="116" ry="62" transform="rotate(-12 124 102)" />
-                    <ellipse cx="124" cy="102" rx="78" ry="40" transform="rotate(-12 124 102)" />
-                    <ellipse cx="124" cy="102" rx="42" ry="22" transform="rotate(-12 124 102)" />
+                <rect class="distill-map-window" x="24" y="26" width="1132" height="330" rx="22" />
+                <line class="combined-divider" x1="590" y1="58" x2="590" y2="326" />
+
+                <g class="combined-mask-panel" transform="translate(62 70)">
+                  <text class="combined-panel-title" x="0" y="0">Masked diffusion</text>
+                  <g transform="translate(0 44)">
+                    <text class="combined-row-label" x="0" y="26">revealed</text>
+                    <g class="token-pill-row" transform="translate(92 6)">
+                      <rect class="discrete-token-pill token-pill-green" width="84" height="36" rx="12" />
+                      <text x="42" y="24">cat</text>
+                    </g>
+                    <path class="combined-arrow combined-arrow-green" d="M190 24 L252 24" marker-end="url(#combinedGreenArrow)" />
+                    <g class="token-pill-row" transform="translate(270 6)">
+                      <rect class="discrete-token-pill token-pill-green" width="88" height="36" rx="12" />
+                      <text x="44" y="24">cat</text>
+                    </g>
+                    <text class="combined-equals" x="382" y="31">=</text>
+                    <g class="token-pill-row" transform="translate(410 6)">
+                      <rect class="discrete-token-pill token-pill-green" width="88" height="36" rx="12" />
+                      <text x="44" y="24">cat</text>
+                    </g>
+                    <g class="discrete-summary-chip chip-green" transform="translate(252 58)">
+                      <rect width="170" height="30" rx="10" />
+                      <text x="85" y="20">copied branch cancels</text>
+                    </g>
                   </g>
-                  <path class="duo-gaussian-trace" d="M64 139 C91 102 124 78 164 86 C191 91 210 114 226 141" />
-                  <g class="duo-gaussian-point" transform="translate(64 139)">
-                    <circle r="8" />
-                    <text x="-18" y="25">z3</text>
-                  </g>
-                  <g class="duo-gaussian-point" transform="translate(122 88)">
-                    <circle r="8" />
-                    <text x="-18" y="-14">z2</text>
-                  </g>
-                  <g class="duo-gaussian-point" transform="translate(178 92)">
-                    <circle r="8" />
-                    <text x="12" y="-11">z1</text>
-                  </g>
-                  <g class="duo-gaussian-point" transform="translate(226 141)">
-                    <circle r="8" />
-                    <text x="12" y="25">z0</text>
-                  </g>
-                  <g class="discrete-summary-chip chip-orange" transform="translate(38 194)">
-                    <rect width="178" height="30" rx="10" />
-                    <text x="89" y="20">z = mu + sigma eps</text>
-                  </g>
-                </g>
-                <path class="duo-map-arrow" d="M334 160 L430 160" marker-end="url(#duoSoftmaxArrow)" />
-                <g class="duo-softmax-node" transform="translate(448 108)">
-                  <rect width="210" height="104" rx="18" />
-                  <text class="duo-softmax-main" x="105" y="43">softmax(z / tau)</text>
-                  <text class="duo-softmax-sub" x="105" y="68">smooth map</text>
-                </g>
-                <path class="duo-map-arrow" d="M674 160 L770 160" marker-end="url(#duoSoftmaxArrow)" />
-                <g class="duo-simplex-block" transform="translate(804 55)">
-                  <text class="discrete-panel-label" x="0" y="-14">simplex-valued token states</text>
-                  <polygon class="soft-simplex-face" points="96,214 194,30 298,214" />
-                  <path class="soft-simplex-grid" d="M128 154 L266 154 M158 96 L233 96 M147 124 L194 41 M249 124 L200 41 M158 214 L240 56 M236 214 L158 56" />
-                  <g class="simplex-corner" transform="translate(96 214)">
-                    <circle r="9" />
-                    <text x="-42" y="31">cat</text>
-                  </g>
-                  <g class="simplex-corner" transform="translate(194 30)">
-                    <circle r="9" />
-                    <text x="-20" y="-18">the</text>
-                  </g>
-                  <g class="simplex-corner" transform="translate(298 214)">
-                    <circle r="9" />
-                    <text x="16" y="31">mat</text>
-                  </g>
-                  <path class="duo-simplex-soft-path" d="M129 177 C158 126 186 91 212 105 C238 118 238 157 267 180" marker-end="url(#duoSoftmaxArrow)" />
-                  <g class="duo-simplex-point" transform="translate(129 177)">
-                    <circle r="8" />
-                    <text x="-23" y="24">p3</text>
-                  </g>
-                  <g class="duo-simplex-point" transform="translate(184 104)">
-                    <circle r="8" />
-                    <text x="-24" y="-12">p2</text>
-                  </g>
-                  <g class="duo-simplex-point" transform="translate(224 122)">
-                    <circle r="8" />
-                    <text x="12" y="-10">p1</text>
-                  </g>
-                  <g class="duo-simplex-point" transform="translate(267 180)">
-                    <circle r="8" />
-                    <text x="12" y="24">p0</text>
+                  <g transform="translate(0 170)">
+                    <text class="combined-row-label" x="0" y="26">masked</text>
+                    <g class="token-pill-row" transform="translate(92 6)">
+                      <rect class="discrete-token-pill token-pill-mask" width="96" height="36" rx="12" />
+                      <text x="48" y="24">[MASK]</text>
+                    </g>
+                    <path class="combined-arrow combined-arrow-orange" d="M204 24 C241 0 282 0 322 13" marker-end="url(#combinedOrangeArrow)" />
+                    <path class="combined-arrow combined-arrow-orange combined-faint" d="M204 24 C241 54 282 57 322 38" marker-end="url(#combinedOrangeArrow)" />
+                    <g class="token-pill-row" transform="translate(338 -3)">
+                      <rect class="discrete-token-pill token-pill-blue" width="104" height="34" rx="11" />
+                      <text x="52" y="23">teacher</text>
+                    </g>
+                    <g class="token-pill-row" transform="translate(338 44)">
+                      <rect class="discrete-token-pill token-pill-orange" width="104" height="34" rx="11" />
+                      <text x="52" y="23">fake</text>
+                    </g>
+                    <path class="combined-bracket" d="M452 13 L474 13 L474 62 L452 62" />
+                    <text class="combined-update-label" x="488" y="43">IDLM</text>
                   </g>
                 </g>
-                <path class="duo-gradient-path" d="M870 283 C738 316 496 309 242 276" marker-end="url(#duoGradientArrow)" />
-                <text class="duo-gradient-label" x="436" y="299">gradient flows back through softmax</text>
+
+                <g class="combined-duo-panel" transform="translate(632 70)">
+                  <text class="combined-panel-title" x="0" y="0">Uniform diffusion + Duo</text>
+                  <g class="duo-gaussian-contours combined-gaussian" transform="translate(0 42)">
+                    <ellipse cx="88" cy="78" rx="86" ry="45" transform="rotate(-12 88 78)" />
+                    <ellipse cx="88" cy="78" rx="54" ry="28" transform="rotate(-12 88 78)" />
+                    <ellipse cx="88" cy="78" rx="27" ry="14" transform="rotate(-12 88 78)" />
+                  </g>
+                  <path class="duo-gaussian-trace" d="M46 132 C68 96 96 71 132 82 C154 89 170 108 184 132" />
+                  <g class="duo-gaussian-point" transform="translate(46 132)">
+                    <circle r="7" />
+                  </g>
+                  <g class="duo-gaussian-point" transform="translate(102 85)">
+                    <circle r="7" />
+                  </g>
+                  <g class="duo-gaussian-point" transform="translate(184 132)">
+                    <circle r="7" />
+                  </g>
+                  <g class="discrete-summary-chip chip-orange" transform="translate(18 186)">
+                    <rect width="146" height="30" rx="10" />
+                    <text x="73" y="20">z = mu + sigma eps</text>
+                  </g>
+
+                  <path class="combined-arrow combined-arrow-blue" d="M204 124 L220 124" marker-end="url(#combinedBlueArrow)" />
+                  <g class="duo-softmax-node combined-softmax" transform="translate(236 86)">
+                    <rect width="112" height="76" rx="18" />
+                    <text class="duo-softmax-main" x="56" y="36">softmax</text>
+                    <text class="duo-softmax-sub" x="56" y="57">smooth</text>
+                  </g>
+                  <path class="combined-arrow combined-arrow-blue" d="M362 124 L390 124" marker-end="url(#combinedBlueArrow)" />
+
+                  <g class="combined-simplex" transform="translate(382 74)">
+                    <polygon class="soft-simplex-face" points="32,146 84,50 136,146" />
+                    <g class="simplex-corner" transform="translate(32 146)">
+                      <circle r="8" />
+                      <text x="0" y="26" text-anchor="middle">cat</text>
+                    </g>
+                    <g class="simplex-corner" transform="translate(84 50)">
+                      <circle r="8" />
+                      <text x="0" y="-16" text-anchor="middle">the</text>
+                    </g>
+                    <g class="simplex-corner" transform="translate(136 146)">
+                      <circle r="8" />
+                      <text x="0" y="26" text-anchor="middle">mat</text>
+                    </g>
+                    <path class="duo-simplex-soft-path" d="M52 122 C70 91 90 82 103 96 C118 111 123 128 132 134" marker-end="url(#combinedBlueArrow)" />
+                    <g class="duo-simplex-point" transform="translate(52 122)">
+                      <circle r="7" />
+                    </g>
+                    <g class="duo-simplex-point" transform="translate(102 96)">
+                      <circle r="7" />
+                    </g>
+                    <g class="duo-simplex-point" transform="translate(132 134)">
+                      <circle r="7" />
+                    </g>
+                  </g>
+                </g>
               </svg>
             </div>
           </div>
           <figcaption>
-            Duo keeps uniform diffusion differentiable by reparameterizing Gaussian logits and
-            mapping them through softmax into soft token distributions on the simplex.
+            Masked diffusion gets a clean mask-only update because copied branches cancel. Uniform
+            diffusion uses Duo: Gaussian logits pass through softmax to form a smooth path on the
+            simplex, so token revisions remain differentiable.
           </figcaption>
         </figure>
 
