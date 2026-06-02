@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260602-token-panel-polished">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260602-token-x-nonsmooth">
 </head>
 <body>
   <main class="blog-shell">
@@ -923,18 +923,16 @@
               </div>
               <svg class="distill-svg language-transfer-svg token-strip-svg" viewBox="0 0 560 180" role="img" aria-labelledby="token-space-title token-space-desc">
                 <title id="token-space-title">Language tokens are isolated word states</title>
-                <desc id="token-space-desc">The words the, met, and cat appear as three isolated token points. The broken arrows between them show hard jumps instead of a smooth path.</desc>
-                <defs>
-                  <marker id="tokenJumpArrowA" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L7,4 L1,7 Z" fill="#ffd3a2" />
-                  </marker>
-                  <marker id="tokenJumpArrowB" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L7,4 L1,7 Z" fill="#b5f07c" />
-                  </marker>
-                </defs>
+                <desc id="token-space-desc">The words the, met, and cat appear as three isolated token points. Red X marks show that there is no smooth transition between valid token states.</desc>
                 <rect class="token-state-rail" x="54" y="43" width="452" height="94" rx="47" />
-                <path class="token-jump token-jump-left" d="M160 90 H236" marker-end="url(#tokenJumpArrowA)" />
-                <path class="token-jump token-jump-right" d="M324 90 H400" marker-end="url(#tokenJumpArrowB)" />
+                <g class="token-nonsmooth-mark" transform="translate(198 90)">
+                  <line x1="-17" y1="-17" x2="17" y2="17" />
+                  <line x1="-17" y1="17" x2="17" y2="-17" />
+                </g>
+                <g class="token-nonsmooth-mark" transform="translate(362 90)">
+                  <line x1="-17" y1="-17" x2="17" y2="17" />
+                  <line x1="-17" y1="17" x2="17" y2="-17" />
+                </g>
                 <g class="token-word-point token-word-the" transform="translate(116 90)">
                   <circle class="token-node-glow" r="48" />
                   <circle class="token-node-core" r="34" />
@@ -950,6 +948,7 @@
                   <circle class="token-node-core" r="34" />
                   <text class="token-node-label" y="7">cat</text>
                 </g>
+                <text class="token-nonsmooth-caption" x="280" y="160">non-smooth</text>
               </svg>
             </div>
           </div>
