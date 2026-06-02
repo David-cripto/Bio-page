@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260602-sequence-map-1-5x">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260602-loss-intuition-table">
 </head>
 <body>
   <main class="blog-shell">
@@ -1442,31 +1442,33 @@
           below that baseline. When the fake model catches up to the teacher on student samples, this
           relative advantage vanishes.
         </p>
-        <div class="intuition-strip" aria-label="Teacher fake loss intuition">
-          <div>
-            <span class="intuition-step">01</span>
-            <h4>Teacher attraction</h4>
-            <p>
-              If \(f^\star\) gives a token or state a better denoising score than the fake model, the
-              student is pushed toward it.
-            </p>
-          </div>
-          <div>
-            <span class="intuition-step">02</span>
-            <h4>Fake repulsion</h4>
-            <p>
-              If the fake model already explains a sample too well, the sample may be a student
-              artifact rather than teacher-supported text.
-            </p>
-          </div>
-          <div>
-            <span class="intuition-step">03</span>
-            <h4>Signal vanishes</h4>
-            <p>
-              When the fake model catches up to the teacher on student samples, the relative
-              advantage disappears.
-            </p>
-          </div>
+        <div class="loss-table-wrap" aria-label="MDLM teacher-over-fake advantage cases">
+          <table class="loss-intuition-table">
+            <thead>
+              <tr>
+                <th>Case</th>
+                <th>Token behavior</th>
+                <th>Intuition</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>\(a_{t,i}>\langle G_\theta(\epsilon),a_t\rangle\)</td>
+                <td>logit increases</td>
+                <td>\(f^\star\) prefers token \(i\) more than \(f\) does.</td>
+              </tr>
+              <tr>
+                <td>\(a_{t,i}<\langle G_\theta(\epsilon),a_t\rangle\)</td>
+                <td>logit decreases</td>
+                <td>Token \(i\) is below the generator's current average advantage.</td>
+              </tr>
+              <tr>
+                <td>\(a_t\approx 0\)</td>
+                <td>no relative signal</td>
+                <td>The fake model \(f\) has matched the teacher \(f^\star\) on student samples.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <h3 id="final-algorithm" class="blog-subheading">3.5 Final Algorithm</h3>
