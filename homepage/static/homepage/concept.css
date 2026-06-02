@@ -2572,6 +2572,21 @@ svg {
   animation: interpCatBlend var(--interp-duration) linear infinite;
 }
 
+.interp-smooth-caption {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  z-index: 5;
+  color: #b5f07c;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+  pointer-events: none;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 0 10px rgba(181, 240, 124, 0.28));
+}
+
 .token-transfer-panel {
   display: flex;
   flex-direction: column;
