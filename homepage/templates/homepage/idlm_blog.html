@@ -965,15 +965,15 @@
           sequences, and let \(p_\theta\) be the distribution produced by the student generator
           \(G_\theta\). The frozen teacher \(f^\star\) is the diffusion model trained on
           \(p^\star\), while \(f\) is a fake diffusion model retrained on samples from
-          \(p_\theta\). With \(\mathcal{L}(f,p)\) denoting the population diffusion training loss
-          for a model \(f\) on clean distribution \(p\), IDLM optimizes the inverse gap
+          \(p_\theta\). With \(\mathcal{L}(f,p)\) denoting the diffusion loss for model \(f\)
+          when the clean samples come from distribution \(p\), IDLM optimizes the inverse gap
           \(\mathcal{L}(f^\star,p_\theta)-\min_f \mathcal{L}(f,p_\theta)\).
         </p>
         <p>
           In a discrete space, this gap is not automatically meaningful: a poorly chosen objective
           could have minimizers that do not recover the data distribution. The theorem shows that
-          for the losses underlying SEDD, MDLM, and Duo in the hard-token limit, the population
-          IDLM objective has the desired unique zero-loss solution:
+          for the losses underlying SEDD, MDLM, and Duo in the hard-token limit, the ideal IDLM
+          objective has the desired unique zero-loss solution:
         </p>
         <div class="blog-equation">
           \[
@@ -1000,8 +1000,8 @@
           \(p\), run the corresponding discrete diffusion process and look at the entire stochastic
           trajectory, not just the endpoint. Let \(\mathbb{P}^{\star}\) be the path distribution
           induced by \(p^\star\), and let \(\mathbb{P}^{\theta}\) be the path distribution induced
-          by \(p_\theta\). In the ideal population setting, the IDLM gap is the KL divergence
-          between these full trajectory distributions:
+          by \(p_\theta\). If we could compute the losses exactly, the IDLM gap would be the KL
+          divergence between these full trajectory distributions:
         </p>
         <div class="blog-equation">
           \[
