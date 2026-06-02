@@ -3281,6 +3281,7 @@ svg {
   font-size: 15px;
   font-weight: 900;
   letter-spacing: 0;
+  text-anchor: middle;
   text-transform: uppercase;
 }
 
@@ -3328,10 +3329,10 @@ svg {
 }
 
 .combined-zero-highlight {
-  fill: rgba(181, 240, 124, 0.06);
-  stroke: rgba(181, 240, 124, 0.76);
-  stroke-width: 1.8;
-  stroke-dasharray: 6 5;
+  fill: rgba(181, 240, 124, 0.075);
+  stroke: rgba(181, 240, 124, 0.72);
+  stroke-width: 1.7;
+  filter: drop-shadow(0 0 12px rgba(181, 240, 124, 0.12));
 }
 
 .combined-zero-chip rect {
