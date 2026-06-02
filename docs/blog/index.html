@@ -502,7 +502,16 @@
 
       <section id="inverse-distillation" class="blog-section">
         <h2>2. Inverse Distillation</h2>
-        <p class="section-kicker">Rather than only shortening a path, IDLM asks which distribution the teacher came from.</p>
+        <div class="blog-callout">
+          <strong>TL;DR</strong>
+          <span>
+            Distillation can either shorten a teacher trajectory or directly match a student
+            distribution to the target distribution. Inverse distillation follows the second view:
+            keep the pretrained teacher \(f^\star\), train a fake model \(f\) on samples from
+            \(p_\theta\), and update \(p_\theta\) until it behaves like the data distribution
+            \(p^\star\).
+          </span>
+        </div>
 
         <h3 id="distillation-families" class="blog-subheading">2.1 Two General Distillation Approaches</h3>
         <p>
