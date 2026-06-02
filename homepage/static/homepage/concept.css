@@ -3350,6 +3350,22 @@ svg {
   font-size: 11px;
 }
 
+.combined-motion-dot {
+  stroke: rgba(2, 8, 24, 0.92);
+  stroke-width: 2.2;
+  pointer-events: none;
+}
+
+.combined-motion-orange {
+  fill: #ffd3a2;
+  filter: drop-shadow(0 0 14px rgba(255, 211, 162, 0.34));
+}
+
+.combined-motion-blue {
+  fill: #6ee8ff;
+  filter: drop-shadow(0 0 14px rgba(110, 232, 255, 0.36));
+}
+
 .combined-bracket {
   stroke: #ffd3a2;
   stroke-width: 2.8;
@@ -3447,35 +3463,9 @@ svg {
   animation: distillDash 8s linear infinite reverse;
 }
 
-.duo-gaussian-point circle,
-.duo-simplex-point circle {
-  stroke: rgba(2, 8, 24, 0.9);
-  stroke-width: 2;
-}
-
-.duo-gaussian-point circle {
-  fill: #ffd3a2;
-}
-
-.duo-simplex-point circle {
-  fill: #6ee8ff;
-}
-
-.duo-gaussian-point text,
-.duo-simplex-point text,
 .duo-gradient-label {
   font-weight: 800;
   letter-spacing: 0;
-}
-
-.duo-gaussian-point text {
-  fill: #ffd3a2;
-  font-size: 12px;
-}
-
-.duo-simplex-point text {
-  fill: #9beeff;
-  font-size: 12px;
 }
 
 .duo-softmax-node rect {
