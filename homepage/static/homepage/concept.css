@@ -3371,6 +3371,7 @@ svg {
 .combined-arrow-blue {
   stroke: #6ee8ff;
   stroke-width: 4.9;
+  stroke-linecap: butt;
   filter: drop-shadow(0 0 8px rgba(110, 232, 255, 0.16));
 }
 
