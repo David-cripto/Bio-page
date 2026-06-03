@@ -3779,48 +3779,108 @@ svg {
   background: #ffd36b;
 }
 
-.gsm8k-axis,
-.gsm8k-row {
+.gsm8k-plot {
   display: grid;
-  grid-template-columns: minmax(138px, 0.85fr) minmax(220px, 1.65fr) minmax(82px, 0.45fr) minmax(180px, 1fr);
+  grid-template-columns: 42px minmax(0, 1fr);
   gap: 14px;
-  align-items: center;
+  margin-top: 22px;
+  overflow-x: auto;
+  padding-bottom: 4px;
 }
 
-.gsm8k-axis {
-  margin: 18px 0 4px;
-}
-
-.gsm8k-axis > div {
-  grid-column: 2;
+.gsm8k-y-axis {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  color: rgba(167, 189, 219, 0.68);
+  height: 260px;
+  margin-top: 33px;
+  color: rgba(167, 189, 219, 0.72);
   font-size: 0.68rem;
   font-weight: 800;
+  text-align: right;
 }
 
-.gsm8k-row {
-  min-height: 84px;
-  padding: 14px 0;
-  border-top: 1px solid rgba(94, 217, 255, 0.11);
+.gsm8k-bars {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(112px, 1fr));
+  gap: 14px;
+  min-width: 690px;
 }
 
-.gsm8k-row:first-child {
-  border-top: 0;
+.gsm8k-bars::before {
+  content: "";
+  position: absolute;
+  inset: 33px 0 auto;
+  height: 260px;
+  border-bottom: 1px solid rgba(94, 217, 255, 0.22);
+  background:
+    linear-gradient(180deg, rgba(94, 217, 255, 0.14) 0 1px, transparent 1px 33.3%, rgba(94, 217, 255, 0.13) 33.3% calc(33.3% + 1px), transparent calc(33.3% + 1px) 66.6%, rgba(94, 217, 255, 0.13) 66.6% calc(66.6% + 1px), transparent calc(66.6% + 1px));
+  pointer-events: none;
+}
+
+.gsm8k-column {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: 24px 260px auto minmax(58px, auto);
+  gap: 9px;
+  min-width: 0;
+}
+
+.gsm8k-score {
+  align-self: end;
+  color: #d9f7ff;
+  font-size: 0.94rem;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.gsm8k-column-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 12px;
+}
+
+.gsm8k-column-bar i {
+  display: block;
+  width: min(100%, 62px);
+  height: var(--height);
+  min-height: 14px;
+  border: 1px solid rgba(246, 251, 255, 0.12);
+  border-radius: 7px 7px 3px 3px;
+  background: linear-gradient(180deg, #6ee8ff, #6d93ff);
+  box-shadow: 0 0 18px rgba(110, 232, 255, 0.24);
+}
+
+.gsm8k-student .gsm8k-column-bar i {
+  background: linear-gradient(180deg, #ffd36b, #b5f07c);
+  box-shadow: 0 0 18px rgba(255, 211, 107, 0.24);
+}
+
+.gsm8k-best .gsm8k-column-bar i {
+  background: linear-gradient(180deg, #ff8fd4, #ffd36b 44%, #b5f07c);
+  box-shadow: 0 0 22px rgba(255, 143, 212, 0.26);
+}
+
+.gsm8k-model {
+  min-width: 0;
+  text-align: center;
 }
 
 .gsm8k-model strong {
   display: block;
   margin: 4px 0;
   color: var(--ink);
-  font-size: 0.9rem;
-  line-height: 1.35;
+  font-size: 0.86rem;
+  line-height: 1.32;
 }
 
 .gsm8k-model em {
   color: var(--muted);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-style: normal;
 }
 
@@ -3828,47 +3888,12 @@ svg {
   color: #ffd36b;
 }
 
-.gsm8k-bar-track {
-  position: relative;
-  height: 17px;
-  overflow: hidden;
-  border: 1px solid rgba(94, 217, 255, 0.16);
-  border-radius: 6px;
-  background:
-    linear-gradient(90deg, transparent 0 32%, rgba(94, 217, 255, 0.12) 32.5% 33.5%, transparent 34% 65%, rgba(94, 217, 255, 0.12) 65.5% 66.5%, transparent 67%),
-    rgba(1, 6, 22, 0.72);
-}
-
-.gsm8k-bar-track i {
-  display: block;
-  width: var(--score);
-  height: 100%;
-  border-radius: 5px;
-  background: linear-gradient(90deg, #6ee8ff, #9eb6ff);
-  box-shadow: 0 0 18px rgba(110, 232, 255, 0.22);
-}
-
-.gsm8k-student .gsm8k-bar-track i {
-  background: linear-gradient(90deg, #b5f07c, #ffd36b);
-  box-shadow: 0 0 18px rgba(255, 211, 107, 0.24);
-}
-
-.gsm8k-best .gsm8k-bar-track i {
-  background: linear-gradient(90deg, #b5f07c, #ffd36b 58%, #ff8fd4);
-  box-shadow: 0 0 20px rgba(255, 143, 212, 0.25);
-}
-
-.gsm8k-score {
-  color: #d9f7ff;
-  font-size: 1rem;
-  line-height: 1.2;
-}
-
-.gsm8k-row p {
+.gsm8k-column p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.78rem;
-  line-height: 1.5;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  text-align: center;
 }
 
 .gsm8k-chart figcaption {
@@ -4004,14 +4029,17 @@ svg {
     flex-direction: column;
   }
 
-  .gsm8k-axis {
-    display: none;
+  .gsm8k-plot {
+    grid-template-columns: 38px minmax(640px, 1fr);
   }
 
-  .gsm8k-row {
-    grid-template-columns: 1fr;
-    gap: 9px;
-    align-items: stretch;
+  .gsm8k-column {
+    grid-template-rows: 24px 220px auto minmax(58px, auto);
+  }
+
+  .gsm8k-y-axis,
+  .gsm8k-bars::before {
+    height: 220px;
   }
 
   .factorization-card-wide {
