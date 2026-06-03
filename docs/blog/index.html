@@ -1536,8 +1536,8 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
     x0_hat <span class="alg-op">&larr;</span> <span class="alg-student">G_theta</span>(x_k, tau_k)
              <span class="alg-comment">// predicted clean sequence</span>
 
-    x_{k-1} <span class="alg-op">&larr;</span> reverse_step(
-        x_k, x0_hat, tau_k <span class="alg-op">&rarr;</span> tau_{k-1}
+    x_k <span class="alg-op">&larr;</span> reverse_step(
+        x_k, x0_hat, tau_k, tau_{k-1}
     )
              <span class="alg-comment">// MDLM mask step or Duo uniform step</span>
 <span class="alg-key">end for</span>
