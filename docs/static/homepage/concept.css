@@ -3368,10 +3368,8 @@ svg {
   filter: drop-shadow(0 0 10px rgba(255, 211, 162, 0.16));
 }
 
-.combined-arrow-blue {
-  stroke: #6ee8ff;
-  stroke-width: 4.9;
-  stroke-linecap: butt;
+.combined-solid-arrow-blue {
+  fill: #6ee8ff;
   filter: drop-shadow(0 0 8px rgba(110, 232, 255, 0.16));
 }
 

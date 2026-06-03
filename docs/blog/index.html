@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260603-owt-metrics-arrow-cap">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260603-solid-uniform-arrows">
 </head>
 <body>
   <main class="blog-shell">
@@ -1167,9 +1167,6 @@
                 <title id="combined-discrete-title">Masked diffusion uses mask-only updates while uniform diffusion maps Gaussian logits through softmax</title>
                 <desc id="combined-discrete-desc">The left panel shows copied revealed tokens where teacher and fake outputs are equal, making the IDLM loss zero, while masked tokens keep the IDLM update. The right panel animates a Gaussian process point and the corresponding uniform process point on the simplex.</desc>
                 <defs>
-                  <marker id="combinedBlueArrow" markerWidth="4.8" markerHeight="4.8" refX="4.2" refY="2.4" orient="auto" markerUnits="strokeWidth">
-                    <path d="M0.7,0.7 L4.2,2.4 L0.7,4.1 Z" fill="#6ee8ff" />
-                  </marker>
                   <marker id="combinedGreenArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
                     <path d="M1,1 L7,4 L1,7 Z" fill="#b5f07c" />
                   </marker>
@@ -1242,12 +1239,12 @@
                     <text x="78" y="21">gaussian process</text>
                   </g>
 
-                  <path class="combined-arrow combined-arrow-blue" d="M188 136 L214 136" marker-end="url(#combinedBlueArrow)" />
+                  <path class="combined-solid-arrow-blue" d="M0 -3 L21 -3 L21 -9 L36 0 L21 9 L21 3 L0 3 Z" transform="translate(188 136)" />
                   <g class="duo-softmax-node combined-softmax" transform="translate(228 104)">
                     <rect width="116" height="64" rx="17" />
                     <text class="duo-softmax-main" x="58" y="40">softmax</text>
                   </g>
-                  <path class="combined-arrow combined-arrow-blue" d="M360 136 L388 136" marker-end="url(#combinedBlueArrow)" />
+                  <path class="combined-solid-arrow-blue" d="M0 -3 L21 -3 L21 -9 L36 0 L21 9 L21 3 L0 3 Z" transform="translate(352 136)" />
 
                   <g class="combined-simplex" transform="translate(372 24)">
                     <g class="combined-simplex-geometry" transform="scale(0.86)">
