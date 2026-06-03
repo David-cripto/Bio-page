@@ -3582,6 +3582,13 @@ svg {
   max-height: 380px;
 }
 
+.owt-frontier img {
+  display: block;
+  height: auto;
+  max-height: none;
+  object-fit: initial;
+}
+
 .owt-chart {
   overflow: hidden;
 }
