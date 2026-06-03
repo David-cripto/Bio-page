@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260603-owt-table">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260603-owt-table-quad-arrows">
 </head>
 <body>
   <main class="blog-shell">
@@ -1654,12 +1654,128 @@ x_K <span class="alg-op">&larr;</span> terminal_noise(process)
             so entropy is tracked as a guardrail. This is especially important for reverse-KL-like
             objectives, which can become mode-seeking if they are pushed too far.
           </p>
-          <figure class="blog-figure">
-            <div class="blog-figure-grid">
-              <img src="/Bio-page/static/homepage/blog/idlm-owt-mdlm-bars.png" alt="Current arXiv OpenWebText masked diffusion bar figure">
-              <img src="/Bio-page/static/homepage/blog/idlm-owt-duo-greedy-bars.png" alt="Current arXiv OpenWebText uniform diffusion bar figure">
+          <figure class="gsm8k-chart owt-chart" aria-label="OpenWebText GenPPL and entropy comparison">
+            <div class="gsm8k-chart-head">
+              <div>
+                <span class="gsm8k-chart-title">OpenWebText generation</span>
+              </div>
+              <div class="gsm8k-legend" aria-hidden="true">
+                <span class="owt-key-teacher">Teacher</span>
+                <span class="owt-key-baseline">Distilled baseline</span>
+                <span class="owt-key-idlm">IDLM student</span>
+                <span class="owt-key-entropy">Entropy</span>
+              </div>
             </div>
-            <figcaption>The current arXiv OpenWebText panels compare teacher and distilled models under much smaller sampling budgets.</figcaption>
+            <div class="owt-panel-grid">
+              <article class="owt-panel" aria-label="Masked diffusion OpenWebText GenPPL comparison">
+                <div class="owt-panel-head">
+                  <span>Masked Diffusion</span>
+                  <strong>GenPPL, lower is better</strong>
+                </div>
+                <div class="owt-plot">
+                  <div class="owt-y-axis" aria-hidden="true">
+                    <span>50</span>
+                    <span>40</span>
+                    <span>30</span>
+                    <span>20</span>
+                    <span>10</span>
+                    <span>0</span>
+                  </div>
+                  <div class="owt-bars owt-bars-masked">
+                    <div class="owt-column owt-teacher" style="--height: 82.6%;">
+                      <strong class="owt-score">\(41.29\)</strong>
+                      <div class="owt-column-bar"><i></i></div>
+                      <div class="owt-model">
+                        <span>Teacher</span>
+                        <strong>MDLM</strong>
+                        <em>\(1024\) steps</em>
+                        <small>Entropy \(5.3\)</small>
+                      </div>
+                    </div>
+                    <div class="owt-column owt-baseline" style="--height: 84%;">
+                      <strong class="owt-score">\(41.98\)</strong>
+                      <div class="owt-column-bar"><i></i></div>
+                      <div class="owt-model">
+                        <span>Baseline</span>
+                        <strong>SDTT</strong>
+                        <em>\(128\) steps</em>
+                        <small>Entropy \(5.4\)</small>
+                      </div>
+                    </div>
+                    <div class="owt-column owt-idlm owt-best" style="--height: 65.5%;">
+                      <strong class="owt-score">\(32.74\)</strong>
+                      <div class="owt-column-bar"><i></i></div>
+                      <div class="owt-model">
+                        <span>IDLM</span>
+                        <strong>IDLM-MDLM</strong>
+                        <em>\(16\) steps</em>
+                        <small>Entropy \(5.4\)</small>
+                      </div>
+                    </div>
+                    <div class="owt-group owt-group-masked"><span>Distilled</span></div>
+                  </div>
+                </div>
+              </article>
+              <article class="owt-panel" aria-label="Uniform diffusion OpenWebText GenPPL comparison">
+                <div class="owt-panel-head">
+                  <span>Uniform Diffusion</span>
+                  <strong>Greedy sampler</strong>
+                </div>
+                <div class="owt-plot">
+                  <div class="owt-y-axis" aria-hidden="true">
+                    <span>80</span>
+                    <span>60</span>
+                    <span>40</span>
+                    <span>20</span>
+                    <span>0</span>
+                  </div>
+                  <div class="owt-bars owt-bars-uniform">
+                    <div class="owt-column owt-teacher" style="--height: 89.7%;">
+                      <strong class="owt-score">\(71.72\)</strong>
+                      <div class="owt-column-bar"><i></i></div>
+                      <div class="owt-model">
+                        <span>Teacher</span>
+                        <strong>\(\mathrm{Duo}^{g}\)</strong>
+                        <em>\(1024\) steps</em>
+                        <small>Entropy \(5.2\)</small>
+                      </div>
+                    </div>
+                    <div class="owt-column owt-baseline" style="--height: 87%;">
+                      <strong class="owt-score">\(69.58\)</strong>
+                      <div class="owt-column-bar"><i></i></div>
+                      <div class="owt-model">
+                        <span>Baseline</span>
+                        <strong>\(\mathrm{Duo\mbox{-}DCD}^{g}\)</strong>
+                        <em>\(8\) steps</em>
+                        <small>Entropy \(5.3\)</small>
+                      </div>
+                    </div>
+                    <div class="owt-column owt-idlm owt-best" style="--height: 85.1%;">
+                      <strong class="owt-score">\(68.04\)</strong>
+                      <div class="owt-column-bar"><i></i></div>
+                      <div class="owt-model">
+                        <span>IDLM</span>
+                        <strong>\(\mathrm{IDLM\mbox{-}Duo}^{g}\)</strong>
+                        <em>\(16\) steps</em>
+                        <small>Entropy \(5.6\)</small>
+                      </div>
+                    </div>
+                    <div class="owt-column owt-idlm" style="--height: 96.9%;">
+                      <strong class="owt-score">\(77.49\)</strong>
+                      <div class="owt-column-bar"><i></i></div>
+                      <div class="owt-model">
+                        <span>IDLM</span>
+                        <strong>\(\mathrm{IDLM\mbox{-}DCD}^{g}\)</strong>
+                        <em>\(4\) steps</em>
+                        <small>Entropy \(5.3\)</small>
+                      </div>
+                    </div>
+                    <div class="owt-group owt-group-uniform"><span>Distilled</span></div>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <figcaption>The OpenWebText diagrams are drawn directly in the page. Bars show GenPPL and the entropy badges check that aggressive step reduction does not collapse diversity.</figcaption>
           </figure>
           <div class="metric-grid">
             <div class="metric-card">
