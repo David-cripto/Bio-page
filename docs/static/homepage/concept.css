@@ -3836,6 +3836,183 @@ svg {
   grid-column: 2 / 5;
 }
 
+.owt-frontier {
+  overflow: hidden;
+}
+
+.owt-frontier-head {
+  padding-bottom: 14px;
+}
+
+.owt-frontier-legend {
+  max-width: 560px;
+}
+
+.frontier-key-continuous::before {
+  border-radius: 50%;
+  background: #20d6c2;
+}
+
+.frontier-key-flow::before {
+  border-radius: 0;
+  background: #8d5bff;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.frontier-key-discrete::before {
+  border-radius: 2px;
+  background: #df4cff;
+  clip-path: polygon(50% 0, 62% 34%, 98% 34%, 69% 55%, 80% 92%, 50% 70%, 20% 92%, 31% 55%, 2% 34%, 38% 34%);
+}
+
+.frontier-key-idlm::before {
+  border-radius: 999px;
+  background: linear-gradient(90deg, #76a4ff, #ff8a45);
+}
+
+.owt-frontier-scroll {
+  margin-top: 18px;
+  overflow-x: auto;
+  border: 1px solid rgba(94, 217, 255, 0.16);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(255, 211, 107, 0.09), transparent 32%),
+    radial-gradient(circle at 18% 16%, rgba(94, 217, 255, 0.12), transparent 34%),
+    rgba(1, 6, 22, 0.58);
+}
+
+.owt-frontier-svg {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+}
+
+.owt-frontier-svg text {
+  font-family: inherit;
+}
+
+.frontier-panel {
+  fill: url(#frontier-grid-glow);
+  stroke: rgba(94, 217, 255, 0.18);
+  stroke-width: 1.2;
+}
+
+.frontier-plot-frame {
+  fill: rgba(1, 6, 22, 0.46);
+  stroke: rgba(94, 217, 255, 0.25);
+  stroke-width: 1.4;
+}
+
+.frontier-grid line {
+  stroke: rgba(94, 217, 255, 0.13);
+  stroke-width: 1.2;
+}
+
+.frontier-ticks text {
+  fill: rgba(167, 189, 219, 0.76);
+  font-size: 13px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.frontier-ticks text:nth-child(-n + 4) {
+  text-anchor: end;
+}
+
+.frontier-axis-label {
+  fill: var(--ink);
+  font-size: 16px;
+  font-weight: 900;
+  text-anchor: middle;
+}
+
+.frontier-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4.5;
+}
+
+.frontier-line-mdlm {
+  stroke: #76a4ff;
+  filter: drop-shadow(0 0 8px rgba(118, 164, 255, 0.32));
+}
+
+.frontier-line-dcd {
+  stroke: #ff8a45;
+  filter: drop-shadow(0 0 8px rgba(255, 138, 69, 0.32));
+}
+
+.frontier-marker {
+  stroke: rgba(1, 6, 22, 0.92);
+  stroke-width: 2.4;
+}
+
+.frontier-continuous {
+  fill: #20d6c2;
+}
+
+.frontier-flow {
+  fill: #8d5bff;
+}
+
+.frontier-discrete {
+  fill: #df4cff;
+}
+
+.frontier-teacher {
+  fill: #ff8a45;
+}
+
+.frontier-reference {
+  fill: #d9e6ff;
+}
+
+.frontier-idlm-mdlm {
+  fill: #76a4ff;
+  stroke: #d9f7ff;
+}
+
+.frontier-idlm-dcd {
+  fill: #ff8a45;
+  stroke: #ffd3a2;
+}
+
+.frontier-label {
+  font-size: 13px;
+  font-weight: 900;
+  paint-order: stroke;
+  stroke: rgba(1, 6, 22, 0.95);
+  stroke-linejoin: round;
+  stroke-width: 4px;
+}
+
+.frontier-label-continuous {
+  fill: #55e9dd;
+}
+
+.frontier-label-flow {
+  fill: #a98cff;
+}
+
+.frontier-label-discrete {
+  fill: #ef7cff;
+}
+
+.frontier-label-teacher,
+.frontier-label-dcd {
+  fill: #ffb27c;
+}
+
+.frontier-label-mdlm {
+  fill: #9fc1ff;
+}
+
+.frontier-label-reference {
+  fill: #d9e6ff;
+}
+
 .blog-figure figcaption {
   margin: 10px 2px 0;
   color: var(--quiet);
@@ -4396,6 +4573,10 @@ svg {
 
   .blog-callout {
     grid-template-columns: 1fr;
+  }
+
+  .owt-frontier-svg {
+    min-width: 720px;
   }
 
   .blog-article {
