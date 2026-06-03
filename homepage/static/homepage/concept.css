@@ -3727,7 +3727,6 @@ svg {
   border-bottom: 1px solid rgba(94, 217, 255, 0.14);
 }
 
-.gsm8k-chart-head span,
 .gsm8k-model span {
   color: var(--quiet);
   font-size: 0.72rem;
@@ -3736,13 +3735,13 @@ svg {
   text-transform: uppercase;
 }
 
-.gsm8k-chart-head strong {
+.gsm8k-chart-title {
   display: block;
-  max-width: 640px;
-  margin-top: 8px;
   color: var(--ink);
-  font-size: clamp(1.05rem, 1.9vw, 1.42rem);
-  line-height: 1.35;
+  font-size: clamp(2rem, 5vw, 3.65rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1.05;
 }
 
 .gsm8k-legend {
@@ -3761,6 +3760,10 @@ svg {
   border-radius: 6px;
   background: rgba(1, 6, 22, 0.52);
   color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
