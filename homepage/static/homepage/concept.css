@@ -3738,7 +3738,7 @@ svg {
 .gsm8k-chart-title {
   display: block;
   color: var(--ink);
-  font-size: clamp(2rem, 5vw, 3.65rem);
+  font-size: clamp(1rem, 2.5vw, 1.825rem);
   font-weight: 900;
   letter-spacing: 0;
   line-height: 1.05;
