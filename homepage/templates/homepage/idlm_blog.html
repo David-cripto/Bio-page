@@ -134,8 +134,8 @@
           <a href="#results">Results</a>
           <span class="toc-note">What changes when IDLM compresses many sampling steps into a few.</span>
           <ol>
-            <li><a href="#gsm8k">GSM8K</a></li>
-            <li><a href="#openwebtext">OpenWebText</a></li>
+            <li><a href="#gsm8k">Conditional generation on TyniGSM</a></li>
+            <li><a href="#openwebtext">Unconditional generation on OpenWebText</a></li>
           </ol>
         </li>
         <li>
@@ -1568,7 +1568,7 @@ x_K <span class="alg-op">&larr;</span> terminal_noise(process)
           reverse steps while preserving the teacher's quality and diversity signals?
         </p>
         <section class="result-block">
-          <h3 id="gsm8k" class="blog-subheading">4.1 GSM8K</h3>
+          <h3 id="gsm8k" class="blog-subheading">4.1 Conditional generation on TyniGSM</h3>
           <p>
             GSM8K tests conditional generation. The prompt is clamped, and the model generates the
             solution region. This is a useful stress test because local token quality is not enough:
@@ -1647,7 +1647,7 @@ x_K <span class="alg-op">&larr;</span> terminal_noise(process)
         </section>
 
         <section class="result-block">
-          <h3 id="openwebtext" class="blog-subheading">4.2 OpenWebText</h3>
+          <h3 id="openwebtext" class="blog-subheading">4.2 Unconditional generation on OpenWebText</h3>
           <p>
             OpenWebText evaluates unconditional generation with GenPPL, MAUVE, entropy, and related
             diversity metrics. GenPPL alone is not enough: a model can improve it by losing diversity,
