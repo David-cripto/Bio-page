@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260603-gsm8k-title-small">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260603-gsm8k-no-captions">
 </head>
 <body>
   <main class="blog-shell">
@@ -1602,7 +1602,6 @@ x_K <span class="alg-op">&larr;</span> terminal_noise(process)
                     <strong>MDLM Teacher</strong>
                     <em>\(1024\) steps</em>
                   </div>
-                  <p>Masked diffusion baseline.</p>
                 </div>
                 <div class="gsm8k-column gsm8k-student" style="--height: 64.3%;">
                   <strong class="gsm8k-score">\(19.86\%\)</strong>
@@ -1612,7 +1611,6 @@ x_K <span class="alg-op">&larr;</span> terminal_noise(process)
                     <strong>IDLM-MDLM</strong>
                     <em>\(128\) steps</em>
                   </div>
-                  <p>Slightly above the MDLM teacher with \(8\times\) fewer steps.</p>
                 </div>
                 <div class="gsm8k-column gsm8k-teacher" style="--height: 20%;">
                   <strong class="gsm8k-score">\(17.2\%\)</strong>
@@ -1622,7 +1620,6 @@ x_K <span class="alg-op">&larr;</span> terminal_noise(process)
                     <strong>Duo Teacher</strong>
                     <em>\(1024\) steps</em>
                   </div>
-                  <p>Continuous-relaxation teacher baseline.</p>
                 </div>
                 <div class="gsm8k-column gsm8k-student gsm8k-best" style="--height: 89.7%;">
                   <strong class="gsm8k-score">\(21.38\%\)</strong>
@@ -1632,7 +1629,6 @@ x_K <span class="alg-op">&larr;</span> terminal_noise(process)
                     <strong>IDLM-Duo</strong>
                     <em>\(128\) steps</em>
                   </div>
-                  <p>Best reported distilled result in this setting.</p>
                 </div>
                 <div class="gsm8k-column gsm8k-student" style="--height: 50.5%;">
                   <strong class="gsm8k-score">\(19.03\%\)</strong>
@@ -1642,11 +1638,9 @@ x_K <span class="alg-op">&larr;</span> terminal_noise(process)
                     <strong>IDLM-Duo</strong>
                     <em>\(64\) steps</em>
                   </div>
-                  <p>Still teacher-level with \(16\times\) fewer steps.</p>
                 </div>
               </div>
             </div>
-            <figcaption>Bars use a zoomed \(16\%\)-to-\(22\%\) accuracy axis so the teacher-student differences are visible; the exact reported accuracy is printed for each method.</figcaption>
           </figure>
         </section>
 
