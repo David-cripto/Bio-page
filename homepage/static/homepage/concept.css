@@ -3640,22 +3640,39 @@ svg {
 
 .owt-plot {
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 10px;
   overflow-x: auto;
   padding-bottom: 2px;
 }
 
 .owt-y-axis {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 230px;
   margin-top: 27px;
+  padding-left: 24px;
   color: rgba(167, 189, 219, 0.72);
   font-size: 0.64rem;
   font-weight: 800;
   text-align: right;
+}
+
+.owt-y-label {
+  position: absolute;
+  left: -18px;
+  top: 50%;
+  color: rgba(232, 241, 255, 0.9);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: none;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: center;
+  white-space: nowrap;
 }
 
 .owt-bars {
@@ -4255,7 +4272,7 @@ svg {
   }
 
   .owt-plot {
-    grid-template-columns: 34px minmax(500px, 1fr);
+    grid-template-columns: 58px minmax(500px, 1fr);
   }
 
   .gsm8k-column {
