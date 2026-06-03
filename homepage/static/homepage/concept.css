@@ -3164,15 +3164,6 @@ svg {
   animation: simplexBreath 2.8s ease-in-out infinite;
 }
 
-.simplex-flow-line {
-  fill: none;
-  stroke: #6ee8ff;
-  stroke-width: 3.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 0 12px rgba(110, 232, 255, 0.2));
-}
-
 .simplex-generator-node rect,
 .simplex-vector-card > rect {
   fill: rgba(2, 8, 24, 0.66);
@@ -3349,28 +3340,25 @@ svg {
   font-weight: 800;
 }
 
-.combined-arrow,
 .combined-bracket {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.combined-arrow-green {
-  stroke: #b5f07c;
-  stroke-width: 3.4;
-  filter: drop-shadow(0 0 10px rgba(181, 240, 124, 0.14));
-}
-
-.combined-arrow-orange {
-  stroke: #ffd3a2;
-  stroke-width: 3.4;
-  filter: drop-shadow(0 0 10px rgba(255, 211, 162, 0.16));
-}
-
 .combined-solid-arrow-blue {
   fill: #6ee8ff;
   filter: drop-shadow(0 0 8px rgba(110, 232, 255, 0.16));
+}
+
+.combined-solid-arrow-green {
+  fill: #b5f07c;
+  filter: drop-shadow(0 0 10px rgba(181, 240, 124, 0.14));
+}
+
+.combined-solid-arrow-orange {
+  fill: #ffd3a2;
+  filter: drop-shadow(0 0 10px rgba(255, 211, 162, 0.16));
 }
 
 .combined-faint {
@@ -3642,10 +3630,6 @@ svg {
   background: #6ee8ff;
 }
 
-.owt-key-baseline::before {
-  background: #9fb7ff;
-}
-
 .owt-key-idlm::before {
   background: #ffd36b;
 }
@@ -3682,13 +3666,13 @@ svg {
 }
 
 .owt-bars-masked {
-  grid-template-columns: repeat(3, minmax(116px, 1fr));
-  min-width: 500px;
+  grid-template-columns: repeat(2, minmax(132px, 1fr));
+  min-width: 360px;
 }
 
 .owt-bars-uniform {
-  grid-template-columns: repeat(4, minmax(116px, 1fr));
-  min-width: 660px;
+  grid-template-columns: repeat(3, minmax(132px, 1fr));
+  min-width: 520px;
 }
 
 .owt-bars::before {
@@ -3740,11 +3724,6 @@ svg {
   border-radius: 7px 7px 3px 3px;
   background: linear-gradient(180deg, #6ee8ff, #6d93ff);
   box-shadow: 0 0 18px rgba(110, 232, 255, 0.2);
-}
-
-.owt-baseline .owt-column-bar i {
-  background: linear-gradient(180deg, #9fb7ff, #7c7bff);
-  box-shadow: 0 0 18px rgba(159, 183, 255, 0.2);
 }
 
 .owt-idlm .owt-column-bar i {
@@ -3829,11 +3808,11 @@ svg {
 }
 
 .owt-group-masked {
-  grid-column: 2 / 4;
+  grid-column: 2 / 3;
 }
 
 .owt-group-uniform {
-  grid-column: 2 / 5;
+  grid-column: 2 / 4;
 }
 
 .owt-frontier {

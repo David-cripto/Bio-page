@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260603-clean-frontier-values">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260603-clean-frontier-solid-arrows">
 </head>
 <body>
   <main class="blog-shell">
@@ -1078,23 +1078,18 @@
               <svg class="distill-svg discrete-svg" viewBox="0 0 760 220" role="img" aria-labelledby="simplex-relax-title simplex-relax-desc">
                 <title id="simplex-relax-title">The student generator outputs a probability vector on the simplex</title>
                 <desc id="simplex-relax-desc">A latent input goes through the student generator. Instead of sampling one token during training, the generator outputs a horizontal vector of token probabilities that sums to one, and the same vector appears as a point inside the probability simplex.</desc>
-                <defs>
-                  <marker id="simplexFlowArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L7,4 L1,7 Z" fill="#6ee8ff" />
-                  </marker>
-                </defs>
                 <rect class="distill-map-window" x="24" y="26" width="712" height="144" rx="22" />
                 <g class="simplex-pipeline" transform="translate(54 62)">
                   <g class="simplex-input-node token-pill-row" transform="translate(0 20)">
                     <rect class="discrete-token-pill token-pill-muted" width="70" height="38" rx="12" />
                     <text x="35" y="25">&epsilon;</text>
                   </g>
-                  <path class="simplex-flow-line" d="M80 39 L122 39" marker-end="url(#simplexFlowArrow)" />
+                  <path class="combined-solid-arrow-blue" d="M0 -3 L21 -3 L21 -9 L36 0 L21 9 L21 3 L0 3 Z" transform="translate(83 39)" />
                   <g class="simplex-generator-node" transform="translate(138 8)">
                     <rect width="86" height="62" rx="17" />
                     <text class="simplex-generator-main" x="43" y="39">G<tspan baseline-shift="sub" font-size="12">&theta;</tspan></text>
                   </g>
-                  <path class="simplex-flow-line" d="M238 39 L280 39" marker-end="url(#simplexFlowArrow)" />
+                  <path class="combined-solid-arrow-blue" d="M0 -3 L21 -3 L21 -9 L36 0 L21 9 L21 3 L0 3 Z" transform="translate(241 39)" />
                   <g class="simplex-vector-card" transform="translate(294 6)">
                     <rect width="222" height="66" rx="18" />
                     <g class="simplex-prob-chip prob-chip-cat" transform="translate(16 16)">
@@ -1113,7 +1108,7 @@
                       <text class="simplex-prob-value" x="29" y="29">0.16</text>
                     </g>
                   </g>
-                  <path class="simplex-flow-line" d="M528 39 L596 39" marker-end="url(#simplexFlowArrow)" />
+                  <path class="combined-solid-arrow-blue" d="M0 -3 L21 -3 L21 -9 L36 0 L21 9 L21 3 L0 3 Z" transform="translate(544 39)" />
                 </g>
                 <g class="simplex-diagram simplex-inline-diagram" transform="translate(600 50)">
                   <polygon class="soft-simplex-face" points="40,102 86,18 134,102" />
@@ -1166,14 +1161,6 @@
               <svg class="distill-svg discrete-svg" viewBox="0 0 1180 330" role="img" aria-labelledby="combined-discrete-title combined-discrete-desc">
                 <title id="combined-discrete-title">Masked diffusion uses mask-only updates while uniform diffusion maps Gaussian logits through softmax</title>
                 <desc id="combined-discrete-desc">The left panel shows copied revealed tokens where teacher and fake outputs are equal, making the IDLM loss zero, while masked tokens keep the IDLM update. The right panel animates a Gaussian process point and the corresponding uniform process point on the simplex.</desc>
-                <defs>
-                  <marker id="combinedGreenArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L7,4 L1,7 Z" fill="#b5f07c" />
-                  </marker>
-                  <marker id="combinedOrangeArrow" markerWidth="8" markerHeight="8" refX="6.4" refY="4" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L7,4 L1,7 Z" fill="#ffd3a2" />
-                  </marker>
-                </defs>
                 <rect class="distill-map-window" x="24" y="22" width="1132" height="296" rx="22" />
                 <line class="combined-divider" x1="590" y1="55" x2="590" y2="304" />
 
@@ -1184,7 +1171,7 @@
                       <rect class="discrete-token-pill token-pill-green" width="82" height="38" rx="13" />
                       <text x="41" y="25">cat</text>
                     </g>
-                    <path class="combined-arrow combined-arrow-green" d="M184 29 L238 29" marker-end="url(#combinedGreenArrow)" />
+                    <path class="combined-solid-arrow-green" d="M0 -3 L21 -3 L21 -9 L36 0 L21 9 L21 3 L0 3 Z" transform="translate(193 29)" />
                     <rect class="combined-zero-highlight" x="246" y="4" width="254" height="50" rx="16" />
                     <g class="token-pill-row" transform="translate(258 10)">
                       <rect class="discrete-token-pill token-pill-green" width="86" height="38" rx="13" />
@@ -1206,8 +1193,8 @@
                       <rect class="discrete-token-pill token-pill-mask" width="82" height="38" rx="13" />
                       <text x="41" y="25">[MASK]</text>
                     </g>
-                    <path class="combined-arrow combined-arrow-orange" d="M188 43 C226 13 273 10 314 26" marker-end="url(#combinedOrangeArrow)" />
-                    <path class="combined-arrow combined-arrow-orange combined-faint" d="M188 43 C226 76 273 80 314 60" marker-end="url(#combinedOrangeArrow)" />
+                    <path class="combined-solid-arrow-orange" d="M0 -3 L21 -3 L21 -9 L36 0 L21 9 L21 3 L0 3 Z" transform="translate(236 35) rotate(-10)" />
+                    <path class="combined-solid-arrow-orange combined-faint" d="M0 -3 L21 -3 L21 -9 L36 0 L21 9 L21 3 L0 3 Z" transform="translate(236 51) rotate(10)" />
                     <g class="token-pill-row" transform="translate(330 8)">
                       <rect class="discrete-token-pill token-pill-blue" width="108" height="36" rx="12" />
                       <text x="54" y="24">teacher</text>
@@ -1658,7 +1645,6 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
               </div>
               <div class="gsm8k-legend" aria-hidden="true">
                 <span class="owt-key-teacher">Teacher</span>
-                <span class="owt-key-baseline">Distilled baseline</span>
                 <span class="owt-key-idlm">IDLM student</span>
                 <span class="owt-key-entropy">Entropy</span>
               </div>
@@ -1686,17 +1672,7 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
                         <span>Teacher</span>
                         <strong>MDLM</strong>
                         <em>\(1024\) steps</em>
-                        <small>Entropy \(5.3\)</small>
-                      </div>
-                    </div>
-                    <div class="owt-column owt-baseline" style="--height: 84%;">
-                      <strong class="owt-score">\(41.98\)</strong>
-                      <div class="owt-column-bar"><i></i></div>
-                      <div class="owt-model">
-                        <span>Baseline</span>
-                        <strong>SDTT</strong>
-                        <em>\(128\) steps</em>
-                        <small>Entropy \(5.4\)</small>
+                        <small>Entropy&nbsp;\(5.3\)</small>
                       </div>
                     </div>
                     <div class="owt-column owt-idlm owt-best" style="--height: 65.5%;">
@@ -1706,7 +1682,7 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
                         <span>IDLM</span>
                         <strong>IDLM-MDLM</strong>
                         <em>\(16\) steps</em>
-                        <small>Entropy \(5.4\)</small>
+                        <small>Entropy&nbsp;\(5.4\)</small>
                       </div>
                     </div>
                     <div class="owt-group owt-group-masked"><span>Distilled</span></div>
@@ -1734,17 +1710,7 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
                         <span>Teacher</span>
                         <strong>\(\mathrm{Duo}^{g}\)</strong>
                         <em>\(1024\) steps</em>
-                        <small>Entropy \(5.2\)</small>
-                      </div>
-                    </div>
-                    <div class="owt-column owt-baseline" style="--height: 87%;">
-                      <strong class="owt-score">\(69.58\)</strong>
-                      <div class="owt-column-bar"><i></i></div>
-                      <div class="owt-model">
-                        <span>Baseline</span>
-                        <strong>\(\mathrm{Duo\mbox{-}DCD}^{g}\)</strong>
-                        <em>\(8\) steps</em>
-                        <small>Entropy \(5.3\)</small>
+                        <small>Entropy&nbsp;\(5.2\)</small>
                       </div>
                     </div>
                     <div class="owt-column owt-idlm owt-best" style="--height: 85.1%;">
@@ -1754,7 +1720,7 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
                         <span>IDLM</span>
                         <strong>\(\mathrm{IDLM\mbox{-}Duo}^{g}\)</strong>
                         <em>\(16\) steps</em>
-                        <small>Entropy \(5.6\)</small>
+                        <small>Entropy&nbsp;\(5.6\)</small>
                       </div>
                     </div>
                     <div class="owt-column owt-idlm" style="--height: 96.9%;">
@@ -1764,7 +1730,7 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
                         <span>IDLM</span>
                         <strong>\(\mathrm{IDLM\mbox{-}DCD}^{g}\)</strong>
                         <em>\(4\) steps</em>
-                        <small>Entropy \(5.3\)</small>
+                        <small>Entropy&nbsp;\(5.3\)</small>
                       </div>
                     </div>
                     <div class="owt-group owt-group-uniform"><span>Distilled</span></div>
@@ -1772,7 +1738,7 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
                 </div>
               </article>
             </div>
-            <figcaption>The OpenWebText diagrams are drawn directly in the page. Bars show GenPPL and the entropy badges check that aggressive step reduction does not collapse diversity.</figcaption>
+            <figcaption>The OpenWebText diagrams are drawn directly in the page. Bars compare the teacher and IDLM students; entropy badges check that aggressive step reduction does not collapse diversity.</figcaption>
           </figure>
           <figure class="blog-figure owt-frontier" aria-label="OpenWebText GenPPL and entropy tradeoff">
             <div class="gsm8k-chart-head owt-frontier-head">
