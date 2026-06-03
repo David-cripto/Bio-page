@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260603-owt-table-removed-double-arrows">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260603-owt-metrics-removed">
 </head>
 <body>
   <main class="blog-shell">
@@ -1777,23 +1777,6 @@ x_K <span class="alg-op">&larr;</span> terminal_noise(process)
             </div>
             <figcaption>The OpenWebText diagrams are drawn directly in the page. Bars show GenPPL and the entropy badges check that aggressive step reduction does not collapse diversity.</figcaption>
           </figure>
-          <div class="metric-grid">
-            <div class="metric-card">
-              <span>Masked diffusion</span>
-              <strong>\(64\times\)</strong>
-              <p>IDLM-MDLM reduces a \(1024\)-step MDLM teacher to \(16\) reverse steps while keeping entropy comparable.</p>
-            </div>
-            <div class="metric-card">
-              <span>Uniform diffusion</span>
-              <strong>\(256\times\)</strong>
-              <p>IDLM-DCD reaches a \(4\)-step greedy sampling regime, where trajectory skipping is extremely aggressive.</p>
-            </div>
-            <div class="metric-card">
-              <span>Main signal</span>
-              <strong>quality</strong>
-              <p>The best students improve or preserve GenPPL without the obvious entropy collapse that would make samples less diverse.</p>
-            </div>
-          </div>
           <figure class="blog-figure">
             <img src="/Bio-page/static/homepage/blog/idlm-owt-frontier.png" alt="Current arXiv GenPPL and entropy tradeoff plot on OpenWebText">
             <figcaption>The GenPPL-entropy frontier shows why diversity must be read together with perplexity.</figcaption>

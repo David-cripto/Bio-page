@@ -839,7 +839,6 @@ svg {
 
 .blog-callout,
 .method-grid > div,
-.metric-card,
 .gsm8k-chart,
 .result-table-wrap,
 .intuition-strip > div,
@@ -3852,8 +3851,7 @@ svg {
   margin-top: 28px;
 }
 
-.method-grid > div,
-.metric-card {
+.method-grid > div {
   min-width: 0;
   min-height: 232px;
   padding: 20px;
@@ -3866,8 +3864,7 @@ svg {
   line-height: 1.45;
 }
 
-.method-grid p,
-.metric-card p {
+.method-grid p {
   margin: 0;
   color: var(--muted);
   font-size: 0.84rem;
@@ -3930,28 +3927,6 @@ svg {
 
 .sampling-duo .sampling-track i {
   width: 5%;
-}
-
-.metric-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin: 28px 0;
-}
-
-.metric-card span {
-  color: var(--quiet);
-  font-size: 0.72rem;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.metric-card strong {
-  display: block;
-  margin: 18px 0 12px;
-  color: #ffd3a2;
-  font-size: clamp(2rem, 4vw, 3.3rem);
-  line-height: 1;
 }
 
 .gsm8k-chart {
@@ -4271,7 +4246,6 @@ svg {
   .discrete-map-grid,
   .algorithm-explainer,
   .method-grid,
-  .metric-grid,
   .generation-animation-grid,
   .factorization-visual,
   .owt-panel-grid,
@@ -4341,7 +4315,6 @@ svg {
   }
 
   .method-grid > div,
-  .metric-card,
   .algorithm-panel,
   .token-scale-visual > div,
   .intuition-strip > div {
