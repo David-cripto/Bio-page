@@ -840,6 +840,7 @@ svg {
 .blog-callout,
 .method-grid > div,
 .metric-card,
+.gsm8k-chart,
 .result-table-wrap,
 .intuition-strip > div,
 .inverse-contrast-visual,
@@ -3711,6 +3712,172 @@ svg {
   line-height: 1;
 }
 
+.gsm8k-chart {
+  margin: 26px 0 0;
+  padding: 22px;
+  border-radius: 8px;
+}
+
+.gsm8k-chart-head {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(94, 217, 255, 0.14);
+}
+
+.gsm8k-chart-head span,
+.gsm8k-model span {
+  color: var(--quiet);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.gsm8k-chart-head strong {
+  display: block;
+  max-width: 640px;
+  margin-top: 8px;
+  color: var(--ink);
+  font-size: clamp(1.05rem, 1.9vw, 1.42rem);
+  line-height: 1.35;
+}
+
+.gsm8k-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.gsm8k-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 9px;
+  border: 1px solid rgba(94, 217, 255, 0.18);
+  border-radius: 6px;
+  background: rgba(1, 6, 22, 0.52);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.gsm8k-legend span::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+}
+
+.gsm8k-key-teacher::before {
+  background: #6ee8ff;
+}
+
+.gsm8k-key-student::before {
+  background: #ffd36b;
+}
+
+.gsm8k-axis,
+.gsm8k-row {
+  display: grid;
+  grid-template-columns: minmax(138px, 0.85fr) minmax(220px, 1.65fr) minmax(82px, 0.45fr) minmax(180px, 1fr);
+  gap: 14px;
+  align-items: center;
+}
+
+.gsm8k-axis {
+  margin: 18px 0 4px;
+}
+
+.gsm8k-axis > div {
+  grid-column: 2;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(167, 189, 219, 0.68);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.gsm8k-row {
+  min-height: 84px;
+  padding: 14px 0;
+  border-top: 1px solid rgba(94, 217, 255, 0.11);
+}
+
+.gsm8k-row:first-child {
+  border-top: 0;
+}
+
+.gsm8k-model strong {
+  display: block;
+  margin: 4px 0;
+  color: var(--ink);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.gsm8k-model em {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-style: normal;
+}
+
+.gsm8k-student .gsm8k-model span {
+  color: #ffd36b;
+}
+
+.gsm8k-bar-track {
+  position: relative;
+  height: 17px;
+  overflow: hidden;
+  border: 1px solid rgba(94, 217, 255, 0.16);
+  border-radius: 6px;
+  background:
+    linear-gradient(90deg, transparent 0 32%, rgba(94, 217, 255, 0.12) 32.5% 33.5%, transparent 34% 65%, rgba(94, 217, 255, 0.12) 65.5% 66.5%, transparent 67%),
+    rgba(1, 6, 22, 0.72);
+}
+
+.gsm8k-bar-track i {
+  display: block;
+  width: var(--score);
+  height: 100%;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #6ee8ff, #9eb6ff);
+  box-shadow: 0 0 18px rgba(110, 232, 255, 0.22);
+}
+
+.gsm8k-student .gsm8k-bar-track i {
+  background: linear-gradient(90deg, #b5f07c, #ffd36b);
+  box-shadow: 0 0 18px rgba(255, 211, 107, 0.24);
+}
+
+.gsm8k-best .gsm8k-bar-track i {
+  background: linear-gradient(90deg, #b5f07c, #ffd36b 58%, #ff8fd4);
+  box-shadow: 0 0 20px rgba(255, 143, 212, 0.25);
+}
+
+.gsm8k-score {
+  color: #d9f7ff;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.gsm8k-row p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.gsm8k-chart figcaption {
+  margin-top: 16px;
+  color: rgba(167, 189, 219, 0.82);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
 .result-table-wrap {
   overflow-x: auto;
   margin-top: 24px;
@@ -3826,6 +3993,25 @@ svg {
 
   .distill-map-head strong {
     text-align: left;
+  }
+
+  .gsm8k-chart-head,
+  .gsm8k-legend {
+    justify-content: flex-start;
+  }
+
+  .gsm8k-chart-head {
+    flex-direction: column;
+  }
+
+  .gsm8k-axis {
+    display: none;
+  }
+
+  .gsm8k-row {
+    grid-template-columns: 1fr;
+    gap: 9px;
+    align-items: stretch;
   }
 
   .factorization-card-wide {

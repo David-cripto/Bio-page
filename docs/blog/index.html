@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260602-loss-intuition-blocks-only">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260603-gsm8k-accuracy-chart">
 </head>
 <body>
   <main class="blog-shell">
@@ -1576,50 +1576,79 @@ x_K <span class="alg-op">&larr;</span> terminal_noise(process)
             Autoregressive baselines are still much stronger, but IDLM recovers diffusion-teacher
             accuracy with far fewer reverse steps.
           </p>
-          <div class="result-table-wrap">
-            <table class="result-table">
-              <thead>
-                <tr>
-                  <th>Model</th>
-                  <th>Steps</th>
-                  <th>Accuracy</th>
-                  <th>Takeaway</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>MDLM Teacher</td>
-                  <td>\(1024\)</td>
-                  <td>\(18.0\%\)</td>
-                  <td>Teacher baseline</td>
-                </tr>
-                <tr>
-                  <td>IDLM-MDLM</td>
-                  <td>\(128\)</td>
-                  <td>\(19.86\%\)</td>
-                  <td>Teacher-level with \(8\times\) fewer steps</td>
-                </tr>
-                <tr>
-                  <td>Duo Teacher</td>
-                  <td>\(1024\)</td>
-                  <td>\(17.2\%\)</td>
-                  <td>Teacher baseline</td>
-                </tr>
-                <tr>
-                  <td>IDLM-Duo</td>
-                  <td>\(128\)</td>
-                  <td>\(21.38\%\)</td>
-                  <td>Best reported distilled result</td>
-                </tr>
-                <tr>
-                  <td>IDLM-Duo</td>
-                  <td>\(64\)</td>
-                  <td>\(19.03\%\)</td>
-                  <td>Teacher-level with \(16\times\) fewer steps</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <figure class="gsm8k-chart" aria-label="GSM8K accuracy comparison by method">
+            <div class="gsm8k-chart-head">
+              <div>
+                <span>GSM8K accuracy</span>
+                <strong>Distilled students preserve teacher-level accuracy with far fewer reverse steps.</strong>
+              </div>
+              <div class="gsm8k-legend" aria-hidden="true">
+                <span class="gsm8k-key-teacher">Teacher</span>
+                <span class="gsm8k-key-student">IDLM student</span>
+              </div>
+            </div>
+            <div class="gsm8k-axis" aria-hidden="true">
+              <div>
+                <span>16%</span>
+                <span>18%</span>
+                <span>20%</span>
+                <span>22%</span>
+              </div>
+            </div>
+            <div class="gsm8k-rows">
+              <div class="gsm8k-row gsm8k-teacher" style="--score: 33.3%;">
+                <div class="gsm8k-model">
+                  <span>Teacher</span>
+                  <strong>MDLM Teacher</strong>
+                  <em>\(1024\) steps</em>
+                </div>
+                <div class="gsm8k-bar-track"><i></i></div>
+                <strong class="gsm8k-score">\(18.0\%\)</strong>
+                <p>Masked diffusion baseline.</p>
+              </div>
+              <div class="gsm8k-row gsm8k-student" style="--score: 64.3%;">
+                <div class="gsm8k-model">
+                  <span>Student</span>
+                  <strong>IDLM-MDLM</strong>
+                  <em>\(128\) steps</em>
+                </div>
+                <div class="gsm8k-bar-track"><i></i></div>
+                <strong class="gsm8k-score">\(19.86\%\)</strong>
+                <p>Slightly above the MDLM teacher with \(8\times\) fewer steps.</p>
+              </div>
+              <div class="gsm8k-row gsm8k-teacher" style="--score: 20%;">
+                <div class="gsm8k-model">
+                  <span>Teacher</span>
+                  <strong>Duo Teacher</strong>
+                  <em>\(1024\) steps</em>
+                </div>
+                <div class="gsm8k-bar-track"><i></i></div>
+                <strong class="gsm8k-score">\(17.2\%\)</strong>
+                <p>Continuous-relaxation teacher baseline.</p>
+              </div>
+              <div class="gsm8k-row gsm8k-student gsm8k-best" style="--score: 89.7%;">
+                <div class="gsm8k-model">
+                  <span>Student</span>
+                  <strong>IDLM-Duo</strong>
+                  <em>\(128\) steps</em>
+                </div>
+                <div class="gsm8k-bar-track"><i></i></div>
+                <strong class="gsm8k-score">\(21.38\%\)</strong>
+                <p>Best reported distilled result in this setting.</p>
+              </div>
+              <div class="gsm8k-row gsm8k-student" style="--score: 50.5%;">
+                <div class="gsm8k-model">
+                  <span>Student</span>
+                  <strong>IDLM-Duo</strong>
+                  <em>\(64\) steps</em>
+                </div>
+                <div class="gsm8k-bar-track"><i></i></div>
+                <strong class="gsm8k-score">\(19.03\%\)</strong>
+                <p>Still teacher-level with \(16\times\) fewer steps.</p>
+              </div>
+            </div>
+            <figcaption>Bars use a zoomed \(16\%\)-to-\(22\%\) accuracy axis so the teacher-student differences are visible; the exact reported accuracy is printed for each method.</figcaption>
+          </figure>
         </section>
 
         <section class="result-block">
