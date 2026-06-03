@@ -1530,7 +1530,7 @@
             <pre class="algorithm-code" aria-label="IDLM sampling pseudocode"><code><span class="alg-key">Algorithm</span> Sample-IDLM(<span class="alg-student">G_theta</span>, process, K)
 <span class="alg-comment">// A short grid replaces the long teacher chain.</span>
 tau_K, ..., tau_0 <span class="alg-op">&larr;</span> reverse_grid(K)
-x_K <span class="alg-op">&larr;</span> terminal_noise(process)
+x_k <span class="alg-op">&larr;</span> terminal_noise(process)
 
 <span class="alg-key">for</span> k = K, ..., 1 <span class="alg-key">do</span>
     x0_hat <span class="alg-op">&larr;</span> <span class="alg-student">G_theta</span>(x_k, tau_k)
@@ -1542,7 +1542,7 @@ x_K <span class="alg-op">&larr;</span> terminal_noise(process)
              <span class="alg-comment">// MDLM mask step or Duo uniform step</span>
 <span class="alg-key">end for</span>
 
-<span class="alg-key">return</span> decode(x_0)</code></pre>
+<span class="alg-key">return</span> x_k</code></pre>
           </div>
         </div>
         <p>
