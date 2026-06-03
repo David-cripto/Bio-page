@@ -3584,9 +3584,9 @@ svg {
 
 .owt-frontier img {
   display: block;
-  height: auto !important;
-  max-height: none !important;
-  object-fit: fill !important;
+  height: auto;
+  max-height: none;
+  object-fit: initial;
 }
 
 .owt-chart {
