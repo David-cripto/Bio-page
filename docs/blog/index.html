@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260603-frontier-solid-arrows">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260603-clean-frontier-values">
 </head>
 <body>
   <main class="blog-shell">
@@ -1700,7 +1700,7 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
                       </div>
                     </div>
                     <div class="owt-column owt-idlm owt-best" style="--height: 65.5%;">
-                      <strong class="owt-score">\(32.74\)</strong>
+                      <strong class="owt-score">\(32.75\)</strong>
                       <div class="owt-column-bar"><i></i></div>
                       <div class="owt-model">
                         <span>IDLM</span>
@@ -1758,7 +1758,7 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
                       </div>
                     </div>
                     <div class="owt-column owt-idlm" style="--height: 96.9%;">
-                      <strong class="owt-score">\(77.49\)</strong>
+                      <strong class="owt-score">\(77.47\)</strong>
                       <div class="owt-column-bar"><i></i></div>
                       <div class="owt-model">
                         <span>IDLM</span>
@@ -1774,111 +1774,134 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
             </div>
             <figcaption>The OpenWebText diagrams are drawn directly in the page. Bars show GenPPL and the entropy badges check that aggressive step reduction does not collapse diversity.</figcaption>
           </figure>
-          <figure class="blog-figure owt-frontier" aria-label="OpenWebText GenPPL and entropy frontier">
+          <figure class="blog-figure owt-frontier" aria-label="OpenWebText GenPPL and entropy tradeoff">
             <div class="gsm8k-chart-head owt-frontier-head">
               <div class="gsm8k-model">
                 <span>OpenWebText tradeoff</span>
-                <span class="gsm8k-chart-title">GenPPL-entropy frontier</span>
+                <span class="gsm8k-chart-title">Quality-diversity map</span>
               </div>
               <div class="gsm8k-legend owt-frontier-legend" aria-label="Frontier legend">
-                <span class="frontier-key-continuous">Continuous</span>
-                <span class="frontier-key-flow">Continuous distillation</span>
-                <span class="frontier-key-discrete">Discrete distillation</span>
-                <span class="frontier-key-idlm">IDLM frontier</span>
+                <span class="frontier-key-teacher">Teacher</span>
+                <span class="frontier-key-baseline">Prior baseline</span>
+                <span class="frontier-key-idlm">IDLM</span>
               </div>
             </div>
-            <div class="owt-frontier-scroll">
-              <svg class="owt-frontier-svg" viewBox="0 0 1000 500" role="img" aria-labelledby="owt-frontier-title owt-frontier-desc">
-                <title id="owt-frontier-title">OpenWebText GenPPL and entropy frontier</title>
-                <desc id="owt-frontier-desc">Scatter plot with sample entropy on the horizontal axis and GenPPL on the vertical axis. Lower GenPPL and higher entropy are preferred. IDLM frontiers are shown as connected blue and orange curves.</desc>
-                <defs>
-                  <linearGradient id="frontier-grid-glow" x1="0" x2="1" y1="0" y2="1">
-                    <stop offset="0" stop-color="#102c4b" stop-opacity="0.82" />
-                    <stop offset="1" stop-color="#061225" stop-opacity="0.9" />
-                  </linearGradient>
-                  <g id="frontier-triangle">
-                    <path d="M0 -8 L8 7 L-8 7 Z" />
-                  </g>
-                  <g id="frontier-diamond">
-                    <path d="M0 -8 L8 0 L0 8 L-8 0 Z" />
-                  </g>
-                  <g id="frontier-star">
-                    <path d="M0 -9 L2.4 -2.8 L9 -2.8 L3.6 1 L5.6 8 L0 4.1 L-5.6 8 L-3.6 1 L-9 -2.8 L-2.4 -2.8 Z" />
-                  </g>
-                </defs>
-
-                <rect class="frontier-panel" x="70" y="32" width="890" height="420" rx="10" />
-                <rect class="frontier-plot-frame" x="92" y="50" width="850" height="360" rx="6" />
-
-                <g class="frontier-grid" aria-hidden="true">
-                  <line x1="92" x2="942" y1="383" y2="383" />
-                  <line x1="92" x2="942" y1="276" y2="276" />
-                  <line x1="92" x2="942" y1="168" y2="168" />
-                  <line x1="92" x2="942" y1="61" y2="61" />
-                  <line x1="205" x2="205" y1="50" y2="410" />
-                  <line x1="432" x2="432" y1="50" y2="410" />
-                  <line x1="659" x2="659" y1="50" y2="410" />
-                  <line x1="885" x2="885" y1="50" y2="410" />
-                </g>
-
-                <g class="frontier-ticks" aria-hidden="true">
-                  <text x="78" y="387">20</text>
-                  <text x="78" y="280">40</text>
-                  <text x="78" y="172">60</text>
-                  <text x="78" y="65">80</text>
-                  <text x="205" y="434">5.0</text>
-                  <text x="432" y="434">5.2</text>
-                  <text x="659" y="434">5.4</text>
-                  <text x="885" y="434">5.6</text>
-                </g>
-
-                <text class="frontier-axis-label" x="517" y="472">Sample entropy, higher is better</text>
-                <text class="frontier-axis-label" x="-245" y="34" transform="rotate(-90)">GenPPL, lower is better</text>
-
-                <polyline class="frontier-line frontier-line-mdlm" points="466,381 681,315 897,62" />
-                <polyline class="frontier-line frontier-line-dcd" points="602,279 670,258 670,203 523,74" />
-
-                <g class="frontier-points">
-                  <circle class="frontier-marker frontier-continuous" cx="387" cy="310" r="8" />
-                  <circle class="frontier-marker frontier-continuous" cx="579" cy="156" r="8" />
-                  <g transform="translate(534 149)"><use href="#frontier-triangle" class="frontier-marker frontier-flow" /></g>
-                  <g transform="translate(591 250)"><use href="#frontier-triangle" class="frontier-marker frontier-flow" /></g>
-                  <g transform="translate(613 161)"><use href="#frontier-star" class="frontier-marker frontier-discrete" /></g>
-                  <g transform="translate(625 200)"><use href="#frontier-star" class="frontier-marker frontier-discrete" /></g>
-                  <g transform="translate(851 127)"><use href="#frontier-star" class="frontier-marker frontier-discrete" /></g>
-                  <g transform="translate(443 285)"><use href="#frontier-star" class="frontier-marker frontier-discrete" /></g>
-                  <g transform="translate(523 269)"><use href="#frontier-diamond" class="frontier-marker frontier-teacher" /></g>
-                  <g transform="translate(455 105)"><use href="#frontier-diamond" class="frontier-marker frontier-teacher" /></g>
-                  <g transform="translate(659 391)"><use href="#frontier-diamond" class="frontier-marker frontier-reference" /></g>
-                  <g transform="translate(885 295)"><use href="#frontier-diamond" class="frontier-marker frontier-reference" /></g>
-
-                  <g transform="translate(466 381)"><use href="#frontier-star" class="frontier-marker frontier-idlm-mdlm" /></g>
-                  <g transform="translate(681 315)"><use href="#frontier-star" class="frontier-marker frontier-idlm-mdlm" /></g>
-                  <g transform="translate(897 62)"><use href="#frontier-star" class="frontier-marker frontier-idlm-mdlm" /></g>
-                  <g transform="translate(602 279)"><use href="#frontier-star" class="frontier-marker frontier-idlm-dcd" /></g>
-                  <g transform="translate(670 258)"><use href="#frontier-star" class="frontier-marker frontier-idlm-dcd" /></g>
-                  <g transform="translate(670 203)"><use href="#frontier-star" class="frontier-marker frontier-idlm-dcd" /></g>
-                  <g transform="translate(523 74)"><use href="#frontier-star" class="frontier-marker frontier-idlm-dcd" /></g>
-                </g>
-
-                <g class="frontier-labels">
-                  <text class="frontier-label frontier-label-continuous" x="336" y="332">ELF / 16</text>
-                  <text class="frontier-label frontier-label-continuous" x="545" y="177">FLM / 1024</text>
-                  <text class="frontier-label frontier-label-flow" x="545" y="137">FMLM / 16</text>
-                  <text class="frontier-label frontier-label-discrete" x="627" y="153">SDTT / 16</text>
-                  <text class="frontier-label frontier-label-discrete" x="638" y="192">Duo-DCD-g / 16</text>
-                  <text class="frontier-label frontier-label-discrete" x="858" y="115">D-MMD / 16</text>
-                  <text class="frontier-label frontier-label-teacher" x="318" y="101">Duo-g Teacher / 1024</text>
-                  <text class="frontier-label frontier-label-teacher" x="532" y="285">MDLM Teacher / 1024</text>
-                  <text class="frontier-label frontier-label-mdlm" x="694" y="332">IDLM-MDLM / 16</text>
-                  <text class="frontier-label frontier-label-dcd" x="684" y="222">IDLM-DCD-g / 8</text>
-                  <text class="frontier-label frontier-label-dcd" x="536" y="69">IDLM-DCD-g / 4</text>
-                  <text class="frontier-label frontier-label-reference" x="674" y="390">AR p=0.95 / 1024</text>
-                  <text class="frontier-label frontier-label-reference" x="772" y="291">AR p=1.0 / 1024</text>
-                </g>
-              </svg>
+            <div class="frontier-panel-grid">
+              <article class="frontier-panel-card" aria-label="Masked diffusion GenPPL entropy map">
+                <div class="frontier-panel-title">
+                  <span>Masked diffusion</span>
+                  <strong>MDLM family</strong>
+                </div>
+                <div class="frontier-plot-scroll">
+                  <svg class="frontier-mini-svg" viewBox="0 0 520 320" role="img" aria-labelledby="masked-frontier-title masked-frontier-desc">
+                    <title id="masked-frontier-title">Masked diffusion OpenWebText GenPPL entropy map</title>
+                    <desc id="masked-frontier-desc">Exact table values for MDLM teacher, prior baselines, and IDLM-MDLM at 32, 16, and 8 steps.</desc>
+                    <rect class="frontier-plot-frame" x="58" y="24" width="444" height="258" rx="8" />
+                    <g class="frontier-grid" aria-hidden="true">
+                      <line x1="70" x2="480" y1="231" y2="231" />
+                      <line x1="70" x2="480" y1="171" y2="171" />
+                      <line x1="70" x2="480" y1="111" y2="111" />
+                      <line x1="70" x2="480" y1="51" y2="51" />
+                      <line x1="145" x2="145" y1="36" y2="246" />
+                      <line x1="294" x2="294" y1="36" y2="246" />
+                      <line x1="443" x2="443" y1="36" y2="246" />
+                    </g>
+                    <g class="frontier-ticks" aria-hidden="true">
+                      <text x="53" y="235">20</text>
+                      <text x="53" y="175">40</text>
+                      <text x="53" y="115">60</text>
+                      <text x="53" y="55">80</text>
+                      <text x="145" y="269">5.2</text>
+                      <text x="294" y="269">5.4</text>
+                      <text x="443" y="269">5.6</text>
+                    </g>
+                    <text class="frontier-axis-label" x="275" y="304">Sample entropy</text>
+                    <text class="frontier-axis-label" x="-156" y="24" transform="rotate(-90)">GenPPL</text>
+                    <polyline class="frontier-line frontier-line-idlm" points="167,230 309,193 450,52" />
+                    <g class="frontier-points">
+                      <circle class="frontier-marker frontier-teacher" cx="204" cy="167" r="7" />
+                      <rect class="frontier-marker frontier-baseline" x="256" y="99" width="16" height="16" rx="3" />
+                      <rect class="frontier-marker frontier-baseline" x="144" y="168" width="16" height="16" rx="3" />
+                      <circle class="frontier-marker frontier-idlm" cx="167" cy="230" r="8" />
+                      <circle class="frontier-marker frontier-idlm" cx="309" cy="193" r="8" />
+                      <circle class="frontier-marker frontier-idlm" cx="450" cy="52" r="8" />
+                    </g>
+                    <g class="frontier-labels">
+                      <text class="frontier-label frontier-label-teacher" x="212" y="160">MDLM teacher</text>
+                      <text class="frontier-label frontier-label-baseline" x="279" y="105">SDTT / 16</text>
+                      <text class="frontier-label frontier-label-baseline" x="118" y="198">DiDi / 16</text>
+                      <text class="frontier-label frontier-label-idlm" x="91" y="236">IDLM / 32</text>
+                      <text class="frontier-label frontier-label-idlm" x="317" y="188">IDLM / 16</text>
+                      <text class="frontier-label frontier-label-idlm" x="337" y="48">IDLM / 8</text>
+                    </g>
+                  </svg>
+                </div>
+                <div class="frontier-readouts">
+                  <span><strong>IDLM-MDLM / 32</strong><em>GenPPL 20.45, entropy 5.23</em></span>
+                  <span><strong>IDLM-MDLM / 16</strong><em>GenPPL 32.75, entropy 5.42</em></span>
+                  <span><strong>IDLM-MDLM / 8</strong><em>GenPPL 79.75, entropy 5.61</em></span>
+                </div>
+              </article>
+              <article class="frontier-panel-card" aria-label="Uniform diffusion GenPPL entropy map">
+                <div class="frontier-panel-title">
+                  <span>Uniform and continuous diffusion</span>
+                  <strong>Duo / DCD family</strong>
+                </div>
+                <div class="frontier-plot-scroll">
+                  <svg class="frontier-mini-svg" viewBox="0 0 520 320" role="img" aria-labelledby="uniform-frontier-title uniform-frontier-desc">
+                    <title id="uniform-frontier-title">Uniform diffusion OpenWebText GenPPL entropy map</title>
+                    <desc id="uniform-frontier-desc">Exact table values for continuous teachers, prior baselines, and IDLM-DCD greedy at 16, 8, and 4 steps.</desc>
+                    <rect class="frontier-plot-frame" x="58" y="24" width="444" height="258" rx="8" />
+                    <g class="frontier-grid" aria-hidden="true">
+                      <line x1="70" x2="480" y1="231" y2="231" />
+                      <line x1="70" x2="480" y1="171" y2="171" />
+                      <line x1="70" x2="480" y1="111" y2="111" />
+                      <line x1="70" x2="480" y1="51" y2="51" />
+                      <line x1="145" x2="145" y1="36" y2="246" />
+                      <line x1="294" x2="294" y1="36" y2="246" />
+                      <line x1="443" x2="443" y1="36" y2="246" />
+                    </g>
+                    <g class="frontier-ticks" aria-hidden="true">
+                      <text x="53" y="235">20</text>
+                      <text x="53" y="175">40</text>
+                      <text x="53" y="115">60</text>
+                      <text x="53" y="55">80</text>
+                      <text x="145" y="269">5.2</text>
+                      <text x="294" y="269">5.4</text>
+                      <text x="443" y="269">5.6</text>
+                    </g>
+                    <text class="frontier-axis-label" x="275" y="304">Sample entropy</text>
+                    <text class="frontier-axis-label" x="-156" y="24" transform="rotate(-90)">GenPPL</text>
+                    <polyline class="frontier-line frontier-line-idlm" points="301,161 301,130 204,59" />
+                    <g class="frontier-points">
+                      <circle class="frontier-marker frontier-teacher" cx="159" cy="76" r="7" />
+                      <circle class="frontier-marker frontier-teacher" cx="241" cy="104" r="7" />
+                      <rect class="frontier-marker frontier-baseline" x="107" y="182" width="16" height="16" rx="3" />
+                      <rect class="frontier-marker frontier-baseline" x="204" y="92" width="16" height="16" rx="3" />
+                      <rect class="frontier-marker frontier-baseline" x="211" y="74" width="16" height="16" rx="3" />
+                      <circle class="frontier-marker frontier-idlm" cx="301" cy="161" r="8" />
+                      <circle class="frontier-marker frontier-idlm" cx="301" cy="130" r="8" />
+                      <circle class="frontier-marker frontier-idlm" cx="204" cy="59" r="8" />
+                    </g>
+                    <g class="frontier-labels">
+                      <text class="frontier-label frontier-label-teacher" x="76" y="72">Duo-g teacher</text>
+                      <text class="frontier-label frontier-label-teacher" x="248" y="111">FLM</text>
+                      <text class="frontier-label frontier-label-baseline" x="82" y="214">ELF / 16</text>
+                      <text class="frontier-label frontier-label-baseline" x="231" y="95">Duo-DCD / 8</text>
+                      <text class="frontier-label frontier-label-idlm" x="310" y="166">IDLM / 16</text>
+                      <text class="frontier-label frontier-label-idlm" x="310" y="126">IDLM / 8</text>
+                      <text class="frontier-label frontier-label-idlm" x="213" y="55">IDLM / 4</text>
+                    </g>
+                  </svg>
+                </div>
+                <div class="frontier-readouts">
+                  <span><strong>IDLM-DCD-g / 16</strong><em>GenPPL 43.36, entropy 5.41</em></span>
+                  <span><strong>IDLM-DCD-g / 8</strong><em>GenPPL 53.61, entropy 5.41</em></span>
+                  <span><strong>IDLM-DCD-g / 4</strong><em>GenPPL 77.47, entropy 5.28</em></span>
+                </div>
+              </article>
             </div>
-            <figcaption>The GenPPL-entropy frontier shows why diversity must be read together with perplexity.</figcaption>
+            <figcaption>Each point uses the exact OpenWebText table value. Lower GenPPL and higher entropy are preferred, so the best region is toward the lower-right.</figcaption>
           </figure>
         </section>
       </section>

@@ -3841,61 +3841,82 @@ svg {
 }
 
 .owt-frontier-head {
-  padding-bottom: 14px;
+  padding-bottom: 16px;
 }
 
 .owt-frontier-legend {
-  max-width: 560px;
+  max-width: 430px;
 }
 
-.frontier-key-continuous::before {
+.frontier-key-teacher::before {
   border-radius: 50%;
-  background: #20d6c2;
+  background: #6ee8ff;
 }
 
-.frontier-key-flow::before {
-  border-radius: 0;
-  background: #8d5bff;
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-}
-
-.frontier-key-discrete::before {
-  border-radius: 2px;
-  background: #df4cff;
-  clip-path: polygon(50% 0, 62% 34%, 98% 34%, 69% 55%, 80% 92%, 50% 70%, 20% 92%, 31% 55%, 2% 34%, 38% 34%);
+.frontier-key-baseline::before {
+  border-radius: 3px;
+  background: #b86bff;
 }
 
 .frontier-key-idlm::before {
-  border-radius: 999px;
-  background: linear-gradient(90deg, #76a4ff, #ff8a45);
+  border-radius: 50%;
+  background: #ffd36b;
 }
 
-.owt-frontier-scroll {
+.frontier-panel-grid {
+  display: grid;
+  gap: 16px;
   margin-top: 18px;
-  overflow-x: auto;
+}
+
+.frontier-panel-card {
+  min-width: 0;
+  padding: 16px;
   border: 1px solid rgba(94, 217, 255, 0.16);
   border-radius: 8px;
   background:
-    radial-gradient(circle at 78% 18%, rgba(255, 211, 107, 0.09), transparent 32%),
-    radial-gradient(circle at 18% 16%, rgba(94, 217, 255, 0.12), transparent 34%),
-    rgba(1, 6, 22, 0.58);
+    linear-gradient(135deg, rgba(94, 217, 255, 0.07), rgba(184, 107, 255, 0.05)),
+    rgba(1, 6, 22, 0.48);
 }
 
-.owt-frontier-svg {
+.frontier-panel-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.frontier-panel-title span {
+  color: var(--ink);
+  font-size: 0.94rem;
+  font-weight: 900;
+}
+
+.frontier-panel-title strong {
+  color: var(--quiet);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.frontier-plot-scroll {
+  overflow-x: auto;
+  border: 1px solid rgba(94, 217, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(1, 6, 22, 0.48);
+}
+
+.frontier-mini-svg {
   display: block;
   width: 100%;
-  min-width: 0;
+  min-width: 520px;
   height: auto;
 }
 
-.owt-frontier-svg text {
+.frontier-mini-svg text {
   font-family: inherit;
-}
-
-.frontier-panel {
-  fill: url(#frontier-grid-glow);
-  stroke: rgba(94, 217, 255, 0.18);
-  stroke-width: 1.2;
 }
 
 .frontier-plot-frame {
@@ -3922,7 +3943,7 @@ svg {
 
 .frontier-axis-label {
   fill: var(--ink);
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 900;
   text-anchor: middle;
 }
@@ -3931,56 +3952,35 @@ svg {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 4.5;
+  stroke-width: 4;
 }
 
-.frontier-line-mdlm {
-  stroke: #76a4ff;
-  filter: drop-shadow(0 0 8px rgba(118, 164, 255, 0.32));
-}
-
-.frontier-line-dcd {
-  stroke: #ff8a45;
-  filter: drop-shadow(0 0 8px rgba(255, 138, 69, 0.32));
+.frontier-line-idlm {
+  stroke: #ffd36b;
+  filter: drop-shadow(0 0 8px rgba(255, 211, 107, 0.28));
 }
 
 .frontier-marker {
   stroke: rgba(1, 6, 22, 0.92);
-  stroke-width: 2.4;
-}
-
-.frontier-continuous {
-  fill: #20d6c2;
-}
-
-.frontier-flow {
-  fill: #8d5bff;
-}
-
-.frontier-discrete {
-  fill: #df4cff;
+  stroke-width: 2;
 }
 
 .frontier-teacher {
-  fill: #ff8a45;
+  fill: #6ee8ff;
 }
 
-.frontier-reference {
-  fill: #d9e6ff;
+.frontier-baseline {
+  fill: #b86bff;
 }
 
-.frontier-idlm-mdlm {
-  fill: #76a4ff;
-  stroke: #d9f7ff;
-}
-
-.frontier-idlm-dcd {
-  fill: #ff8a45;
-  stroke: #ffd3a2;
+.frontier-idlm {
+  fill: #ffd36b;
+  stroke: #fff2b5;
 }
 
 .frontier-label {
-  font-size: 13px;
+  fill: var(--ink);
+  font-size: 12px;
   font-weight: 900;
   paint-order: stroke;
   stroke: rgba(1, 6, 22, 0.95);
@@ -3988,29 +3988,50 @@ svg {
   stroke-width: 4px;
 }
 
-.frontier-label-continuous {
-  fill: #55e9dd;
+.frontier-label-teacher {
+  fill: #9beeff;
 }
 
-.frontier-label-flow {
-  fill: #a98cff;
+.frontier-label-baseline {
+  fill: #d6adff;
 }
 
-.frontier-label-discrete {
-  fill: #ef7cff;
+.frontier-label-idlm {
+  fill: #ffd36b;
 }
 
-.frontier-label-teacher,
-.frontier-label-dcd {
-  fill: #ffb27c;
+.frontier-readouts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
 }
 
-.frontier-label-mdlm {
-  fill: #9fc1ff;
+.frontier-readouts span {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid rgba(255, 211, 107, 0.18);
+  border-radius: 6px;
+  background: rgba(255, 211, 107, 0.07);
 }
 
-.frontier-label-reference {
-  fill: #d9e6ff;
+.frontier-readouts strong,
+.frontier-readouts em {
+  display: block;
+}
+
+.frontier-readouts strong {
+  color: var(--ink);
+  font-size: 0.74rem;
+  line-height: 1.28;
+}
+
+.frontier-readouts em {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-style: normal;
+  line-height: 1.45;
 }
 
 .blog-figure figcaption {
@@ -4575,8 +4596,8 @@ svg {
     grid-template-columns: 1fr;
   }
 
-  .owt-frontier-svg {
-    min-width: 720px;
+  .frontier-readouts {
+    grid-template-columns: 1fr;
   }
 
   .blog-article {
