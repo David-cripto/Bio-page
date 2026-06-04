@@ -246,6 +246,40 @@ svg {
   margin-top: auto;
 }
 
+.rail-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.rail-links a span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.rail-icon {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--quiet);
+  filter: drop-shadow(0 0 8px rgba(25, 198, 255, 0.24));
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.rail-icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.rail-links a:hover .rail-icon {
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
 .content {
   width: min(100% - 56px, 980px);
   margin: 0 auto;
@@ -4400,6 +4434,10 @@ svg {
     width: min(100%, 220px);
   }
 
+  .rail-links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .blog-hero {
     grid-template-columns: 1fr;
     align-items: stretch;
@@ -4514,6 +4552,10 @@ svg {
 @media (max-width: 620px) {
   .identity-panel {
     padding: 22px;
+  }
+
+  .rail-links {
+    grid-template-columns: 1fr 1fr;
   }
 
   .content {
