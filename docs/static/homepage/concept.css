@@ -2406,17 +2406,17 @@ svg {
   animation: distillDash 8.4s linear infinite reverse;
 }
 
-.inverse-arrow-head {
+.inverse-model-paths .inverse-arrow-head {
   stroke: none;
   filter: drop-shadow(0 0 13px rgba(246, 251, 255, 0.18));
 }
 
-.inverse-teacher-arrow-head {
+.inverse-model-paths .inverse-teacher-arrow-head {
   fill: #6ee8ff;
   opacity: 0.9;
 }
 
-.inverse-fake-arrow-head {
+.inverse-model-paths .inverse-fake-arrow-head {
   fill: #ffd3a2;
   opacity: 0.9;
 }
