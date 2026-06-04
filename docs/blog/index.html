@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260604-separated-map-arrowheads">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260604-inverse-arrowheads">
 </head>
 <body>
   <main class="blog-shell">
@@ -748,14 +748,6 @@
           <svg class="distill-svg inverse-contrast-svg" viewBox="0 0 900 390" role="img" aria-labelledby="inverse-contrast-title inverse-contrast-desc">
             <title id="inverse-contrast-title">Inverse distillation compares a frozen teacher with a fake model</title>
             <desc id="inverse-contrast-desc">The teacher diffusion model and a fake diffusion model both start from the same terminal distribution. The teacher reverses toward the target distribution, while the fake model reverses toward the current student distribution. The loss compares these two reverse dynamics on student samples.</desc>
-            <defs>
-              <marker id="inverseTeacherArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                <path d="M1,1 L6,3.5 L1,6 Z" fill="#6ee8ff" />
-              </marker>
-              <marker id="inverseFakeArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                <path d="M1,1 L6,3.5 L1,6 Z" fill="#ffd3a2" />
-              </marker>
-            </defs>
             <rect class="distill-map-window" x="24" y="28" width="852" height="326" rx="22" />
             <g class="inverse-density-terminal">
               <ellipse cx="130" cy="205" rx="94" ry="58" transform="rotate(-8 130 205)" />
@@ -796,8 +788,12 @@
               <circle cx="106" cy="229" r="7" />
             </g>
             <g class="inverse-model-paths">
-              <path id="inverseTeacherTrace" class="inverse-teacher-path" d="M155 185 C284 72 470 75 617 105 C680 118 724 118 787 123" marker-end="url(#inverseTeacherArrow)" />
-              <path id="inverseFakeTrace" class="inverse-fake-path" d="M155 224 C296 309 472 319 622 288 C685 274 728 270 790 266" marker-end="url(#inverseFakeArrow)" />
+              <path class="inverse-teacher-path" d="M155 185 C284 72 470 75 617 105 C680 118 724 118 766 122" />
+              <path class="inverse-fake-path" d="M155 224 C296 309 472 319 622 288 C685 274 728 270 770 267" />
+              <path id="inverseTeacherTrace" class="inverse-motion-path" d="M155 185 C284 72 470 75 617 105 C680 118 724 118 787 123" />
+              <path id="inverseFakeTrace" class="inverse-motion-path" d="M155 224 C296 309 472 319 622 288 C685 274 728 270 790 266" />
+              <path class="inverse-arrow-head inverse-teacher-arrow-head" d="M0 0 L-21 -11.5 L-21 11.5 Z" transform="translate(787 123) rotate(6)" />
+              <path class="inverse-arrow-head inverse-fake-arrow-head" d="M0 0 L-21 -11.5 L-21 11.5 Z" transform="translate(790 266) rotate(-4)" />
               <circle class="inverse-moving-dot inverse-moving-teacher" r="7">
                 <animateMotion dur="6.4s" repeatCount="indefinite" rotate="auto">
                   <mpath href="#inverseTeacherTrace" />
@@ -1573,12 +1569,12 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
               </div>
               <p><b>Prompt.</b> A baseball coach buys \(9\) baseballs for &#36;3 each, and a basketball coach buys \(8\) basketballs for &#36;14 each. How much more did the basketball coach spend?</p>
               <span class="tinygsm-code-label">Generated program</span>
-              <pre><code>def simple_math_problem() -> int:
-    baseball_cost = 9 * 3
-    basketball_cost = 8 * 14
-    difference = basketball_cost - baseball_cost
-    result = difference
-    return result</code></pre>
+              <pre><code><span class="py-kw">def</span> <span class="py-fn">simple_math_problem</span>() <span class="py-op">-&gt;</span> <span class="py-type">int</span>:
+    <span class="py-name">baseball_cost</span> <span class="py-op">=</span> <span class="py-num">9</span> <span class="py-op">*</span> <span class="py-num">3</span>
+    <span class="py-name">basketball_cost</span> <span class="py-op">=</span> <span class="py-num">8</span> <span class="py-op">*</span> <span class="py-num">14</span>
+    <span class="py-name">difference</span> <span class="py-op">=</span> <span class="py-name">basketball_cost</span> <span class="py-op">-</span> <span class="py-name">baseball_cost</span>
+    <span class="py-name">result</span> <span class="py-op">=</span> <span class="py-name">difference</span>
+    <span class="py-kw">return</span> <span class="py-name">result</span></code></pre>
             </article>
             <article class="tinygsm-example">
               <div class="tinygsm-example-head">
@@ -1587,12 +1583,12 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
               </div>
               <p><b>Prompt.</b> The red car is \(40\%\) cheaper than the blue car. The price of the blue car is &#36;100. How much do both cars cost?</p>
               <span class="tinygsm-code-label">Generated program</span>
-              <pre><code>def simple_math_problem() -> int:
-    blue_car = 100
-    red_car = blue_car * 0.60
-    total_cost = blue_car + red_car
-    result = total_cost
-    return result</code></pre>
+              <pre><code><span class="py-kw">def</span> <span class="py-fn">simple_math_problem</span>() <span class="py-op">-&gt;</span> <span class="py-type">int</span>:
+    <span class="py-name">blue_car</span> <span class="py-op">=</span> <span class="py-num">100</span>
+    <span class="py-name">red_car</span> <span class="py-op">=</span> <span class="py-name">blue_car</span> <span class="py-op">*</span> <span class="py-num">0.60</span>
+    <span class="py-name">total_cost</span> <span class="py-op">=</span> <span class="py-name">blue_car</span> <span class="py-op">+</span> <span class="py-name">red_car</span>
+    <span class="py-name">result</span> <span class="py-op">=</span> <span class="py-name">total_cost</span>
+    <span class="py-kw">return</span> <span class="py-name">result</span></code></pre>
             </article>
           </div>
           <figure class="gsm8k-chart" aria-label="GSM8K accuracy comparison by method">
