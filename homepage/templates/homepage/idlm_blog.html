@@ -134,7 +134,7 @@
           <a href="#results">Results</a>
           <span class="toc-note">What changes when IDLM compresses many sampling steps into a few.</span>
           <ol>
-            <li><a href="#gsm8k">Conditional generation on TyniGSM</a></li>
+            <li><a href="#gsm8k">Conditional generation on TinyGSM</a></li>
             <li><a href="#openwebtext">Unconditional generation on OpenWebText</a></li>
           </ol>
         </li>
@@ -1552,13 +1552,21 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
           reverse steps while preserving the teacher's quality and diversity signals?
         </p>
         <section class="result-block">
-          <h3 id="gsm8k" class="blog-subheading">4.1 Conditional generation on TyniGSM</h3>
+          <h3 id="gsm8k" class="blog-subheading">4.1 Conditional generation on TinyGSM</h3>
           <p>
-            GSM8K tests conditional generation. The prompt is clamped, and the model generates the
-            solution region. This is a useful stress test because local token quality is not enough:
-            the sample has to preserve the reasoning path well enough to reach the right answer.
-            Autoregressive baselines are still much stronger, but IDLM recovers diffusion-teacher
-            accuracy with far fewer reverse steps.
+            We follow the TinyGSM/GSM8K conditional-generation protocol used in
+            <a href="https://arxiv.org/abs/2605.11125" target="_blank" rel="noopener noreferrer">S-FLM</a>.
+            Models are trained on TinyGSM, a large synthetic set of GSM8K-like word problems whose
+            solutions are executable programs, and evaluated on the GSM8K test split. Each example is
+            formatted as a problem prompt followed by a solution region: during sampling, the prompt is
+            kept clean and clamped, while the diffusion model generates only the solution tokens. We use
+            the SmolLM-135M tokenizer with length \(512\), generate one completion per problem, extract
+            the predicted numerical answer with the execution-based scorer, and report exact-match
+            accuracy against the GSM8K answer. This is a stricter test than local fluency: the generated
+            sequence must keep enough reasoning structure to execute to the right number. Autoregressive
+            baselines are still much stronger, but IDLM recovers diffusion-teacher accuracy with far fewer
+            reverse steps: IDLM-MDLM matches the \(1024\)-step MDLM teacher at \(128\) steps, while
+            IDLM-Duo reaches teacher-level accuracy at \(64\) steps.
           </p>
           <figure class="gsm8k-chart" aria-label="GSM8K accuracy comparison by method">
             <div class="gsm8k-chart-head">
