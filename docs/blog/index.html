@@ -1658,10 +1658,17 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
         <section class="result-block">
           <h3 id="openwebtext" class="blog-subheading">4.2 Unconditional generation on OpenWebText</h3>
           <p>
-            OpenWebText evaluates unconditional generation with GenPPL, MAUVE, entropy, and related
-            diversity metrics. GenPPL alone is not enough: a model can improve it by losing diversity,
-            so entropy is tracked as a guardrail. This is especially important for reverse-KL-like
-            objectives, which can become mode-seeking if they are pushed too far.
+            OpenWebText is the main unconditional generation test: unlike TinyGSM, there is no
+            clamped prompt, and the model must generate full \(1024\)-token sequences from the
+            terminal noise distribution. We follow the prior DLM protocol: OpenWebText is tokenized
+            with the GPT-2 tokenizer, documents are concatenated and wrapped with \(\texttt{eos}\)
+            tokens, the final \(100{,}000\) documents are held out for validation, and sampling is
+            evaluated in \(\texttt{float64}\) precision using the official Duo evaluation code. The
+            question is how far we can compress pretrained teacher samplers: IDLM-MDLM replaces the
+            \(1024\)-step MDLM teacher with \(16\) reverse steps, while IDLM-DCD pushes the greedy
+            Duo-DCD teacher down to \(4\) steps. We report GenPPL from a fixed GPT-2 Large evaluator
+            together with token entropy, but the main story is teacher acceleration under much smaller
+            reverse-step budgets.
           </p>
           <figure class="gsm8k-chart owt-chart" aria-label="OpenWebText GenPPL and entropy comparison">
             <div class="gsm8k-chart-head">
