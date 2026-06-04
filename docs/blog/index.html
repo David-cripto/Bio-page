@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260603-owt-frontier-fit">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260604-solid-map-arrows">
 </head>
 <body>
   <main class="blog-shell">
@@ -544,12 +544,6 @@
                 <title id="consistency-map-title">Consistency-like distillation shortens a teacher trajectory</title>
                 <desc id="consistency-map-desc">A long teacher denoising curve is replaced by a few larger student jumps in a two-dimensional space.</desc>
                 <defs>
-                  <marker id="teacherArrow" markerWidth="5.5" markerHeight="5.5" refX="4.7" refY="2.75" orient="auto" markerUnits="strokeWidth">
-                    <path d="M0.8,0.8 L5,2.75 L0.8,4.7 Z" fill="#6ee8ff" />
-                  </marker>
-                  <marker id="studentArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L5.5,3 L1,5 Z" fill="#ffd3a2" />
-                  </marker>
                   <radialGradient id="noiseGlow" cx="50%" cy="50%" r="55%">
                     <stop offset="0%" stop-color="#b86bff" stop-opacity="0.55" />
                     <stop offset="100%" stop-color="#19c6ff" stop-opacity="0.04" />
@@ -558,6 +552,12 @@
                     <stop offset="0%" stop-color="#b5f07c" stop-opacity="0.52" />
                     <stop offset="100%" stop-color="#19c6ff" stop-opacity="0.05" />
                   </radialGradient>
+                  <marker id="teacherArrowClean" viewBox="0 -6 12 12" markerWidth="12" markerHeight="12" refX="0" refY="0" orient="auto" markerUnits="userSpaceOnUse">
+                    <path d="M0 -5 L12 0 L0 5 Z" fill="#6ee8ff" />
+                  </marker>
+                  <marker id="studentArrowClean" viewBox="0 -7 14 14" markerWidth="14" markerHeight="14" refX="0" refY="0" orient="auto" markerUnits="userSpaceOnUse">
+                    <path d="M0 -7 L14 0 L0 7 Z" fill="#ffd3a2" />
+                  </marker>
                 </defs>
                 <rect class="distill-map-window" x="24" y="28" width="512" height="258" rx="22" />
                 <g class="density-consistency-noise">
@@ -587,10 +587,10 @@
                   <circle cx="516" cy="105" r="7" />
                 </g>
                 <g class="teacher-jump-curve">
-                  <path d="M86 246 C133 150 154 153 200 178" marker-end="url(#teacherArrow)" />
-                  <path d="M200 178 C235 130 263 119 300 141" marker-end="url(#teacherArrow)" />
-                  <path d="M300 141 C337 73 373 63 409 93" marker-end="url(#teacherArrow)" />
-                  <path d="M409 93 C443 64 481 39 498 105" marker-end="url(#teacherArrow)" />
+                  <path d="M86 246 C133 150 154 153 189 172" marker-end="url(#teacherArrowClean)" />
+                  <path d="M200 178 C235 130 263 119 290 135" marker-end="url(#teacherArrowClean)" />
+                  <path d="M300 141 C337 73 373 63 400 86" marker-end="url(#teacherArrowClean)" />
+                  <path d="M409 93 C443 64 481 39 495 93" marker-end="url(#teacherArrowClean)" />
                 </g>
                 <path id="teacherTracerPath" class="teacher-tracer-path" d="M86 246 C133 150 154 153 200 178 C235 130 263 119 300 141 C337 73 373 63 409 93 C443 64 481 39 498 105" />
                 <circle class="teacher-tracer" r="7">
@@ -598,7 +598,7 @@
                     <mpath href="#teacherTracerPath" />
                   </animateMotion>
                 </circle>
-                <path class="student-shortcut" d="M86 246 C179 170 286 158 369 111 C417 84 463 74 498 105" marker-end="url(#studentArrow)" />
+                <path class="student-shortcut" d="M86 246 C179 170 286 158 369 111 C417 84 463 74 489 97" marker-end="url(#studentArrowClean)" />
                 <g class="student-anchors">
                   <circle cx="86" cy="246" r="7" />
                   <circle cx="275" cy="150" r="7" />
@@ -629,9 +629,6 @@
                 <title id="matching-map-title">Distribution matching aligns a student distribution with the target distribution</title>
                 <desc id="matching-map-desc">A student point cloud is pushed toward a target point cloud instead of following individual teacher trajectories.</desc>
                 <defs>
-                  <marker id="matchArrow" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#ffd3a2" />
-                  </marker>
                   <radialGradient id="targetDensity" cx="50%" cy="50%" r="60%">
                     <stop offset="0%" stop-color="#b5f07c" stop-opacity="0.5" />
                     <stop offset="100%" stop-color="#6ee8ff" stop-opacity="0.04" />
@@ -640,6 +637,9 @@
                     <stop offset="0%" stop-color="#ffd3a2" stop-opacity="0.46" />
                     <stop offset="100%" stop-color="#eb7a50" stop-opacity="0.04" />
                   </radialGradient>
+                  <marker id="matchArrowClean" viewBox="0 -7 14 14" markerWidth="14" markerHeight="14" refX="0" refY="0" orient="auto" markerUnits="userSpaceOnUse">
+                    <path d="M0 -7 L14 0 L0 7 Z" fill="#ffd3a2" />
+                  </marker>
                 </defs>
                 <rect class="distill-map-window" x="24" y="28" width="512" height="258" rx="22" />
                 <g class="density-target">
@@ -652,9 +652,9 @@
                   <ellipse cx="164" cy="201" rx="68" ry="34" transform="rotate(15 164 201)" />
                 </g>
                 <g class="match-arrows">
-                  <path d="M167 202 C228 178 272 153 333 142" marker-end="url(#matchArrow)" />
-                  <path d="M132 174 C208 127 270 113 346 124" marker-end="url(#matchArrow)" />
-                  <path d="M200 232 C251 225 307 203 375 184" marker-end="url(#matchArrow)" />
+                  <path d="M167 202 C228 178 272 153 321 140" marker-end="url(#matchArrowClean)" />
+                  <path d="M132 174 C208 127 270 113 334 122" marker-end="url(#matchArrowClean)" />
+                  <path d="M200 232 C251 225 307 203 363 187" marker-end="url(#matchArrowClean)" />
                 </g>
                 <g class="target-samples">
                   <circle cx="333" cy="132" r="7" />
@@ -1557,17 +1557,45 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
             We follow the TinyGSM/GSM8K conditional-generation protocol used in
             <a href="https://arxiv.org/abs/2605.11125" target="_blank" rel="noopener noreferrer">S-FLM</a>.
             Models are trained on TinyGSM, a large synthetic set of GSM8K-like word problems whose
-            solutions are executable programs, and evaluated on the GSM8K test split. Each example is
-            formatted as a problem prompt followed by a solution region: during sampling, the prompt is
-            kept clean and clamped, while the diffusion model generates only the solution tokens. We use
+            solutions are executable programs, and evaluated on the GSM8K test split. At sampling time,
+            the problem text is clamped as context and the model samples only the solution region. We use
             the SmolLM-135M tokenizer with length \(512\), generate one completion per problem, extract
             the predicted numerical answer with the execution-based scorer, and report exact-match
             accuracy against the GSM8K answer. This is a stricter test than local fluency: the generated
-            sequence must keep enough reasoning structure to execute to the right number. Autoregressive
-            baselines are still much stronger, but IDLM recovers diffusion-teacher accuracy with far fewer
-            reverse steps: IDLM-MDLM matches the \(1024\)-step MDLM teacher at \(128\) steps, while
-            IDLM-Duo reaches teacher-level accuracy at \(64\) steps.
+            sequence must keep enough reasoning structure to execute to the right number. IDLM recovers
+            diffusion-teacher accuracy with far fewer reverse steps: IDLM-MDLM matches the \(1024\)-step
+            MDLM teacher at \(128\) steps, while IDLM-Duo reaches teacher-level accuracy at \(64\) steps.
           </p>
+          <div class="tinygsm-examples" aria-label="TinyGSM conditional generation examples">
+            <article class="tinygsm-example">
+              <div class="tinygsm-example-head">
+                <span>IDLM-MDLM</span>
+                <strong>\(128\) steps</strong>
+              </div>
+              <p><b>Prompt.</b> A baseball coach buys \(9\) baseballs for &#36;3 each, and a basketball coach buys \(8\) basketballs for &#36;14 each. How much more did the basketball coach spend?</p>
+              <span class="tinygsm-code-label">Generated program</span>
+              <pre><code>def simple_math_problem() -> int:
+    baseball_cost = 9 * 3
+    basketball_cost = 8 * 14
+    difference = basketball_cost - baseball_cost
+    result = difference
+    return result</code></pre>
+            </article>
+            <article class="tinygsm-example">
+              <div class="tinygsm-example-head">
+                <span>IDLM-Duo</span>
+                <strong>\(64\) steps</strong>
+              </div>
+              <p><b>Prompt.</b> The red car is \(40\%\) cheaper than the blue car. The price of the blue car is &#36;100. How much do both cars cost?</p>
+              <span class="tinygsm-code-label">Generated program</span>
+              <pre><code>def simple_math_problem() -> int:
+    blue_car = 100
+    red_car = blue_car * 0.60
+    total_cost = blue_car + red_car
+    result = total_cost
+    return result</code></pre>
+            </article>
+          </div>
           <figure class="gsm8k-chart" aria-label="GSM8K accuracy comparison by method">
             <div class="gsm8k-chart-head">
               <div>

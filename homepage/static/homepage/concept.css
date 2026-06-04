@@ -1790,7 +1790,7 @@ svg {
   fill: none;
   stroke: #6ee8ff;
   stroke-width: 3.2;
-  stroke-linecap: round;
+  stroke-linecap: butt;
   stroke-dasharray: 7 11;
   opacity: 0.74;
   animation: distillDash 7.2s linear infinite;
@@ -1827,7 +1827,7 @@ svg {
   fill: none;
   stroke: #ffd3a2;
   stroke-width: 5.2;
-  stroke-linecap: round;
+  stroke-linecap: butt;
   opacity: 0.9;
   filter: drop-shadow(0 0 12px rgba(255, 211, 162, 0.24));
   animation: studentGlow 3.6s ease-in-out infinite;
@@ -1945,7 +1945,7 @@ svg {
   fill: none;
   stroke: #ffd3a2;
   stroke-width: 3.2;
-  stroke-linecap: round;
+  stroke-linecap: butt;
   stroke-dasharray: 8 10;
   opacity: 0.78;
   animation: distillDash 6.8s linear infinite;
@@ -3937,6 +3937,90 @@ svg {
   border-radius: 8px;
 }
 
+.tinygsm-examples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 24px 0 4px;
+}
+
+.tinygsm-example {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid rgba(255, 149, 92, 0.28);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 149, 92, 0.11), rgba(94, 217, 255, 0.05)),
+    rgba(2, 8, 24, 0.74);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.tinygsm-example-head {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tinygsm-example-head span {
+  color: #ffd36b;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.tinygsm-example-head strong {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.tinygsm-example p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.tinygsm-example p b {
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.tinygsm-code-label {
+  display: block;
+  margin: 0 0 6px;
+  color: #6ee8ff;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.tinygsm-example pre {
+  margin: 0;
+  overflow-x: auto;
+  padding: 12px;
+  border: 1px solid rgba(94, 217, 255, 0.16);
+  border-radius: 6px;
+  background: rgba(0, 5, 18, 0.82);
+}
+
+.tinygsm-example code {
+  color: #e8f1ff;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  white-space: pre;
+}
+
 .gsm8k-chart-head {
   display: flex;
   gap: 18px;
@@ -4250,6 +4334,7 @@ svg {
   .method-grid,
   .generation-animation-grid,
   .factorization-visual,
+  .tinygsm-examples,
   .owt-panel-grid,
   .blog-figure-grid {
     grid-template-columns: 1fr;
