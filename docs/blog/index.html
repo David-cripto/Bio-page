@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260604-solid-map-arrows">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260604-separated-map-arrowheads">
 </head>
 <body>
   <main class="blog-shell">
@@ -552,12 +552,6 @@
                     <stop offset="0%" stop-color="#b5f07c" stop-opacity="0.52" />
                     <stop offset="100%" stop-color="#19c6ff" stop-opacity="0.05" />
                   </radialGradient>
-                  <marker id="teacherArrowClean" viewBox="0 -6 12 12" markerWidth="12" markerHeight="12" refX="0" refY="0" orient="auto" markerUnits="userSpaceOnUse">
-                    <path d="M0 -5 L12 0 L0 5 Z" fill="#6ee8ff" />
-                  </marker>
-                  <marker id="studentArrowClean" viewBox="0 -7 14 14" markerWidth="14" markerHeight="14" refX="0" refY="0" orient="auto" markerUnits="userSpaceOnUse">
-                    <path d="M0 -7 L14 0 L0 7 Z" fill="#ffd3a2" />
-                  </marker>
                 </defs>
                 <rect class="distill-map-window" x="24" y="28" width="512" height="258" rx="22" />
                 <g class="density-consistency-noise">
@@ -587,18 +581,23 @@
                   <circle cx="516" cy="105" r="7" />
                 </g>
                 <g class="teacher-jump-curve">
-                  <path d="M86 246 C133 150 154 153 189 172" marker-end="url(#teacherArrowClean)" />
-                  <path d="M200 178 C235 130 263 119 290 135" marker-end="url(#teacherArrowClean)" />
-                  <path d="M300 141 C337 73 373 63 400 86" marker-end="url(#teacherArrowClean)" />
-                  <path d="M409 93 C443 64 481 39 495 93" marker-end="url(#teacherArrowClean)" />
+                  <path d="M86 246 C133 150 154 153 189 172" />
+                  <path d="M200 178 C235 130 263 119 290 135" />
+                  <path d="M300 141 C337 73 373 63 400 86" />
+                  <path d="M409 93 C443 64 481 39 495 93" />
                 </g>
+                <path class="teacher-arrow-head" d="M0 0 L-15 -8.5 L-15 8.5 Z" transform="translate(200 178) rotate(29)" />
+                <path class="teacher-arrow-head" d="M0 0 L-15 -8.5 L-15 8.5 Z" transform="translate(300 141) rotate(31)" />
+                <path class="teacher-arrow-head" d="M0 0 L-15 -8.5 L-15 8.5 Z" transform="translate(409 93) rotate(40)" />
+                <path class="teacher-arrow-head" d="M0 0 L-15 -8.5 L-15 8.5 Z" transform="translate(498 105) rotate(76)" />
                 <path id="teacherTracerPath" class="teacher-tracer-path" d="M86 246 C133 150 154 153 200 178 C235 130 263 119 300 141 C337 73 373 63 409 93 C443 64 481 39 498 105" />
                 <circle class="teacher-tracer" r="7">
                   <animateMotion dur="7.2s" repeatCount="indefinite" rotate="auto">
                     <mpath href="#teacherTracerPath" />
                   </animateMotion>
                 </circle>
-                <path class="student-shortcut" d="M86 246 C179 170 286 158 369 111 C417 84 463 74 489 97" marker-end="url(#studentArrowClean)" />
+                <path class="student-shortcut" d="M86 246 C179 170 286 158 369 111 C417 84 463 74 489 97" />
+                <path class="student-arrow-head" d="M0 0 L-18 -10 L-18 10 Z" transform="translate(498 105) rotate(42)" />
                 <g class="student-anchors">
                   <circle cx="86" cy="246" r="7" />
                   <circle cx="275" cy="150" r="7" />
@@ -637,9 +636,6 @@
                     <stop offset="0%" stop-color="#ffd3a2" stop-opacity="0.46" />
                     <stop offset="100%" stop-color="#eb7a50" stop-opacity="0.04" />
                   </radialGradient>
-                  <marker id="matchArrowClean" viewBox="0 -7 14 14" markerWidth="14" markerHeight="14" refX="0" refY="0" orient="auto" markerUnits="userSpaceOnUse">
-                    <path d="M0 -7 L14 0 L0 7 Z" fill="#ffd3a2" />
-                  </marker>
                 </defs>
                 <rect class="distill-map-window" x="24" y="28" width="512" height="258" rx="22" />
                 <g class="density-target">
@@ -652,10 +648,13 @@
                   <ellipse cx="164" cy="201" rx="68" ry="34" transform="rotate(15 164 201)" />
                 </g>
                 <g class="match-arrows">
-                  <path d="M167 202 C228 178 272 153 321 140" marker-end="url(#matchArrowClean)" />
-                  <path d="M132 174 C208 127 270 113 334 122" marker-end="url(#matchArrowClean)" />
-                  <path d="M200 232 C251 225 307 203 363 187" marker-end="url(#matchArrowClean)" />
+                  <path d="M167 202 C228 178 272 153 321 140" />
+                  <path d="M132 174 C208 127 270 113 334 122" />
+                  <path d="M200 232 C251 225 307 203 363 187" />
                 </g>
+                <path class="match-arrow-head" d="M0 0 L-18 -10 L-18 10 Z" transform="translate(333 142) rotate(10)" />
+                <path class="match-arrow-head" d="M0 0 L-18 -10 L-18 10 Z" transform="translate(346 124) rotate(8)" />
+                <path class="match-arrow-head" d="M0 0 L-18 -10 L-18 10 Z" transform="translate(375 184) rotate(-16)" />
                 <g class="target-samples">
                   <circle cx="333" cy="132" r="7" />
                   <circle cx="360" cy="101" r="7" />
