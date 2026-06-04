@@ -2163,6 +2163,27 @@ svg {
   stroke: #b86bff;
 }
 
+.sequence-latent-rays .sequence-latent-arrow-head {
+  stroke: none;
+  stroke-width: 0;
+  stroke-dasharray: none;
+  opacity: 0.9;
+  animation: none;
+  filter: drop-shadow(0 0 12px rgba(246, 251, 255, 0.18));
+}
+
+.sequence-latent-rays .sequence-latent-arrow-green {
+  fill: #b5f07c;
+}
+
+.sequence-latent-rays .sequence-latent-arrow-blue {
+  fill: #6ee8ff;
+}
+
+.sequence-latent-rays .sequence-latent-arrow-purple {
+  fill: #b86bff;
+}
+
 .sequence-output-label {
   fill: var(--muted);
   font-size: 14px;

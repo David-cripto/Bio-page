@@ -27,7 +27,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260604-inverse-arrowheads-visible">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260604-sequence-arrowheads">
 </head>
 <body>
   <main class="blog-shell">
@@ -1311,15 +1311,6 @@
                 <title id="latent-sequence-title">Latent samples map to generated word sequences</title>
                 <desc id="latent-sequence-desc">Several latent variables are sampled from a latent prior. The generator maps each latent variable to one complete generated sequence, shown as rows of word tokens.</desc>
                 <defs>
-                  <marker id="sequenceLatentArrowGreen" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#b5f07c" />
-                  </marker>
-                  <marker id="sequenceLatentArrowBlue" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#6ee8ff" />
-                  </marker>
-                  <marker id="sequenceLatentArrowPurple" markerWidth="7" markerHeight="7" refX="5.8" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                    <path d="M1,1 L6,3.5 L1,6 Z" fill="#b86bff" />
-                  </marker>
                   <radialGradient id="latentBasinGreen" cx="50%" cy="50%" r="58%">
                     <stop offset="0%" stop-color="#b5f07c" stop-opacity="0.42" />
                     <stop offset="100%" stop-color="#b5f07c" stop-opacity="0.04" />
@@ -1355,9 +1346,12 @@
                   </g>
                 </g>
                 <g class="latent-rays sequence-latent-rays">
-                  <path d="M142 100 L536 96" marker-end="url(#sequenceLatentArrowGreen)" />
-                  <path d="M204 175 L536 172" marker-end="url(#sequenceLatentArrowBlue)" />
-                  <path d="M134 244 L536 248" marker-end="url(#sequenceLatentArrowPurple)" />
+                  <path d="M142 100 L520 96" />
+                  <path d="M204 175 L520 172" />
+                  <path d="M134 244 L520 248" />
+                  <path class="sequence-latent-arrow-head sequence-latent-arrow-green" d="M0 0 L-18 -10 L-18 10 Z" transform="translate(536 96) rotate(-0.6)" />
+                  <path class="sequence-latent-arrow-head sequence-latent-arrow-blue" d="M0 0 L-18 -10 L-18 10 Z" transform="translate(536 172) rotate(-0.5)" />
+                  <path class="sequence-latent-arrow-head sequence-latent-arrow-purple" d="M0 0 L-18 -10 L-18 10 Z" transform="translate(536 248) rotate(0.6)" />
                 </g>
                 <g class="sequence-atom-stack" transform="translate(552 60)">
                   <g class="sequence-atom-row atom-green" transform="translate(0 0)">
