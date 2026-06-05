@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260605-blog-bg-fix">
+  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260605-blog-card-redesign">
 </head>
 <body>
   <main class="blog-shell">
@@ -30,12 +30,13 @@
       <div class="blog-post-list">
         <a class="blog-post-card" href="{% url 'idlm_blog' %}">
           <div class="blog-post-copy">
-            <span>ICML 2026</span>
+            <span class="blog-post-kicker">ICML 2026</span>
             <h2 aria-label="Few-step text generation with Inverse Distillation">
               <span aria-hidden="true">Few-step text generation</span>
               <span aria-hidden="true">with Inverse Distillation</span>
             </h2>
             <p>Inverse-distilled diffusion language models for fast parallel text generation.</p>
+            <strong>Read article</strong>
           </div>
           <div class="blog-post-thumb" aria-hidden="true">
             <img src="{% static 'homepage/blog/idlm-teaser.png' %}" alt="">
