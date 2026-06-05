@@ -140,7 +140,7 @@
         </li>
         <li>
           <a href="#bibtex">BibTeX</a>
-          <span class="toc-note">Citation for the IDLM paper.</span>
+          <span class="toc-note">BibTeX entry for the IDLM paper.</span>
         </li>
       </ol>
     </section>
@@ -1867,11 +1867,13 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
       <section id="bibtex" class="blog-section">
         <h2>6. BibTeX</h2>
         <div class="bibtex-panel">
-          <div class="bibtex-head">
-            <span>Citation</span>
-            <button class="bibtex-copy" type="button" data-copy-target="idlm-bibtex" aria-label="Copy BibTeX citation">Copy BibTeX</button>
-          </div>
-          <pre id="idlm-bibtex" class="algorithm-code"><code>@article{li2026idlm,
+          <button class="bibtex-copy" type="button" data-copy-target="idlm-bibtex" aria-label="Copy BibTeX entry" title="Copy BibTeX">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+              <path d="M4 16V6a2 2 0 0 1 2-2h10"></path>
+            </svg>
+          </button>
+          <pre id="idlm-bibtex" class="algorithm-code bibtex-code"><code>@article{li2026idlm,
   title={IDLM: Inverse-distilled Diffusion Language Models},
   author={Li, David and Gushchin, Nikita and Abulkhanov, Dmitry and Moulines, Eric and Oseledets, Ivan and Panov, Maxim and Korotin, Alexander},
   journal={arXiv preprint arXiv:2602.19066},
@@ -1904,18 +1906,23 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
         const target = document.getElementById(button.dataset.copyTarget);
         if (!target) return;
         const text = target.textContent.trim();
+        const defaultLabel = 'Copy BibTeX entry';
         try {
           await copyBibtex(text);
-          button.textContent = 'Copied';
           button.classList.add('is-copied');
+          button.setAttribute('aria-label', 'Copied BibTeX entry');
+          button.setAttribute('title', 'Copied');
           window.setTimeout(() => {
-            button.textContent = 'Copy BibTeX';
             button.classList.remove('is-copied');
+            button.setAttribute('aria-label', defaultLabel);
+            button.setAttribute('title', 'Copy BibTeX');
           }, 1600);
         } catch (error) {
-          button.textContent = 'Select text';
+          button.setAttribute('aria-label', 'Copy failed');
+          button.setAttribute('title', 'Copy failed');
           window.setTimeout(() => {
-            button.textContent = 'Copy BibTeX';
+            button.setAttribute('aria-label', defaultLabel);
+            button.setAttribute('title', 'Copy BibTeX');
           }, 1800);
         }
       });

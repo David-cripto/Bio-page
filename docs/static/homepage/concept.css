@@ -1425,37 +1425,36 @@ svg {
 
 .bibtex-panel {
   margin-top: 22px;
-}
-
-.bibtex-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-.bibtex-head span {
-  color: #ffd3a2;
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0;
-  text-transform: uppercase;
+  position: relative;
 }
 
 .bibtex-copy {
-  min-width: 118px;
-  padding: 8px 12px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   border: 1px solid rgba(94, 217, 255, 0.36);
   border-radius: 6px;
   background: rgba(94, 217, 255, 0.1);
   color: #d9f7ff;
   cursor: pointer;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0;
-  line-height: 1;
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.bibtex-copy svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
 }
 
 .bibtex-copy:hover,
@@ -1464,6 +1463,7 @@ svg {
   background: rgba(181, 240, 124, 0.12);
   color: #f6fbff;
   outline: none;
+  transform: translateY(-1px);
 }
 
 .bibtex-copy.is-copied {
@@ -1472,8 +1472,9 @@ svg {
   color: #bdf486;
 }
 
-.bibtex-panel .algorithm-code {
-  margin-top: 10px;
+.bibtex-code {
+  margin-top: 0;
+  padding-right: 58px;
 }
 
 .alg-key {
