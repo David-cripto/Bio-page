@@ -306,7 +306,7 @@ svg {
 }
 
 .statement {
-  padding: 74px 0 40px;
+  padding: 74px 0 18px;
 }
 
 .statement h2,
@@ -412,7 +412,10 @@ svg {
   transform: translateY(-2px);
 }
 
-.feature-section,
+.feature-section {
+  margin-top: 34px;
+}
+
 .paper-section {
   margin-top: 74px;
 }
