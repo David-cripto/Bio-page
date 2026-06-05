@@ -530,6 +530,7 @@ svg {
 .paper-action-icon svg {
   width: 14px;
   height: 14px;
+  transition: color 160ms ease, transform 160ms ease;
 }
 
 .paper-action-icon path {
@@ -545,6 +546,11 @@ svg {
   background: var(--accent-soft);
   text-decoration: none;
   transform: translateY(-2px);
+}
+
+.paper-action-icon:hover svg {
+  color: var(--ink);
+  transform: translateY(-1px);
 }
 
 .blog-shell {
