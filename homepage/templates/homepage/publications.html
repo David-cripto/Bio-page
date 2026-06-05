@@ -110,13 +110,35 @@
                 <div class="paper-actions">
                   <span>{{ paper.venue }}</span>
                   {% if paper.url %}
-                    <a href="{{ paper.url }}" target="_blank" rel="noopener noreferrer">Paper</a>
+                    <a class="paper-action-icon" href="{{ paper.url }}" target="_blank" rel="noopener noreferrer" aria-label="Paper" title="Paper">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/>
+                        <path d="M14 3v5h5"/>
+                        <path d="M9 13h6"/>
+                        <path d="M9 17h6"/>
+                        <path d="M9 9h1"/>
+                      </svg>
+                    </a>
                   {% endif %}
                   {% if paper.code_url %}
-                    <a href="{{ paper.code_url }}" target="_blank" rel="noopener noreferrer">Code</a>
+                    <a class="paper-action-icon" href="{{ paper.code_url }}" target="_blank" rel="noopener noreferrer" aria-label="Code" title="Code">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m8 9-4 3 4 3"/>
+                        <path d="m16 9 4 3-4 3"/>
+                        <path d="m14 5-4 14"/>
+                      </svg>
+                    </a>
                   {% endif %}
                   {% if paper.webpage_url %}
-                    <a href="{{ paper.webpage_url }}" target="_blank" rel="noopener noreferrer">Webpage</a>
+                    <a class="paper-action-icon" href="{{ paper.webpage_url }}" target="_blank" rel="noopener noreferrer" aria-label="Webpage" title="Webpage">
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"/>
+                        <path d="M3.6 9h16.8"/>
+                        <path d="M3.6 15h16.8"/>
+                        <path d="M12 3c2 2.5 3 5.5 3 9s-1 6.5-3 9"/>
+                        <path d="M12 3c-2 2.5-3 5.5-3 9s1 6.5 3 9"/>
+                      </svg>
+                    </a>
                   {% endif %}
                 </div>
               </div>

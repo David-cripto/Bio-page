@@ -508,6 +508,37 @@ svg {
   max-width: 100%;
 }
 
+.paper-action-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(94, 217, 255, 0.16);
+  background: rgba(7, 21, 45, 0.34);
+  text-decoration: none;
+  transition: border 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.paper-action-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.paper-action-icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.paper-action-icon:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
 .blog-shell {
   width: min(100% - 48px, 1280px);
   margin: 0 auto;
