@@ -3964,6 +3964,13 @@ svg {
   text-transform: uppercase;
 }
 
+.owt-example-head span sup {
+  font-size: 0.62em;
+  line-height: 0;
+  position: relative;
+  top: -0.35em;
+}
+
 .owt-example-head strong {
   color: var(--ink);
   font-family: var(--mono);
