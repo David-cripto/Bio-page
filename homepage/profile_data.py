@@ -1,6 +1,6 @@
 PROFILE = {
     "name": "David Li",
-    "role": "First-year PhD Student",
+    "role": "PhD Student",
     "affiliation": "Mohamed bin Zayed University of Artificial Intelligence",
     "short_affiliation": "MBZUAI",
     "email": "David.Li@mbzuai.ac.ae",
