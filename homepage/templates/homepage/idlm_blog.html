@@ -1785,10 +1785,8 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
             maintaining comparable or higher entropy. IDLM-MDLM at \(16\) steps lands on the strong
             masked-diffusion branch, improving over the \(1024\)-step MDLM teacher without moving into
             an obviously collapsed low-entropy regime. For uniform diffusion, the IDLM-DCD points show
-            the main acceleration story: the \(16\)-step and \(4\)-step students remain in the
-            competitive high-entropy region while replacing much longer Duo-style teacher samplers.
-            Thus the plot should be read as a quality-diversity frontier, not just as a list of
-            isolated GenPPL scores.
+            the main acceleration story: the \(16\)-step students remain in the competitive
+            high-entropy region.
           </p>
           <figure class="blog-figure">
             <img src="{% static 'homepage/blog/idlm-owt-frontier.png' %}" alt="Current arXiv GenPPL and entropy tradeoff plot on OpenWebText">
