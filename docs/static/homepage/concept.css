@@ -116,8 +116,7 @@ svg {
 
 .back-link,
 .top-nav a,
-.rail-links a,
-.paper-actions a {
+.rail-links a {
   color: var(--accent);
   font-size: 0.78rem;
   font-weight: 800;
@@ -125,8 +124,7 @@ svg {
 
 .back-link:hover,
 .top-nav a:hover,
-.rail-links a:hover,
-.paper-actions a:hover {
+.rail-links a:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -463,14 +461,20 @@ svg {
 
 .paper-table {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .paper-item {
   display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
-  gap: 22px;
-  padding: 18px;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 18px;
+  padding: 14px 16px;
+}
+
+.paper-meta {
+  display: grid;
+  align-content: start;
+  gap: 11px;
 }
 
 .paper-year {
@@ -480,15 +484,15 @@ svg {
 }
 
 .paper-item h3 {
-  margin: 0 0 8px;
+  margin: 0 0 7px;
 }
 
 .paper-item .paper-authors {
-  margin: 0 0 8px;
+  margin: 0 0 7px;
   color: var(--quiet);
   font-size: 0.74rem;
   font-weight: 600;
-  line-height: 1.55;
+  line-height: 1.45;
 }
 
 .paper-authors .author-highlight {
@@ -497,34 +501,35 @@ svg {
   text-shadow: 0 0 16px rgba(190, 97, 255, 0.42), 0 0 2px rgba(78, 221, 255, 0.18);
 }
 
-.paper-actions {
+.paper-side-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
+  flex-wrap: nowrap;
+  gap: 5px;
+}
+
+.paper-venue {
+  margin: 0;
   color: var(--quiet);
   font-size: 0.72rem;
   font-weight: 700;
-}
-
-.paper-actions span {
-  max-width: 100%;
+  line-height: 1.45;
 }
 
 .paper-action-icon {
   display: inline-grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   border: 1px solid rgba(94, 217, 255, 0.16);
   background: rgba(7, 21, 45, 0.34);
+  color: var(--accent);
   text-decoration: none;
   transition: border 160ms ease, background 160ms ease, transform 160ms ease;
 }
 
 .paper-action-icon svg {
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
 }
 
 .paper-action-icon path {
