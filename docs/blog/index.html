@@ -1532,11 +1532,10 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
         <div class="blog-callout">
           <strong>TL;DR</strong>
           <span>
-            IDLM is evaluated as a sampler-acceleration method: keep pretrained diffusion teachers
-            fixed, replace long \(1024\)-step reverse chains with few-step students, and check
-            whether conditional accuracy, GenPPL, and entropy remain close to the teacher behavior.
-            TinyGSM tests conditional reasoning; OpenWebText tests unconditional text quality and
-            diversity.
+            The experiments ask whether a pretrained diffusion teacher can be compressed from a
+            long \(1024\)-step reverse chain into a few reliable student steps. TinyGSM evaluates
+            IDLM in the conditional-generation setting, while OpenWebText measures unconditional
+            text quality and diversity through GenPPL and entropy.
           </span>
         </div>
         <p>
