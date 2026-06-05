@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{{ profile.name }} - research homepage">
-  <title>{{ profile.name }}</title>
+  <meta name="description" content="{{ profile.name }} - publications">
+  <title>Publications | {{ profile.name }}</title>
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'homepage/favicon-32.png' %}?v=20260528-lisearch-alpha">
   <link rel="icon" type="image/png" sizes="192x192" href="{% static 'homepage/favicon-192.png' %}?v=20260528-lisearch-alpha">
   <link rel="apple-touch-icon" sizes="180x180" href="{% static 'homepage/apple-touch-icon.png' %}?v=20260528-lisearch-alpha">
@@ -75,41 +75,54 @@
 
     <main class="content">
       <nav class="top-nav" aria-label="Research page navigation">
-        <a href="#lisearch">LiSearch</a>
-        <a href="#work">Highlights</a>
-        <a href="{% url 'publications' %}">Publications</a>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'home' %}#work">Highlights</a>
+        <a href="#papers" aria-current="page">Publications</a>
         <a href="{% url 'idlm_blog' %}">Blog</a>
       </nav>
 
-      <section class="statement">
-        <p>{{ profile.intro }}</p>
-      </section>
-
-      <section id="lisearch" class="community-section">
-        <div>
-          <h2>{{ profile.community.title }}</h2>
-          <p>{{ profile.community.text }}</p>
+      <section id="papers" class="paper-section">
+        <div class="section-title publication-title">
+          <div>
+            <p class="label">Publications</p>
+            <div class="publication-stats" aria-label="Publication summary">
+              <span><strong>5x</strong> A*</span>
+              <span><strong>2x</strong> Oral</span>
+              <span><strong>3x</strong> Workshops</span>
+            </div>
+          </div>
+          <p class="equal-note">* equal contribution</p>
         </div>
-        <div class="community-links" aria-label="LiSearch links">
-          {% for link in profile.community.links %}
-            <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">
-              {{ link.label }}
-            </a>
-          {% endfor %}
-        </div>
-      </section>
-
-      <section id="work" class="feature-section">
-        <div class="section-title">
-          <p class="label">Highlights</p>
-        </div>
-        <div class="feature-list">
-          {% for work in profile.selected_work %}
-            <a class="feature-card" href="{{ work.url }}" target="_blank" rel="noopener noreferrer">
-              <span>{{ work.venue }}</span>
-              <h3>{{ work.title }}</h3>
-              <p>{{ work.description }}</p>
-            </a>
+        <div class="paper-table">
+          {% for paper in profile.papers %}
+            <article class="paper-item">
+              <div class="paper-year">{{ paper.year|default:"--" }}</div>
+              <div>
+                <h3>
+                  {% if paper.url %}
+                    <a href="{{ paper.title_url|default:paper.url }}" target="_blank" rel="noopener noreferrer">{{ paper.title }}</a>
+                  {% else %}
+                    {{ paper.title }}
+                  {% endif %}
+                </h3>
+                {% if paper.authors %}
+                  <p class="paper-authors">{{ paper.authors|highlight_author:profile.name }}</p>
+                {% endif %}
+                <p>{{ paper.summary|default:paper.venue }}</p>
+                <div class="paper-actions">
+                  <span>{{ paper.venue }}</span>
+                  {% if paper.url %}
+                    <a href="{{ paper.url }}" target="_blank" rel="noopener noreferrer">Paper</a>
+                  {% endif %}
+                  {% if paper.code_url %}
+                    <a href="{{ paper.code_url }}" target="_blank" rel="noopener noreferrer">Code</a>
+                  {% endif %}
+                  {% if paper.webpage_url %}
+                    <a href="{{ paper.webpage_url }}" target="_blank" rel="noopener noreferrer">Webpage</a>
+                  {% endif %}
+                </div>
+              </div>
+            </article>
           {% endfor %}
         </div>
       </section>

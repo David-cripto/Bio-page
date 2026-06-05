@@ -25,8 +25,14 @@ def write_page(client, route, output_path):
     if response.status_code != 200:
         raise RuntimeError(f"{route} returned HTTP {response.status_code}")
     html = response.content.decode("utf-8")
-    html = html.replace('href="/"', f'href="{BASE_PATH}/"')
-    html = html.replace('href="/blog/"', f'href="{BASE_PATH}/blog/"')
+    replacements = {
+        'href="/"': f'href="{BASE_PATH}/"',
+        'href="/#': f'href="{BASE_PATH}/#',
+        'href="/blog/"': f'href="{BASE_PATH}/blog/"',
+        'href="/publications/"': f'href="{BASE_PATH}/publications/"',
+    }
+    for source, target in replacements.items():
+        html = html.replace(source, target)
     html = "\n".join(line.rstrip() for line in html.splitlines()) + "\n"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(html, encoding="utf-8")
@@ -43,6 +49,7 @@ def main():
 
     client = Client()
     write_page(client, "/", DOCS_DIR / "index.html")
+    write_page(client, "/publications/", DOCS_DIR / "publications" / "index.html")
     write_page(client, "/blog/", DOCS_DIR / "blog" / "index.html")
 
     print(f"Exported GitHub Pages site to {DOCS_DIR}")
