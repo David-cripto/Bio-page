@@ -1772,13 +1772,12 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
           </figure>
           <p>
             Although recent diffusion language models show strong unconditional generation quality,
-            recent research-oriented blog posts have emphasized that GenPPL should be interpreted
-            together with diversity. For example,
-            <a href="https://samacquaviva.com/projects/flow-evals/" target="_blank" rel="noopener noreferrer">a technical blog post on flow-model evaluation</a>
-            notes that because GenPPL is computed by an external language-model evaluator, changing the
-            sampling temperature can shift a method along an entropy-perplexity tradeoff, from
-            lower-entropy samples with lower measured GenPPL to higher-entropy samples with higher
-            measured GenPPL. The frontier view is therefore a way to ask a fairer question: at a
+            <a href="https://samacquaviva.com/projects/flow-evals/" target="_blank" rel="noopener noreferrer">recent research discussions</a>
+            have emphasized that GenPPL should be interpreted together with diversity, since
+            GenPPL is computed by an external language-model evaluator and changing the sampling
+            temperature can move a method along an entropy-perplexity tradeoff, from lower-entropy
+            samples with lower measured GenPPL to higher-entropy samples with higher measured
+            GenPPL. The frontier view is therefore a way to ask a fairer question: at a
             comparable level of token entropy, which sampler achieves lower GenPPL?
           </p>
           <p>
