@@ -1529,7 +1529,16 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
 
       <section id="results" class="blog-section">
         <h2>4. Results</h2>
-        <p class="section-kicker">The experiments test whether few-step students can preserve teacher-level quality.</p>
+        <div class="blog-callout">
+          <strong>TL;DR</strong>
+          <span>
+            IDLM is evaluated as a sampler-acceleration method: keep pretrained diffusion teachers
+            fixed, replace long \(1024\)-step reverse chains with few-step students, and check
+            whether conditional accuracy, GenPPL, and entropy remain close to the teacher behavior.
+            TinyGSM tests conditional reasoning; OpenWebText tests unconditional text quality and
+            diversity.
+          </span>
+        </div>
         <p>
           IDLM is evaluated on conditional math generation and unconditional OpenWebText generation.
           The main question is not whether diffusion beats autoregression everywhere. It does not on
@@ -1666,6 +1675,45 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
             together with token entropy, but the main story is teacher acceleration under much smaller
             reverse-step budgets.
           </p>
+          <div class="owt-examples-block" aria-label="OpenWebText generated text examples">
+            <div class="owt-examples-head">
+              <span>Generated excerpts</span>
+              <strong>shortened from \(1024\)-token samples</strong>
+            </div>
+            <div class="owt-examples">
+              <article class="owt-example">
+                <div class="owt-example-head">
+                  <span>IDLM-MDLM</span>
+                  <strong>\(16\) steps</strong>
+                </div>
+                <div class="owt-example-metrics" aria-label="IDLM-MDLM sample metrics">
+                  <span>GenPPL \(32.75\)</span>
+                  <span>Entropy \(5.42\)</span>
+                </div>
+                <p>
+                  &hellip; In the wake of angry remarks from the media, Sam Kicks Radio decided to
+                  take a shot, claiming that he had only ever learned how to get away with something
+                  bad. I want to get over it, he says, while the exchange returns to the same public
+                  dispute. &hellip;
+                </p>
+              </article>
+              <article class="owt-example">
+                <div class="owt-example-head">
+                  <span>\(\mathrm{IDLM\mbox{-}DCD}^{g}\)</span>
+                  <strong>\(4\) steps</strong>
+                </div>
+                <div class="owt-example-metrics" aria-label="IDLM-DCD greedy sample metrics">
+                  <span>GenPPL \(77.47\)</span>
+                  <span>Entropy \(5.28\)</span>
+                </div>
+                <p>
+                  &hellip; This device is not the only way to use features in this article. People who
+                  conduct interviews in secure environments are attracted by a two-way monitor, making
+                  it an ideal candidate for an interviewee who can adapt to secure systems. &hellip;
+                </p>
+              </article>
+            </div>
+          </div>
           <figure class="gsm8k-chart owt-chart" aria-label="OpenWebText GenPPL and entropy comparison">
             <div class="gsm8k-chart-head">
               <div>

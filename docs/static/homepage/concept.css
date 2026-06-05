@@ -3747,6 +3747,105 @@ svg {
   overflow: hidden;
 }
 
+.owt-examples-block {
+  margin: 24px 0 4px;
+}
+
+.owt-examples-head {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0 2px 10px;
+}
+
+.owt-examples-head span {
+  color: #b5f07c;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.owt-examples-head strong {
+  color: var(--quiet);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-align: right;
+}
+
+.owt-examples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.owt-example {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid rgba(181, 240, 124, 0.24);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 86% 8%, rgba(181, 240, 124, 0.1), transparent 32%),
+    linear-gradient(135deg, rgba(94, 217, 255, 0.08), rgba(181, 240, 124, 0.06)),
+    rgba(2, 8, 24, 0.74);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.owt-example-head {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 9px;
+}
+
+.owt-example-head span {
+  color: #b5f07c;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.owt-example-head strong {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.owt-example-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 12px;
+}
+
+.owt-example-metrics span {
+  display: inline-flex;
+  padding: 4px 7px;
+  border: 1px solid rgba(94, 217, 255, 0.18);
+  border-radius: 6px;
+  background: rgba(94, 217, 255, 0.07);
+  color: #d9f7ff;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.owt-example p {
+  margin: 0;
+  color: rgba(232, 241, 255, 0.83);
+  font-size: 0.78rem;
+  line-height: 1.62;
+}
+
 .owt-panel-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -4518,9 +4617,20 @@ svg {
   .generation-animation-grid,
   .factorization-visual,
   .tinygsm-examples,
+  .owt-examples,
   .owt-panel-grid,
   .blog-figure-grid {
     grid-template-columns: 1fr;
+  }
+
+  .owt-examples-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .owt-examples-head strong {
+    text-align: left;
   }
 
   .distill-map-head {
