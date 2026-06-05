@@ -1770,6 +1770,26 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
               </article>
             </div>
           </figure>
+          <p>
+            The bar plots above show the selected operating points, but a single GenPPL number can
+            be misleading without the entropy context. The same issue is emphasized in
+            <a href="https://samacquaviva.com/projects/flow-evals/" target="_blank" rel="noopener noreferrer">Sam Acquaviva's flow-model evaluation note</a>:
+            because GenPPL is computed by an external language-model evaluator, changing the
+            sampling temperature can shift a method along an entropy-perplexity tradeoff, from
+            lower-entropy samples with lower measured GenPPL to higher-entropy samples with higher
+            measured GenPPL. The frontier view is therefore a way to ask a fairer question: at a
+            comparable level of token entropy, which sampler achieves lower GenPPL?
+          </p>
+          <p>
+            In the frontier below, the desired direction is down and to the right: lower GenPPL while
+            maintaining comparable or higher entropy. IDLM-MDLM at \(16\) steps lands on the strong
+            masked-diffusion branch, improving over the \(1024\)-step MDLM teacher without moving into
+            an obviously collapsed low-entropy regime. For uniform diffusion, the IDLM-DCD points show
+            the main acceleration story: the \(16\)-step and \(4\)-step students remain in the
+            competitive high-entropy region while replacing much longer Duo-style teacher samplers.
+            Thus the plot should be read as a quality-diversity frontier, not just as a list of
+            isolated GenPPL scores.
+          </p>
           <figure class="blog-figure">
             <img src="{% static 'homepage/blog/idlm-owt-frontier.png' %}" alt="Current arXiv GenPPL and entropy tradeoff plot on OpenWebText">
             <figcaption>The GenPPL-entropy frontier from the article shows why diversity must be read together with perplexity.</figcaption>
