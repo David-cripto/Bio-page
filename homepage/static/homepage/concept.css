@@ -564,11 +564,11 @@ svg {
 }
 
 .blog-index {
-  padding: clamp(44px, 7vw, 72px) 0 90px;
+  padding: clamp(34px, 5.4vw, 56px) 0 76px;
 }
 
 .blog-index-title {
-  margin-bottom: 22px;
+  margin-bottom: 16px;
 }
 
 .blog-index-title h1 {
@@ -581,7 +581,7 @@ svg {
 
 .blog-post-list {
   display: grid;
-  max-width: 980px;
+  width: min(92%, 860px);
   margin: 0 auto;
   gap: 14px;
 }
@@ -589,9 +589,9 @@ svg {
 .blog-post-card {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.82fr);
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 0.72fr);
   align-items: center;
-  gap: clamp(20px, 3.6vw, 34px);
+  gap: clamp(16px, 2.8vw, 26px);
   overflow: hidden;
   border: 1px solid rgba(94, 217, 255, 0.26);
   background:
@@ -601,7 +601,7 @@ svg {
     rgba(7, 21, 45, 0.94);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(246, 251, 255, 0.04);
   color: var(--ink);
-  padding: clamp(22px, 3vw, 32px);
+  padding: clamp(18px, 2.45vw, 24px);
   text-decoration: none;
   transition: border 160ms ease, transform 160ms ease, box-shadow 160ms ease;
 }
@@ -626,22 +626,22 @@ svg {
   z-index: 1;
   display: grid;
   align-content: center;
-  gap: 14px;
+  gap: 11px;
 }
 
 .blog-post-kicker {
   color: var(--accent);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 800;
 }
 
 .blog-post-copy h2 {
   display: grid;
-  gap: 6px;
+  gap: 4px;
   margin: 0;
   color: var(--ink);
-  font-size: clamp(1.85rem, 4.1vw, 3.05rem);
-  line-height: 1.06;
+  font-size: clamp(1.42rem, 3.15vw, 2.35rem);
+  line-height: 1.08;
   text-shadow: 0 0 28px rgba(25, 198, 255, 0.16);
 }
 
@@ -651,23 +651,17 @@ svg {
 }
 
 .blog-post-copy p {
-  max-width: 560px;
+  max-width: 500px;
   margin: 0;
   color: var(--muted);
-  font-size: clamp(0.9rem, 1.45vw, 1.02rem);
-  line-height: 1.65;
-}
-
-.blog-post-copy strong {
-  color: var(--accent);
-  font-size: 0.82rem;
-  font-weight: 800;
+  font-size: clamp(0.82rem, 1.25vw, 0.92rem);
+  line-height: 1.55;
 }
 
 .blog-post-thumb {
   position: relative;
   z-index: 1;
-  height: clamp(172px, 22vw, 238px);
+  height: clamp(136px, 17vw, 182px);
   border: 1px solid rgba(94, 217, 255, 0.24);
   background: #f8fbff;
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
@@ -4806,7 +4800,7 @@ svg {
   }
 
   .blog-post-thumb {
-    height: clamp(168px, 31vw, 230px);
+    height: clamp(128px, 24vw, 176px);
   }
 
   .blog-hero-heading h1 {
