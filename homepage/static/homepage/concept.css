@@ -559,6 +559,96 @@ svg {
   padding: 28px 0 86px;
 }
 
+.blog-index {
+  padding: 72px 0 90px;
+}
+
+.blog-index-title {
+  margin-bottom: 20px;
+}
+
+.blog-index-title h1 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.45rem;
+  line-height: 1.3;
+}
+
+.blog-post-list {
+  display: grid;
+  gap: 14px;
+}
+
+.blog-post-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
+  gap: 18px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgba(25, 198, 255, 0.12), rgba(184, 107, 255, 0.08) 42%, transparent 78%),
+    rgba(7, 21, 45, 0.88);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(246, 251, 255, 0.04);
+  color: var(--ink);
+  padding: 18px;
+  text-decoration: none;
+  transition: border 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.blog-post-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-red);
+  transform: translateY(-3px);
+}
+
+.blog-post-copy {
+  display: grid;
+  align-content: center;
+  gap: 12px;
+}
+
+.blog-post-copy span {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.blog-post-copy h2 {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.35rem, 3vw, 2.35rem);
+  line-height: 1.12;
+}
+
+.blog-post-copy p {
+  max-width: 560px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.blog-post-thumb {
+  min-height: 210px;
+  border: 1px solid rgba(94, 217, 255, 0.16);
+  background: rgba(2, 7, 20, 0.36);
+  overflow: hidden;
+}
+
+.blog-post-thumb img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: saturate(1.08) contrast(1.05);
+  transition: transform 220ms ease;
+}
+
+.blog-post-card:hover .blog-post-thumb img {
+  transform: scale(1.03);
+}
+
 .blog-nav {
   position: sticky;
   top: 0;
@@ -4664,6 +4754,14 @@ svg {
     min-height: auto;
   }
 
+  .blog-post-card {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-post-thumb {
+    min-height: 190px;
+  }
+
   .blog-hero-heading h1 {
     font-size: clamp(2.4rem, 8vw, 4rem);
   }
@@ -4811,6 +4909,10 @@ svg {
   .blog-shell {
     width: min(100% - 28px, 520px);
     padding-bottom: 58px;
+  }
+
+  .blog-index {
+    padding: 48px 0 58px;
   }
 
   .blog-nav {

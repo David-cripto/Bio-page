@@ -29,6 +29,7 @@ def write_page(client, route, output_path):
         'href="/"': f'href="{BASE_PATH}/"',
         'href="/#': f'href="{BASE_PATH}/#',
         'href="/blog/"': f'href="{BASE_PATH}/blog/"',
+        'href="/blog/idlm/"': f'href="{BASE_PATH}/blog/idlm/"',
         'href="/publications/"': f'href="{BASE_PATH}/publications/"',
     }
     for source, target in replacements.items():
@@ -51,6 +52,7 @@ def main():
     write_page(client, "/", DOCS_DIR / "index.html")
     write_page(client, "/publications/", DOCS_DIR / "publications" / "index.html")
     write_page(client, "/blog/", DOCS_DIR / "blog" / "index.html")
+    write_page(client, "/blog/idlm/", DOCS_DIR / "blog" / "idlm" / "index.html")
 
     print(f"Exported GitHub Pages site to {DOCS_DIR}")
 

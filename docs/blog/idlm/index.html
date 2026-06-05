@@ -1,14 +1,14 @@
-{% load static %}
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Blog post about few-step text generation with Inverse Distillation">
-  <title>IDLM Blog | {{ profile.name }}</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'homepage/favicon-32.png' %}?v=20260530-balanced-hero">
-  <link rel="icon" type="image/png" sizes="192x192" href="{% static 'homepage/favicon-192.png' %}?v=20260530-balanced-hero">
-  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'homepage/apple-touch-icon.png' %}?v=20260530-balanced-hero">
+  <title>IDLM Blog | David Li</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/Bio-page/static/homepage/favicon-32.png?v=20260530-balanced-hero">
+  <link rel="icon" type="image/png" sizes="192x192" href="/Bio-page/static/homepage/favicon-192.png?v=20260530-balanced-hero">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Bio-page/static/homepage/apple-touch-icon.png?v=20260530-balanced-hero">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -27,14 +27,14 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
-  <link rel="stylesheet" href="{% static 'homepage/concept.css' %}?v=20260605-blog-index">
+  <link rel="stylesheet" href="/Bio-page/static/homepage/concept.css?v=20260605-blog-index">
 </head>
 <body>
   <main class="blog-shell">
     <nav class="top-nav" aria-label="Research page navigation">
-      <a href="{% url 'home' %}">Home</a>
-      <a href="{% url 'publications' %}">Publications</a>
-      <a href="{% url 'blog' %}">Blog</a>
+      <a href="/Bio-page/">Home</a>
+      <a href="/Bio-page/publications/">Publications</a>
+      <a href="/Bio-page/blog/">Blog</a>
     </nav>
 
     <header class="blog-hero">
@@ -89,7 +89,7 @@
         </div>
       </div>
       <figure class="blog-figure blog-hero-figure">
-        <img src="{% static 'homepage/blog/idlm-teaser.png' %}" alt="Current arXiv teaser comparing diffusion training with inverse distillation">
+        <img src="/Bio-page/static/homepage/blog/idlm-teaser.png" alt="Current arXiv teaser comparing diffusion training with inverse distillation">
         <figcaption>Standard DLM training learns a many-step diffusion model from data, whereas IDLM fixes a pretrained teacher and learns a fast student distribution.</figcaption>
       </figure>
     </header>
@@ -198,14 +198,14 @@
               <span>Autoregressive</span>
               <img
                 class="generation-animation"
-                src="{% static 'homepage/blog/idlm-autoregressive-generation.gif' %}?v=20260530-slower-gifs"
+                src="/Bio-page/static/homepage/blog/idlm-autoregressive-generation.gif?v=20260530-slower-gifs"
                 alt="Animated autoregressive token row filling one token at a time">
             </div>
             <div class="generation-animation-item">
               <span>Diffusion</span>
               <img
                 class="generation-animation"
-                src="{% static 'homepage/blog/idlm-diffusion-generation.gif' %}?v=20260530-slower-gifs"
+                src="/Bio-page/static/homepage/blog/idlm-diffusion-generation.gif?v=20260530-slower-gifs"
                 alt="Animated diffusion token row moving from unknown tokens to a complete sentence">
             </div>
           </div>
@@ -344,7 +344,7 @@
             <strong>Correlation can break</strong>
             <img
               class="factorization-gif"
-              src="{% static 'homepage/blog/idlm-factorization-large-step.gif' %}?v=20260530-slower-gifs"
+              src="/Bio-page/static/homepage/blog/idlm-factorization-large-step.gif?v=20260530-slower-gifs"
               alt="Large factorized denoising jump producing a noun-verb agreement conflict">
             <p>
               Independent choices can create incompatible tokens, for example <code>cat</code> with
@@ -356,7 +356,7 @@
             <strong>Small errors get repaired</strong>
             <img
               class="factorization-gif"
-              src="{% static 'homepage/blog/idlm-factorization-small-steps.gif' %}?v=20260530-slower-gifs"
+              src="/Bio-page/static/homepage/blog/idlm-factorization-small-steps.gif?v=20260530-slower-gifs"
               alt="Many small denoising steps correcting a noun-verb agreement conflict">
             <p>
               A short correction can use the partially cleaned context before choosing the next token.
@@ -397,21 +397,21 @@
               <div class="problem-steps image-diffusion-steps" aria-label="Cat image denoising timeline">
                 <div class="problem-node">
                   <span class="problem-node-label">Input noise</span>
-                  <img class="cat-board" src="{% static 'homepage/blog/idlm-cat-step-noise.png' %}?v=20260529-cat-blocks" alt="Random image noise before denoising">
+                  <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-noise.png?v=20260529-cat-blocks" alt="Random image noise before denoising">
                 </div>
                 <div class="problem-node">
                   <span class="problem-node-label">Step&nbsp;\(1\)</span>
-                  <img class="cat-board" src="{% static 'homepage/blog/idlm-cat-step-1.png' %}?v=20260529-cat-blocks" alt="First cat image denoising step">
+                  <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-1.png?v=20260529-cat-blocks" alt="First cat image denoising step">
                   <span class="problem-model">Denoising model</span>
                 </div>
                 <div class="problem-node">
                   <span class="problem-node-label">Step&nbsp;\(2\)</span>
-                  <img class="cat-board" src="{% static 'homepage/blog/idlm-cat-step-2.png' %}?v=20260529-cat-blocks" alt="Second cat image denoising step">
+                  <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-2.png?v=20260529-cat-blocks" alt="Second cat image denoising step">
                   <span class="problem-model">Denoising model</span>
                 </div>
                 <div class="problem-node">
                   <span class="problem-node-label">Step&nbsp;\(3\)</span>
-                  <img class="cat-board" src="{% static 'homepage/blog/idlm-cat-step-3.png' %}?v=20260529-cat-blocks" alt="Third cat image denoising step with visible cat">
+                  <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-3.png?v=20260529-cat-blocks" alt="Third cat image denoising step with visible cat">
                   <span class="problem-model">Denoising model</span>
                 </div>
                 <div class="problem-node problem-dots">
@@ -419,12 +419,12 @@
                 </div>
                 <div class="problem-node">
                   <span class="problem-node-label">Step&nbsp;\(T-1\)</span>
-                  <img class="cat-board" src="{% static 'homepage/blog/idlm-cat-step-late.png' %}?v=20260529-cat-blocks" alt="Late cat image denoising step near the final image">
+                  <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-late.png?v=20260529-cat-blocks" alt="Late cat image denoising step near the final image">
                   <span class="problem-model">Denoising model</span>
                 </div>
                 <div class="problem-node problem-final-node">
                   <span class="problem-node-label">Step&nbsp;\(T\)</span>
-                  <img class="cat-board cat-board-final" src="{% static 'homepage/blog/idlm-cat-step-final.png' %}?v=20260529-cat-blocks" alt="Final generated tabby cat image">
+                  <img class="cat-board cat-board-final" src="/Bio-page/static/homepage/blog/idlm-cat-step-final.png?v=20260529-cat-blocks" alt="Final generated tabby cat image">
                   <span class="problem-model">Denoising model</span>
                 </div>
               </div>
@@ -463,26 +463,26 @@
             <div class="problem-steps distill-steps" aria-label="k-step distilled cat image denoising timeline">
               <div class="problem-node">
                 <span class="problem-node-label">Input noise</span>
-                <img class="cat-board" src="{% static 'homepage/blog/idlm-cat-step-noise.png' %}?v=20260529-cat-blocks" alt="Random image noise before distilled denoising">
+                <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-noise.png?v=20260529-cat-blocks" alt="Random image noise before distilled denoising">
               </div>
               <div class="problem-node">
                 <span class="problem-node-label">Step&nbsp;\(1\)</span>
-                <img class="cat-board" src="{% static 'homepage/blog/idlm-cat-step-1.png' %}?v=20260529-cat-blocks" alt="First distilled cat image denoising step">
+                <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-1.png?v=20260529-cat-blocks" alt="First distilled cat image denoising step">
                 <span class="problem-model">Student denoiser</span>
               </div>
               <div class="problem-node">
                 <span class="problem-node-label">Step&nbsp;\(2\)</span>
-                <img class="cat-board" src="{% static 'homepage/blog/idlm-cat-step-3.png' %}?v=20260529-cat-blocks" alt="Second distilled cat image denoising step with a visible cat">
+                <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-3.png?v=20260529-cat-blocks" alt="Second distilled cat image denoising step with a visible cat">
                 <span class="problem-model">Student denoiser</span>
               </div>
               <div class="problem-node">
                 <span class="problem-node-label">Step&nbsp;\(3\)</span>
-                <img class="cat-board" src="{% static 'homepage/blog/idlm-cat-step-late.png' %}?v=20260529-cat-blocks" alt="Third distilled cat image denoising step near the final image">
+                <img class="cat-board" src="/Bio-page/static/homepage/blog/idlm-cat-step-late.png?v=20260529-cat-blocks" alt="Third distilled cat image denoising step near the final image">
                 <span class="problem-model">Student denoiser</span>
               </div>
               <div class="problem-node problem-final-node">
                 <span class="problem-node-label">Step&nbsp;\(k\)</span>
-                <img class="cat-board cat-board-final" src="{% static 'homepage/blog/idlm-cat-step-final.png' %}?v=20260529-cat-blocks" alt="Final distilled generated tabby cat image">
+                <img class="cat-board cat-board-final" src="/Bio-page/static/homepage/blog/idlm-cat-step-final.png?v=20260529-cat-blocks" alt="Final distilled generated tabby cat image">
                 <span class="problem-model">Student denoiser</span>
               </div>
             </div>
@@ -903,17 +903,17 @@
                 role="img"
                 aria-label="An interpolated preview moves on a dashed line from a dog image to a cat image, cross-fading between the same two images to show a continuous pixel interpolation.">
                 <figure class="interp-endpoint interp-endpoint-dog">
-                  <img src="{% static 'homepage/blog/idlm-dog-interpolation.png' %}?v=20260601-real-dog" alt="Realistic dog portrait endpoint">
+                  <img src="/Bio-page/static/homepage/blog/idlm-dog-interpolation.png?v=20260601-real-dog" alt="Realistic dog portrait endpoint">
                 </figure>
                 <figure class="interp-endpoint interp-endpoint-cat">
-                  <img src="{% static 'homepage/blog/idlm-cat-step-final.png' %}?v=20260529-cat-blocks" alt="Final tabby cat image from section 1.3">
+                  <img src="/Bio-page/static/homepage/blog/idlm-cat-step-final.png?v=20260529-cat-blocks" alt="Final tabby cat image from section 1.3">
                 </figure>
                 <div class="interp-track" aria-hidden="true"></div>
                 <div class="interp-sample" aria-hidden="true">
                   <span class="interp-tether"></span>
                   <div class="interp-sample-frame">
-                    <img class="interp-sample-dog" src="{% static 'homepage/blog/idlm-dog-interpolation.png' %}?v=20260601-real-dog" alt="">
-                    <img class="interp-sample-cat" src="{% static 'homepage/blog/idlm-cat-step-final.png' %}?v=20260529-cat-blocks" alt="">
+                    <img class="interp-sample-dog" src="/Bio-page/static/homepage/blog/idlm-dog-interpolation.png?v=20260601-real-dog" alt="">
+                    <img class="interp-sample-cat" src="/Bio-page/static/homepage/blog/idlm-cat-step-final.png?v=20260529-cat-blocks" alt="">
                   </div>
                 </div>
                 <div class="interp-smooth-caption" aria-hidden="true">smooth</div>
@@ -1526,7 +1526,7 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
           and the sampling algorithm then reuses the same reverse process on a much shorter grid.
         </p>
         <figure class="blog-figure">
-          <img src="{% static 'homepage/blog/idlm-method.png' %}" alt="Current arXiv IDLM training loop with generator, teacher, and fake model">
+          <img src="/Bio-page/static/homepage/blog/idlm-method.png" alt="Current arXiv IDLM training loop with generator, teacher, and fake model">
           <figcaption>IDLM training loop. The student proposal is scored by the frozen teacher and the auxiliary fake denoiser; the difference between these losses defines the generator update.</figcaption>
         </figure>
       </section>
@@ -1832,7 +1832,7 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
             high-entropy region.
           </p>
           <figure class="blog-figure">
-            <img src="{% static 'homepage/blog/idlm-owt-frontier.png' %}" alt="Current arXiv GenPPL and entropy tradeoff plot on OpenWebText">
+            <img src="/Bio-page/static/homepage/blog/idlm-owt-frontier.png" alt="Current arXiv GenPPL and entropy tradeoff plot on OpenWebText">
             <figcaption>OpenWebText GenPPL-entropy frontier. Each point is annotated by Method / Sampling steps.</figcaption>
           </figure>
         </section>

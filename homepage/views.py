@@ -11,5 +11,9 @@ def publications(request):
     return render(request, "homepage/publications.html", {"profile": PROFILE})
 
 
+def blog_index(request):
+    return render(request, "homepage/blog_index.html", {"profile": PROFILE})
+
+
 def idlm_blog(request):
     return render(request, "homepage/idlm_blog.html", {"profile": PROFILE})
