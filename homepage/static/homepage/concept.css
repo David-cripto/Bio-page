@@ -640,7 +640,7 @@ svg {
   gap: 3px;
   margin: 0;
   color: var(--ink);
-  font-size: clamp(1.18rem, 2.65vw, 2.05rem);
+  font-size: clamp(1.18rem, 2.25vw, 1.75rem);
   line-height: 1.12;
   text-shadow: 0 0 28px rgba(25, 198, 255, 0.16);
 }
@@ -648,6 +648,7 @@ svg {
 .blog-post-copy h2 span {
   color: inherit;
   font: inherit;
+  white-space: nowrap;
 }
 
 .blog-post-copy p {
