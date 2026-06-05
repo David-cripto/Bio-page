@@ -1866,14 +1866,60 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
 
       <section id="bibtex" class="blog-section">
         <h2>6. BibTeX</h2>
-        <pre class="algorithm-code"><code>@article{li2026idlm,
+        <div class="bibtex-panel">
+          <div class="bibtex-head">
+            <span>Citation</span>
+            <button class="bibtex-copy" type="button" data-copy-target="idlm-bibtex" aria-label="Copy BibTeX citation">Copy BibTeX</button>
+          </div>
+          <pre id="idlm-bibtex" class="algorithm-code"><code>@article{li2026idlm,
   title={IDLM: Inverse-distilled Diffusion Language Models},
   author={Li, David and Gushchin, Nikita and Abulkhanov, Dmitry and Moulines, Eric and Oseledets, Ivan and Panov, Maxim and Korotin, Alexander},
   journal={arXiv preprint arXiv:2602.19066},
   year={2026}
 }</code></pre>
+        </div>
       </section>
     </article>
   </main>
+  <script>
+    const copyBibtex = async (text) => {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+    };
+
+    document.querySelectorAll('.bibtex-copy').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const target = document.getElementById(button.dataset.copyTarget);
+        if (!target) return;
+        const text = target.textContent.trim();
+        try {
+          await copyBibtex(text);
+          button.textContent = 'Copied';
+          button.classList.add('is-copied');
+          window.setTimeout(() => {
+            button.textContent = 'Copy BibTeX';
+            button.classList.remove('is-copied');
+          }, 1600);
+        } catch (error) {
+          button.textContent = 'Select text';
+          window.setTimeout(() => {
+            button.textContent = 'Copy BibTeX';
+          }, 1800);
+        }
+      });
+    });
+  </script>
 </body>
 </html>

@@ -1423,6 +1423,59 @@ svg {
   font: inherit;
 }
 
+.bibtex-panel {
+  margin-top: 22px;
+}
+
+.bibtex-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.bibtex-head span {
+  color: #ffd3a2;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.bibtex-copy {
+  min-width: 118px;
+  padding: 8px 12px;
+  border: 1px solid rgba(94, 217, 255, 0.36);
+  border-radius: 6px;
+  background: rgba(94, 217, 255, 0.1);
+  color: #d9f7ff;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.bibtex-copy:hover,
+.bibtex-copy:focus-visible {
+  border-color: rgba(181, 240, 124, 0.58);
+  background: rgba(181, 240, 124, 0.12);
+  color: #f6fbff;
+  outline: none;
+}
+
+.bibtex-copy.is-copied {
+  border-color: rgba(181, 240, 124, 0.62);
+  background: rgba(181, 240, 124, 0.14);
+  color: #bdf486;
+}
+
+.bibtex-panel .algorithm-code {
+  margin-top: 10px;
+}
+
 .alg-key {
   color: #ffd3a2;
   font-weight: 800;
