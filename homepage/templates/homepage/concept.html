@@ -85,20 +85,6 @@
         <p>{{ profile.intro }}</p>
       </section>
 
-      <section id="lisearch" class="community-section">
-        <div>
-          <h2>{{ profile.community.title }}</h2>
-          <p>{{ profile.community.text }}</p>
-        </div>
-        <div class="community-links" aria-label="LiSearch links">
-          {% for link in profile.community.links %}
-            <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">
-              {{ link.label }}
-            </a>
-          {% endfor %}
-        </div>
-      </section>
-
       <section id="work" class="feature-section">
         <div class="section-title">
           <h2>Highlights</h2>
