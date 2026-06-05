@@ -3828,6 +3828,8 @@ svg {
 
 .owt-example-metrics span {
   display: inline-flex;
+  gap: 5px;
+  align-items: baseline;
   padding: 4px 7px;
   border: 1px solid rgba(94, 217, 255, 0.18);
   border-radius: 6px;
@@ -3837,6 +3839,22 @@ svg {
   font-size: 0.64rem;
   font-weight: 900;
   line-height: 1;
+  white-space: nowrap;
+}
+
+.owt-example-metrics b,
+.owt-example-metrics em {
+  font: inherit;
+  letter-spacing: 0;
+}
+
+.owt-example-metrics b {
+  color: #d9f7ff;
+}
+
+.owt-example-metrics em {
+  color: #b5f07c;
+  font-style: normal;
 }
 
 .owt-example p {
