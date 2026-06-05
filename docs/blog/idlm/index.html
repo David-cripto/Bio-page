@@ -103,7 +103,7 @@
           <ol>
             <li><a href="#generation-approaches">Autoregression vs Diffusion</a></li>
             <li><a href="#diffusion-inference">Diffusion Inference</a></li>
-            <li><a href="#image-distillation">Image Distillation</a></li>
+            <li><a href="#image-distillation">Distillation in the Image Domain</a></li>
           </ol>
         </li>
         <li>
@@ -117,7 +117,7 @@
         </li>
         <li>
           <a href="#idlm">IDLM</a>
-          <span class="toc-note">How the inverse objective becomes a practical discrete-language method.</span>
+          <span class="toc-note">How inverse distillation transfers to the discrete language domain.</span>
           <ol>
             <li><a href="#theory">Theoretical Guarantees</a></li>
             <li><a href="#discrete-practice">Discrete Non-Smoothness</a></li>
@@ -128,7 +128,7 @@
         </li>
         <li>
           <a href="#results">Results</a>
-          <span class="toc-note">What changes when IDLM compresses many sampling steps into a few.</span>
+          <span class="toc-note">Empirical evaluation of IDLM under few-step sampling budgets.</span>
           <ol>
             <li><a href="#gsm8k">Conditional generation on TinyGSM</a></li>
             <li><a href="#openwebtext">Unconditional generation on OpenWebText</a></li>
@@ -140,7 +140,6 @@
         </li>
         <li>
           <a href="#bibtex">BibTeX</a>
-          <span class="toc-note">BibTeX entry for the IDLM paper.</span>
         </li>
       </ol>
     </section>
@@ -1542,12 +1541,6 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
             text quality and diversity through GenPPL and entropy.
           </span>
         </div>
-        <p>
-          IDLM is evaluated on conditional math generation and unconditional OpenWebText generation.
-          The main question is not whether diffusion beats autoregression everywhere. It does not on
-          GSM8K. The question is sharper: can a diffusion teacher be compressed into far fewer
-          reverse steps while preserving the teacher's quality and diversity signals?
-        </p>
         <section class="result-block">
           <h3 id="gsm8k" class="blog-subheading">4.1 Conditional generation on TinyGSM</h3>
           <p>
@@ -1840,15 +1833,6 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
 
       <section id="conclusion" class="blog-section">
         <h2>5. Conclusion</h2>
-        <div class="blog-callout">
-          <strong>TL;DR</strong>
-          <span>
-            IDLM shows that Inverse Distillation can be transferred to discrete language generation:
-            a pretrained diffusion teacher can guide a few-step student distribution, reducing the
-            reverse-step budget while preserving the teacher's quality on conditional and
-            unconditional generation tasks.
-          </span>
-        </div>
         <p>
           Diffusion language models offer parallel, bidirectional generation, but their long
           denoising chains make inference slow. An attractive approach is Inverse Distillation:
