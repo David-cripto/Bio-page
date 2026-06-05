@@ -107,7 +107,6 @@
                 {% if paper.authors %}
                   <p class="paper-authors">{{ paper.authors|highlight_author:profile.name }}</p>
                 {% endif %}
-                <p>{{ paper.summary|default:paper.venue }}</p>
                 <div class="paper-actions">
                   <span>{{ paper.venue }}</span>
                   {% if paper.url %}
