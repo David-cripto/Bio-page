@@ -637,11 +637,11 @@ svg {
 
 .blog-post-copy h2 {
   display: grid;
-  gap: 4px;
+  gap: 3px;
   margin: 0;
   color: var(--ink);
-  font-size: clamp(1.42rem, 3.15vw, 2.35rem);
-  line-height: 1.08;
+  font-size: clamp(1.18rem, 2.65vw, 2.05rem);
+  line-height: 1.12;
   text-shadow: 0 0 28px rgba(25, 198, 255, 0.16);
 }
 
