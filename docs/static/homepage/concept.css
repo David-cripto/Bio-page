@@ -19,12 +19,15 @@
 }
 
 html {
+  min-height: 100%;
+  background: var(--paper);
   scroll-behavior: smooth;
 }
 
 body {
   position: relative;
   isolation: isolate;
+  min-height: 100vh;
   margin: 0;
   background:
     radial-gradient(circle at 16% 7%, rgba(0, 137, 255, 0.24), transparent 27%),
@@ -555,6 +558,7 @@ svg {
 
 .blog-shell {
   width: min(100% - 48px, 1280px);
+  min-height: 100vh;
   margin: 0 auto;
   padding: 28px 0 86px;
 }
