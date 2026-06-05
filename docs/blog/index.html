@@ -138,6 +138,10 @@
           <a href="#conclusion">Conclusion</a>
           <span class="toc-note">The practical takeaway for diffusion language model inference.</span>
         </li>
+        <li>
+          <a href="#bibtex">BibTeX</a>
+          <span class="toc-note">Citation for the IDLM paper.</span>
+        </li>
       </ol>
     </section>
 
@@ -1836,20 +1840,38 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
 
       <section id="conclusion" class="blog-section">
         <h2>5. Conclusion</h2>
-        <p class="section-kicker">IDLM turns inverse distillation into a discrete-language distillation method.</p>
+        <div class="blog-callout">
+          <strong>TL;DR</strong>
+          <span>
+            IDLM shows that Inverse Distillation can be transferred to discrete language generation:
+            a pretrained diffusion teacher can guide a few-step student distribution, reducing the
+            reverse-step budget while preserving the teacher's quality on conditional and
+            unconditional generation tasks.
+          </span>
+        </div>
         <p>
           Diffusion language models offer parallel, bidirectional generation, but their long
-          denoising chains make inference slow. Image diffusion suggests the right high-level move:
-          distill the sampler. IDLM makes this move in the language domain by using inverse
-          distillation, a distribution-matching objective rather than only a trajectory-shortening
-          objective.
+          denoising chains make inference slow. An attractive approach is Inverse Distillation:
+          instead of only shortening a reverse trajectory, it learns a fast student distribution
+          whose induced diffusion training process remains compatible with the pretrained teacher.
+          IDLM adapts this distribution-matching view to the language domain.
         </p>
         <p>
           The result is a few-step generator with a clean target: match the teacher-supported data
           distribution. The theory gives a unique optimum, the practical method handles discrete
           non-smoothness, and the experiments show substantial step reductions on GSM8K and
-          OpenWebText while keeping the teacher's quality signals largely intact.
+          OpenWebText while keeping the teacher's quality.
         </p>
+      </section>
+
+      <section id="bibtex" class="blog-section">
+        <h2>6. BibTeX</h2>
+        <pre class="algorithm-code"><code>@article{li2026idlm,
+  title={IDLM: Inverse-distilled Diffusion Language Models},
+  author={Li, David and Gushchin, Nikita and Abulkhanov, Dmitry and Moulines, Eric and Oseledets, Ivan and Panov, Maxim and Korotin, Alexander},
+  journal={arXiv preprint arXiv:2602.19066},
+  year={2026}
+}</code></pre>
       </section>
     </article>
   </main>
