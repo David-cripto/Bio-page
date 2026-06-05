@@ -581,7 +581,7 @@ svg {
 
 .blog-post-list {
   display: grid;
-  width: min(92%, 620px);
+  width: min(92%, 500px);
   margin: 0;
   gap: 14px;
 }
@@ -600,7 +600,7 @@ svg {
     rgba(7, 21, 45, 0.94);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(246, 251, 255, 0.04);
   color: var(--ink);
-  padding: clamp(18px, 2.45vw, 24px);
+  padding: clamp(16px, 2.2vw, 22px);
   text-decoration: none;
   transition: border 160ms ease, transform 160ms ease, box-shadow 160ms ease;
 }
@@ -625,6 +625,7 @@ svg {
   z-index: 1;
   display: grid;
   align-content: center;
+  justify-items: start;
   gap: 11px;
 }
 
@@ -651,7 +652,7 @@ svg {
 }
 
 .blog-post-copy p {
-  max-width: 500px;
+  max-width: 420px;
   margin: 0;
   color: var(--muted);
   font-size: clamp(0.82rem, 1.25vw, 0.92rem);
