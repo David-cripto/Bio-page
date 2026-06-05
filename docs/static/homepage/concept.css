@@ -581,7 +581,7 @@ svg {
 
 .blog-post-list {
   display: grid;
-  width: min(92%, 860px);
+  width: min(92%, 620px);
   margin: 0;
   gap: 14px;
 }
@@ -589,9 +589,8 @@ svg {
 .blog-post-card {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(230px, 0.72fr);
+  grid-template-columns: 1fr;
   align-items: center;
-  gap: clamp(16px, 2.8vw, 26px);
   overflow: hidden;
   border: 1px solid rgba(94, 217, 255, 0.26);
   background:
@@ -657,45 +656,6 @@ svg {
   color: var(--muted);
   font-size: clamp(0.82rem, 1.25vw, 0.92rem);
   line-height: 1.55;
-}
-
-.blog-post-thumb {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  height: clamp(136px, 17vw, 182px);
-  border: 1px solid rgba(94, 217, 255, 0.24);
-  background: #f8fbff;
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
-  overflow: hidden;
-  padding: 8px;
-}
-
-.blog-post-thumb::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(246, 251, 255, 0.12);
-  pointer-events: none;
-}
-
-.blog-post-thumb img {
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  min-width: 0;
-  min-height: 0;
-  display: block;
-  object-fit: contain;
-  object-position: center;
-  filter: saturate(1.02) contrast(1.04) brightness(0.96);
-  transition: transform 220ms ease;
-}
-
-.blog-post-card:hover .blog-post-thumb img {
-  transform: none;
 }
 
 .blog-nav {
@@ -4801,16 +4761,6 @@ svg {
     grid-template-columns: 1fr;
     align-items: stretch;
     min-height: auto;
-  }
-
-  .blog-post-card {
-    grid-template-columns: 1fr;
-  }
-
-  .blog-post-thumb {
-    justify-self: start;
-    width: min(100%, 430px);
-    height: clamp(128px, 24vw, 176px);
   }
 
   .blog-hero-heading h1 {
