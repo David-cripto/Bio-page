@@ -1696,7 +1696,7 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
             terminal noise distribution. We follow the prior DLM protocol: OpenWebText is tokenized
             with the GPT-2 tokenizer, documents are concatenated and wrapped with \(\texttt{eos}\)
             tokens, the final \(100{,}000\) documents are held out for validation, and sampling is
-            evaluated in \(\texttt{float64}\) precision using the official Duo evaluation code. The
+            evaluated in \(\texttt{float64}\) precision using the official <a href="https://arxiv.org/abs/2506.10892" target="_blank" rel="noopener noreferrer">Duo</a> evaluation code. The
             question is how far we can compress pretrained teacher samplers: IDLM-MDLM replaces the
             \(1024\)-step MDLM teacher with \(16\) reverse steps, while IDLM-DCD pushes the greedy
             Duo-DCD teacher down to \(4\) steps. We report GenPPL from a fixed GPT-2 Large evaluator
