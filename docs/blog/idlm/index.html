@@ -1553,9 +1553,7 @@ x_k <span class="alg-op">&larr;</span> terminal_noise(process)
         </div>
         <p>
           The notation \(L_{\mathrm{seq}}\) denotes the sequence-level diffusion loss for the chosen
-          teacher family. For MDLM, the reverse transition follows the masked-diffusion rule; for
-          Duo, it follows the uniform-diffusion rule with the Gaussian-softmax relaxation. The
-          training algorithm teaches \(G_\theta\) how to replace many small teacher denoising moves,
+          teacher family. The training algorithm teaches \(G_\theta\) how to replace many small teacher denoising moves,
           and the sampling algorithm then reuses the same reverse process on a much shorter grid.
         </p>
         <figure class="blog-figure">
