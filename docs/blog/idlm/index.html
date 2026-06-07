@@ -1374,7 +1374,7 @@
           </div>
           <figcaption>
             Different latent draws \(\varepsilon\sim p_{\mathcal{E}}\) map to different full
-            generated sequences; averaging over these draws gives the sequence-level mixture.
+            generated sequences. Averaging over these draws gives the sequence-level mixture.
           </figcaption>
         </figure>
 
@@ -1396,30 +1396,65 @@
           \]
         </div>
         <p>
-          Here \(f^\star\) is the frozen teacher trained on real data, while \(f\) is the best
-          denoiser the current student samples can teach us. This makes the gap a relative quality
-          signal. If the teacher assigns a lower diffusion loss to a sample than the fake model does,
-          the sample receives an attractive signal: it looks more compatible with the teacher's
-          data-like reverse process than with the student's current artifacts. If the fake model
-          explains the sample too well relative to the teacher, the signal becomes repulsive: the
-          sample is easy for the student distribution to reproduce, but it is not supported by the
-          teacher in the same way. The fake model therefore acts like a moving baseline for
-          \(p_\theta\), so the generator is rewarded for moving beyond its own current behavior
-          rather than merely reinforcing it.
+          Here \(f^\star\) is the frozen teacher trained on real data. The fake model \(f\) is
+          trained on the current student samples, so it describes what the student already knows how
+          to generate. During the generator update, both \(f^\star\) and \(f\) are fixed, and the
+          parameters \(\theta\) are trained to minimize \(\mathcal{L}_{\mathrm{IDLM}}\). The first
+          term is attractive: reducing \(\mathcal{L}(f^\star,p_\theta)\) encourages the student
+          distribution to place probability on token choices that have small teacher loss. The
+          second term is repulsive: because it is subtracted, the generator update minimizes
+          \(-\mathcal{L}(f,p_\theta)\), equivalently maximizing \(\mathcal{L}(f,p_\theta)\) with
+          \(f\) fixed. Therefore, tokens that are easy for the fake model but not consistently
+          supported by the teacher are pushed down.
         </p>
         <p>
           For MDLM, the \(\mathrm{SUBS}\) parameterization makes this particularly transparent.
           Revealed tokens are copied by both models, so they cancel out of the teacher-minus-fake
-          difference. Only masked positions remain. At such a position, the update can be read as a
-          weighted token preference:
-          \(a_t=\log f^\star(m,t)-\log f(m,t)\), where \(a_t\) is a vector over vocabulary tokens.
-          If \(G_\theta(\epsilon)=\mathrm{softmax}(z_\theta)\), then gradient descent increases the
-          logit of token \(i\) exactly when
-          \(a_{t,i}>\langle G_\theta(\epsilon),a_t\rangle\). In words, the generator does not simply
-          copy the teacher's most likely token. It promotes tokens whose teacher-over-fake advantage
-          is above the generator's current average advantage, and decreases tokens whose advantage is
-          below that baseline. When the fake model catches up to the teacher on student samples, this
-          relative advantage vanishes.
+          difference. Only masked positions remain. At a masked position, let \(m\) denote the mask
+          token and define the teacher-over-fake advantage vector
+          \(a_t=\log f^\star(m,t)-\log f(m,t)\). Each coordinate \(a_{t,i}\) compares how much the
+          teacher and fake model support vocabulary token \(i\) at time \(t\). The IDLM-MDLM loss
+          becomes
+        </p>
+        <div class="blog-equation">
+          \[
+            \mathcal{L}_{\mathrm{IDLM\text{-}MDLM}}(\theta)
+            =
+            -\mathbb{E}_{\epsilon,t}
+            \left[
+              w_t
+              \left\langle G_\theta(\epsilon), a_t\right\rangle
+            \right].
+          \]
+        </div>
+        <p>
+          Here \(G_\theta(\epsilon)\) is the student distribution over the vocabulary, while
+          \(w_t\ge0\) is the time-dependent weight inherited from the masked-diffusion loss.
+          The inner product \(\langle G_\theta(\epsilon),a_t\rangle\) is the student's current
+          expected teacher-over-fake advantage. Since the loss is the negative of this quantity,
+          minimizing it is equivalent to maximizing that expected advantage. Moving probability mass
+          toward a token with larger \(a_{t,i}\) increases the inner product and decreases the loss,
+          moving mass toward a token with smaller \(a_{t,i}\) has the opposite effect. If
+          \(G_\theta(\epsilon)=\mathrm{softmax}(z_\theta)\), this becomes even sharper after taking
+          the gradient with respect to the pre-softmax logit of token \(i\):
+        </p>
+        <div class="blog-equation">
+          \[
+            \frac{\partial \mathcal{L}_{\mathrm{IDLM\text{-}MDLM}}}{\partial z_{\theta,i}}
+            =
+            -w_t G_{\theta,i}(\epsilon)
+            \Big(a_{t,i}-\langle G_\theta(\epsilon),a_t\rangle\Big).
+          \]
+        </div>
+        <p>
+          This equation makes the sign of the update explicit. Since \(w_t\ge0\) and
+          \(G_{\theta,i}(\epsilon)>0\), gradient descent increases token \(i\)'s logit exactly when
+          \(a_{t,i}\) is larger than the current average advantage
+          \(\langle G_\theta(\epsilon),a_t\rangle\). The average term acts like a baseline: a token
+          is attractive only if the teacher prefers it over the fake model more than the generator's
+          current mixture does on average. Tokens below this baseline are pushed down, even if they
+          still have some teacher probability. When \(f\) catches up with \(f^\star\) on student
+          samples, \(a_t\approx0\), the bracket becomes zero, and the relative signal disappears.
         </p>
         <div class="intuition-strip" aria-label="Teacher fake loss intuition">
           <div>
